@@ -18,16 +18,12 @@ public class MessageSender {
         factory.setHost("localhost");
     }
 
-    public static void sendMessage(Object payload,String queName) throws Exception {
+    public static void sendMessage(Message message,String queName) throws Exception {
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
         channel.queueDeclare(queName, false, false, false, null);
-
-        String messageStr = mapper.writeValueAsString(payload);
-        Message message = new Message();
-        message.setPayload(messageStr);
 
         String queueMessage=mapper.writeValueAsString(message);
         channel.basicPublish("", queName, null, queueMessage.getBytes("UTF-8"));

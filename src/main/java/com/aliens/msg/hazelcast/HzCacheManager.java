@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Singleton;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by jayant on 25/9/16.
@@ -32,6 +33,26 @@ public class HzCacheManager implements CacheManager {
         log.info("Hazelcast instance created {}",instance.getName());
     }
 
+    @Override
+    public void putToWait(String groupId)
+    {
+       Set<String> waiting =instance.getSet("waitingGroups") ;
+        waiting.add(groupId);
+    }
+
+    @Override
+    public boolean isWaiting(String groupId)
+    {
+        Set<String> waiting =instance.getSet("waitingGroups");
+        return waiting.contains(groupId);
+    }
+
+    @Override
+    public void clearWaitingList()
+    {
+        Set<String> waiting =instance.getSet("waitingGroups");
+        waiting.clear();
+    }
 
     @Override
     public Optional<QueueInfo> findIdleQueue() {
@@ -42,6 +63,19 @@ public class HzCacheManager implements CacheManager {
             .findFirst();
 
         return queueDataOptional;
+    }
+
+    @Override
+    public Optional<QueueInfo> findByGroupId(String groupId) {
+        Map<String, QueueInfo> dataMap = instance.getMap("data");
+        return Optional.ofNullable(dataMap.getOrDefault(groupId,null));
+    }
+
+    @Override
+    public int getSize()
+    {
+        Map<String, QueueInfo> dataMap = instance.getMap("data");
+        return dataMap.size();
     }
 
     @Override

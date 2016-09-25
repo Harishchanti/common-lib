@@ -9,7 +9,17 @@ import java.util.Optional;
  */
 public interface CacheManager {
 
+    void putToWait(String groupId);
+
+    boolean isWaiting(String groupId);
+
+    void clearWaitingList();
+
     public Optional<QueueInfo> findIdleQueue();
+
+    Optional<QueueInfo> findByGroupId(String groupId);
+
+    int getSize();
 
     public void updateData(QueueInfo queueInfo, ChannelResponse response);
 

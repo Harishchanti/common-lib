@@ -61,7 +61,11 @@ public class MessageReceiver {
             while (true) {
                 QueueingConsumer.Delivery delivery = consumer.nextDelivery(timeout);
 
-                if(delivery==null)return ChannelResponse.QUEUE_PROCESSED;
+                if(delivery==null)
+                {
+                    channel.queueDelete(queueName);
+                    return ChannelResponse.QUEUE_PROCESSED;
+                }
 
                 String messageStr = new String(delivery.getBody());
 
@@ -80,8 +84,6 @@ public class MessageReceiver {
                 if(!autoAck)
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
             }
-
-
 
         }
         catch(Exception e)

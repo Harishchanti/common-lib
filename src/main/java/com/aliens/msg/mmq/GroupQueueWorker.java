@@ -20,7 +20,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Workers implements Runnable {
+public class GroupQueueWorker implements Runnable {
 
     @Autowired
     HzCacheManager cacheManager;

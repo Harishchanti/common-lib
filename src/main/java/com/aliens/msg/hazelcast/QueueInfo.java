@@ -15,17 +15,15 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
-public class QueueInfo implements Serializable
-{
+public class QueueInfo implements Serializable {
+
     String qname;
+    String groupName;
+    String threadName;
+    QueueState state = QueueState.IDLE;
+    int retry = 0;
 
- String groupName;
- String threadName;
-    QueueState state=QueueState.IDLE;
-    int retry=0;
-
-    public void incRetry(int val)
-    {
-        retry+=val;
+    public void incRetry(int val) {
+        retry += val;
     }
 }
