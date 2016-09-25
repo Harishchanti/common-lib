@@ -9,7 +9,6 @@ import java.util.Optional;
  */
 public interface CacheManager {
 
-    void putToWait(String groupId);
 
     boolean isWaiting(String groupId);
 

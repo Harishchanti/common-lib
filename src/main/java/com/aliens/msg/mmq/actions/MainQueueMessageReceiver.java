@@ -1,8 +1,10 @@
-package com.aliens.msg.mmq;
+package com.aliens.msg.mmq.actions;
 
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
+import com.aliens.msg.mmq.Message;
+import com.aliens.msg.mmq.Status;
 import com.rabbitmq.client.AMQP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -25,7 +27,20 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
 
     @Override
-    public Object action(Message message, AMQP.BasicProperties properties) throws Exception {
+    public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
+
+        int restartState=hzCacheManager.getRestartState();
+
+        if(restartState>0)
+        {
+            if(!hzCacheManager.isRestarted(threadName))
+            {
+                hzCacheManager.updateSet("restartedThreads",threadName);
+                hzCacheManager.decreaseRestartState();
+                return Status.RESTART;
+            }
+        }
+
 
         String groupId=message.getGroupId();
         Optional<QueueInfo> queueInfoOptional= hzCacheManager.findByGroupId(groupId);
@@ -34,6 +49,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         {
             String qname=queueInfoOptional.get().getQname();
             MessageSender.sendMessage(message,qname);
+            return Status.SUCCESS;
         }
         else
         {
@@ -43,8 +59,8 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 if(hzCacheManager.isWaiting(groupId))
                 {
-                    //restart channel
-                    //clear waiting list
+                    hzCacheManager.handleRestart();
+                    return Status.RESTART;
                 }
 
                 MessageSender.sendMessage(message,groupId);
@@ -53,13 +69,14 @@ public class MainQueueMessageReceiver extends MessageReceiver {
                     .qname(groupId)
                     .groupName(groupId).build();
                 hzCacheManager.updateData(queueInfo, QueueState.IDLE);
+                return Status.SUCCESS;
             }
             else
             {
-                hzCacheManager.putToWait(groupId);
-                throw new Exception("Size full");
+                hzCacheManager.updateSet("waitingGroups",groupId);
+                return Status.WAITING;
             }
         }
-        return null;
+
     }
 }

@@ -1,8 +1,9 @@
-package com.aliens.msg.mmq;
+package com.aliens.msg.mmq.actions;
 
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
+import com.aliens.msg.mmq.ChannelResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

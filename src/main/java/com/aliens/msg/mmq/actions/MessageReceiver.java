@@ -1,6 +1,9 @@
-package com.aliens.msg.mmq;
+package com.aliens.msg.mmq.actions;
 
 
+import com.aliens.msg.mmq.ChannelResponse;
+import com.aliens.msg.mmq.Message;
+import com.aliens.msg.mmq.Status;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.*;
 import lombok.AllArgsConstructor;
@@ -26,6 +29,9 @@ public class MessageReceiver {
     boolean autoAck=false;
 
     @Wither
+    String threadName;
+
+    @Wither
     String queueName;
 
     Connection connection;
@@ -33,9 +39,9 @@ public class MessageReceiver {
 
 
 
-    public  Object action(Message message, AMQP.BasicProperties properties) throws Exception
+    public Status action(Message message, AMQP.BasicProperties properties) throws Exception
     {
-        return null;
+        return Status.SUCCESS;
     }
 
 
@@ -54,7 +60,6 @@ public class MessageReceiver {
             QueueingConsumer consumer = new QueueingConsumer(channel);
 
 
-
             channel.basicConsume(queueName, autoAck, consumer);
 
 
@@ -63,7 +68,7 @@ public class MessageReceiver {
 
                 if(delivery==null)
                 {
-                    channel.queueDelete(queueName);
+                    channel.queueDelete(queueName,true,true);
                     return ChannelResponse.QUEUE_PROCESSED;
                 }
 
@@ -71,17 +76,19 @@ public class MessageReceiver {
 
 
                 Message message = mapper.readValue(messageStr.getBytes(), Message.class);
-
+                Status status=null;
                 try {
-                    action(message, delivery.getProperties());
+                    status=action(message, delivery.getProperties());
                 }
                 catch (Exception e)
                 {
                     return ChannelResponse.MESSAGE_FAILED;
                 }
 
+                if(status==Status.RESTART)
+                    return ChannelResponse.RESTART;
 
-                if(!autoAck)
+                if(!autoAck && status==Status.SUCCESS)
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
             }
 

@@ -1,5 +1,6 @@
-package com.aliens.msg.mmq;
+package com.aliens.msg.mmq.actions;
 
+import com.aliens.msg.mmq.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -18,7 +19,7 @@ public class MessageSender {
         factory.setHost("localhost");
     }
 
-    public static void sendMessage(Message message,String queName) throws Exception {
+    public static void sendMessage(Message message, String queName) throws Exception {
 
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();

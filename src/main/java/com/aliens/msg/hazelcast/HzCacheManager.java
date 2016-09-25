@@ -33,11 +33,35 @@ public class HzCacheManager implements CacheManager {
         log.info("Hazelcast instance created {}",instance.getName());
     }
 
-    @Override
-    public void putToWait(String groupId)
+
+
+    public void updateSet(String setName,String ele)
     {
-       Set<String> waiting =instance.getSet("waitingGroups") ;
-        waiting.add(groupId);
+        Set<String> set =instance.getSet(setName);
+        set.add(ele);
+    }
+
+    public synchronized void handleRestart()
+    {
+        Set<String> workerThreads=instance.getSet("workerThreads");
+        Set<String> restartedThreads=instance.getSet("restartedThreads");
+        restartedThreads.clear();
+        Map<String, Integer> dataMap = instance.getMap("info");
+        dataMap.put("restartState",workerThreads.size());
+
+    }
+
+    public Integer getRestartState()
+    {
+        Map<String, Integer> dataMap = instance.getMap("info");
+        return dataMap.getOrDefault("restartState",0);
+    }
+
+    public void decreaseRestartState()
+    {
+        Map<String, Integer> dataMap = instance.getMap("info");
+        int prevstate= dataMap.getOrDefault("restartState",0);
+        dataMap.put("restartState",prevstate-1);
     }
 
     @Override
@@ -45,6 +69,12 @@ public class HzCacheManager implements CacheManager {
     {
         Set<String> waiting =instance.getSet("waitingGroups");
         return waiting.contains(groupId);
+    }
+
+    public boolean isRestarted(String threadName)
+    {
+        Set<String> set =instance.getSet("restartedThreads");
+        return set.contains(threadName);
     }
 
     @Override

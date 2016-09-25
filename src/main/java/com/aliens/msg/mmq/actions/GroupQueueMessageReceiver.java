@@ -1,5 +1,7 @@
-package com.aliens.msg.mmq;
+package com.aliens.msg.mmq.actions;
 
+import com.aliens.msg.mmq.Message;
+import com.aliens.msg.mmq.Status;
 import com.rabbitmq.client.AMQP;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -12,8 +14,8 @@ import org.springframework.stereotype.Component;
 public class GroupQueueMessageReceiver extends MessageReceiver {
 
     @Override
-    public Object action(Message message, AMQP.BasicProperties properties) throws Exception {
+    public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
         //call mycroft here
-        return null;
+        return Status.SUCCESS;
     }
 }
