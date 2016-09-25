@@ -9,7 +9,6 @@ import com.rabbitmq.client.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -17,32 +16,48 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MessageReceiver {
+public abstract class MessageReceiver  {
 
     private static ObjectMapper mapper = new ObjectMapper();
     private static ConnectionFactory factory = new ConnectionFactory();
-
-    @Wither
-    long timeout=10*1000;
-
-    @Wither
-    boolean autoAck=false;
-
-    @Wither
-    String threadName;
-
-    @Wither
-    String queueName;
 
     Connection connection;
     Channel channel;
 
 
+    long timeout=15*1000;
+    String threadName;
+    String queueName;
+    boolean autoAck=false;
 
-    public Status action(Message message, AMQP.BasicProperties properties) throws Exception
-    {
-        return Status.SUCCESS;
+
+    public MessageReceiver withTimeout(long timeout) {
+        this.timeout=timeout;
+        return this;
     }
+
+
+    public MessageReceiver withThreadName(String threadName) {
+        this.threadName=threadName;
+        return this;
+    }
+
+
+    public MessageReceiver withQueueName(String queueName) {
+        this.queueName=queueName;
+        return this;
+    }
+
+
+    public MessageReceiver withAutoAck(boolean autoAck) {
+        this.autoAck=autoAck;
+        return this;
+    }
+
+
+
+    public abstract Status action(Message message, AMQP.BasicProperties properties) throws Exception;
+
 
 
     public ChannelResponse consumeMessages()  {
@@ -68,7 +83,8 @@ public class MessageReceiver {
 
                 if(delivery==null)
                 {
-                    channel.queueDelete(queueName,true,true);
+                    log.info("No message since {} seconds, deleting queue {}",timeout/1000,queueName);
+                    channel.queueDelete(queueName,false,true);
                     return ChannelResponse.QUEUE_PROCESSED;
                 }
 
@@ -76,6 +92,7 @@ public class MessageReceiver {
 
 
                 Message message = mapper.readValue(messageStr.getBytes(), Message.class);
+                log.info("Received message {}",message.getMessageId());
                 Status status=null;
                 try {
                     status=action(message, delivery.getProperties());

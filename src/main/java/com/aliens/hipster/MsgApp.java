@@ -3,8 +3,11 @@ package com.aliens.hipster;
 import com.aliens.hipster.config.Constants;
 import com.aliens.hipster.config.DefaultProfileUtil;
 import com.aliens.hipster.config.JHipsterProperties;
+import com.aliens.msg.hazelcast.HzCacheManager;
+import com.aliens.msg.mmq.ThreadWrapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
@@ -21,7 +24,7 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
-@ComponentScan
+@ComponentScan("com.aliens")
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ JHipsterProperties.class, LiquibaseProperties.class })
 public class MsgApp {
@@ -30,6 +33,12 @@ public class MsgApp {
 
     @Inject
     private Environment env;
+
+    @Autowired
+    HzCacheManager hzCacheManager;
+
+    @Autowired
+    ThreadWrapper threadWrapper;
 
     /**
      * Initializes msg.
@@ -50,6 +59,9 @@ public class MsgApp {
             log.error("You have misconfigured your application! It should not" +
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
+
+        hzCacheManager.setup();
+        threadWrapper.setup();
     }
 
     /**
@@ -70,6 +82,8 @@ public class MsgApp {
             env.getProperty("server.port"),
             InetAddress.getLocalHost().getHostAddress(),
             env.getProperty("server.port"));
+
+
 
     }
 

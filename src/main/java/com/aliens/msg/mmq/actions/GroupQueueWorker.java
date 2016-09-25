@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Provider;
 import java.util.Optional;
@@ -21,6 +22,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Component
 public class GroupQueueWorker implements Runnable {
 
     @Autowired
@@ -49,6 +51,7 @@ public class GroupQueueWorker implements Runnable {
                 cacheManager.updateData(queueInfo,response);
             }
             else {
+                log.info("No idle queue, sleeping for 4 sec");
                 try {
                     Thread.sleep(4000,0);
                 } catch (InterruptedException e) {

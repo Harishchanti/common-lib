@@ -22,73 +22,84 @@ import java.util.Set;
 @Singleton
 public class HzCacheManager implements CacheManager {
 
-    private static HazelcastInstance instance;
 
-    public void setup()
-    {
+    public final static String CLUSTERNAME = "testCluster";
+    public final static String WORKER_LIST = "workerThreads";
+    public final static String RESTARTED_WORKER_LIST = "restartedThreads";
+    public final static String WAITING_GROUPS_LIST="waitingGroups";
+    public final static String QUEUE_MAPPINGS="data";
+    public final static String INFO="info";
+    public final static String RESTART_STATE="restartState";
+
+    private HazelcastInstance instance;
+
+    public void setup() {
         Config config = new Config();
-        config.getGroupConfig().setName("testCluster");
+        config.getGroupConfig().setName(CLUSTERNAME);
         instance = Hazelcast.newHazelcastInstance(config);
 
-        log.info("Hazelcast instance created {}",instance.getName());
+        log.info("Hazelcast instance created {}", instance.getName());
+    }
+
+    public HzStat getStat()
+    {
+        HzStat stat = new HzStat();
+         stat.setWorkerThreads(instance.getSet(WORKER_LIST));
+        stat.setRestartedThreads(instance.getSet(RESTARTED_WORKER_LIST));
+        stat.setMappings(instance.getMap(QUEUE_MAPPINGS));
+        stat.setInfo(instance.getMap(INFO));
+        stat.setWaitingGroupList(instance.getSet(WAITING_GROUPS_LIST));
+        return stat;
     }
 
 
-
-    public void updateSet(String setName,String ele)
-    {
-        Set<String> set =instance.getSet(setName);
+    public void updateSet(String setName, String ele) {
+        Set<String> set = instance.getSet(setName);
         set.add(ele);
     }
 
-    public synchronized void handleRestart()
-    {
-        Set<String> workerThreads=instance.getSet("workerThreads");
-        Set<String> restartedThreads=instance.getSet("restartedThreads");
+    public synchronized void handleRestart() {
+        Set<String> workerThreads = instance.getSet(WORKER_LIST);
+        Set<String> restartedThreads = instance.getSet(RESTARTED_WORKER_LIST);
         restartedThreads.clear();
-        Map<String, Integer> dataMap = instance.getMap("info");
-        dataMap.put("restartState",workerThreads.size());
+        Map<String, Integer> dataMap = instance.getMap(INFO);
+        dataMap.put(RESTART_STATE, workerThreads.size());
 
     }
 
-    public Integer getRestartState()
-    {
-        Map<String, Integer> dataMap = instance.getMap("info");
-        return dataMap.getOrDefault("restartState",0);
+    public Integer getRestartState() {
+        Map<String, Integer> dataMap = instance.getMap(INFO);
+        return dataMap.getOrDefault(RESTART_STATE, 0);
     }
 
-    public void decreaseRestartState()
-    {
-        Map<String, Integer> dataMap = instance.getMap("info");
-        int prevstate= dataMap.getOrDefault("restartState",0);
-        dataMap.put("restartState",prevstate-1);
+    public void decreaseRestartState() {
+        Map<String, Integer> dataMap = instance.getMap(INFO);
+        int prevstate = dataMap.getOrDefault(RESTART_STATE, 0);
+        dataMap.put(RESTART_STATE, prevstate - 1);
     }
 
     @Override
-    public boolean isWaiting(String groupId)
-    {
-        Set<String> waiting =instance.getSet("waitingGroups");
+    public boolean isWaiting(String groupId) {
+        Set<String> waiting = instance.getSet(WAITING_GROUPS_LIST);
         return waiting.contains(groupId);
     }
 
-    public boolean isRestarted(String threadName)
-    {
-        Set<String> set =instance.getSet("restartedThreads");
+    public boolean isRestarted(String threadName) {
+        Set<String> set = instance.getSet(RESTARTED_WORKER_LIST);
         return set.contains(threadName);
     }
 
     @Override
-    public void clearWaitingList()
-    {
-        Set<String> waiting =instance.getSet("waitingGroups");
+    public void clearWaitingList() {
+        Set<String> waiting = instance.getSet(WAITING_GROUPS_LIST);
         waiting.clear();
     }
 
     @Override
     public Optional<QueueInfo> findIdleQueue() {
-        Map<String, QueueInfo> dataMap = instance.getMap("data");
+        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
 
-        Optional<QueueInfo> queueDataOptional=dataMap.values().stream()
+        Optional<QueueInfo> queueDataOptional = dataMap.values().stream()
             .filter(queueInfo -> queueInfo.getState().equals(QueueState.IDLE))
             .findFirst();
 
@@ -97,41 +108,33 @@ public class HzCacheManager implements CacheManager {
 
     @Override
     public Optional<QueueInfo> findByGroupId(String groupId) {
-        Map<String, QueueInfo> dataMap = instance.getMap("data");
-        return Optional.ofNullable(dataMap.getOrDefault(groupId,null));
+        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+        return Optional.ofNullable(dataMap.getOrDefault(groupId, null));
     }
 
     @Override
-    public int getSize()
-    {
-        Map<String, QueueInfo> dataMap = instance.getMap("data");
+    public int getSize() {
+        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
         return dataMap.size();
     }
 
     @Override
     public void updateData(QueueInfo queueInfo, ChannelResponse response) {
 
-        Map<String, QueueInfo> dataMap = instance.getMap("data");
-        String key= queueInfo.getGroupName();
+        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+        String key = queueInfo.getGroupName();
 
-        if(response==ChannelResponse.QUEUE_PROCESSED)
-        {
+        if (response == ChannelResponse.QUEUE_PROCESSED) {
 
-            log.info("Deleting entry {}",key);
+            log.info("Deleting entry {}", key);
             dataMap.remove(key);
-        }
-        else if(response==ChannelResponse.MESSAGE_FAILED)
-        {
-            if(queueInfo.getRetry()>=3)
-            {
+        } else if (response == ChannelResponse.MESSAGE_FAILED) {
+            if (queueInfo.getRetry() >= 3) {
                 queueInfo.setState(QueueState.FAILED);
-            }
-            else queueInfo.incRetry(1);
+            } else queueInfo.incRetry(1);
 
-             dataMap.put(key, queueInfo);
-        }
-        else if(response==ChannelResponse.ERROR)
-        {
+            dataMap.put(key, queueInfo);
+        } else if (response == ChannelResponse.ERROR) {
             queueInfo.setState(QueueState.IDLE);
             dataMap.put(key, queueInfo);
         }
@@ -141,8 +144,8 @@ public class HzCacheManager implements CacheManager {
 
     @Override
     public void updateData(QueueInfo queueInfo, QueueState queueState) {
-        Map<String, QueueInfo> dataMap = instance.getMap("data");
-        String key= queueInfo.getGroupName();
+        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+        String key = queueInfo.getGroupName();
         queueInfo.setState(queueState);
         dataMap.put(key, queueInfo);
     }

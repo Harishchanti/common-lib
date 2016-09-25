@@ -5,7 +5,9 @@ import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
+import com.google.common.base.Strings;
 import com.rabbitmq.client.AMQP;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,14 +19,13 @@ import java.util.Optional;
  */
 @Component
 @Scope("prototype")
+@Slf4j
 public class MainQueueMessageReceiver extends MessageReceiver {
 
     @Autowired
     HzCacheManager hzCacheManager;
 
-    final int limit=100;
-
-
+    final int limit=3;
 
     @Override
     public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
@@ -35,14 +36,19 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         {
             if(!hzCacheManager.isRestarted(threadName))
             {
-                hzCacheManager.updateSet("restartedThreads",threadName);
+                hzCacheManager.updateSet(HzCacheManager.RESTARTED_WORKER_LIST,threadName);
                 hzCacheManager.decreaseRestartState();
+                log.info("Restarting channel {}",threadName);
                 return Status.RESTART;
             }
         }
 
 
         String groupId=message.getGroupId();
+
+        if(Strings.isNullOrEmpty(groupId))
+            return Status.SUCCESS;
+
         Optional<QueueInfo> queueInfoOptional= hzCacheManager.findByGroupId(groupId);
 
         if(queueInfoOptional.isPresent())
@@ -59,6 +65,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 if(hzCacheManager.isWaiting(groupId))
                 {
+                    log.info("Initalize channel restart");
                     hzCacheManager.handleRestart();
                     return Status.RESTART;
                 }
@@ -73,10 +80,13 @@ public class MainQueueMessageReceiver extends MessageReceiver {
             }
             else
             {
-                hzCacheManager.updateSet("waitingGroups",groupId);
+                hzCacheManager.updateSet(HzCacheManager.WAITING_GROUPS_LIST,groupId);
+                log.info("{} queues already created. waiting...",limit);
                 return Status.WAITING;
             }
         }
 
     }
+
+
 }

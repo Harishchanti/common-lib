@@ -4,6 +4,7 @@ import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.mmq.ChannelResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Provider;
 import java.util.UUID;
@@ -12,6 +13,7 @@ import java.util.UUID;
  * Created by jayant on 25/9/16.
  */
 @Slf4j
+@Component
 public class MainQueueWorker implements Runnable {
 
     @Autowired
@@ -28,7 +30,7 @@ public class MainQueueWorker implements Runnable {
         String threadName= UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
-        cacheManager.updateSet("workerThreads",threadName);
+        cacheManager.updateSet(HzCacheManager.WORKER_LIST,threadName);
 
         while (true) {
             ChannelResponse response = mainQueueMessageReceiverProvider
