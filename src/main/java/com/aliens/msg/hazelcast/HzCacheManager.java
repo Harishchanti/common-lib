@@ -107,6 +107,9 @@ public class HzCacheManager implements CacheManager {
             .filter(queueInfo -> queueInfo.getState().equals(QueueState.IDLE))
             .findFirst();
 
+        if(queueDataOptional.isPresent())
+            queueDataOptional.get().setState(QueueState.PROCESSING);
+
         return queueDataOptional;
     }
 
@@ -117,7 +120,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public int getSize() {
+    public synchronized  int getSize() {
         Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
         return dataMap.size();
     }
@@ -135,9 +138,13 @@ public class HzCacheManager implements CacheManager {
                 log.info("Deleting entry {}", key);
                 dataMap.remove(key);
             } else if (response == ChannelResponse.MESSAGE_FAILED) {
+                queueInfo.incRetry(1);
                 if (queueInfo.getRetry() >= 3) {
                     queueInfo.setState(QueueState.FAILED);
-                } else queueInfo.incRetry(1);
+                } else  {
+
+                    queueInfo.setState(QueueState.IDLE);
+                }
 
                 dataMap.put(key, queueInfo);
             } else if (response == ChannelResponse.ERROR) {

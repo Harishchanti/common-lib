@@ -1,15 +1,13 @@
 package com.aliens.msg.mmq.actions;
 
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
 import com.aliens.hipster.domain.InboundMessages;
 import com.aliens.hipster.repository.InboundMessagesRepository;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
 import com.rabbitmq.client.AMQP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by jayant on 25/9/16.
@@ -29,15 +27,16 @@ public class GroupQueueMessageReceiver extends MessageReceiver {
 		// call mycroft here
 		try {
 
-			
-			System.out.println("inside Action");
-			JSONObject mycroftPayload = new JSONObject(message.getPayload());
-			String response = sendMessageToMycroft.withMycroftPayload(mycroftPayload).invoke();
+
+//			System.out.println("inside Action");
+//			JSONObject mycroftPayload = new JSONObject(message.getPayload());
+//			String response = sendMessageToMycroft.withMycroftPayload(mycroftPayload).invoke();
 
 			InboundMessages inboundMessages = new InboundMessages();
 			inboundMessages.setGroupId(message.getGroupId());
 			inboundMessages.setMessageId(message.getMessageId());
 			inboundMessagesRepository.save(inboundMessages);
+            if(message.getGroupId().equals("g1")) return Status.FAILED;
 			return Status.SUCCESS;
 		} catch (Exception ex) {
 			return Status.FAILED;

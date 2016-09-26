@@ -1,5 +1,6 @@
 package com.aliens.msg.web;
 
+import com.aliens.msg.mmq.ThreadWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +29,9 @@ public class TestController {
     @Autowired
     HzCacheManager hzCacheManager;
 
+    @Autowired
+    ThreadWrapper threadWrapper;
+
     @RequestMapping(value = "",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -35,6 +39,15 @@ public class TestController {
 
         HzStat hzStat = hzCacheManager.getStat();
         return ResponseEntity.ok().body(hzStat);
+    }
+
+    @RequestMapping(value = "/start",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> startTest() throws Exception {
+
+        threadWrapper.setup();
+        return ResponseEntity.ok().body("start");
     }
 
     @RequestMapping(value = "/sendMessage",
@@ -45,6 +58,8 @@ public class TestController {
         MessageSender.sendMessage(message,"hello");
         return ResponseEntity.ok().body("sent");
     }
+
+
 
     @RequestMapping(value = "/delete/{queueName}",
         method = RequestMethod.GET,
@@ -65,16 +80,16 @@ public class TestController {
     		msg.setGroupId("g1");
     		msg.setPayload("{\"abc\":\"ASdssfs \"}");
     		msg.setMessageId("m1");
-    		
+
     		GroupQueueMessageReceiver gqmr = new GroupQueueMessageReceiver();
-    		
+
     		AMQP.BasicProperties properties = new AMQP.BasicProperties();
-    		
+
     		return gqmr.action(msg, properties);
 //            return ResponseEntity.ok().body("sent");
         }
-    
-    
+
+
 
 
 }

@@ -109,8 +109,12 @@ public abstract class MessageReceiver  {
                     return ChannelResponse.MESSAGE_FAILED;
                 }
 
+                if(status==Status.FAILED)
+                    return ChannelResponse.MESSAGE_FAILED;
+
                 if(status==Status.RESTART)
                     return ChannelResponse.RESTART;
+
 
                 if(!autoAck && status==Status.SUCCESS)
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);

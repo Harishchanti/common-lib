@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Provider;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
 
 /**
  * Created by jayant on 25/9/16.
@@ -31,15 +32,13 @@ public class ThreadWrapper {
 
     public void setup()
     {
-        executorService.submit(mainQueueWorkerProvider.get());
 
-        executorService.submit(groupQueueWorkerProvider .get());
-        executorService.submit(groupQueueWorkerProvider .get());
+        IntStream.range(0,1).forEach( (x)->executorService.submit(mainQueueWorkerProvider .get()));
 
-        executorService.submit(testMessageSenderProvider.get().withGroupId("g1"));
-        executorService.submit(testMessageSenderProvider.get().withGroupId("g2"));
-        executorService.submit(testMessageSenderProvider.get().withGroupId("g3"));
-        executorService.submit(testMessageSenderProvider.get().withGroupId("g4"));
+        IntStream.range(0,1).forEach( (x)->executorService.submit(groupQueueWorkerProvider .get()));
+
+        IntStream.range(0,2).forEach( (x)->executorService.submit(testMessageSenderProvider.get().withGroupId("g"+String.valueOf(x))));
+
     }
 
 
