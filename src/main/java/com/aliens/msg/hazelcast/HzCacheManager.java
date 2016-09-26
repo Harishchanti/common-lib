@@ -76,7 +76,7 @@ public class HzCacheManager implements CacheManager {
         return dataMap.getOrDefault(RESTART_STATE, 0);
     }
 
-    public void decreaseRestartState() {
+    public synchronized void decreaseRestartState() {
         Map<String, Integer> dataMap = instance.getMap(INFO);
         int prevstate = dataMap.getOrDefault(RESTART_STATE, 0);
         dataMap.put(RESTART_STATE, prevstate - 1);
@@ -94,7 +94,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public void clearWaitingList() {
+    public synchronized void clearWaitingList() {
         Set<String> waiting = instance.getSet(WAITING_GROUPS_LIST);
         waiting.clear();
     }
@@ -123,7 +123,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public void updateData(QueueInfo queueInfo, ChannelResponse response) {
+    public synchronized void updateData(QueueInfo queueInfo, ChannelResponse response) {
 
         Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
         String key = queueInfo.getGroupName();
@@ -147,7 +147,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public void updateData(QueueInfo queueInfo, QueueState queueState) {
+    public synchronized void updateData(QueueInfo queueInfo, QueueState queueState) {
         Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
         String key = queueInfo.getGroupName();
         queueInfo.setState(queueState);

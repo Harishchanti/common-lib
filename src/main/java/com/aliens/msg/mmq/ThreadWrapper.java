@@ -38,8 +38,8 @@ public class ThreadWrapper {
 
         executorService.submit(testMessageSenderProvider.get().withGroupId("g1"));
         executorService.submit(testMessageSenderProvider.get().withGroupId("g2"));
-        executorService.submit(testMessageSenderProvider.get().withGroupId("g3"));
-        executorService.submit(testMessageSenderProvider.get().withGroupId("g4"));
+        //executorService.submit(testMessageSenderProvider.get().withGroupId("g3"));
+        //executorService.submit(testMessageSenderProvider.get().withGroupId("g4"));
     }
 
 
