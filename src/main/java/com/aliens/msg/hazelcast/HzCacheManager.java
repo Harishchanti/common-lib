@@ -23,7 +23,7 @@ import java.util.Set;
 public class HzCacheManager implements CacheManager {
 
 
-    public final static String CLUSTERNAME = "testCluster";
+    public final static String CLUSTERNAME = "clusterMsg";
 
     public final static String MAIN_QUEUE_WORKER_LIST = "mainQueueWorkerThreads";
     public final static String GROUP_QUEUE_WORKER_LIST = "groupQueueWorkerThreads";

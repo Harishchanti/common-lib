@@ -25,7 +25,7 @@ public class MessageSender {
         Channel channel = connection.createChannel();
 
         channel.queueDeclare(queName, false, false, false, null);
-
+        System.out.println("inside sendMessage");
         String queueMessage=mapper.writeValueAsString(message);
         channel.basicPublish("", queName, null, queueMessage.getBytes("UTF-8"));
         log.info("Sent Message messageId {} payload {}",message.getMessageId(),message.getPayload());

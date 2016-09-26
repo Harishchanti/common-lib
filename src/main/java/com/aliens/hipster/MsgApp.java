@@ -5,6 +5,8 @@ import com.aliens.hipster.config.DefaultProfileUtil;
 import com.aliens.hipster.config.JHipsterProperties;
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.mmq.ThreadWrapper;
+import com.aliens.msg.utils.RestUtil;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,6 +64,7 @@ public class MsgApp {
 
         hzCacheManager.setup();
         threadWrapper.setup();
+        RestUtil.setupUnirest();
     }
 
     /**
