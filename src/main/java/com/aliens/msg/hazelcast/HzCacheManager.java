@@ -62,7 +62,7 @@ public class HzCacheManager implements CacheManager {
         set.add(ele);
     }
 
-    public synchronized void handleRestart() {
+    public void handleRestart() {
         Set<String> workerThreads = instance.getSet(MAIN_QUEUE_WORKER_LIST);
         Set<String> restartedThreads = instance.getSet(RESTARTED_WORKER_LIST);
         restartedThreads.clear();
@@ -76,7 +76,7 @@ public class HzCacheManager implements CacheManager {
         return dataMap.getOrDefault(RESTART_STATE, 0);
     }
 
-    public synchronized void decreaseRestartState() {
+    public void decreaseRestartState() {
         Map<String, Integer> dataMap = instance.getMap(INFO);
         int prevstate = dataMap.getOrDefault(RESTART_STATE, 0);
         dataMap.put(RESTART_STATE, prevstate - 1);
@@ -94,7 +94,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public synchronized void clearWaitingList() {
+    public void clearWaitingList() {
         Set<String> waiting = instance.getSet(WAITING_GROUPS_LIST);
         waiting.clear();
     }
@@ -123,34 +123,40 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public synchronized void updateData(QueueInfo queueInfo, ChannelResponse response) {
+    public void updateData(QueueInfo queueInfo, ChannelResponse response) {
 
-        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
-        String key = queueInfo.getGroupName();
+        //synchronized (queueInfo.getGroupName())
+        {
+            Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+            String key = queueInfo.getGroupName();
 
-        if (response == ChannelResponse.QUEUE_PROCESSED) {
+            if (response == ChannelResponse.QUEUE_PROCESSED) {
 
-            log.info("Deleting entry {}", key);
-            dataMap.remove(key);
-        } else if (response == ChannelResponse.MESSAGE_FAILED) {
-            if (queueInfo.getRetry() >= 3) {
-                queueInfo.setState(QueueState.FAILED);
-            } else queueInfo.incRetry(1);
+                log.info("Deleting entry {}", key);
+                dataMap.remove(key);
+            } else if (response == ChannelResponse.MESSAGE_FAILED) {
+                if (queueInfo.getRetry() >= 3) {
+                    queueInfo.setState(QueueState.FAILED);
+                } else queueInfo.incRetry(1);
 
-            dataMap.put(key, queueInfo);
-        } else if (response == ChannelResponse.ERROR) {
-            queueInfo.setState(QueueState.IDLE);
-            dataMap.put(key, queueInfo);
+                dataMap.put(key, queueInfo);
+            } else if (response == ChannelResponse.ERROR) {
+                queueInfo.setState(QueueState.IDLE);
+                dataMap.put(key, queueInfo);
+            }
         }
 
 
     }
 
     @Override
-    public synchronized void updateData(QueueInfo queueInfo, QueueState queueState) {
-        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
-        String key = queueInfo.getGroupName();
-        queueInfo.setState(queueState);
-        dataMap.put(key, queueInfo);
+    public  void updateData(QueueInfo queueInfo, QueueState queueState) {
+        //synchronized (queueInfo.getGroupName())
+        {
+            Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+            String key = queueInfo.getGroupName();
+            queueInfo.setState(queueState);
+            dataMap.put(key, queueInfo);
+        }
     }
 }
