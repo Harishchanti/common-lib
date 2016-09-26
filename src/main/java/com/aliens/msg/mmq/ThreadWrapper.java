@@ -28,6 +28,7 @@ public class ThreadWrapper {
     public void setup()
     {
         executorService.submit(mainQueueWorkerProvider.get());
+        executorService.submit(groupQueueWorkerProvider .get());
     }
 
 

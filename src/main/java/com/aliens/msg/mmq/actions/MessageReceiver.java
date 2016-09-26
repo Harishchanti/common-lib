@@ -25,10 +25,13 @@ public abstract class MessageReceiver  {
     Channel channel;
 
 
-    long timeout=15*1000;
+    long timeout=10*1000;
     String threadName;
     String queueName;
     boolean autoAck=false;
+
+    long startTime= System.currentTimeMillis();
+    long threadLifeTime=10*1000;
 
 
     public MessageReceiver withTimeout(long timeout) {
@@ -62,6 +65,7 @@ public abstract class MessageReceiver  {
 
     public ChannelResponse consumeMessages()  {
 
+
         factory.setHost("localhost");
         try {
             connection = factory.newConnection();
@@ -83,8 +87,11 @@ public abstract class MessageReceiver  {
 
                 if(delivery==null)
                 {
-                    log.info("No message since {} seconds, deleting queue {}",timeout/1000,queueName);
-                    channel.queueDelete(queueName,false,true);
+
+                    if(!queueName.equals("hello")) {
+                        log.info("No message since {} seconds, deleting queue {}", timeout / 1000, queueName);
+                        channel.queueDelete(queueName, false, true);
+                    }
                     return ChannelResponse.QUEUE_PROCESSED;
                 }
 
@@ -107,6 +114,11 @@ public abstract class MessageReceiver  {
 
                 if(!autoAck && status==Status.SUCCESS)
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
+
+                if(System.currentTimeMillis()-startTime > threadLifeTime && queueName.equals("hello"))
+                {
+                    return ChannelResponse.SCHEDULED_RESTART;
+                }
             }
 
         }

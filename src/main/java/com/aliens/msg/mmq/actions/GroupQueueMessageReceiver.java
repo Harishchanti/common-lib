@@ -16,6 +16,7 @@ public class GroupQueueMessageReceiver extends MessageReceiver {
     @Override
     public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
         //call mycroft here
+        Thread.sleep(1000);
         return Status.SUCCESS;
     }
 }

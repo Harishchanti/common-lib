@@ -24,7 +24,10 @@ public class HzCacheManager implements CacheManager {
 
 
     public final static String CLUSTERNAME = "testCluster";
-    public final static String WORKER_LIST = "workerThreads";
+
+    public final static String MAIN_QUEUE_WORKER_LIST = "mainQueueWorkerThreads";
+    public final static String GROUP_QUEUE_WORKER_LIST = "groupQueueWorkerThreads";
+
     public final static String RESTARTED_WORKER_LIST = "restartedThreads";
     public final static String WAITING_GROUPS_LIST="waitingGroups";
     public final static String QUEUE_MAPPINGS="data";
@@ -44,7 +47,8 @@ public class HzCacheManager implements CacheManager {
     public HzStat getStat()
     {
         HzStat stat = new HzStat();
-         stat.setWorkerThreads(instance.getSet(WORKER_LIST));
+         stat.setMainQueueworkerThreads(instance.getSet(MAIN_QUEUE_WORKER_LIST));
+         stat.setGroupQueueWorkerThreads(instance.getSet(GROUP_QUEUE_WORKER_LIST));
         stat.setRestartedThreads(instance.getSet(RESTARTED_WORKER_LIST));
         stat.setMappings(instance.getMap(QUEUE_MAPPINGS));
         stat.setInfo(instance.getMap(INFO));
@@ -59,7 +63,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     public synchronized void handleRestart() {
-        Set<String> workerThreads = instance.getSet(WORKER_LIST);
+        Set<String> workerThreads = instance.getSet(MAIN_QUEUE_WORKER_LIST);
         Set<String> restartedThreads = instance.getSet(RESTARTED_WORKER_LIST);
         restartedThreads.clear();
         Map<String, Integer> dataMap = instance.getMap(INFO);
@@ -96,7 +100,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public Optional<QueueInfo> findIdleQueue() {
+    public synchronized Optional<QueueInfo> findIdleQueue() {
         Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
 
         Optional<QueueInfo> queueDataOptional = dataMap.values().stream()

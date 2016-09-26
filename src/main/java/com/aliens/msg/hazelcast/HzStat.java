@@ -14,8 +14,11 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class HzStat {
- Set<String> workerThreads;
- Set<String> restartedThreads;
+
+    Set<String> mainQueueworkerThreads;
+    Set<String> groupQueueWorkerThreads;
+
+    Set<String> restartedThreads;
  Set<String> waitingGroupList;
  Map<String,Integer> info;
  Map<String,QueueInfo> mappings;
