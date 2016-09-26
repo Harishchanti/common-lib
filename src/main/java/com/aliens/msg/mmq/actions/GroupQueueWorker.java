@@ -1,5 +1,6 @@
 package com.aliens.msg.mmq.actions;
 
+import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
@@ -37,7 +38,7 @@ public class GroupQueueWorker implements Runnable {
         String threadName= UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
-        cacheManager.updateSet(HzCacheManager.GROUP_QUEUE_WORKER_LIST,threadName);
+        cacheManager.updateSet(Constants.GROUP_QUEUE_WORKER_LIST,threadName);
 
         while(true)
         {

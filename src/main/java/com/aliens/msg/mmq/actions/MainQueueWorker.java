@@ -1,5 +1,6 @@
 package com.aliens.msg.mmq.actions;
 
+import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.mmq.ChannelResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +23,7 @@ public class MainQueueWorker implements Runnable {
     @Autowired
     Provider<MainQueueMessageReceiver> mainQueueMessageReceiverProvider;
 
-    final String mainQueuName = "hello";
+
 
     @Override
     public void run() {
@@ -30,19 +31,19 @@ public class MainQueueWorker implements Runnable {
         String threadName= UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
-        cacheManager.updateSet(HzCacheManager.MAIN_QUEUE_WORKER_LIST,threadName);
+        cacheManager.updateSet(Constants.MAIN_QUEUE_WORKER_LIST,threadName);
 
         while (true) {
             ChannelResponse response = mainQueueMessageReceiverProvider
                 .get()
                 .withTimeout(10 * 1000)
                 .withThreadName(threadName)
-                .withQueueName(mainQueuName)
+                .withQueueName(Constants.MAIN_QUEUE_NAME)
                 .consumeMessages();
 
             if (response == ChannelResponse.QUEUE_PROCESSED) {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

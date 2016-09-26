@@ -1,5 +1,6 @@
 package com.aliens.msg.web;
 
+import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.mmq.ThreadWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -32,6 +33,9 @@ public class TestController {
     @Autowired
     ThreadWrapper threadWrapper;
 
+    @Autowired
+    MessageSender messageSender;
+
     @RequestMapping(value = "",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -55,7 +59,7 @@ public class TestController {
         produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<?> sendMessage(@RequestBody  Message message) throws Exception {
 
-        MessageSender.sendMessage(message,"hello");
+        messageSender.sendMessage(message,"hello");
         return ResponseEntity.ok().body("sent");
     }
 
@@ -66,7 +70,7 @@ public class TestController {
         produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<?> deleteQueue(@PathVariable("queueName") String queue) throws Exception {
 
-        hzCacheManager.getInstance().getMap(HzCacheManager.QUEUE_MAPPINGS).remove(queue);
+        hzCacheManager.getInstance().getMap(Constants.QUEUE_MAPPINGS).remove(queue);
         return ResponseEntity.ok().body("deleted");
     }
 

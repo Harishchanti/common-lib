@@ -1,5 +1,6 @@
 package com.aliens.msg.mmq.actions;
 
+import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
@@ -25,7 +26,10 @@ public class MainQueueMessageReceiver extends MessageReceiver {
     @Autowired
     HzCacheManager hzCacheManager;
 
-    final int limit=3;
+    @Autowired
+    MessageSender messageSender;
+
+
 
     @Override
     public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
@@ -36,7 +40,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         {
             if(!hzCacheManager.isRestarted(threadName))
             {
-                hzCacheManager.updateSet(HzCacheManager.RESTARTED_WORKER_LIST,threadName);
+                hzCacheManager.updateSet(Constants.RESTARTED_WORKER_LIST,threadName);
                 hzCacheManager.decreaseRestartState();
                 log.info("Restarting channel {}",threadName);
                 return Status.RESTART;
@@ -54,23 +58,23 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         if(queueInfoOptional.isPresent())
         {
             String qname=queueInfoOptional.get().getQname();
-            MessageSender.sendMessage(message,qname);
+            messageSender.sendMessage(message,qname);
             return Status.SUCCESS;
         }
         else
         {
             int size=hzCacheManager.getSize();
-            if(size<limit)
+            if(size<rabbitMqConfig.getQueueLimit())
             {
 
-                if(hzCacheManager.isWaiting(groupId))
+                if(hzCacheManager.isWaiting(groupId) && hzCacheManager.getRestartState()==0)
                 {
                     log.info("Initalize channel restart");
                     hzCacheManager.handleRestart();
                     return Status.RESTART;
                 }
 
-                MessageSender.sendMessage(message,groupId);
+                messageSender.sendMessage(message,groupId);
 
                 QueueInfo queueInfo=QueueInfo.builder()
                     .qname(groupId)
@@ -80,8 +84,8 @@ public class MainQueueMessageReceiver extends MessageReceiver {
             }
             else
             {
-                hzCacheManager.updateSet(HzCacheManager.WAITING_GROUPS_LIST,groupId);
-                log.info("{} queues already created. waiting...",limit);
+                hzCacheManager.updateSet(Constants.WAITING_GROUPS_LIST,groupId);
+                log.info("queues limit crossed: {} . waiting...",rabbitMqConfig.getQueueLimit());
                 return Status.WAITING;
             }
         }

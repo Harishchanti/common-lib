@@ -24,9 +24,6 @@ public class GroupQueueMessageReceiver extends MessageReceiver {
 
 	@Override
 	public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
-		// call mycroft here
-		try {
-
 
 //			System.out.println("inside Action");
 //			JSONObject mycroftPayload = new JSONObject(message.getPayload());
@@ -36,12 +33,7 @@ public class GroupQueueMessageReceiver extends MessageReceiver {
 			inboundMessages.setGroupId(message.getGroupId());
 			inboundMessages.setMessageId(message.getMessageId());
 			inboundMessagesRepository.save(inboundMessages);
-            if(message.getGroupId().equals("g1")) return Status.FAILED;
-			return Status.SUCCESS;
-		} catch (Exception ex) {
-			return Status.FAILED;
-
-		}
-	}
+            return Status.SUCCESS;
+    }
 
 }
