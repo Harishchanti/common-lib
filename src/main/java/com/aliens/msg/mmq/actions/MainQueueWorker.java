@@ -30,12 +30,12 @@ public class MainQueueWorker implements Runnable {
         String threadName= UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
-        cacheManager.updateSet(HzCacheManager.WORKER_LIST,threadName);
+        cacheManager.updateSet(HzCacheManager.MAIN_QUEUE_WORKER_LIST,threadName);
 
         while (true) {
             ChannelResponse response = mainQueueMessageReceiverProvider
                 .get()
-                .withTimeout(60 * 1000)
+                .withTimeout(10 * 1000)
                 .withThreadName(threadName)
                 .withQueueName(mainQueuName)
                 .consumeMessages();
@@ -50,9 +50,15 @@ public class MainQueueWorker implements Runnable {
                 {
                     cacheManager.clearWaitingList();
                 }
-            } else {
+            } else if(response==ChannelResponse.ERROR) {
                 log.error("Got error while processing main queue");
             }
+            else if(response==ChannelResponse.SCHEDULED_RESTART)
+            {
+                log.info("Scheduled restart");
+            }
+
+
 
         }
 

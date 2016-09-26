@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Provider;
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * Created by jayant on 25/9/16.
@@ -33,6 +34,11 @@ public class GroupQueueWorker implements Runnable {
 
     public void run()
     {
+        String threadName= UUID.randomUUID().toString();
+        Thread.currentThread().setName(threadName);
+
+        cacheManager.updateSet(HzCacheManager.GROUP_QUEUE_WORKER_LIST,threadName);
+
         while(true)
         {
             Optional<QueueInfo> queueInfoOptional = cacheManager.findIdleQueue();
@@ -41,11 +47,13 @@ public class GroupQueueWorker implements Runnable {
             {
                 QueueInfo queueInfo =queueInfoOptional.get();
                 String qname=queueInfo.getQname();
+                queueInfo.setThreadName(threadName);
                 cacheManager.updateData(queueInfo, QueueState.PROCESSING);
 
                 ChannelResponse response=groupQueueMessageReceiverProvider
                     .get()
                     .withQueueName(qname)
+                    .withThreadName(threadName)
                     .consumeMessages();
 
                 cacheManager.updateData(queueInfo,response);
