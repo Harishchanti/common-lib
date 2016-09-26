@@ -31,7 +31,7 @@ public class TestMessageSender  implements Runnable {
                 MessageSender.sendMessage(message, "hello");
             }catch (Exception e)
             {
-
+            	System.out.println("Excepion in sending mesg");
             }
         }
     }
