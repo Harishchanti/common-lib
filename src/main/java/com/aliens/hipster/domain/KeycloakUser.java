@@ -1,8 +1,10 @@
 package com.aliens.hipster.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -19,6 +21,8 @@ import java.util.Set;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class KeycloakUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +47,4 @@ public class KeycloakUser implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Clients> clients = new HashSet<>();
-
-
 }

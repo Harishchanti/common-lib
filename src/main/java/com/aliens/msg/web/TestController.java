@@ -1,5 +1,6 @@
 package com.aliens.msg.web;
 
+import com.aliens.hipster.repository.ClientsRepository;
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.mmq.ThreadWrapper;
 import com.aliens.msg.mmq.actions.VerifyGrouping;
@@ -42,6 +43,9 @@ public class TestController {
     @Autowired
     MessageSender messageSender;
 
+    @Autowired
+    ClientsRepository clientsRepository;
+
     @RequestMapping(value = "",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -50,6 +54,17 @@ public class TestController {
         HzStat hzStat = hzCacheManager.getStat();
         return ResponseEntity.ok().body(hzStat);
     }
+
+    @RequestMapping(value = "/clients",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getClients() throws Exception {
+
+
+        return ResponseEntity.ok().body(clientsRepository.findAll());
+    }
+
+
 
 
     @RequestMapping(value = "/verify",

@@ -33,8 +33,8 @@ public class Clients implements Serializable {
     private String target_endpoint;
 
 
-    @ManyToOne(fetch =FetchType.LAZY )
-    @JoinColumn(name="keycloak_user_id")
+    @ManyToOne(fetch =FetchType.EAGER )
+    @JoinColumn(name="keycloak_user")
     private KeycloakUser keycloak_user;
 
 
