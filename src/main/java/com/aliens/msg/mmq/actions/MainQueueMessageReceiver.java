@@ -25,7 +25,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
     @Autowired
     HzCacheManager hzCacheManager;
 
-    final int limit=10;
+    final int limit=5;
 
     @Override
     public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
@@ -47,7 +47,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         String groupId=message.getGroupId();
 
         if(Strings.isNullOrEmpty(groupId))
-            return Status.SUCCESS;
+            return Status.FAILED;
 
         Optional<QueueInfo> queueInfoOptional= hzCacheManager.findByGroupId(groupId);
 
@@ -65,9 +65,9 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 if(hzCacheManager.isWaiting(groupId))
                 {
-                    log.info("Initalize channel restart");
-                    hzCacheManager.handleRestart();
-                    return Status.RESTART;
+                    //log.info("Initalize channel restart");
+                    //hzCacheManager.handleRestart();
+                    return Status.WAITING;
                 }
 
                 MessageSender.sendMessage(message,groupId);

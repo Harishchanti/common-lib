@@ -42,24 +42,18 @@ public class MainQueueWorker implements Runnable {
 
             if (response == ChannelResponse.QUEUE_PROCESSED) {
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            } else if (response == ChannelResponse.RESTART) {
+            } else if (response == ChannelResponse.RESTART || response==ChannelResponse.SCHEDULED_RESTART) {
                 {
+                    log.info("Restarting mainQueue consumer thread");
                     cacheManager.clearWaitingList();
                 }
             } else if(response==ChannelResponse.ERROR) {
                 log.error("Got error while processing main queue");
             }
-            else if(response==ChannelResponse.SCHEDULED_RESTART)
-            {
-                log.info("Scheduled restart");
-            }
-
-
-
         }
 
     }
