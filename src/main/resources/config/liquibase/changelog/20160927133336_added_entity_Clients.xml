@@ -24,29 +24,26 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="topic" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="consumer_count" type="integer">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="target_endpoint" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="keycloak_user" type="integer">
                 <constraints nullable="true" />
             </column>
-            
-            <column name="keycloak_user_map_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
+
 
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
 </databaseChangeLog>
