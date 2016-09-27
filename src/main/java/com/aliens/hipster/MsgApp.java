@@ -3,7 +3,7 @@ package com.aliens.hipster;
 import com.aliens.hipster.config.Constants;
 import com.aliens.hipster.config.DefaultProfileUtil;
 import com.aliens.hipster.config.JHipsterProperties;
-import com.aliens.msg.hazelcast.HzCacheManager;
+import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.utils.RestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +35,7 @@ public class MsgApp {
     private Environment env;
 
     @Autowired
-    HzCacheManager hzCacheManager;
+    CacheManager cacheManager;
 
     /**
      * Initializes msg.
@@ -57,7 +57,7 @@ public class MsgApp {
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
 
-        hzCacheManager.setup();
+        cacheManager.setup();
         RestUtil.setupUnirest();
     }
 

@@ -7,20 +7,28 @@ import java.util.Optional;
 /**
  * Created by jayant on 25/9/16.
  */
-public interface CacheManager {
+public interface CacheManager<T> {
 
+
+    HzStat getStat();
+
+    void updateSet(String setName, String ele);
 
     boolean isWaiting(String groupId);
 
     void clearWaitingList();
 
-    public Optional<QueueInfo> findIdleQueue();
+    void setup();
 
-    Optional<QueueInfo> findByGroupId(String groupId);
+    void updateAvailbleQueue(String str);
+
+    Optional<T> findIdleQueue();
+
+    Optional<T> findByGroupId(String groupId);
 
     int getSize();
 
-    public void updateData(QueueInfo queueInfo, ChannelResponse response);
+    void updateData(T queueInfo, ChannelResponse response);
 
-    public void updateData(QueueInfo queueInfo, QueueState queueState);
+    void updateData(T queueInfo, QueueState queueState);
 }

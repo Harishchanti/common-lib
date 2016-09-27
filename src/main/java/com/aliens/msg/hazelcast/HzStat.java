@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 /**
@@ -19,10 +20,10 @@ public class HzStat {
     Set<String> groupQueueWorkerThreads;
 
     Set<String> restartedThreads;
- Set<String> waitingGroupList;
- Map<String,Integer> info;
- Map<String,QueueInfo> mappings;
-
+    Set<String> waitingGroupList;
+    Queue<String> queue;
+    Map<String, Integer> info;
+    Map<String, QueueInfo> mappings;
 
 
 }

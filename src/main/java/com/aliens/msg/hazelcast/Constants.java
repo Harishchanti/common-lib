@@ -20,4 +20,5 @@ public class Constants {
     public final static String RESTART_STATE="restartState";
 
     public final static String MAIN_QUEUE_NAME="hello";
+    public final static String AVAILABLE_GROUP_QUEUE = "availableGroups";
 }

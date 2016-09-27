@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.worker;
 
+import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
-import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.aliens.msg.mmq.receiver.MainQueueMessageReceiver;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import java.util.UUID;
 public class MainQueueWorker implements Runnable {
 
 
-    final HzCacheManager cacheManager;
+    final CacheManager cacheManager;
     final Provider<MainQueueMessageReceiver> mainQueueMessageReceiverProvider;
 
 

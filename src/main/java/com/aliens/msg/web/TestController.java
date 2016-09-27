@@ -1,25 +1,22 @@
 package com.aliens.msg.web;
 
 import com.aliens.hipster.repository.ClientsRepository;
-import com.aliens.msg.hazelcast.Constants;
+import com.aliens.msg.hazelcast.CacheManager;
+import com.aliens.msg.hazelcast.HzStat;
+import com.aliens.msg.mmq.Message;
+import com.aliens.msg.mmq.Status;
 import com.aliens.msg.mmq.ThreadWrapper;
+import com.aliens.msg.mmq.actions.MessageSender;
 import com.aliens.msg.mmq.actions.VerifyGrouping;
+import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
+import com.rabbitmq.client.AMQP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.aliens.msg.hazelcast.HzCacheManager;
-import com.aliens.msg.hazelcast.HzStat;
-import com.aliens.msg.mmq.Message;
-import com.aliens.msg.mmq.Status;
-import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
-import com.aliens.msg.mmq.actions.MessageSender;
-import com.rabbitmq.client.AMQP;
 
 import java.util.Set;
 
@@ -32,7 +29,7 @@ import java.util.Set;
 public class TestController {
 
     @Autowired
-    HzCacheManager hzCacheManager;
+    CacheManager cacheManager;
 
     @Autowired
     ThreadWrapper threadWrapper;
@@ -51,7 +48,7 @@ public class TestController {
         produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> stat() throws Exception {
 
-        HzStat hzStat = hzCacheManager.getStat();
+        HzStat hzStat = cacheManager.getStat();
         return ResponseEntity.ok().body(hzStat);
     }
 
@@ -96,14 +93,7 @@ public class TestController {
 
 
 
-    @RequestMapping(value = "/delete/{queueName}",
-        method = RequestMethod.GET,
-        produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<?> deleteQueue(@PathVariable("queueName") String queue) throws Exception {
 
-        hzCacheManager.getInstance().getMap(Constants.QUEUE_MAPPINGS).remove(queue);
-        return ResponseEntity.ok().body("deleted");
-    }
 
     @RequestMapping(value = "/testSendTOMycroft",
             method = RequestMethod.POST,

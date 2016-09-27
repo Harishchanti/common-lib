@@ -32,12 +32,8 @@ public class Clients implements Serializable {
     @Column(name = "target_endpoint")
     private String target_endpoint;
 
-
     @ManyToOne(fetch =FetchType.EAGER )
     @JoinColumn(name="keycloak_user")
     private KeycloakUser keycloak_user;
-
-
-
 
 }

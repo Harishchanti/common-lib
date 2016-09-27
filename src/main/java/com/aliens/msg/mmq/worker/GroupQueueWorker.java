@@ -1,8 +1,8 @@
 package com.aliens.msg.mmq.worker;
 
 import com.aliens.msg.config.RabbitMqConfig;
+import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
-import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.ChannelResponse;
@@ -30,7 +30,7 @@ import java.util.UUID;
 public class GroupQueueWorker implements Runnable {
 
 
-    final HzCacheManager cacheManager;
+    final CacheManager cacheManager;
     final RabbitMqConfig rabbitMqConfig;
     final Provider<GroupQueueMessageReceiver> groupQueueMessageReceiverProvider;
 

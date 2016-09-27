@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.receiver;
 
+import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
-import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.Message;
@@ -25,7 +25,7 @@ import java.util.Optional;
 public class MainQueueMessageReceiver extends MessageReceiver {
 
     @Autowired
-    HzCacheManager hzCacheManager;
+    CacheManager cacheManager;
 
     @Autowired
     MessageSender messageSender;
@@ -38,7 +38,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         if(Strings.isNullOrEmpty(groupId))
             return Status.FAILED;
 
-        Optional<QueueInfo> queueInfoOptional= hzCacheManager.findByGroupId(groupId);
+        Optional<QueueInfo> queueInfoOptional= cacheManager.findByGroupId(groupId);
 
         if(queueInfoOptional.isPresent())
         {
@@ -48,11 +48,11 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         }
         else
         {
-            int size=hzCacheManager.getSize();
+            int size= cacheManager.getSize();
             if(size<rabbitMqConfig.getQueueLimit())
             {
 
-                if(hzCacheManager.isWaiting(groupId))
+                if(cacheManager.isWaiting(groupId))
                 {
                     return Status.WAITING;
                 }
@@ -63,13 +63,13 @@ public class MainQueueMessageReceiver extends MessageReceiver {
                     .qname(groupId)
                     .groupName(groupId).build();
 
-                hzCacheManager.updateData(queueInfo, QueueState.IDLE);
-
+                cacheManager.updateData(queueInfo, QueueState.IDLE);
+                cacheManager.updateAvailbleQueue(groupId);
                 return Status.SUCCESS;
             }
             else
             {
-                hzCacheManager.updateSet(Constants.WAITING_GROUPS_LIST,groupId);
+                cacheManager.updateSet(Constants.WAITING_GROUPS_LIST,groupId);
                 log.info("queues limit crossed: {} . waiting...",rabbitMqConfig.getQueueLimit());
                 return Status.WAITING;
             }

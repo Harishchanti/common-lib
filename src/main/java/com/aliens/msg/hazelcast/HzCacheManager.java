@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Singleton;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Queue;
 import java.util.Set;
 
 import static com.aliens.msg.hazelcast.Constants.*;
@@ -22,11 +23,12 @@ import static com.aliens.msg.hazelcast.Constants.*;
 @Getter
 @Slf4j
 @Singleton
-public class HzCacheManager implements CacheManager {
+public class HzCacheManager implements CacheManager<QueueInfo> {
 
 
     private HazelcastInstance instance;
 
+    @Override
     public void setup() {
         Config config = new Config();
         config.getGroupConfig().setName(CLUSTERNAME);
@@ -35,6 +37,27 @@ public class HzCacheManager implements CacheManager {
         log.info("Hazelcast instance created {}", instance.getName());
     }
 
+    @Override
+    public void updateAvailbleQueue(String str)
+    {
+        instance.getQueue(AVAILABLE_GROUP_QUEUE).add(str);
+    }
+
+    @Override
+    public synchronized Optional<QueueInfo> findIdleQueue()
+    {
+        Queue<String> queue = instance.getQueue(AVAILABLE_GROUP_QUEUE);
+        if(queue.isEmpty())
+        {
+            return Optional.empty();
+        }
+
+        String groupId=queue.poll();
+        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+        return Optional.ofNullable(dataMap.getOrDefault(groupId,null));
+    }
+
+    @Override
     public HzStat getStat()
     {
         HzStat stat = new HzStat();
@@ -44,34 +67,18 @@ public class HzCacheManager implements CacheManager {
         stat.setMappings(instance.getMap(QUEUE_MAPPINGS));
         stat.setInfo(instance.getMap(INFO));
         stat.setWaitingGroupList(instance.getSet(WAITING_GROUPS_LIST));
+
+        stat.setQueue(instance.getQueue(AVAILABLE_GROUP_QUEUE));
         return stat;
     }
 
-
+    @Override
     public synchronized void updateSet(String setName, String ele) {
         Set<String> set = instance.getSet(setName);
         set.add(ele);
     }
 
-    public void handleRestart() {
-        Set<String> workerThreads = instance.getSet(MAIN_QUEUE_WORKER_LIST);
-        Set<String> restartedThreads = instance.getSet(RESTARTED_WORKER_LIST);
-        restartedThreads.clear();
-        Map<String, Integer> dataMap = instance.getMap(INFO);
-        dataMap.put(RESTART_STATE, workerThreads.size());
 
-    }
-
-    public Integer getRestartState() {
-        Map<String, Integer> dataMap = instance.getMap(INFO);
-        return dataMap.getOrDefault(RESTART_STATE, 0);
-    }
-
-    public void decreaseRestartState() {
-        Map<String, Integer> dataMap = instance.getMap(INFO);
-        int prevstate = dataMap.getOrDefault(RESTART_STATE, 0);
-        dataMap.put(RESTART_STATE, prevstate - 1);
-    }
 
     @Override
     public boolean isWaiting(String groupId) {
@@ -79,10 +86,6 @@ public class HzCacheManager implements CacheManager {
         return waiting.contains(groupId);
     }
 
-    public boolean isRestarted(String threadName) {
-        Set<String> set = instance.getSet(RESTARTED_WORKER_LIST);
-        return set.contains(threadName);
-    }
 
     @Override
     public void clearWaitingList() {
@@ -90,19 +93,6 @@ public class HzCacheManager implements CacheManager {
         waiting.clear();
     }
 
-    @Override
-    public synchronized Optional<QueueInfo> findIdleQueue() {
-        Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
-
-        Optional<QueueInfo> queueDataOptional = dataMap.values().stream()
-            .filter(queueInfo -> queueInfo.getState().equals(QueueState.IDLE))
-            .findFirst();
-
-        if(queueDataOptional.isPresent())
-            queueDataOptional.get().setState(QueueState.PROCESSING);
-
-        return queueDataOptional;
-    }
 
     @Override
     public Optional<QueueInfo> findByGroupId(String groupId) {
@@ -156,5 +146,35 @@ public class HzCacheManager implements CacheManager {
             queueInfo.setState(queueState);
             dataMap.put(key, queueInfo);
         }
+    }
+
+
+    //deprecated methods
+
+    @Deprecated
+    public void handleRestart() {
+        Set<String> workerThreads = instance.getSet(MAIN_QUEUE_WORKER_LIST);
+        Set<String> restartedThreads = instance.getSet(RESTARTED_WORKER_LIST);
+        restartedThreads.clear();
+        Map<String, Integer> dataMap = instance.getMap(INFO);
+        dataMap.put(RESTART_STATE, workerThreads.size());
+
+    }
+
+    @Deprecated
+    public Integer getRestartState() {
+        Map<String, Integer> dataMap = instance.getMap(INFO);
+        return dataMap.getOrDefault(RESTART_STATE, 0);
+    }
+
+    public void decreaseRestartState() {
+        Map<String, Integer> dataMap = instance.getMap(INFO);
+        int prevstate = dataMap.getOrDefault(RESTART_STATE, 0);
+        dataMap.put(RESTART_STATE, prevstate - 1);
+    }
+
+    public boolean isRestarted(String threadName) {
+        Set<String> set = instance.getSet(RESTARTED_WORKER_LIST);
+        return set.contains(threadName);
     }
 }
