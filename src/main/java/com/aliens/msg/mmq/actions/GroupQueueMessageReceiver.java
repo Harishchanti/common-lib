@@ -36,8 +36,7 @@ public class GroupQueueMessageReceiver extends MessageReceiver {
 			inboundMessages.setGroupId(message.getGroupId());
 			inboundMessages.setMessageId(message.getMessageId());
 			inboundMessagesRepository.save(inboundMessages);
-            if(message.getGroupId().equals("g1")) return Status.FAILED;
-			return Status.SUCCESS;
+            return Status.SUCCESS;
 		} catch (Exception ex) {
 			return Status.FAILED;
 

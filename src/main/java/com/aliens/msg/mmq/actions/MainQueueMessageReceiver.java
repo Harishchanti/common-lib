@@ -25,7 +25,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
     @Autowired
     HzCacheManager hzCacheManager;
 
-    final int limit=3;
+    final int limit=10;
 
     @Override
     public Status action(Message message, AMQP.BasicProperties properties) throws Exception {

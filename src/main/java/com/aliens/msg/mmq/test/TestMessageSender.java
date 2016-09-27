@@ -22,7 +22,7 @@ public class TestMessageSender  implements Runnable {
     public void run() {
 
         int i;
-        for(i=1;i<=20;i++)
+        for(i=1;i<=100;i++)
         {
             try {
                 Message message = new Message();

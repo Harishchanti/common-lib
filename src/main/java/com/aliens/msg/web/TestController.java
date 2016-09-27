@@ -1,22 +1,19 @@
 package com.aliens.msg.web;
 
-import com.aliens.msg.mmq.ThreadWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.HzStat;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
+import com.aliens.msg.mmq.ThreadWrapper;
 import com.aliens.msg.mmq.actions.GroupQueueMessageReceiver;
 import com.aliens.msg.mmq.actions.MessageSender;
 import com.rabbitmq.client.AMQP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 /**
  * Created by jayant on 25/9/16.
@@ -32,6 +29,9 @@ public class TestController {
     @Autowired
     ThreadWrapper threadWrapper;
 
+    @Autowired
+    VerifyGrouping verifyGrouping;
+
     @RequestMapping(value = "",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
@@ -39,6 +39,16 @@ public class TestController {
 
         HzStat hzStat = hzCacheManager.getStat();
         return ResponseEntity.ok().body(hzStat);
+    }
+
+
+    @RequestMapping(value = "/verify",
+        method = RequestMethod.GET,
+        produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> verify() throws Exception {
+
+        Set<String> result=verifyGrouping.invoke();
+        return ResponseEntity.ok().body(result);
     }
 
     @RequestMapping(value = "/start",

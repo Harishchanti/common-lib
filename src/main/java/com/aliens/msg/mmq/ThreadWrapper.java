@@ -28,16 +28,16 @@ public class ThreadWrapper {
     @Autowired
     Provider<TestMessageSender> testMessageSenderProvider;
 
-    ExecutorService executorService = Executors.newFixedThreadPool(10);
+    ExecutorService executorService = Executors.newFixedThreadPool(20);
 
     public void setup()
     {
 
         IntStream.range(0,1).forEach( (x)->executorService.submit(mainQueueWorkerProvider .get()));
 
-        IntStream.range(0,1).forEach( (x)->executorService.submit(groupQueueWorkerProvider .get()));
+        IntStream.range(0,5).forEach( (x)->executorService.submit(groupQueueWorkerProvider .get()));
 
-        IntStream.range(0,2).forEach( (x)->executorService.submit(testMessageSenderProvider.get().withGroupId("g"+String.valueOf(x))));
+        IntStream.range(0,10).forEach( (x)->executorService.submit(testMessageSenderProvider.get().withGroupId("g"+String.valueOf(x))));
 
     }
 

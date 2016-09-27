@@ -57,9 +57,11 @@ public class HzCacheManager implements CacheManager {
     }
 
 
-    public void updateSet(String setName, String ele) {
-        Set<String> set = instance.getSet(setName);
-        set.add(ele);
+    public synchronized void updateSet(String setName, String ele) {
+        synchronized (setName) {
+            Set<String> set = instance.getSet(setName);
+            set.add(ele);
+        }
     }
 
     public void handleRestart() {
@@ -126,7 +128,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public void updateData(QueueInfo queueInfo, ChannelResponse response) {
+    public synchronized void updateData(QueueInfo queueInfo, ChannelResponse response) {
 
         //synchronized (queueInfo.getGroupName())
         {
@@ -157,7 +159,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public  void updateData(QueueInfo queueInfo, QueueState queueState) {
+    public  synchronized void updateData(QueueInfo queueInfo, QueueState queueState) {
         //synchronized (queueInfo.getGroupName())
         {
             Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
