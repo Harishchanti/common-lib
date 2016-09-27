@@ -24,14 +24,13 @@ public class MainQueueWorker implements Runnable {
     Provider<MainQueueMessageReceiver> mainQueueMessageReceiverProvider;
 
 
-
     @Override
     public void run() {
 
-        String threadName= UUID.randomUUID().toString();
+        String threadName = UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
-        cacheManager.updateSet(Constants.MAIN_QUEUE_WORKER_LIST,threadName);
+        cacheManager.updateSet(Constants.MAIN_QUEUE_WORKER_LIST, threadName);
 
         while (true) {
             ChannelResponse response = mainQueueMessageReceiverProvider
@@ -41,19 +40,18 @@ public class MainQueueWorker implements Runnable {
                 .withQueueName(Constants.MAIN_QUEUE_NAME)
                 .consumeMessages();
 
-            if (response == ChannelResponse.QUEUE_PROCESSED) {
-                try {
-                    Thread.sleep(10000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } else if (response == ChannelResponse.RESTART || response==ChannelResponse.SCHEDULED_RESTART) {
-                {
+            log.info("MainQueue consumer response: {}",response);
+
+            switch (response) {
+                case QUEUE_PROCESSED:
+                case SCHEDULED_RESTART:
+                case RESTART:
                     log.info("Restarting mainQueue consumer thread");
                     cacheManager.clearWaitingList();
-                }
-            } else if(response==ChannelResponse.ERROR) {
-                log.error("Got error while processing main queue");
+                    break;
+                case ERROR:
+                case MESSAGE_FAILED:
+                    log.error("Got error while processing main queue");
             }
         }
 

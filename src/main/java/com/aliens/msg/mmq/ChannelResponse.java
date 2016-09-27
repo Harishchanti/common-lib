@@ -1,8 +1,20 @@
 package com.aliens.msg.mmq;
 
+import lombok.Getter;
+
 /**
  * Created by jayant on 21/9/16.
  */
 public enum  ChannelResponse {
-    QUEUE_PROCESSED,MESSAGE_FAILED,ERROR,RESTART,SCHEDULED_RESTART
+    QUEUE_PROCESSED("QUEUE_PROCESSED")
+    ,MESSAGE_FAILED("MESSAGE_FAILED")
+    ,ERROR("ERROR"),RESTART("RESTART"),SCHEDULED_RESTART("SCHEDULED_RESTART");
+
+    @Getter
+    String value;
+
+    ChannelResponse(String value)
+    {
+        this.value =value;
+    }
 }

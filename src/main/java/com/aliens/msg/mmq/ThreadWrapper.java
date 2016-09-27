@@ -35,7 +35,7 @@ public class ThreadWrapper {
 
         IntStream.range(0,1).forEach( (x)->executorService.submit(mainQueueWorkerProvider.get()));
 
-        IntStream.range(0,4).forEach( (x)->executorService.submit(groupQueueWorkerProvider.get()));
+        IntStream.range(0,3).forEach( (x)->executorService.submit(groupQueueWorkerProvider.get()));
 
         IntStream.range(0,10).forEach( (x)->executorService.submit(testMessageSenderProvider.get().withGroupId("g"+String.valueOf(x))));
 
