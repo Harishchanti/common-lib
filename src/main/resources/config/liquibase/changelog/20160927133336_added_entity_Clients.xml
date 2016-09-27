@@ -37,7 +37,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="keycloak_user" type="integer">
+            <column name="keycloak_user" type="bigint">
                 <constraints nullable="true" />
             </column>
 

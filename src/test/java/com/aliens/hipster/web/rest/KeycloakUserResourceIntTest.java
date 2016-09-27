@@ -174,7 +174,7 @@ public class KeycloakUserResourceIntTest {
         restKeycloakUserMockMvc.perform(put("/api/keycloak-users")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(updatedKeycloakUser)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated());
 
         // Validate the KeycloakUser in the database
         List<KeycloakUser> keycloakUsers = keycloakUserRepository.findAll();

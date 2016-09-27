@@ -7,8 +7,8 @@
         Added the constraints for entity Clients.
     -->
     <changeSet id="20160927133336-2" author="jhipster">
-        
-        <addForeignKeyConstraint baseColumnNames="keycloak_user_map_id"
+
+        <addForeignKeyConstraint baseColumnNames="keycloak_user"
                                  baseTableName="clients"
                                  constraintName="fk_clients_keycloak_user_map_id"
                                  referencedColumnNames="id"

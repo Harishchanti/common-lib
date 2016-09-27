@@ -24,21 +24,21 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="client_id" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="username" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <column name="password" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
-            
+
             <!-- jhipster-needle-liquibase-add-column - Jhipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
 </databaseChangeLog>
