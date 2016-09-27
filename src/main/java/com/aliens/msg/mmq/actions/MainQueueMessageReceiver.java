@@ -51,7 +51,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         String groupId=message.getGroupId();
 
         if(Strings.isNullOrEmpty(groupId))
-            return Status.SUCCESS;
+            return Status.FAILED;
 
         Optional<QueueInfo> queueInfoOptional= hzCacheManager.findByGroupId(groupId);
 
@@ -67,11 +67,11 @@ public class MainQueueMessageReceiver extends MessageReceiver {
             if(size<rabbitMqConfig.getQueueLimit())
             {
 
-                if(hzCacheManager.isWaiting(groupId) && hzCacheManager.getRestartState()==0)
+                if(hzCacheManager.isWaiting(groupId))
                 {
-                    log.info("Initalize channel restart");
-                    hzCacheManager.handleRestart();
-                    return Status.RESTART;
+                    //log.info("Initalize channel restart");
+                    //hzCacheManager.handleRestart();
+                    return Status.WAITING;
                 }
 
                 messageSender.sendMessage(message,groupId);

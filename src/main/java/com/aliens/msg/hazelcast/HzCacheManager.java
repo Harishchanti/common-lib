@@ -35,7 +35,8 @@ public class HzCacheManager implements CacheManager {
         log.info("Hazelcast instance created {}", instance.getName());
     }
 
-    public HzStat getStat() {
+    public HzStat getStat()
+    {
         HzStat stat = new HzStat();
         stat.setMainQueueworkerThreads(instance.getSet(MAIN_QUEUE_WORKER_LIST));
         stat.setGroupQueueWorkerThreads(instance.getSet(GROUP_QUEUE_WORKER_LIST));
@@ -47,19 +48,18 @@ public class HzCacheManager implements CacheManager {
     }
 
 
-    public void updateSet(String setName, String ele) {
-        synchronized (setName) {
-            Set<String> set = instance.getSet(setName);
-            set.add(ele);
-        }
+    public synchronized void updateSet(String setName, String ele) {
+        Set<String> set = instance.getSet(setName);
+        set.add(ele);
     }
 
-    public  synchronized void handleRestart() {
+    public void handleRestart() {
         Set<String> workerThreads = instance.getSet(MAIN_QUEUE_WORKER_LIST);
         Set<String> restartedThreads = instance.getSet(RESTARTED_WORKER_LIST);
         restartedThreads.clear();
         Map<String, Integer> dataMap = instance.getMap(INFO);
         dataMap.put(RESTART_STATE, workerThreads.size());
+
     }
 
     public Integer getRestartState() {
@@ -67,7 +67,7 @@ public class HzCacheManager implements CacheManager {
         return dataMap.getOrDefault(RESTART_STATE, 0);
     }
 
-    public  synchronized void decreaseRestartState() {
+    public void decreaseRestartState() {
         Map<String, Integer> dataMap = instance.getMap(INFO);
         int prevstate = dataMap.getOrDefault(RESTART_STATE, 0);
         dataMap.put(RESTART_STATE, prevstate - 1);
@@ -85,7 +85,7 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public synchronized void clearWaitingList() {
+    public void clearWaitingList() {
         Set<String> waiting = instance.getSet(WAITING_GROUPS_LIST);
         waiting.clear();
     }
@@ -98,7 +98,7 @@ public class HzCacheManager implements CacheManager {
             .filter(queueInfo -> queueInfo.getState().equals(QueueState.IDLE))
             .findFirst();
 
-        if (queueDataOptional.isPresent())
+        if(queueDataOptional.isPresent())
             queueDataOptional.get().setState(QueueState.PROCESSING);
 
         return queueDataOptional;
@@ -111,15 +111,15 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public int getSize() {
+    public synchronized  int getSize() {
         Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
         return dataMap.size();
     }
 
     @Override
-    public void updateData(QueueInfo queueInfo, ChannelResponse response) {
+    public synchronized void updateData(QueueInfo queueInfo, ChannelResponse response) {
 
-        synchronized (queueInfo.getGroupName())
+        //synchronized (queueInfo.getGroupName())
         {
             Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
             String key = queueInfo.getGroupName();
@@ -148,8 +148,9 @@ public class HzCacheManager implements CacheManager {
     }
 
     @Override
-    public void updateData(QueueInfo queueInfo, QueueState queueState) {
-        synchronized(queueInfo.getGroupName()) {
+    public  synchronized void updateData(QueueInfo queueInfo, QueueState queueState) {
+        //synchronized (queueInfo.getGroupName())
+        {
             Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
             String key = queueInfo.getGroupName();
             queueInfo.setState(queueState);
