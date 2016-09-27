@@ -2,7 +2,7 @@ package com.aliens.msg.utils;
 
 
 import com.aliens.msg.keycloak.Credentials;
-import com.aliens.msg.keycloak.KeyCloakUser;
+import com.aliens.msg.keycloak.KeyCloakUserEnum;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -45,12 +45,12 @@ public class RestUtil {
     Map<String,String> headers = new HashMap<>();
 
     @Wither
-    KeyCloakUser keyCloakUser;
+    KeyCloakUserEnum keyCloakUserEnum;
 
     public RestUtil()
     {
         headers.put("content-type",MediaType.APPLICATION_JSON_VALUE);
-        keyCloakUser=null;
+        keyCloakUserEnum =null;
     }
 
 
@@ -108,9 +108,9 @@ public class RestUtil {
     }
 
     public void checkKeyCloak() throws ExecutionException {
-        if(keyCloakUser!=null)
+        if(keyCloakUserEnum !=null)
         {
-            String auth= credentials.getAccessToken(keyCloakUser);
+            String auth= credentials.getAccessToken(keyCloakUserEnum);
             headers.put("Authorization","Bearer "+auth);
         }
     }
@@ -119,9 +119,9 @@ public class RestUtil {
 
         log.info(response.getBody().toString());
 
-        if(response.getStatus()==401 && keyCloakUser!=null)
+        if(response.getStatus()==401 && keyCloakUserEnum !=null)
         {
-            credentials.updateKey(keyCloakUser);
+            credentials.updateKey(keyCloakUserEnum);
         }
 
         if(response.getStatus()/100!=2)

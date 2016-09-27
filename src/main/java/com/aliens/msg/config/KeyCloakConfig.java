@@ -1,6 +1,6 @@
 package com.aliens.msg.config;
 
-import com.aliens.msg.keycloak.KeyCloakUser;
+import com.aliens.msg.keycloak.KeyCloakUserEnum;
 import com.aliens.msg.keycloak.UserCredentials;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -21,6 +21,6 @@ public class KeyCloakConfig {
 	String Authorization;
 	String keycloakGetAccessTokenUrl;
 
-	HashMap<KeyCloakUser, UserCredentials> map=new HashMap<>();
+	HashMap<KeyCloakUserEnum, UserCredentials> map=new HashMap<>();
 
 }

@@ -24,27 +24,27 @@ public class Credentials {
 	@Autowired
 	KeyCloakConfig keyCloakConfig;
 
-	private LoadingCache<KeyCloakUser, String> cache = CacheBuilder.newBuilder().maximumSize(100)
-			.expireAfterWrite(10, TimeUnit.MINUTES).build(new CacheLoader<KeyCloakUser, String>() {
+	private LoadingCache<KeyCloakUserEnum, String> cache = CacheBuilder.newBuilder().maximumSize(100)
+			.expireAfterWrite(10, TimeUnit.MINUTES).build(new CacheLoader<KeyCloakUserEnum, String>() {
 				@Override
-				public String load(KeyCloakUser key) throws Exception {
+				public String load(KeyCloakUserEnum key) throws Exception {
 					return generateAccessToken(key);
 				}
 			});
 	private RestUtil restUtil = new RestUtil();
 
-	public void updateKey(KeyCloakUser user) {
+	public void updateKey(KeyCloakUserEnum user) {
 		cache.refresh(user);
 	}
 
-	public String getAccessToken(KeyCloakUser user) throws ExecutionException {
+	public String getAccessToken(KeyCloakUserEnum user) throws ExecutionException {
 		return cache.get(user);
 	}
 
-	private String generateAccessToken(KeyCloakUser keyCloakUser) throws Exception {
+	private String generateAccessToken(KeyCloakUserEnum keyCloakUserEnum) throws Exception {
 
-		log.info("Getting new Token for {}", keyCloakUser.toString());
-		UserCredentials userCredentials = keyCloakConfig.getMap().getOrDefault(keyCloakUser, null);
+		log.info("Getting new Token for {}", keyCloakUserEnum.toString());
+		UserCredentials userCredentials = keyCloakConfig.getMap().getOrDefault(keyCloakUserEnum, null);
 
 		if (userCredentials == null) {
 			log.error("Keycoak user not found");

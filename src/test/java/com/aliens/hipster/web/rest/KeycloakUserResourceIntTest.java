@@ -3,16 +3,14 @@ package com.aliens.hipster.web.rest;
 import com.aliens.hipster.MsgApp;
 import com.aliens.hipster.domain.KeycloakUser;
 import com.aliens.hipster.repository.KeycloakUserRepository;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.hamcrest.Matchers.hasItem;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
@@ -25,6 +23,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -78,12 +77,12 @@ public class KeycloakUserResourceIntTest {
      * if they test an entity which requires the current entity.
      */
     public static KeycloakUser createEntity(EntityManager em) {
-        KeycloakUser keycloakUser = new KeycloakUser();
-        keycloakUser = new KeycloakUser()
+        KeycloakUser keycloakUser;
+        keycloakUser =  KeycloakUser.builder()
                 .name(DEFAULT_NAME)
                 .clientId(DEFAULT_CLIENT_ID)
                 .username(DEFAULT_USERNAME)
-                .password(DEFAULT_PASSWORD);
+                .password(DEFAULT_PASSWORD).build();
         return keycloakUser;
     }
 
@@ -165,11 +164,12 @@ public class KeycloakUserResourceIntTest {
 
         // Update the keycloakUser
         KeycloakUser updatedKeycloakUser = keycloakUserRepository.findOne(keycloakUser.getId());
-        updatedKeycloakUser
+        updatedKeycloakUser=
+            KeycloakUser.builder()
                 .name(UPDATED_NAME)
                 .clientId(UPDATED_CLIENT_ID)
                 .username(UPDATED_USERNAME)
-                .password(UPDATED_PASSWORD);
+                .password(UPDATED_PASSWORD).build();
 
         restKeycloakUserMockMvc.perform(put("/api/keycloak-users")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
