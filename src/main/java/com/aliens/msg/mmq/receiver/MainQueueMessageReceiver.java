@@ -1,4 +1,4 @@
-package com.aliens.msg.mmq.actions;
+package com.aliens.msg.mmq.receiver;
 
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.hazelcast.HzCacheManager;
@@ -6,6 +6,7 @@ import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
+import com.aliens.msg.mmq.actions.MessageSender;
 import com.google.common.base.Strings;
 import com.rabbitmq.client.AMQP;
 import lombok.extern.slf4j.Slf4j;
@@ -29,24 +30,8 @@ public class MainQueueMessageReceiver extends MessageReceiver {
     @Autowired
     MessageSender messageSender;
 
-
-
     @Override
     public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
-
-        int restartState=hzCacheManager.getRestartState();
-
-        if(restartState>0)
-        {
-            if(!hzCacheManager.isRestarted(threadName))
-            {
-                hzCacheManager.updateSet(Constants.RESTARTED_WORKER_LIST,threadName);
-                hzCacheManager.decreaseRestartState();
-                log.info("Restarting channel {}",threadName);
-                return Status.RESTART;
-            }
-        }
-
 
         String groupId=message.getGroupId();
 
@@ -69,8 +54,6 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 if(hzCacheManager.isWaiting(groupId))
                 {
-                    //log.info("Initalize channel restart");
-                    //hzCacheManager.handleRestart();
                     return Status.WAITING;
                 }
 
@@ -79,7 +62,9 @@ public class MainQueueMessageReceiver extends MessageReceiver {
                 QueueInfo queueInfo=QueueInfo.builder()
                     .qname(groupId)
                     .groupName(groupId).build();
+
                 hzCacheManager.updateData(queueInfo, QueueState.IDLE);
+
                 return Status.SUCCESS;
             }
             else

@@ -1,4 +1,4 @@
-package com.aliens.msg.mmq.actions;
+package com.aliens.msg.mmq.receiver;
 
 
 import com.aliens.msg.config.RabbitMqConfig;
@@ -32,19 +32,11 @@ public abstract class MessageReceiver  {
     Channel channel;
 
 
-    long timeout=10*1000;
     String threadName;
     String queueName;
     boolean autoAck=false;
 
     long startTime= System.currentTimeMillis();
-    long threadLifeTime=10*1000;
-
-
-    public MessageReceiver withTimeout(long timeout) {
-        this.timeout=timeout;
-        return this;
-    }
 
 
     public MessageReceiver withThreadName(String threadName) {
@@ -72,8 +64,8 @@ public abstract class MessageReceiver  {
 
     public ChannelResponse consumeMessages()  {
 
-
         factory.setHost(rabbitMqConfig.getHost());
+
         try {
             connection = factory.newConnection();
             channel = connection.createChannel();
@@ -87,6 +79,9 @@ public abstract class MessageReceiver  {
             QueueingConsumer consumer = new QueueingConsumer(channel);
 
             channel.basicConsume(queueName, autoAck, consumer);
+
+            long timeout =rabbitMqConfig.getTimeout();
+            long threadLifeTime =rabbitMqConfig.getThreadLifeTime();
 
             while (true) {
                 QueueingConsumer.Delivery delivery = consumer.nextDelivery(timeout);

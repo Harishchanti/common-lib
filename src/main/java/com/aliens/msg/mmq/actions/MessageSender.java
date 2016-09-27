@@ -41,7 +41,7 @@ public class MessageSender {
         }
         catch (Exception e)
         {
-            throw  e;
+            throw e;
         }
         finally {
             MMQUtil.ensureClosure(connection,channel);

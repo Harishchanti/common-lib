@@ -1,15 +1,17 @@
-package com.aliens.msg.mmq.actions;
+package com.aliens.msg.mmq.worker;
 
+import com.aliens.msg.config.RabbitMqConfig;
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.ChannelResponse;
-import lombok.AllArgsConstructor;
+import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Provider;
@@ -21,28 +23,29 @@ import java.util.UUID;
  */
 
 @Slf4j
-@AllArgsConstructor
-@NoArgsConstructor
+@Scope("prototype")
 @Data
 @Component
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class GroupQueueWorker implements Runnable {
 
-    @Autowired
-    HzCacheManager cacheManager;
 
-    @Autowired
-    Provider<GroupQueueMessageReceiver> groupQueueMessageReceiverProvider;
+    final HzCacheManager cacheManager;
+    final RabbitMqConfig rabbitMqConfig;
+    final Provider<GroupQueueMessageReceiver> groupQueueMessageReceiverProvider;
 
     public void run()
     {
         String threadName= UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
+        //Todo : dont allow more than one consumer for same client
         cacheManager.updateSet(Constants.GROUP_QUEUE_WORKER_LIST,threadName);
 
         while(true)
         {
             Optional<QueueInfo> queueInfoOptional = cacheManager.findIdleQueue();
+            long sleepInterval =rabbitMqConfig.getSleepInterval();
 
             if(queueInfoOptional.isPresent())
             {
@@ -60,9 +63,9 @@ public class GroupQueueWorker implements Runnable {
                 cacheManager.updateData(queueInfo,response);
             }
             else {
-                log.info("No idle queue, sleeping for 4 sec");
+                log.info("No idle queue found : let me sleep {}",sleepInterval);
                 try {
-                    Thread.sleep(4000,0);
+                    Thread.sleep(sleepInterval,0);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

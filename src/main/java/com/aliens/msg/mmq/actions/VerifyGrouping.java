@@ -1,4 +1,4 @@
-package com.aliens.msg.web;
+package com.aliens.msg.mmq.actions;
 
 import com.aliens.hipster.domain.InboundMessages;
 import com.aliens.hipster.repository.InboundMessagesRepository;

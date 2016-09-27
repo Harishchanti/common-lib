@@ -18,4 +18,7 @@ import org.springframework.stereotype.Component;
 public class RabbitMqConfig {
     String host;
     Integer queueLimit;
+    long timeout;
+    long threadLifeTime;
+    long sleepInterval;
 }

@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq;
 
-import com.aliens.msg.mmq.actions.GroupQueueWorker;
-import com.aliens.msg.mmq.actions.MainQueueWorker;
+import com.aliens.msg.mmq.worker.GroupQueueWorker;
+import com.aliens.msg.mmq.worker.MainQueueWorker;
 import com.aliens.msg.mmq.test.TestMessageSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

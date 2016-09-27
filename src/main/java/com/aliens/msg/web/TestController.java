@@ -2,6 +2,7 @@ package com.aliens.msg.web;
 
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.mmq.ThreadWrapper;
+import com.aliens.msg.mmq.actions.VerifyGrouping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,14 +16,9 @@ import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.hazelcast.HzStat;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
-import com.aliens.msg.mmq.ThreadWrapper;
-import com.aliens.msg.mmq.actions.GroupQueueMessageReceiver;
+import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
 import com.aliens.msg.mmq.actions.MessageSender;
 import com.rabbitmq.client.AMQP;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 

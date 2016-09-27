@@ -1,10 +1,13 @@
-package com.aliens.msg.mmq.actions;
+package com.aliens.msg.mmq.worker;
 
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.hazelcast.HzCacheManager;
 import com.aliens.msg.mmq.ChannelResponse;
+import com.aliens.msg.mmq.receiver.MainQueueMessageReceiver;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Provider;
@@ -15,13 +18,13 @@ import java.util.UUID;
  */
 @Slf4j
 @Component
+@Scope("prototype")
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MainQueueWorker implements Runnable {
 
-    @Autowired
-    HzCacheManager cacheManager;
 
-    @Autowired
-    Provider<MainQueueMessageReceiver> mainQueueMessageReceiverProvider;
+    final HzCacheManager cacheManager;
+    final Provider<MainQueueMessageReceiver> mainQueueMessageReceiverProvider;
 
 
     @Override
@@ -35,7 +38,6 @@ public class MainQueueWorker implements Runnable {
         while (true) {
             ChannelResponse response = mainQueueMessageReceiverProvider
                 .get()
-                .withTimeout(10 * 1000)
                 .withThreadName(threadName)
                 .withQueueName(Constants.MAIN_QUEUE_NAME)
                 .consumeMessages();

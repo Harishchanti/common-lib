@@ -1,9 +1,10 @@
-package com.aliens.msg.mmq.actions;
+package com.aliens.msg.mmq.receiver;
 
 import com.aliens.hipster.domain.InboundMessages;
 import com.aliens.hipster.repository.InboundMessagesRepository;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
+import com.aliens.msg.mmq.actions.SendMessageToMycroft;
 import com.rabbitmq.client.AMQP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class GroupQueueMessageReceiver extends MessageReceiver {
 
 	@Autowired
-	SendMessageToMycroft sendMessageToMycroft;
+    SendMessageToMycroft sendMessageToMycroft;
 
 	@Autowired
 	InboundMessagesRepository inboundMessagesRepository;
