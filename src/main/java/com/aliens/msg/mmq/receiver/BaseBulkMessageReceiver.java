@@ -9,9 +9,8 @@ import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.QueueingConsumer;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +22,16 @@ import java.util.List;
  */
 
 @Slf4j
-@AllArgsConstructor
 @Data
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public abstract class BulkMessageReceiver {
+@NoArgsConstructor
+public abstract class BaseBulkMessageReceiver {
 
-    final ObjectMapper objectMapper;
-    final RabbitMqConfig rabbitMqConfig;
-    final ConnectionFactoryProxy connectionFactory;
+    @Autowired
+    ObjectMapper objectMapper;
+    @Autowired
+    RabbitMqConfig rabbitMqConfig;
+    @Autowired
+    ConnectionFactoryProxy connectionFactory;
 
     final boolean autoAck = false;
 
@@ -40,6 +41,22 @@ public abstract class BulkMessageReceiver {
     String threadName;
     String queueName;
     Clients client;
+
+    public BaseBulkMessageReceiver withThreadName(String threadName) {
+        this.threadName=threadName;
+        return this;
+    }
+
+    public BaseBulkMessageReceiver withClient(Clients client) {
+        this.client=client;
+        return this;
+    }
+
+
+    public BaseBulkMessageReceiver withQueueName(String queueName) {
+        this.queueName=queueName;
+        return this;
+    }
 
 
     public abstract Status action(List<Message> messageList) throws Exception;

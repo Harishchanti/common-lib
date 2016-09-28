@@ -9,11 +9,14 @@ import com.aliens.msg.mmq.actions.MessageSender;
 import com.google.common.base.Strings;
 import com.rabbitmq.client.AMQP;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+
+import static com.aliens.msg.hazelcast.Constants.timeZone;
 
 /**
  * Created by jayant on 25/9/16.
@@ -61,6 +64,8 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 QueueInfo queueInfo=QueueInfo.builder()
                     .qname(groupId)
+                    .createdAt(LocalDateTime.now(timeZone).toString())
+                    .clientName(clientName)
                     .groupName(groupId)
                     .build();
 

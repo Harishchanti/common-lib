@@ -64,11 +64,6 @@ public abstract class MessageReceiver  {
     }
 
 
-    public MessageReceiver withAutoAck(boolean autoAck) {
-        this.autoAck=autoAck;
-        return this;
-    }
-
 
 
     public abstract Status action(Message message, AMQP.BasicProperties properties) throws Exception;

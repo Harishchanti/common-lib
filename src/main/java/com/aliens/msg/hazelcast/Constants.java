@@ -1,6 +1,7 @@
 package com.aliens.msg.hazelcast;
 
 import lombok.experimental.UtilityClass;
+import org.joda.time.DateTimeZone;
 
 /**
  * Created by jayant on 26/9/16.
@@ -22,4 +23,7 @@ public class Constants {
     public final static String AVAILABLE_GROUP_SUFFIX = "_AvailableGroups";
     public final static String WAITING_GROUP_SUFFIX = "_WaitingGroups";
     public final static String CLIENTS= "clients";
+
+    public static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
+
 }

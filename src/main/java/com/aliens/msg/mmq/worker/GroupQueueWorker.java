@@ -7,6 +7,7 @@ import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.ChannelResponse;
+import com.aliens.msg.mmq.receiver.BulkReceiver;
 import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +38,7 @@ public class GroupQueueWorker implements Runnable {
     final CacheManager cacheManager;
     final RabbitMqConfig rabbitMqConfig;
     final Provider<GroupQueueMessageReceiver> groupQueueMessageReceiverProvider;
+    final Provider<BulkReceiver> bulkReceiverProvider;
 
     @Wither
     Clients client;
@@ -61,12 +63,13 @@ public class GroupQueueWorker implements Runnable {
                 queueInfo.setThreadName(threadName);
                 cacheManager.updateData(queueInfo, QueueState.PROCESSING);
 
-                ChannelResponse response=groupQueueMessageReceiverProvider
+                ChannelResponse response=bulkReceiverProvider
                     .get()
                     .withClient(client)
                     .withQueueName(qname)
                     .withThreadName(threadName)
-                    .consumeMessages();
+                    .consumeMessage();
+
 
                 cacheManager.updateData(queueInfo,response);
             }
