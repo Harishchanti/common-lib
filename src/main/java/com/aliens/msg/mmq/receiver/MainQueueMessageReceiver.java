@@ -69,7 +69,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
             }
             else
             {
-                cacheManager.updateSet(Constants.WAITING_GROUPS_LIST,groupId);
+                cacheManager.updateSet(Constants.WAITING_GROUPS,groupId);
                 log.info("queues limit crossed: {} . waiting...",rabbitMqConfig.getQueueLimit());
                 return Status.WAITING;
             }

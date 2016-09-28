@@ -18,10 +18,12 @@ public class HzStat {
 
     Set<String> mainQueueworkerThreads;
     Set<String> groupQueueWorkerThreads;
-
     Set<String> restartedThreads;
-    Set<String> waitingGroupList;
-    Queue<String> queue;
+
+    Map<String,Set<String>> waitingGroups;
+    Map<String,Queue<String>> queueMap;
+
+
     Map<String, Integer> info;
     Map<String, QueueInfo> mappings;
 
