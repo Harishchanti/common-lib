@@ -56,7 +56,7 @@ public class MainQueueWorker implements Runnable {
                 case SCHEDULED_RESTART:
                 case RESTART:
                     log.info("Restarting mainQueue consumer thread");
-                    cacheManager.clearWaitingList();
+                    cacheManager.clearWaitingList(client.getName());
                     break;
                 case ERROR:
                 case MESSAGE_FAILED:

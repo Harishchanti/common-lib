@@ -10,19 +10,23 @@ import java.util.Optional;
 public interface CacheManager<T> {
 
 
+    void updateAvailbleQueue(String clientName, String str);
+
+    Optional<QueueInfo> findIdleQueue(String clientName);
+
     HzStat getStat();
 
     void updateSet(String setName, String ele);
 
-    boolean isWaiting(String groupId);
 
-    void clearWaitingList();
 
     void setup();
 
-    void updateAvailbleQueue(String str);
 
-    Optional<T> findIdleQueue();
+
+    boolean isWaiting(String clientName, String groupId);
+
+    void clearWaitingList(String clientName);
 
     Optional<T> findByGroupId(String groupId);
 
