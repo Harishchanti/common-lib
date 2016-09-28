@@ -5,7 +5,7 @@
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints primaryKey="true" primaryKeyName="clientsPK"/>
             </column>
-            <column name="consumer_count" type="INT"/>
+            <column name="consumerCount" type="INT"/>
             <column name="name" type="VARCHAR(255)"/>
             <column name="target_endpoint" type="VARCHAR(255)"/>
             <column name="topic" type="VARCHAR(255)"/>

@@ -92,19 +92,19 @@ public class HzCacheManager implements CacheManager<QueueInfo> {
     @Override
     public  void putToWait(String  clientName,String ele)
     {
-        instance.getSet(clientName+ WAITING_GROUP_SUFFIX).add(ele);
+        instance.getSet(clientName+WAITING_GROUP_SUFFIX).add(ele);
     }
 
 
     @Override
     public boolean isWaiting(String clientName, String groupId) {
-        return instance.getSet(clientName+ WAITING_GROUP_SUFFIX).contains(groupId);
+        return instance.getSet(clientName+WAITING_GROUP_SUFFIX).contains(groupId);
     }
 
 
     @Override
     public void clearWaitingList(String clientName) {
-         instance.getSet(clientName+ WAITING_GROUP_SUFFIX).clear();
+         instance.getSet(clientName+WAITING_GROUP_SUFFIX).clear();
     }
 
 

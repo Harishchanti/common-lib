@@ -19,6 +19,9 @@ public class TestMessageSender  implements Runnable {
     @Wither
     String groupId;
 
+    @Wither
+    String queName;
+
     @Autowired
     MessageSender messageSender;
 
@@ -32,10 +35,10 @@ public class TestMessageSender  implements Runnable {
                 Message message = new Message();
                 message.setMessageId(String.valueOf(i));
                 message.setGroupId(groupId);
-                messageSender.sendMessage(message, "hello");
+                messageSender.sendMessage(message, queName);
             }catch (Exception e)
             {
-            	System.out.println("Excepion in sending mesg");
+            	System.out.println("Excepion in sending mesage");
             }
         }
     }

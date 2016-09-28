@@ -33,6 +33,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
     public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
 
         String groupId=message.getGroupId();
+        String clientName=client.getName();
 
         if(Strings.isNullOrEmpty(groupId))
             return Status.FAILED;
@@ -51,7 +52,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
             if(size<rabbitMqConfig.getQueueLimit())
             {
 
-                if(cacheManager.isWaiting(client.getName(),groupId))
+                if(cacheManager.isWaiting(clientName,groupId))
                 {
                     return Status.WAITING;
                 }
@@ -60,15 +61,16 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 QueueInfo queueInfo=QueueInfo.builder()
                     .qname(groupId)
-                    .groupName(groupId).build();
+                    .groupName(groupId)
+                    .build();
 
                 cacheManager.updateData(queueInfo, QueueState.IDLE);
-                cacheManager.updateAvailbleQueue(client.getName(),groupId);
+                cacheManager.updateAvailbleQueue(clientName,groupId);
                 return Status.SUCCESS;
             }
             else
             {
-                cacheManager.putToWait(client.getName(),groupId);
+                cacheManager.putToWait(clientName,groupId);
                 log.info("queues limit crossed: {} . waiting...",rabbitMqConfig.getQueueLimit());
                 return Status.WAITING;
             }
