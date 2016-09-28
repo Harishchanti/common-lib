@@ -1,7 +1,6 @@
 package com.aliens.msg.mmq.receiver;
 
 import com.aliens.msg.hazelcast.CacheManager;
-import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.Message;
@@ -52,7 +51,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
             if(size<rabbitMqConfig.getQueueLimit())
             {
 
-                if(cacheManager.isWaiting(groupId))
+                if(cacheManager.isWaiting(client.getName(),groupId))
                 {
                     return Status.WAITING;
                 }
@@ -64,12 +63,12 @@ public class MainQueueMessageReceiver extends MessageReceiver {
                     .groupName(groupId).build();
 
                 cacheManager.updateData(queueInfo, QueueState.IDLE);
-                cacheManager.updateAvailbleQueue(groupId);
+                cacheManager.updateAvailbleQueue(client.getName(),groupId);
                 return Status.SUCCESS;
             }
             else
             {
-                cacheManager.updateSet(Constants.WAITING_GROUPS,groupId);
+                cacheManager.putToWait(client.getName(),groupId);
                 log.info("queues limit crossed: {} . waiting...",rabbitMqConfig.getQueueLimit());
                 return Status.WAITING;
             }

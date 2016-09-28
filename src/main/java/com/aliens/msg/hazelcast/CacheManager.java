@@ -23,6 +23,7 @@ public interface CacheManager<T> {
     void setup();
 
 
+    void putToWait(String clientName, String ele);
 
     boolean isWaiting(String clientName, String groupId);
 

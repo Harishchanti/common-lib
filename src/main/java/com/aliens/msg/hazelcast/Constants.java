@@ -17,8 +17,9 @@ public class Constants {
     public final static String WAITING_GROUPS ="waitingGroups";
     public final static String QUEUE_MAPPINGS="data";
     public final static String INFO="info";
-    public final static String RESTART_STATE="restartState";
 
-    public final static String MAIN_QUEUE_NAME="hello";
-    public final static String AVAILABLE_GROUP_MAP = "availableGroups";
+
+    public final static String AVAILABLE_GROUP_SUFFIX = "_AvailableGroups";
+    public final static String WAITING_GROUP_SUFFIX = "_WaitingGroups";
+    public final static String CLIENTS= "clients";
 }

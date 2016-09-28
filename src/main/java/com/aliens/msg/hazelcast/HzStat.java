@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -16,12 +17,13 @@ import java.util.Set;
 @NoArgsConstructor
 public class HzStat {
 
+    Set<String> clients;
     Set<String> mainQueueworkerThreads;
     Set<String> groupQueueWorkerThreads;
     Set<String> restartedThreads;
 
-    Map<String,Set<String>> waitingGroups;
-    Map<String,Queue<String>> queueMap;
+    Map<String,Set<String>> waitingGroups = new HashMap<>();
+    Map<String,Queue<String>> queue = new HashMap<>();
 
 
     Map<String, Integer> info;

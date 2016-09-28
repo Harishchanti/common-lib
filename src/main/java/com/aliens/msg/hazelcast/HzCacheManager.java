@@ -39,20 +39,20 @@ public class HzCacheManager implements CacheManager<QueueInfo> {
     }
 
     @Override
-    public void updateAvailbleQueue(String clientName, String str)
+    public synchronized void updateAvailbleQueue(String clientName, String str)
     {
+        String queueName=clientName+ AVAILABLE_GROUP_SUFFIX;
+        instance.getQueue(queueName).add(str);
 
-        Map<String,Queue<String>>  map = instance.getMap(AVAILABLE_GROUP_MAP);
-        map.get(clientName).add(str);
     }
 
     @Override
     public synchronized Optional<QueueInfo> findIdleQueue(String clientName)
     {
 
-        Map<String,Queue<String>>  map = instance.getMap(AVAILABLE_GROUP_MAP);
-        Queue<String> queue = map.get(clientName);
-        if(queue.isEmpty())
+        String queueName=clientName+ AVAILABLE_GROUP_SUFFIX;
+        Queue<String> queue = instance.getQueue(queueName);
+        if(queue==null || queue.isEmpty())
         {
             return Optional.empty();
         }
@@ -66,14 +66,20 @@ public class HzCacheManager implements CacheManager<QueueInfo> {
     public HzStat getStat()
     {
         HzStat stat = new HzStat();
+        stat.setClients(instance.getSet(CLIENTS));
         stat.setMainQueueworkerThreads(instance.getSet(MAIN_QUEUE_WORKER_LIST));
         stat.setGroupQueueWorkerThreads(instance.getSet(GROUP_QUEUE_WORKER_LIST));
         stat.setRestartedThreads(instance.getSet(RESTARTED_WORKER_LIST));
         stat.setMappings(instance.getMap(QUEUE_MAPPINGS));
         stat.setInfo(instance.getMap(INFO));
-        stat.setWaitingGroups(instance.getMap(WAITING_GROUPS));
 
-        stat.setQueueMap(instance.getMap(AVAILABLE_GROUP_MAP));
+        Set<String> clients= instance.getSet(CLIENTS);
+        for(String client : clients ) {
+            Queue<String> st= instance.getQueue(client+AVAILABLE_GROUP_SUFFIX);
+            stat.getQueue().put(client,st);
+            stat.getWaitingGroups().put(client,instance.getSet(client+WAITING_GROUP_SUFFIX));
+        }
+
         return stat;
     }
 
@@ -83,19 +89,22 @@ public class HzCacheManager implements CacheManager<QueueInfo> {
         set.add(ele);
     }
 
+    @Override
+    public  void putToWait(String  clientName,String ele)
+    {
+        instance.getSet(clientName+ WAITING_GROUP_SUFFIX).add(ele);
+    }
 
 
     @Override
     public boolean isWaiting(String clientName, String groupId) {
-        Map<String,Set<String>> map =instance.getMap(WAITING_GROUPS);
-
-        return map.get(clientName)!=null && map.get(clientName).contains(groupId);
+        return instance.getSet(clientName+ WAITING_GROUP_SUFFIX).contains(groupId);
     }
 
 
     @Override
     public void clearWaitingList(String clientName) {
-        instance.getMap(WAITING_GROUPS).remove(clientName);
+         instance.getSet(clientName+ WAITING_GROUP_SUFFIX).clear();
     }
 
 

@@ -1,8 +1,8 @@
 package com.aliens.msg.mmq.receiver;
 
 
+import com.aliens.hipster.domain.Clients;
 import com.aliens.msg.config.RabbitMqConfig;
-import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.aliens.msg.mmq.MMQUtil;
 import com.aliens.msg.mmq.Message;
@@ -35,12 +35,21 @@ public abstract class MessageReceiver  {
     String threadName;
     String queueName;
     boolean autoAck=false;
+    Clients client;
+    String mainQueueName;
 
     long startTime= System.currentTimeMillis();
 
 
     public MessageReceiver withThreadName(String threadName) {
         this.threadName=threadName;
+        return this;
+    }
+
+    public MessageReceiver withClient(Clients client) {
+        this.client=client;
+        this.queueName=client.getTopic();
+        this.mainQueueName=client.getTopic();
         return this;
     }
 
@@ -70,7 +79,7 @@ public abstract class MessageReceiver  {
             connection = factory.newConnection();
             channel = connection.createChannel();
 
-            if(!queueName.equals(Constants.MAIN_QUEUE_NAME))
+            if(!queueName.equals(mainQueueName))
                 channel.basicQos(1);
 
             channel.queueDeclare(queueName, false, false, false, null);
@@ -89,7 +98,7 @@ public abstract class MessageReceiver  {
                 if(delivery==null)
                 {
 
-                    if(!queueName.equals(Constants.MAIN_QUEUE_NAME)) {
+                    if(!queueName.equals(mainQueueName)) {
                         log.info("No message since {} seconds, deleting queue {}", timeout / 1000, queueName);
                         channel.queueDelete(queueName, false, true);
                     }
@@ -117,7 +126,7 @@ public abstract class MessageReceiver  {
                 if(!autoAck && status==Status.SUCCESS)
                 channel.basicAck(delivery.getEnvelope().getDeliveryTag(),false);
 
-                if(queueName.equals(Constants.MAIN_QUEUE_NAME) && System.currentTimeMillis()-startTime > threadLifeTime)
+                if(queueName.equals(mainQueueName) && System.currentTimeMillis()-startTime > threadLifeTime)
                 {
                     return ChannelResponse.SCHEDULED_RESTART;
                 }
