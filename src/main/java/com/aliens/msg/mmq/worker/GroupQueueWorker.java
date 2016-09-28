@@ -1,5 +1,15 @@
 package com.aliens.msg.mmq.worker;
 
+import java.util.Optional;
+import java.util.UUID;
+
+import javax.inject.Provider;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.aliens.hipster.domain.Clients;
 import com.aliens.msg.config.RabbitMqConfig;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
@@ -7,16 +17,12 @@ import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-
-import javax.inject.Provider;
-import java.util.Optional;
-import java.util.UUID;
 
 /**
  * Created by jayant on 25/9/16.
@@ -26,6 +32,7 @@ import java.util.UUID;
 @Scope("prototype")
 @Data
 @Component
+@AllArgsConstructor
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class GroupQueueWorker implements Runnable {
 
@@ -34,9 +41,12 @@ public class GroupQueueWorker implements Runnable {
     final RabbitMqConfig rabbitMqConfig;
     final Provider<GroupQueueMessageReceiver> groupQueueMessageReceiverProvider;
 
+    @Wither
+    Clients client;
+    
     public void run()
     {
-        String threadName= UUID.randomUUID().toString();
+        String threadName= client.getName()+"_"+UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
         //Todo : dont allow more than one consumer for same client

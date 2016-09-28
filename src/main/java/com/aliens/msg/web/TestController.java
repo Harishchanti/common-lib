@@ -72,6 +72,15 @@ public class TestController {
         Set<String> result=verifyGrouping.invoke();
         return ResponseEntity.ok().body(result);
     }
+    
+    @RequestMapping(value = "/testresponse",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+        public ResponseEntity<?> testResponse() throws Exception {
+
+            String result = "true";
+            return ResponseEntity.ok().body(result);
+        }
 
     @RequestMapping(value = "/start",
         method = RequestMethod.GET,
