@@ -1,10 +1,13 @@
 package com.aliens.msg.mmq.worker;
 
+import com.aliens.hipster.domain.Clients;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.aliens.msg.mmq.receiver.MainQueueMessageReceiver;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +22,7 @@ import java.util.UUID;
 @Slf4j
 @Component
 @Scope("prototype")
+@AllArgsConstructor
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class MainQueueWorker implements Runnable {
 
@@ -26,11 +30,14 @@ public class MainQueueWorker implements Runnable {
     final CacheManager cacheManager;
     final Provider<MainQueueMessageReceiver> mainQueueMessageReceiverProvider;
 
+    @Wither
+    Clients client;
+
 
     @Override
     public void run() {
 
-        String threadName = UUID.randomUUID().toString();
+        String threadName = client.getName()+"_"+UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
         cacheManager.updateSet(Constants.MAIN_QUEUE_WORKER_LIST, threadName);
@@ -39,7 +46,7 @@ public class MainQueueWorker implements Runnable {
             ChannelResponse response = mainQueueMessageReceiverProvider
                 .get()
                 .withThreadName(threadName)
-                .withQueueName(Constants.MAIN_QUEUE_NAME)
+                .withQueueName(client.getTopic())
                 .consumeMessages();
 
             log.info("MainQueue consumer response: {}",response);
