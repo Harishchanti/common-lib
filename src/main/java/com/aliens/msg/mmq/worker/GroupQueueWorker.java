@@ -8,6 +8,7 @@ import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.aliens.msg.mmq.receiver.BulkReceiver;
+import com.aliens.msg.mmq.receiver.ConsumerType;
 import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +38,8 @@ public class GroupQueueWorker implements Runnable {
 
     final CacheManager cacheManager;
     final RabbitMqConfig rabbitMqConfig;
+
+    //TODO: use mapbinder
     final Provider<GroupQueueMessageReceiver> groupQueueMessageReceiverProvider;
     final Provider<BulkReceiver> bulkReceiverProvider;
 
@@ -48,7 +51,6 @@ public class GroupQueueWorker implements Runnable {
         String threadName= client.getName()+"_"+UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
-        //Todo : dont allow more than one consumer for same client
         cacheManager.updateSet(Constants.GROUP_QUEUE_WORKER_LIST,threadName);
 
         while(true)
@@ -63,12 +65,23 @@ public class GroupQueueWorker implements Runnable {
                 queueInfo.setThreadName(threadName);
                 cacheManager.updateData(queueInfo, QueueState.PROCESSING);
 
-                ChannelResponse response=bulkReceiverProvider
-                    .get()
-                    .withClient(client)
-                    .withQueueName(qname)
-                    .withThreadName(threadName)
-                    .consumeMessage();
+                ChannelResponse response;
+                if(client.getConsumerType().equals(ConsumerType.BULK.name())) {
+                    response = bulkReceiverProvider
+                        .get()
+                        .withClient(client)
+                        .withQueueName(qname)
+                        .withThreadName(threadName)
+                        .consumeMessage();
+                }
+                else
+                {
+                    response = groupQueueMessageReceiverProvider
+                        .get()
+                        .withClient(client)
+                        .withQueueName(qname)
+                        .withThreadName(threadName).consumeMessages();
+                }
 
 
                 cacheManager.updateData(queueInfo,response);
