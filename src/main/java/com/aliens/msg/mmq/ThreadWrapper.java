@@ -1,5 +1,6 @@
 package com.aliens.msg.mmq;
 
+import com.aliens.hipster.domain.ClientStatus;
 import com.aliens.hipster.domain.Clients;
 import com.aliens.hipster.repository.ClientsRepository;
 import com.aliens.msg.hazelcast.CacheManager;
@@ -47,7 +48,8 @@ public class ThreadWrapper {
 
     	List<Clients> clients = clientsRepository.findAll();
 
-    	clients.stream().forEach(client -> {
+    	clients.stream().filter(client-> client.getStatus().equals(ClientStatus.ACTIVE))
+            .forEach(client -> {
 
             IntStream.range(0,1).forEach( (x)->executorService.submit(mainQueueWorkerProvider.get().withClient(client)));
 
@@ -57,7 +59,7 @@ public class ThreadWrapper {
 
             cacheManager.updateSet(Constants.CLIENTS,client.getName());
 
-            IntStream.range(0,6)
+            IntStream.range(0,1)
                 .forEach( (x)->executorService.submit(
                     testMessageSenderProvider.get().withQueName(client.getTopic())
                         .withGroupId(client.getName()+"_g"+String.valueOf(x))));

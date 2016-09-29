@@ -8,13 +8,13 @@ import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.aliens.msg.mmq.receiver.BulkReceiver;
-import com.aliens.msg.mmq.receiver.ConsumerType;
 import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -66,21 +66,32 @@ public class GroupQueueWorker implements Runnable {
                 cacheManager.updateData(queueInfo, QueueState.PROCESSING);
 
                 ChannelResponse response;
-                if(client.getConsumerType().equals(ConsumerType.BULK.name())) {
-                    response = bulkReceiverProvider
-                        .get()
-                        .withClient(client)
-                        .withQueueName(qname)
-                        .withThreadName(threadName)
-                        .consumeMessage();
-                }
-                else
-                {
-                    response = groupQueueMessageReceiverProvider
-                        .get()
-                        .withClient(client)
-                        .withQueueName(qname)
-                        .withThreadName(threadName).consumeMessages();
+
+                switch (client.getConsumerType()) {
+
+                    case BULK:
+
+                        boolean checkSize = true;
+
+                        LocalDateTime queueCreatedAt = new LocalDateTime(queueInfo.getCreatedAt());
+
+                        if (queueCreatedAt.isBefore(LocalDateTime.now(Constants.timeZone).minusSeconds(rabbitMqConfig.getMaxWaitTime())))
+                            checkSize = false;
+
+                        response = bulkReceiverProvider
+                            .get()
+                            .withParams(threadName, client, qname, checkSize)
+                            .consumeMessage();
+                        break;
+
+                    case SINGLE:
+                     default:
+
+                        response = groupQueueMessageReceiverProvider
+                            .get()
+                            .withClient(client)
+                            .withQueueName(qname)
+                            .withThreadName(threadName).consumeMessages();
                 }
 
 

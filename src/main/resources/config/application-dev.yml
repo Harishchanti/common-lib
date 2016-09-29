@@ -61,6 +61,7 @@ spring:
          timeout: 10000
          threadLifeTime: 10000
          sleepInterval: 5000
+         maxWaitTime: 15
          username: holmesqanew
          password: holmesqanew
     keycloakCreds:

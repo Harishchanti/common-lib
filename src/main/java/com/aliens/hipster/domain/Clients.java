@@ -32,10 +32,14 @@ public class Clients implements Serializable {
     @Column(name = "target_endpoint")
     private String targetEndpoint;
 
-    private String consumerType;
+    @Enumerated(EnumType.STRING)
+    private ConsumerType consumerType;
 
     @Column(name = "bulk_count")
     int bulkCount;
+
+    @Enumerated(EnumType.STRING)
+    ClientStatus status;
 
     @ManyToOne(fetch =FetchType.EAGER )
     @JoinColumn(name="keycloak_user")
