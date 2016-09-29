@@ -57,7 +57,7 @@ public class ThreadWrapper {
 
             cacheManager.updateSet(Constants.CLIENTS,client.getName());
 
-            IntStream.range(0,4)
+            IntStream.range(0,6)
                 .forEach( (x)->executorService.submit(
                     testMessageSenderProvider.get().withQueName(client.getTopic())
                         .withGroupId(client.getName()+"_g"+String.valueOf(x))));
