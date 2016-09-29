@@ -4,8 +4,7 @@ import com.aliens.hipster.domain.InboundMessages;
 import com.aliens.hipster.repository.InboundMessagesRepository;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
-import com.aliens.msg.mmq.actions.SendMessageToMycroft;
-import com.rabbitmq.client.AMQP;
+import com.aliens.msg.mmq.actions.SendMessageToClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -18,18 +17,16 @@ import org.springframework.stereotype.Component;
 public class GroupQueueMessageReceiver extends MessageReceiver {
 
 	@Autowired
-    SendMessageToMycroft sendMessageToMycroft;
+    SendMessageToClient sendMessageToClient;
 
 	@Autowired
 	InboundMessagesRepository inboundMessagesRepository;
 
 	@Override
-	public Status action(Message message, AMQP.BasicProperties properties) throws Exception
+	public Status action(Message message) throws Exception
     {
 
-//			System.out.println("inside Action");
-//			JSONObject mycroftPayload = new JSONObject(message.getPayload());
-//			String response = sendMessageToMycroft.withMycroftPayload(mycroftPayload).invoke();
+        sendMessageToClient.withMessage(message).withUrl(client.getTargetEndpoint()).invoke();
 
         InboundMessages inboundMessages = new InboundMessages();
         inboundMessages.setGroupId(message.getGroupId());

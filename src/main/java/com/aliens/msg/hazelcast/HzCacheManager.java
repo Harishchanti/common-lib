@@ -26,7 +26,7 @@ import static com.aliens.msg.hazelcast.Constants.*;
 public class HzCacheManager implements CacheManager<QueueInfo> {
 
 
-    final int retry = 3;
+    final int retry = 10;
     private HazelcastInstance instance;
 
     @Override

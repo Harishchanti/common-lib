@@ -33,7 +33,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="target_endpoint" type="varchar(255)">
+            <column name="targetEndpoint" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 

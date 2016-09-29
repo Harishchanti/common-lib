@@ -7,7 +7,6 @@ import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
 import com.aliens.msg.mmq.actions.MessageSender;
 import com.google.common.base.Strings;
-import com.rabbitmq.client.AMQP;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
     MessageSender messageSender;
 
     @Override
-    public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
+    public Status action(Message message) throws Exception {
 
         String groupId=message.getGroupId();
         String clientName=client.getName();

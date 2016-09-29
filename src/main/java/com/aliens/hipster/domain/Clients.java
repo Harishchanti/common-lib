@@ -30,7 +30,7 @@ public class Clients implements Serializable {
     private Integer consumerCount;
 
     @Column(name = "target_endpoint")
-    private String target_endpoint;
+    private String targetEndpoint;
 
     private String consumerType;
 

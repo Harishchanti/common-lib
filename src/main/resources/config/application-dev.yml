@@ -56,7 +56,7 @@ spring:
         baseUrl: https://kong-qa.ailiens.com:8443
         mycroftEventPath: /event
     rabbit:
-         host: localhost
+         host:  52.77.16.64
          queueLimit: 5
          timeout: 10000
          threadLifeTime: 10000

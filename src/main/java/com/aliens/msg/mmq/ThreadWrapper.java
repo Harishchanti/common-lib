@@ -39,6 +39,7 @@ public class ThreadWrapper {
     @Autowired
     CacheManager cacheManager;
 
+
     ExecutorService executorService = Executors.newFixedThreadPool(50);
 
     public void setup()
@@ -49,16 +50,18 @@ public class ThreadWrapper {
     	clients.stream().forEach(client -> {
 
             IntStream.range(0,1).forEach( (x)->executorService.submit(mainQueueWorkerProvider.get().withClient(client)));
+
             IntStream.range(0,client.getConsumerCount()).forEach( (x)->
 
                 executorService.submit(groupQueueWorkerProvider.get().withClient(client)));
 
             cacheManager.updateSet(Constants.CLIENTS,client.getName());
 
-            IntStream.range(0,4)
-                .forEach( (x)->executorService.submit(
-                    testMessageSenderProvider.get().withQueName(client.getTopic())
-                        .withGroupId(client.getName()+"_g"+String.valueOf(x))));
+//            IntStream.range(0,4)
+//                .forEach( (x)->executorService.submit(
+//                    testMessageSenderProvider.get().withQueName(client.getTopic())
+//                        .withGroupId(client.getName()+"_g"+String.valueOf(x))));
+
     	});
 
 

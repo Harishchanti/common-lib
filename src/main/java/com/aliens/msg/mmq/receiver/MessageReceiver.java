@@ -5,7 +5,6 @@ import com.aliens.hipster.domain.Clients;
 import com.aliens.msg.config.RabbitMqConfig;
 import com.aliens.msg.mmq.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.QueueingConsumer;
@@ -66,7 +65,7 @@ public abstract class MessageReceiver  {
 
 
 
-    public abstract Status action(Message message, AMQP.BasicProperties properties) throws Exception;
+    public abstract Status action(Message message) throws Exception;
 
 
 
@@ -111,7 +110,7 @@ public abstract class MessageReceiver  {
                 log.info("Received message {}",message.getMessageId());
                 Status status=null;
                 try {
-                    status=action(message, delivery.getProperties());
+                    status=action(message);
                 }
                 catch (Exception e)
                 {
