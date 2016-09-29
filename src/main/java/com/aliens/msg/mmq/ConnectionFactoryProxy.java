@@ -31,7 +31,7 @@ public class ConnectionFactoryProxy {
     public void setup()
     {
         factory.setHost(rabbitMqConfig.getHost());
-        factory.setUsername(rabbitMqConfig.getUsername());
-        factory.setPassword(rabbitMqConfig.getPassword());
+        //factory.setUsername(rabbitMqConfig.getUsername());
+        //factory.setPassword(rabbitMqConfig.getPassword());
     }
 }
