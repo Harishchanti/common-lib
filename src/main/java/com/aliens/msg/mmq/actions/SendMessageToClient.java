@@ -27,7 +27,7 @@ public class SendMessageToClient {
     public String invoke() throws Exception {
     	return restUtil
             .withKeyCloakUserEnum(KeyCloakUserEnum.NODEUSER)
-                    .post(url,message, String.class);
+                    .post(client.getTargetEndpoint(),message, String.class);
     }
 
 
