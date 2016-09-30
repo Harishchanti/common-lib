@@ -67,7 +67,7 @@ public class MsgApp {
         cacheManager.setup();
         RestUtil.setupUnirest();
         connectionFactoryProxy.setup();
-        //threadWrapper.setup();
+        threadWrapper.setup();
     }
 
     /**

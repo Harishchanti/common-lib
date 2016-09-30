@@ -1,5 +1,6 @@
 package com.aliens.msg.mmq;
 
+import com.aliens.hipster.domain.ClientStatus;
 import com.aliens.hipster.domain.Clients;
 import com.aliens.hipster.repository.ClientsRepository;
 import com.aliens.msg.hazelcast.CacheManager;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Provider;
+import javax.inject.Singleton;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,6 +24,7 @@ import java.util.stream.IntStream;
  */
 @Slf4j
 @Component
+@Singleton
 public class ThreadWrapper {
 
     @Autowired
@@ -58,14 +61,22 @@ public class ThreadWrapper {
 
             cacheManager.updateSet(Constants.CLIENTS,client.getName());
 
-            IntStream.range(0,1)
-                .forEach( (x)->executorService.submit(
-                    testMessageSenderProvider.get().withQueName(client.getTopic())
-                        .withGroupId(client.getName()+"_g"+String.valueOf(x))));
+
 
     	});
 
+    }
 
+    public void sendTestMessages()
+    {
+        List<Clients> clients = clientsRepository.findAll();
 
+        clients.stream().filter(client-> client.getStatus().equals(ClientStatus.ACTIVE))
+            .forEach(client -> {
+                IntStream.range(0,5)
+                    .forEach( (x)->executorService.submit(
+                        testMessageSenderProvider.get().withQueName(client.getTopic())
+                            .withGroupId(client.getName()+"_g"+String.valueOf(x))));
+            });
     }
 }

@@ -16,16 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Set;
-
 import javax.websocket.server.PathParam;
+import java.util.Set;
 
 /**
  * Created by jayant on 25/9/16.
  */
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/msg")
 public class TestController {
 
     @Autowired
@@ -64,7 +63,7 @@ public class TestController {
 
 
 
-    @RequestMapping(value = "/verify",
+    @RequestMapping(value = "/test/verify",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> verify() throws Exception {
@@ -82,12 +81,12 @@ public class TestController {
             return ResponseEntity.ok().body(result);
         }
 
-    @RequestMapping(value = "/start",
+    @RequestMapping(value = "/test/start",
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> startTest() throws Exception {
 
-        threadWrapper.setup();
+        threadWrapper.sendTestMessages();
         return ResponseEntity.ok().body("start");
     }
 
@@ -99,7 +98,7 @@ public class TestController {
         messageSender.sendMessage(message,"hello");
         return ResponseEntity.ok().body("sent");
     }
-    
+
     @RequestMapping(value = "/resetqueue/{groupId}",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE)

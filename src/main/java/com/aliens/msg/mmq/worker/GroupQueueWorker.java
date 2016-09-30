@@ -39,7 +39,6 @@ public class GroupQueueWorker implements Runnable {
     final CacheManager cacheManager;
     final RabbitMqConfig rabbitMqConfig;
 
-    //TODO: use mapbinder
     final Provider<GroupQueueMessageReceiver> groupQueueMessageReceiverProvider;
     final Provider<BulkReceiver> bulkReceiverProvider;
 
