@@ -161,6 +161,19 @@ public class HzCacheManager implements CacheManager<QueueInfo> {
             dataMap.put(key, queueInfo);
         }
     }
+    
+    @Override
+    public void resetQueue(String groupId,QueueState queueState){
+    	
+    	Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+    	QueueInfo queueInfo = dataMap.getOrDefault(groupId, null);
+    	if(queueInfo != null){
+    		queueInfo.setState(queueState);
+        	queueInfo.setRetry(0);
+        	dataMap.put(groupId, queueInfo);
+    	}
+    }
+    
 
 
 

@@ -36,4 +36,7 @@ public interface CacheManager<T> {
     void updateData(T queueInfo, ChannelResponse response);
 
     void updateData(T queueInfo, QueueState queueState);
+    
+    void resetQueue(String groupId, QueueState queueState);
+    
 }

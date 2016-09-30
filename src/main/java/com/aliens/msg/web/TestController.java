@@ -3,6 +3,7 @@ package com.aliens.msg.web;
 import com.aliens.hipster.repository.ClientsRepository;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.HzStat;
+import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
 import com.aliens.msg.mmq.ThreadWrapper;
@@ -19,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
+
+import javax.websocket.server.PathParam;
 
 /**
  * Created by jayant on 25/9/16.
@@ -99,6 +102,14 @@ public class TestController {
         messageSender.sendMessage(message,"hello");
         return ResponseEntity.ok().body("sent");
     }
+    
+    @RequestMapping(value = "/resetqueue/{groupId}",
+            method = RequestMethod.POST,
+            produces = MediaType.TEXT_PLAIN_VALUE)
+        public ResponseEntity<?> resetQueue(@PathParam("groupId") String groupId) throws Exception {
+    	cacheManager.resetQueue(groupId, QueueState.IDLE);
+    	return ResponseEntity.ok().body("Queue is reset");
+        }
 
 
 
