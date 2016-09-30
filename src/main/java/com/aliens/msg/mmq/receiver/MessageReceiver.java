@@ -39,7 +39,6 @@ public abstract class MessageReceiver  {
     String queueName;
     boolean autoAck=false;
     Clients client;
-    String mainQueueName;
 
     long startTime= System.currentTimeMillis();
 
@@ -51,8 +50,8 @@ public abstract class MessageReceiver  {
 
     public MessageReceiver withClient(Clients client) {
         this.client=client;
-        this.queueName=client.getTopic();
-        this.mainQueueName=client.getTopic();
+        //this.queueName=client.getTopic();
+        //this.mainQueueName=client.getTopic();
         return this;
     }
 
@@ -76,7 +75,7 @@ public abstract class MessageReceiver  {
         try {
             connection = connectionFactory.getConnection();
             channel = connection.createChannel();
-
+            String mainQueueName = client.getTopic();
             if(!queueName.equals(mainQueueName))
                 channel.basicQos(1);
 

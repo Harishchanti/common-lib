@@ -73,7 +73,7 @@ public class ThreadWrapper {
 
         clients.stream().filter(client-> client.getStatus().equals(ClientStatus.ACTIVE))
             .forEach(client -> {
-                IntStream.range(0,5)
+                IntStream.range(0,2)
                     .forEach( (x)->executorService.submit(
                         testMessageSenderProvider.get().withQueName(client.getTopic())
                             .withGroupId(client.getName()+"_g"+String.valueOf(x))));

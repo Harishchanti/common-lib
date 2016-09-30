@@ -47,6 +47,7 @@ public class MainQueueWorker implements Runnable {
                 .get()
                 .withThreadName(threadName)
                 .withClient(client)
+                .withQueueName(client.getTopic())
                 .consumeMessages();
 
             log.info("MainQueue consumer response: {}",response);

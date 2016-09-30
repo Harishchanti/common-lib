@@ -90,7 +90,8 @@ public class GroupQueueWorker implements Runnable {
                             .get()
                             .withClient(client)
                             .withQueueName(qname)
-                            .withThreadName(threadName).consumeMessages();
+                            .withThreadName(threadName)
+                            .consumeMessages();
                 }
 
 
