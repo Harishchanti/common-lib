@@ -42,22 +42,16 @@ public abstract class BaseBulkMessageReceiver {
     String queueName;
     Clients client;
 
-    public BaseBulkMessageReceiver withThreadName(String threadName) {
-        this.threadName=threadName;
+    boolean checkSize=true;
+
+    public BaseBulkMessageReceiver withParams(String threadName,Clients client,String queueName,boolean checkSize)
+    {
+        this.threadName = threadName;
+        this.client =client;
+        this.queueName = queueName;
+        this.checkSize =checkSize;
         return this;
     }
-
-    public BaseBulkMessageReceiver withClient(Clients client) {
-        this.client=client;
-        return this;
-    }
-
-
-    public BaseBulkMessageReceiver withQueueName(String queueName) {
-        this.queueName=queueName;
-        return this;
-    }
-
 
     public abstract Status action(List<Message> messageList) throws Exception;
 
@@ -68,7 +62,7 @@ public abstract class BaseBulkMessageReceiver {
 
             AMQP.Queue.DeclareOk dok = channel.queueDeclare(queueName, false, false, false, null);
 
-            if (dok.getMessageCount() < client.getBulkCount())
+            if (dok.getMessageCount() < client.getBulkCount() && checkSize)
                 return ChannelResponse.NOT_ENOUGH_MESSAGES;
 
             log.info("listening to queue {}", queueName);
@@ -97,7 +91,8 @@ public abstract class BaseBulkMessageReceiver {
 
                 if (messageList.size() == 0)
                     return ChannelResponse.QUEUE_PROCESSED;
-                if (messageList.size() < client.getBulkCount())
+
+                if (messageList.size() < client.getBulkCount() && checkSize)
                     return ChannelResponse.NOT_ENOUGH_MESSAGES;
 
                 Status status = null;

@@ -26,7 +26,7 @@ public class GroupQueueMessageReceiver extends MessageReceiver {
 	public Status action(Message message) throws Exception
     {
 
-        sendMessageToClient.withMessage(message).withUrl(client.getTargetEndpoint()).invoke();
+        //sendMessageToClient.withMessage(message).withUrl(client.getTargetEndpoint()).invoke();
 
         InboundMessages inboundMessages = new InboundMessages();
         inboundMessages.setGroupId(message.getGroupId());

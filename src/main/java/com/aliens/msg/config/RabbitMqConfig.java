@@ -23,4 +23,5 @@ public class RabbitMqConfig {
     long timeout;
     long threadLifeTime;
     long sleepInterval;
+    int maxWaitTime;
 }
