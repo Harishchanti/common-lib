@@ -3,12 +3,12 @@ package com.aliens.msg.mmq.receiver;
 
 import com.aliens.hipster.domain.Clients;
 import com.aliens.msg.config.RabbitMqConfig;
-import com.aliens.msg.mmq.ChannelResponse;
-import com.aliens.msg.mmq.MMQUtil;
-import com.aliens.msg.mmq.Message;
-import com.aliens.msg.mmq.Status;
+import com.aliens.msg.mmq.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.AMQP;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.QueueingConsumer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,17 +16,21 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 @Slf4j
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public abstract class MessageReceiver  {
 
+
+    private static ObjectMapper mapper = new ObjectMapper();
+
     @Autowired
     RabbitMqConfig rabbitMqConfig;
 
-    private static ObjectMapper mapper = new ObjectMapper();
-    private static ConnectionFactory factory = new ConnectionFactory();
+    @Autowired
+    ConnectionFactoryProxy connectionFactory;
 
     Connection connection;
     Channel channel;
@@ -60,11 +64,6 @@ public abstract class MessageReceiver  {
     }
 
 
-    public MessageReceiver withAutoAck(boolean autoAck) {
-        this.autoAck=autoAck;
-        return this;
-    }
-
 
 
     public abstract Status action(Message message, AMQP.BasicProperties properties) throws Exception;
@@ -73,10 +72,10 @@ public abstract class MessageReceiver  {
 
     public ChannelResponse consumeMessages()  {
 
-        factory.setHost(rabbitMqConfig.getHost());
+
 
         try {
-            connection = factory.newConnection();
+            connection = connectionFactory.getConnection();
             channel = connection.createChannel();
 
             if(!queueName.equals(mainQueueName))

@@ -29,7 +29,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="consumer_count" type="integer">
+            <column name="consumerCount" type="integer">
                 <constraints nullable="true" />
             </column>
 

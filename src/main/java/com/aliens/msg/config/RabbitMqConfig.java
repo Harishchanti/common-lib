@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RabbitMqConfig {
     String host;
+    String username;
+    String password;
     Integer queueLimit;
     long timeout;
     long threadLifeTime;

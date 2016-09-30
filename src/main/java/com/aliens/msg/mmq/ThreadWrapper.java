@@ -49,14 +49,16 @@ public class ThreadWrapper {
     	clients.stream().forEach(client -> {
 
             IntStream.range(0,1).forEach( (x)->executorService.submit(mainQueueWorkerProvider.get().withClient(client)));
-            IntStream.range(0,client.getConsumer_count()).forEach( (x)->executorService.submit(groupQueueWorkerProvider.get().withClient(client)));
-    	    cacheManager.updateSet(Constants.CLIENTS,client.getName());
+            IntStream.range(0,client.getConsumerCount()).forEach( (x)->
 
-            
+                executorService.submit(groupQueueWorkerProvider.get().withClient(client)));
 
-            IntStream.range(0,10)
+            cacheManager.updateSet(Constants.CLIENTS,client.getName());
+
+            IntStream.range(0,4)
                 .forEach( (x)->executorService.submit(
-                    testMessageSenderProvider.get().withGroupId("g"+"_"+client.getName()+String.valueOf(x))));
+                    testMessageSenderProvider.get().withQueName(client.getTopic())
+                        .withGroupId(client.getName()+"_g"+String.valueOf(x))));
     	});
 
 

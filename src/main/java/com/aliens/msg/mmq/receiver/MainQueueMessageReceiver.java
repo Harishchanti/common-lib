@@ -9,11 +9,14 @@ import com.aliens.msg.mmq.actions.MessageSender;
 import com.google.common.base.Strings;
 import com.rabbitmq.client.AMQP;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+
+import static com.aliens.msg.hazelcast.Constants.timeZone;
 
 /**
  * Created by jayant on 25/9/16.
@@ -33,6 +36,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
     public Status action(Message message, AMQP.BasicProperties properties) throws Exception {
 
         String groupId=message.getGroupId();
+        String clientName=client.getName();
 
         if(Strings.isNullOrEmpty(groupId))
             return Status.FAILED;
@@ -51,7 +55,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
             if(size<rabbitMqConfig.getQueueLimit())
             {
 
-                if(cacheManager.isWaiting(client.getName(),groupId))
+                if(cacheManager.isWaiting(clientName,groupId))
                 {
                     return Status.WAITING;
                 }
@@ -60,15 +64,18 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 QueueInfo queueInfo=QueueInfo.builder()
                     .qname(groupId)
-                    .groupName(groupId).build();
+                    .createdAt(LocalDateTime.now(timeZone).toString())
+                    .clientName(clientName)
+                    .groupName(groupId)
+                    .build();
 
                 cacheManager.updateData(queueInfo, QueueState.IDLE);
-                cacheManager.updateAvailbleQueue(client.getName(),groupId);
+                cacheManager.updateAvailbleQueue(clientName,groupId);
                 return Status.SUCCESS;
             }
             else
             {
-                cacheManager.putToWait(client.getName(),groupId);
+                cacheManager.putToWait(clientName,groupId);
                 log.info("queues limit crossed: {} . waiting...",rabbitMqConfig.getQueueLimit());
                 return Status.WAITING;
             }

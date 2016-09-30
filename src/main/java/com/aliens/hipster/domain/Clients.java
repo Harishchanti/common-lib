@@ -27,10 +27,15 @@ public class Clients implements Serializable {
     private String topic;
 
     @Column(name = "consumer_count")
-    private Integer consumer_count;
+    private Integer consumerCount;
 
     @Column(name = "target_endpoint")
     private String target_endpoint;
+
+    private String consumerType;
+
+    @Column(name = "bulk_count")
+    int bulkCount;
 
     @ManyToOne(fetch =FetchType.EAGER )
     @JoinColumn(name="keycloak_user")

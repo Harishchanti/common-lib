@@ -1,12 +1,11 @@
 package com.aliens.msg.mmq.actions;
 
-import com.aliens.msg.config.RabbitMqConfig;
+import com.aliens.msg.mmq.ConnectionFactoryProxy;
 import com.aliens.msg.mmq.MMQUtil;
 import com.aliens.msg.mmq.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,11 +17,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageSender {
 
-    static ConnectionFactory factory = new ConnectionFactory();
+
     static ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
-    RabbitMqConfig rabbitMqConfig;
+    ConnectionFactoryProxy connectionFactory;
 
 
     public  void sendMessage(Message message, String queName) throws Exception {
@@ -30,8 +29,8 @@ public class MessageSender {
         Connection connection=null;
         Channel channel=null;
         try {
-            factory.setHost(rabbitMqConfig.getHost());
-             connection = factory.newConnection();
+
+             connection =connectionFactory.getConnection();
              channel = connection.createChannel();
 
             channel.queueDeclare(queName, false, false, false, null);
