@@ -21,10 +21,10 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/msg?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://mycroft.cyanfhybaetb.us-east-1.rds.amazonaws.com:3306/msg?useUnicode=true&characterEncoding=utf8&useSSL=false
         name:
-        username: root
-        password: root
+        username: admin
+        password: <w*MSh6?ANuE$nQP
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -56,7 +56,7 @@ spring:
         baseUrl: https://kong-qa.ailiens.com:8443
         mycroftEventPath: /event
     rabbit:
-         host:  localhost
+         host:  52.77.16.64
          queueLimit: 4
          timeout: 10000
          threadLifeTime: 10000

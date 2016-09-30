@@ -3,13 +3,8 @@ package com.aliens.hipster;
 import com.aliens.hipster.config.Constants;
 import com.aliens.hipster.config.DefaultProfileUtil;
 import com.aliens.hipster.config.JHipsterProperties;
-import com.aliens.msg.hazelcast.CacheManager;
-import com.aliens.msg.mmq.ConnectionFactoryProxy;
-import com.aliens.msg.mmq.ThreadWrapper;
-import com.aliens.msg.utils.RestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.MetricFilterAutoConfiguration;
 import org.springframework.boot.actuate.autoconfigure.MetricRepositoryAutoConfiguration;
@@ -36,13 +31,7 @@ public class MsgApp {
     @Inject
     private Environment env;
 
-    @Autowired
-    CacheManager cacheManager;
 
-    @Autowired
-    ConnectionFactoryProxy connectionFactoryProxy;
-    @Autowired
-    ThreadWrapper threadWrapper;
 
     /**
      * Initializes msg.
@@ -64,10 +53,6 @@ public class MsgApp {
                 "run with both the 'dev' and 'cloud' profiles at the same time.");
         }
 
-        cacheManager.setup();
-        RestUtil.setupUnirest();
-        connectionFactoryProxy.setup();
-        threadWrapper.setup();
     }
 
     /**

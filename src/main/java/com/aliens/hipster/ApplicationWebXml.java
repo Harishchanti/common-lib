@@ -1,6 +1,8 @@
 package com.aliens.hipster;
 
 import com.aliens.hipster.config.DefaultProfileUtil;
+import com.aliens.hipster.web.Initialize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
@@ -9,6 +11,9 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  * This will be invoked only when the application is deployed to a servlet container like Tomcat, Jboss etc.
  */
 public class ApplicationWebXml extends SpringBootServletInitializer {
+
+    @Autowired
+    Initialize initialize;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
