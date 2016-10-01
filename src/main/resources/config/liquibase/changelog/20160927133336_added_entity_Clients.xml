@@ -29,11 +29,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="consumerCount" type="integer">
+            <column name="consumer_count" type="integer">
                 <constraints nullable="true" />
             </column>
 
-            <column name="targetEndpoint" type="varchar(255)">
+            <column name="target_endpoint" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
