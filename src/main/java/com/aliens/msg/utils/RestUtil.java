@@ -1,6 +1,7 @@
 package com.aliens.msg.utils;
 
 
+import com.aliens.msg.init.BootStrap;
 import com.aliens.msg.models.KeycloakUser;
 import com.aliens.msg.keycloak.Credentials;
 import com.aliens.msg.keycloak.KeyCloakUserEnum;
@@ -35,7 +36,7 @@ import java.util.concurrent.ExecutionException;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Slf4j
-public class RestUtil {
+public class RestUtil implements BootStrap {
 
     @Autowired
     ObjectMapper objectMapper;
@@ -151,7 +152,7 @@ public class RestUtil {
 
     }
 
-    public static void setupUnirest()
+    public void setupUnirest()
     {
         Unirest.setObjectMapper(new com.mashape.unirest.http.ObjectMapper() {
             private ObjectMapper jacksonObjectMapper
@@ -176,4 +177,8 @@ public class RestUtil {
     }
 
 
+    @Override
+    public void setup() throws Exception {
+        setupUnirest();
+    }
 }

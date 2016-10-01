@@ -7,7 +7,7 @@ import java.util.Optional;
 /**
  * Created by jayant on 25/9/16.
  */
-public interface CacheManager<T> {
+public interface CacheManager<T>  {
 
 
     void updateAvailbleQueue(String clientName, String str);
@@ -20,7 +20,7 @@ public interface CacheManager<T> {
 
 
 
-    void setup();
+
 
 
     void putToWait(String clientName, String ele);
@@ -36,7 +36,7 @@ public interface CacheManager<T> {
     void updateData(T queueInfo, ChannelResponse response);
 
     void updateData(T queueInfo, QueueState queueState);
-    
+
     void resetQueue(String groupId, QueueState queueState);
-    
+
 }

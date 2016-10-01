@@ -29,7 +29,7 @@ public class SendMessageToClient {
 
         if(!Strings.isNullOrEmpty(client.getTargetEndpoint()))
         {
-            if(client.getKeycloakUser().getId()!=0)
+            if(!client.getKeycloakUser().getName().equals("dummy"))
             {
                 restUtil=restUtil.withKeycloakUser(client.getKeycloakUser());
             }

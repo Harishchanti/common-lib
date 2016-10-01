@@ -33,13 +33,13 @@ public class Clients implements Serializable {
     private String targetEndpoint;
 
     @Enumerated(EnumType.STRING)
-    private ConsumerType consumerType;
+    private ConsumerType consumerType=ConsumerType.SINGLE;
 
     @Column(name = "bulk_count")
     int bulkCount;
 
     @Enumerated(EnumType.STRING)
-    ClientStatus status;
+    ClientStatus status=ClientStatus.ACTIVE;
 
     @ManyToOne(fetch =FetchType.EAGER )
     @JoinColumn(name="keycloak_user")

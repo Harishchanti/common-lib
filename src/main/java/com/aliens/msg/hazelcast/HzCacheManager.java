@@ -1,5 +1,6 @@
 package com.aliens.msg.hazelcast;
 
+import com.aliens.msg.init.BootStrap;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
@@ -23,7 +24,7 @@ import static com.aliens.msg.hazelcast.Constants.*;
 @Getter
 @Slf4j
 @Singleton
-public class HzCacheManager implements CacheManager<QueueInfo> {
+public class HzCacheManager implements CacheManager<QueueInfo>,BootStrap {
 
 
     final int retry = 10;
@@ -164,10 +165,10 @@ public class HzCacheManager implements CacheManager<QueueInfo> {
             dataMap.put(key, queueInfo);
         }
     }
-    
+
     @Override
     public void resetQueue(String groupId,QueueState queueState){
-    	
+
     	Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
     	QueueInfo queueInfo = dataMap.getOrDefault(groupId, null);
     	if(queueInfo != null){
@@ -176,7 +177,7 @@ public class HzCacheManager implements CacheManager<QueueInfo> {
         	dataMap.put(groupId, queueInfo);
     	}
     }
-    
+
 
 
 }

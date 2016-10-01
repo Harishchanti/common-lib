@@ -18,7 +18,7 @@ import javax.inject.Singleton;
 @Singleton
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class LoadKeycloakUsers  implements Setup {
+public class LoadKeycloakUsers  implements BootStrap {
 
    final KeycloakUserRepository keycloakUserRepository;
    final KeyCloakConfig keyCloakConfig;

@@ -1,22 +1,15 @@
 package com.aliens.msg.web;
 
-import com.aliens.msg.repositories.ClientsRepository;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.HzStat;
 import com.aliens.msg.hazelcast.QueueState;
-import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.ThreadWrapper;
-import com.aliens.msg.mmq.actions.MessageSender;
 import com.aliens.msg.mmq.actions.VerifyGrouping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.Set;
 
 /**
@@ -25,7 +18,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/msg")
-public class TestController {
+public class MSGController {
 
     @Autowired
     CacheManager cacheManager;
@@ -36,11 +29,7 @@ public class TestController {
     @Autowired
     VerifyGrouping verifyGrouping;
 
-    @Autowired
-    MessageSender messageSender;
 
-    @Autowired
-    ClientsRepository clientsRepository;
 
     @RequestMapping(value = "",
         method = RequestMethod.GET,
@@ -51,14 +40,7 @@ public class TestController {
         return ResponseEntity.ok().body(hzStat);
     }
 
-    @RequestMapping(value = "/clients",
-        method = RequestMethod.GET,
-        produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getClients() throws Exception {
 
-
-        return ResponseEntity.ok().body(clientsRepository.findAll());
-    }
 
 
 
@@ -90,19 +72,12 @@ public class TestController {
         return ResponseEntity.ok().body("start");
     }
 
-    @RequestMapping(value = "/sendMessage",
-        method = RequestMethod.POST,
-        produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<?> sendMessage(@RequestBody  Message message) throws Exception {
 
-        messageSender.sendMessage(message,"hello");
-        return ResponseEntity.ok().body("sent");
-    }
 
-    @RequestMapping(value = "/resetqueue/{groupId}",
+    @RequestMapping(value = "/reset/{groupId}",
             method = RequestMethod.POST,
             produces = MediaType.TEXT_PLAIN_VALUE)
-        public ResponseEntity<?> resetQueue(@PathParam("groupId") String groupId) throws Exception {
+        public ResponseEntity<?> resetQueue(@RequestBody Object req,@PathVariable("groupId") String groupId) throws Exception {
     	cacheManager.resetQueue(groupId, QueueState.IDLE);
     	return ResponseEntity.ok().body("Queue is reset");
         }

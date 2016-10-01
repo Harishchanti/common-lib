@@ -1,16 +1,12 @@
 package com.aliens.msg.init;
 
-import com.aliens.msg.hazelcast.CacheManager;
-import com.aliens.msg.mmq.ConnectionFactoryProxy;
-import com.aliens.msg.mmq.ThreadWrapper;
-import com.aliens.msg.utils.RestUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
-import java.util.concurrent.TimeoutException;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.List;
 
 /**
  * Created by jayant on 30/9/16.
@@ -18,25 +14,17 @@ import java.util.concurrent.TimeoutException;
 
 @Component
 @Slf4j
+@Singleton
 public class Initialize {
 
-    @Autowired
-    ConnectionFactoryProxy connectionFactoryProxy;
-    @Autowired
-    CacheManager cacheManager;
-    @Autowired
-    ThreadWrapper threadWrapper;
-    @Autowired
-    LoadKeycloakUsers loadKeycloakUsers;
+    @Inject
+    List<BootStrap> bootStrapList;
 
     @PostConstruct
-    public void setup() throws IOException, TimeoutException {
-        RestUtil.setupUnirest();
+    public void setup() throws Exception {
 
-        connectionFactoryProxy.setup();
-        cacheManager.setup();
-        threadWrapper.setup();
-        loadKeycloakUsers.setup();
+        for(BootStrap instance : bootStrapList)
+            instance.setup();
 
         log.info("Setup done");
     }

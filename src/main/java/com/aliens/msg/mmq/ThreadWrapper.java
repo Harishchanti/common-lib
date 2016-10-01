@@ -1,5 +1,6 @@
 package com.aliens.msg.mmq;
 
+import com.aliens.msg.init.BootStrap;
 import com.aliens.msg.models.ClientStatus;
 import com.aliens.msg.models.Clients;
 import com.aliens.msg.repositories.ClientsRepository;
@@ -25,7 +26,7 @@ import java.util.stream.IntStream;
 @Slf4j
 @Component
 @Singleton
-public class ThreadWrapper {
+public class ThreadWrapper  implements BootStrap {
 
     @Autowired
     Provider<GroupQueueWorker> groupQueueWorkerProvider;
@@ -45,13 +46,15 @@ public class ThreadWrapper {
 
     ExecutorService executorService = Executors.newFixedThreadPool(50);
 
+    @Override
     public void setup()
     {
 
     	List<Clients> clients = clientsRepository.findAll();
 
     	clients.stream().filter(client-> client.getStatus().equals(ClientStatus.ACTIVE))
-            .forEach(client -> {
+            .forEach(
+                client -> {
 
             IntStream.range(0,1).forEach( (x)->executorService.submit(mainQueueWorkerProvider.get().withClient(client)));
 
