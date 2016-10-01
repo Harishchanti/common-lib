@@ -30,7 +30,7 @@ public class SendMessageToClient {
 
         if(!Strings.isNullOrEmpty(client.getTargetEndpoint()))
         {
-            if(client.getKeycloak_user().getId()!=0)
+            //if(client.getKeycloak_user().getId()!=0)
             {
                 restUtil=restUtil.withKeyCloakUserEnum(KeyCloakUserEnum.NODEUSER);
             }

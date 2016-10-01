@@ -1,6 +1,7 @@
 package com.aliens.msg.mmq;
 
 import com.aliens.msg.config.RabbitMqConfig;
+import com.google.common.base.Strings;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.Getter;
@@ -31,7 +32,11 @@ public class ConnectionFactoryProxy {
     public void setup()
     {
         factory.setHost(rabbitMqConfig.getHost());
+
+        if(!Strings.isNullOrEmpty(rabbitMqConfig.getUsername()))
         factory.setUsername(rabbitMqConfig.getUsername());
+
+        if(!Strings.isNullOrEmpty(rabbitMqConfig.getPassword()))
         factory.setPassword(rabbitMqConfig.getPassword());
     }
 }
