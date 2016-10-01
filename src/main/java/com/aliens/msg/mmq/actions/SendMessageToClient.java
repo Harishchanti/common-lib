@@ -34,9 +34,7 @@ public class SendMessageToClient {
             {
                 restUtil=restUtil.withKeyCloakUserEnum(KeyCloakUserEnum.NODEUSER);
             }
-            return restUtil
-                .withKeyCloakUserEnum(KeyCloakUserEnum.NODEUSER)
-                .post(client.getTargetEndpoint(),message, String.class);
+            return restUtil.post(client.getTargetEndpoint(),message, String.class);
         }
         return null;
     }

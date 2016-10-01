@@ -21,10 +21,10 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://mycroft.cyanfhybaetb.us-east-1.rds.amazonaws.com:3306/msg?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/msg?useUnicode=true&characterEncoding=utf8&useSSL=false
         name:
-        username: admin
-        password: <w*MSh6?ANuE$nQP
+        username: root
+        password: root
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -56,14 +56,14 @@ spring:
         baseUrl: https://kong-qa.ailiens.com:8443
         mycroftEventPath: /event
     rabbit:
-         host:  52.77.16.64
+         host:  localhost
          queueLimit: 4
          timeout: 10000
          threadLifeTime: 10000
          sleepInterval: 5000
          maxWaitTime: 15
-         username: holmesqanew
-         password: holmesqanew
+         username:
+         password:
     keycloakCreds:
         keycloakGetAccessTokenUrl: https://keycloak-qa.ailiens.com/auth/realms/AILSecureQA/tokens/grants/access
         Authorization: Basic b2RpblFBOjUwYjgwZDQ3LWIxMDAtNDNhMC1iMzU1LTNhMmEwYWYyYjA1MQ==

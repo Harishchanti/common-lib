@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Singleton;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -24,42 +25,58 @@ public class Credentials {
 	@Autowired
 	KeyCloakConfig keyCloakConfig;
 
-	private LoadingCache<KeyCloakUserEnum, String> cache = CacheBuilder.newBuilder().maximumSize(100)
-			.expireAfterWrite(10, TimeUnit.MINUTES).build(new CacheLoader<KeyCloakUserEnum, String>() {
-				@Override
-				public String load(KeyCloakUserEnum key) throws Exception {
-					return generateAccessToken(key);
-				}
-			});
+	private LoadingCache<String, String> cache;
+
+    @PostConstruct
+    public void setup()
+    {
+        cache = CacheBuilder.newBuilder().maximumSize(100)
+            .expireAfterWrite(keyCloakConfig.getCacheDuration(), TimeUnit.MINUTES).build(new CacheLoader<String, String>() {
+                @Override
+                public String load(String key) throws Exception {
+                    return generateAccessToken(key);
+                }
+            });
+    }
 	private RestUtil restUtil = new RestUtil();
 
-	public void updateKey(KeyCloakUserEnum user) {
+	public void updateKey(String user) {
 		cache.refresh(user);
 	}
 
-	public String getAccessToken(KeyCloakUserEnum user) throws ExecutionException {
+	public String getAccessToken(String user) throws ExecutionException {
 		return cache.get(user);
 	}
 
-	private String generateAccessToken(KeyCloakUserEnum keyCloakUserEnum) throws Exception {
+    private  KeyCloakResponse call(UserCredentials userCredentials) throws Exception {
 
-		log.info("Getting new Token for {}", keyCloakUserEnum.toString());
-		UserCredentials userCredentials = keyCloakConfig.getMap().getOrDefault(keyCloakUserEnum, null);
+	    HttpResponse<KeyCloakResponse> httpResponse = Unirest.post(keyCloakConfig.getKeycloakGetAccessTokenUrl())
+            .header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+            .header("Authorization", keyCloakConfig.getAuthorization())
+            .field("username", userCredentials.getUsername())
+            .field("password", userCredentials.getPassword())
+            .field("client", userCredentials.getClientId()).asObject(KeyCloakResponse.class);
+
+        restUtil.checkStatus(httpResponse);
+
+        return httpResponse.getBody();
+	}
+
+	private String generateAccessToken(String user) throws Exception {
+
+		log.info("Getting new Token for {}", user);
+		UserCredentials userCredentials;
+
+        userCredentials=keyCloakConfig.getMap().getOrDefault(user, null);
 
 		if (userCredentials == null) {
-			log.error("Keycoak user not found");
-			throw new Exception("Keycoak user not found");
+			log.error("Keycloak user not found");
+			throw new Exception("Keycloak user not found");
 		}
-		HttpResponse<KeyCloakResponse> httpResponse = Unirest.post(keyCloakConfig.getKeycloakGetAccessTokenUrl())
-				.header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-				.header("Authorization", keyCloakConfig.getAuthorization())
-				.field("username", userCredentials.getUsername())
-				.field("password", userCredentials.getPassword())
-				.field("client", userCredentials.getClientId()).asObject(KeyCloakResponse.class);
 
-		restUtil.checkStatus(httpResponse);
+		KeyCloakResponse keyCloakResponse = call(userCredentials);
 
-		return httpResponse.getBody().getAccessToken();
+        return keyCloakResponse.getAccessToken();
 	}
 
 }

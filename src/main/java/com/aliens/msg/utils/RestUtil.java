@@ -1,11 +1,13 @@
 package com.aliens.msg.utils;
 
 
+import com.aliens.hipster.domain.KeycloakUser;
 import com.aliens.msg.keycloak.Credentials;
 import com.aliens.msg.keycloak.KeyCloakUserEnum;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Strings;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import lombok.AccessLevel;
@@ -46,6 +48,9 @@ public class RestUtil {
 
     @Wither
     KeyCloakUserEnum keyCloakUserEnum;
+
+    @Wither
+    KeycloakUser keycloakUser;
 
     public RestUtil()
     {
@@ -107,21 +112,38 @@ public class RestUtil {
         return responseList;
     }
 
-    public void checkKeyCloak() throws ExecutionException {
+    private String getKeycloakKey()
+    {
         if(keyCloakUserEnum !=null)
         {
-            String auth= credentials.getAccessToken(keyCloakUserEnum);
-            headers.put("Authorization","Bearer "+auth);
+            return keyCloakUserEnum.name();
+        }
+        else if(keycloakUser!=null)
+        {
+            return keycloakUser.getName();
+
+        }
+        return  null;
+    }
+
+    public void checkKeyCloak() throws ExecutionException {
+
+        String key= getKeycloakKey();
+
+        if(!Strings.isNullOrEmpty(key)) {
+            String auth = credentials.getAccessToken(key);
+            headers.put("Authorization", "Bearer " + auth);
         }
     }
 
     public  void checkStatus(HttpResponse response) throws Exception {
 
         log.info(response.getBody().toString());
+        String key= getKeycloakKey();
 
-        if(response.getStatus()==401 && keyCloakUserEnum !=null)
+        if(response.getStatus()==401 && !Strings.isNullOrEmpty(key) )
         {
-            credentials.updateKey(keyCloakUserEnum);
+            credentials.updateKey(key);
         }
 
         if(response.getStatus()/100!=2)

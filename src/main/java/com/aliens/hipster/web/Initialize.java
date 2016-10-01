@@ -1,6 +1,7 @@
 package com.aliens.hipster.web;
 
 import com.aliens.msg.hazelcast.CacheManager;
+import com.aliens.msg.init.LoadKeycloakUsers;
 import com.aliens.msg.mmq.ConnectionFactoryProxy;
 import com.aliens.msg.mmq.ThreadWrapper;
 import com.aliens.msg.utils.RestUtil;
@@ -24,14 +25,19 @@ public class Initialize {
     CacheManager cacheManager;
     @Autowired
     ThreadWrapper threadWrapper;
+    @Autowired
+    LoadKeycloakUsers loadKeycloakUsers;
 
     @PostConstruct
     public void setup()
     {
-        connectionFactoryProxy.setup();
         RestUtil.setupUnirest();
+
+        connectionFactoryProxy.setup();
         cacheManager.setup();
         threadWrapper.setup();
+        loadKeycloakUsers.setup();
+
         log.info("Setup done");
     }
 }
