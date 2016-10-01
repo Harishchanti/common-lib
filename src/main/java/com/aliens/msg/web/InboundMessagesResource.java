@@ -1,13 +1,12 @@
-package com.aliens.hipster.web.rest;
+package com.aliens.msg.web;
 
 import com.codahale.metrics.annotation.Timed;
-import com.aliens.hipster.domain.InboundMessages;
+import com.aliens.msg.models.InboundMessages;
 
-import com.aliens.hipster.repository.InboundMessagesRepository;
+import com.aliens.msg.repositories.InboundMessagesRepository;
 import com.aliens.hipster.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +26,7 @@ import java.util.Optional;
 public class InboundMessagesResource {
 
     private final Logger log = LoggerFactory.getLogger(InboundMessagesResource.class);
-        
+
     @Inject
     private InboundMessagesRepository inboundMessagesRepository;
 

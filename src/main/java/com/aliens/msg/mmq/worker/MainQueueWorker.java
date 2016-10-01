@@ -1,6 +1,6 @@
 package com.aliens.msg.mmq.worker;
 
-import com.aliens.hipster.domain.Clients;
+import com.aliens.msg.models.Clients;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.mmq.ChannelResponse;

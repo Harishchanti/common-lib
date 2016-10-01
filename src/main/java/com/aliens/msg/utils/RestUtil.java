@@ -1,7 +1,7 @@
 package com.aliens.msg.utils;
 
 
-import com.aliens.hipster.domain.KeycloakUser;
+import com.aliens.msg.models.KeycloakUser;
 import com.aliens.msg.keycloak.Credentials;
 import com.aliens.msg.keycloak.KeyCloakUserEnum;
 import com.fasterxml.jackson.core.JsonProcessingException;

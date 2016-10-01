@@ -1,6 +1,6 @@
-package com.aliens.hipster.repository;
+package com.aliens.msg.repositories;
 
-import com.aliens.hipster.domain.Clients;
+import com.aliens.msg.models.Clients;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**

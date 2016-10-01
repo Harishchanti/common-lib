@@ -1,10 +1,8 @@
-package com.aliens.hipster.repository;
+package com.aliens.msg.repositories;
 
-import com.aliens.hipster.domain.InboundMessages;
+import com.aliens.msg.models.InboundMessages;
 
 import org.springframework.data.jpa.repository.*;
-
-import java.util.List;
 
 /**
  * Spring Data JPA repository for the InboundMessages entity.

@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.receiver;
 
 
-import com.aliens.hipster.domain.Clients;
+import com.aliens.msg.models.Clients;
 import com.aliens.msg.config.RabbitMqConfig;
 import com.aliens.msg.mmq.*;
 import com.fasterxml.jackson.databind.ObjectMapper;

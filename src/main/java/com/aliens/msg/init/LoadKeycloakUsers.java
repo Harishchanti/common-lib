@@ -1,6 +1,6 @@
 package com.aliens.msg.init;
 
-import com.aliens.hipster.repository.KeycloakUserRepository;
+import com.aliens.msg.repositories.KeycloakUserRepository;
 import com.aliens.msg.config.KeyCloakConfig;
 import com.aliens.msg.keycloak.UserCredentials;
 import com.fasterxml.jackson.databind.ObjectMapper;

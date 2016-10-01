@@ -1,4 +1,4 @@
-package com.aliens.hipster.domain;
+package com.aliens.msg.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -42,7 +42,7 @@ public class KeycloakUser implements Serializable {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "keycloak_user")
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "keycloakUser")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Clients> clients = new HashSet<>();

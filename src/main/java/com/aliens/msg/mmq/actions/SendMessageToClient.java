@@ -1,7 +1,6 @@
 package com.aliens.msg.mmq.actions;
 
-import com.aliens.hipster.domain.Clients;
-import com.aliens.msg.keycloak.KeyCloakUserEnum;
+import com.aliens.msg.models.Clients;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.utils.RestUtil;
 import com.google.common.base.Strings;
@@ -30,9 +29,9 @@ public class SendMessageToClient {
 
         if(!Strings.isNullOrEmpty(client.getTargetEndpoint()))
         {
-            //if(client.getKeycloak_user().getId()!=0)
+            if(client.getKeycloakUser().getId()!=0)
             {
-                restUtil=restUtil.withKeyCloakUserEnum(KeyCloakUserEnum.NODEUSER);
+                restUtil=restUtil.withKeycloakUser(client.getKeycloakUser());
             }
             return restUtil.post(client.getTargetEndpoint(),message, String.class);
         }

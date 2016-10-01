@@ -1,8 +1,8 @@
 package com.aliens.msg.mmq;
 
-import com.aliens.hipster.domain.ClientStatus;
-import com.aliens.hipster.domain.Clients;
-import com.aliens.hipster.repository.ClientsRepository;
+import com.aliens.msg.models.ClientStatus;
+import com.aliens.msg.models.Clients;
+import com.aliens.msg.repositories.ClientsRepository;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.mmq.test.TestMessageSender;

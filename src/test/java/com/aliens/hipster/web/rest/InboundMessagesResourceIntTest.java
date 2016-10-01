@@ -1,8 +1,9 @@
 package com.aliens.hipster.web.rest;
 
 import com.aliens.hipster.MsgApp;
-import com.aliens.hipster.domain.InboundMessages;
-import com.aliens.hipster.repository.InboundMessagesRepository;
+import com.aliens.msg.web.InboundMessagesResource;
+import com.aliens.msg.models.InboundMessages;
+import com.aliens.msg.repositories.InboundMessagesRepository;
 
 import org.junit.Before;
 import org.junit.Test;

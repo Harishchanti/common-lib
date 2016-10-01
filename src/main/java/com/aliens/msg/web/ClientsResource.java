@@ -1,9 +1,9 @@
-package com.aliens.hipster.web.rest;
+package com.aliens.msg.web;
 
 import com.codahale.metrics.annotation.Timed;
-import com.aliens.hipster.domain.Clients;
+import com.aliens.msg.models.Clients;
 
-import com.aliens.hipster.repository.ClientsRepository;
+import com.aliens.msg.repositories.ClientsRepository;
 import com.aliens.hipster.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.actions;
 
-import com.aliens.hipster.domain.InboundMessages;
-import com.aliens.hipster.repository.InboundMessagesRepository;
+import com.aliens.msg.models.InboundMessages;
+import com.aliens.msg.repositories.InboundMessagesRepository;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

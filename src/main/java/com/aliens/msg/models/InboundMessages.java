@@ -1,4 +1,4 @@
-package com.aliens.hipster.domain;
+package com.aliens.msg.models;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;

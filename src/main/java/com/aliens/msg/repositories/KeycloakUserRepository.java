@@ -1,10 +1,8 @@
-package com.aliens.hipster.repository;
+package com.aliens.msg.repositories;
 
-import com.aliens.hipster.domain.KeycloakUser;
+import com.aliens.msg.models.KeycloakUser;
 
 import org.springframework.data.jpa.repository.*;
-
-import java.util.List;
 
 /**
  * Spring Data JPA repository for the KeycloakUser entity.

@@ -1,7 +1,6 @@
-package com.aliens.hipster.web;
+package com.aliens.msg.init;
 
 import com.aliens.msg.hazelcast.CacheManager;
-import com.aliens.msg.init.LoadKeycloakUsers;
 import com.aliens.msg.mmq.ConnectionFactoryProxy;
 import com.aliens.msg.mmq.ThreadWrapper;
 import com.aliens.msg.utils.RestUtil;

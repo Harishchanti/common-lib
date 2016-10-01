@@ -1,7 +1,7 @@
 package com.aliens.hipster;
 
 import com.aliens.hipster.config.DefaultProfileUtil;
-import com.aliens.hipster.web.Initialize;
+import com.aliens.msg.init.Initialize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;

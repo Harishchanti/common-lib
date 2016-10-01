@@ -1,4 +1,4 @@
-package com.aliens.hipster.domain;
+package com.aliens.msg.models;
 
 import lombok.Data;
 import org.hibernate.annotations.Cache;
@@ -43,6 +43,6 @@ public class Clients implements Serializable {
 
     @ManyToOne(fetch =FetchType.EAGER )
     @JoinColumn(name="keycloak_user")
-    private KeycloakUser keycloak_user;
+    private KeycloakUser keycloakUser;
 
 }

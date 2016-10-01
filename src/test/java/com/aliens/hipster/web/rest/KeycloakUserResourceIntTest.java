@@ -1,8 +1,9 @@
 package com.aliens.hipster.web.rest;
 
 import com.aliens.hipster.MsgApp;
-import com.aliens.hipster.domain.KeycloakUser;
-import com.aliens.hipster.repository.KeycloakUserRepository;
+import com.aliens.msg.web.KeycloakUserResource;
+import com.aliens.msg.models.KeycloakUser;
+import com.aliens.msg.repositories.KeycloakUserRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

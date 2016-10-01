@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.receiver;
 
-import com.aliens.hipster.domain.InboundMessages;
-import com.aliens.hipster.repository.InboundMessagesRepository;
+import com.aliens.msg.models.InboundMessages;
+import com.aliens.msg.repositories.InboundMessagesRepository;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
 import org.springframework.beans.factory.annotation.Autowired;

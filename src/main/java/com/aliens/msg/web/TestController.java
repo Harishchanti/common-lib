@@ -1,6 +1,6 @@
 package com.aliens.msg.web;
 
-import com.aliens.hipster.repository.ClientsRepository;
+import com.aliens.msg.repositories.ClientsRepository;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.HzStat;
 import com.aliens.msg.hazelcast.QueueState;
