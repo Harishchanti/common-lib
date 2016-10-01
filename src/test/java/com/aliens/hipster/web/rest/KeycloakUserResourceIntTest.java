@@ -168,6 +168,7 @@ public class KeycloakUserResourceIntTest {
         updatedKeycloakUser=
             KeycloakUser.builder()
                 .name(UPDATED_NAME)
+                .id(keycloakUser.getId())
                 .clientId(UPDATED_CLIENT_ID)
                 .username(UPDATED_USERNAME)
                 .password(UPDATED_PASSWORD).build();
@@ -175,7 +176,7 @@ public class KeycloakUserResourceIntTest {
         restKeycloakUserMockMvc.perform(put("/api/keycloak-users")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
                 .content(TestUtil.convertObjectToJsonBytes(updatedKeycloakUser)))
-                .andExpect(status().isCreated());
+                .andExpect(status().isOk());
 
         // Validate the KeycloakUser in the database
         List<KeycloakUser> keycloakUsers = keycloakUserRepository.findAll();

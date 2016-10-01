@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by jayant on 30/9/16.
@@ -28,8 +30,7 @@ public class Initialize {
     LoadKeycloakUsers loadKeycloakUsers;
 
     @PostConstruct
-    public void setup()
-    {
+    public void setup() throws IOException, TimeoutException {
         RestUtil.setupUnirest();
 
         connectionFactoryProxy.setup();

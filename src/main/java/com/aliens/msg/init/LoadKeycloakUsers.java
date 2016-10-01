@@ -18,12 +18,13 @@ import javax.inject.Singleton;
 @Singleton
 @Slf4j
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class LoadKeycloakUsers {
+public class LoadKeycloakUsers  implements Setup {
 
    final KeycloakUserRepository keycloakUserRepository;
    final KeyCloakConfig keyCloakConfig;
    final ObjectMapper objectMapper;
 
+    @Override
    public void setup()
    {
        keycloakUserRepository.findAll().forEach( keycloakUser -> {

@@ -14,8 +14,7 @@ public class MMQUtil {
     public static void ensureClosure(Connection connection, Channel channel)
     {
         try {
-            if (connection != null && connection.isOpen())
-                connection.close();
+
             if (channel != null && channel.isOpen())
                 channel.close();
         }
