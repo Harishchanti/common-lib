@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import javax.inject.Provider;
 import java.util.UUID;
 
@@ -33,14 +34,15 @@ public class MainQueueWorker implements Runnable {
     @Wither
     Clients client;
 
+    String threadName;
 
     @Override
     public void run() {
 
-        String threadName = client.getName()+"_"+UUID.randomUUID().toString();
+        threadName = client.getName()+"_"+UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
-        cacheManager.updateSet(Constants.MAIN_QUEUE_WORKER_LIST, threadName);
+        cacheManager.addToSet(Constants.MAIN_QUEUE_WORKER_LIST, threadName);
 
         while (true) {
             ChannelResponse response = mainQueueMessageReceiverProvider
@@ -65,5 +67,11 @@ public class MainQueueWorker implements Runnable {
             }
         }
 
+    }
+
+    @PreDestroy
+    public void destroy()
+    {
+        cacheManager.removeFromSet(Constants.MAIN_QUEUE_WORKER_LIST, threadName);
     }
 }

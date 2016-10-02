@@ -26,7 +26,7 @@ public class HzStat {
     Map<String,Queue<String>> queue = new HashMap<>();
 
 
-    Map<String, Integer> info;
+    Map<String, String> workerStatus;
     Map<String, QueueInfo> mappings;
 
 

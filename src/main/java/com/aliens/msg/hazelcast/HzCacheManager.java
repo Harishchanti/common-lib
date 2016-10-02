@@ -5,6 +5,7 @@ import com.aliens.msg.mmq.ChannelResponse;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.core.IMap;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import static com.aliens.msg.hazelcast.Constants.*;
 
@@ -24,10 +26,12 @@ import static com.aliens.msg.hazelcast.Constants.*;
 @Getter
 @Slf4j
 @Singleton
-public class HzCacheManager implements CacheManager<QueueInfo>,BootStrap {
+public class HzCacheManager implements BootStrap,CacheManager<QueueInfo> {
 
 
-    final int retry = 10;
+    final int retry = 5;
+    final int workerStatusTTL=2;
+
     private HazelcastInstance instance;
 
     @Override
@@ -68,7 +72,7 @@ public class HzCacheManager implements CacheManager<QueueInfo>,BootStrap {
         stat.setGroupQueueWorkerThreads(instance.getSet(GROUP_QUEUE_WORKER_LIST));
         stat.setRestartedThreads(instance.getSet(RESTARTED_WORKER_LIST));
         stat.setMappings(instance.getMap(QUEUE_MAPPINGS));
-        stat.setInfo(instance.getMap(INFO));
+        stat.setWorkerStatus(instance.getMap(WORKER_STATUS));
 
         Set<String> clients = instance.getSet(CLIENTS);
         for (String client : clients) {
@@ -81,9 +85,31 @@ public class HzCacheManager implements CacheManager<QueueInfo>,BootStrap {
     }
 
     @Override
-    public synchronized void updateSet(String setName, String ele) {
+    public boolean isWorkerRequired(String clientName)
+    {
+        IMap<String,String> info =instance.getMap(WORKER_STATUS);
+        if(info.containsKey(clientName))return  false;
+        info.put(clientName,WORKER_ACTIVE,workerStatusTTL, TimeUnit.MINUTES);
+        return true;
+    }
+
+    @Override
+    public void updateWorkerStatus(String clientName,String status)
+    {
+        IMap<String,String> info =instance.getMap(WORKER_STATUS);
+        info.put(clientName,status,workerStatusTTL, TimeUnit.MINUTES);
+    }
+
+    @Override
+    public synchronized void addToSet(String setName, String ele) {
         Set<String> set = instance.getSet(setName);
         set.add(ele);
+    }
+
+    @Override
+    public synchronized void removeFromSet(String setName, String ele) {
+        Set<String> set = instance.getSet(setName);
+        set.remove(ele);
     }
 
     @Override
@@ -121,7 +147,7 @@ public class HzCacheManager implements CacheManager<QueueInfo>,BootStrap {
 
         //synchronized (queueInfo.getGroupName())
         {
-            Map<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+            IMap<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
             String key = queueInfo.getGroupName();
 
             switch (response) {

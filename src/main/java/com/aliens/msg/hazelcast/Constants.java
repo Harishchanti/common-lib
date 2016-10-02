@@ -15,14 +15,15 @@ public class Constants {
     public final static String GROUP_QUEUE_WORKER_LIST = "groupQueueWorkerThreads";
 
     public final static String RESTARTED_WORKER_LIST = "restartedThreads";
-    public final static String WAITING_GROUPS ="waitingGroups";
     public final static String QUEUE_MAPPINGS="data";
-    public final static String INFO="info";
+    public final static String WORKER_STATUS ="worker_info";
 
 
     public final static String AVAILABLE_GROUP_SUFFIX = "_AvailableGroups";
     public final static String WAITING_GROUP_SUFFIX = "_WaitingGroups";
     public final static String CLIENTS= "clients";
+
+    public final static String WORKER_ACTIVE ="active";
 
     public static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
 

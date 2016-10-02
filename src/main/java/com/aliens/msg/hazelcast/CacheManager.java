@@ -16,12 +16,13 @@ public interface CacheManager<T>  {
 
     HzStat getStat();
 
-    void updateSet(String setName, String ele);
+    boolean isWorkerRequired(String clientName);
 
+    void updateWorkerStatus(String clientName,String status);
 
+    void addToSet(String setName, String ele);
 
-
-
+    void removeFromSet(String setName, String ele);
 
     void putToWait(String clientName, String ele);
 

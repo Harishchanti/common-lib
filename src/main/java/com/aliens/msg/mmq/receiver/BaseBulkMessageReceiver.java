@@ -55,12 +55,12 @@ public abstract class BaseBulkMessageReceiver {
 
     public abstract Status action(List<Message> messageList) throws Exception;
 
-    public ChannelResponse consumeMessage() {
+    public ChannelResponse consumeMessages() {
         try {
             connection = connectionFactory.getConnection();
             channel = connection.createChannel();
 
-            AMQP.Queue.DeclareOk dok = channel.queueDeclare(queueName, false, false, false, null);
+            AMQP.Queue.DeclareOk dok = channel.queueDeclare(queueName, true, false, false, null);
 
             if (dok.getMessageCount() < client.getBulkCount() && checkSize)
                 return ChannelResponse.NOT_ENOUGH_MESSAGES;

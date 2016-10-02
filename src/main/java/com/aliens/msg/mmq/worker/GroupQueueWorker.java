@@ -1,6 +1,5 @@
 package com.aliens.msg.mmq.worker;
 
-import com.aliens.msg.models.Clients;
 import com.aliens.msg.config.RabbitMqConfig;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
@@ -9,6 +8,7 @@ import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.aliens.msg.mmq.receiver.BulkReceiver;
 import com.aliens.msg.mmq.receiver.GroupQueueMessageReceiver;
+import com.aliens.msg.models.Clients;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
 import javax.inject.Provider;
 import java.util.Optional;
 import java.util.UUID;
@@ -45,12 +46,14 @@ public class GroupQueueWorker implements Runnable {
     @Wither
     Clients client;
 
+    String threadName;
+
     public void run()
     {
-        String threadName= client.getName()+"_"+UUID.randomUUID().toString();
+        threadName= client.getName()+"_"+UUID.randomUUID().toString();
         Thread.currentThread().setName(threadName);
 
-        cacheManager.updateSet(Constants.GROUP_QUEUE_WORKER_LIST,threadName);
+        cacheManager.addToSet(Constants.GROUP_QUEUE_WORKER_LIST,threadName);
 
         while(true)
         {
@@ -80,7 +83,7 @@ public class GroupQueueWorker implements Runnable {
                         response = bulkReceiverProvider
                             .get()
                             .withParams(threadName, client, qname, checkSize)
-                            .consumeMessage();
+                            .consumeMessages();
                         break;
 
                     case SINGLE:
@@ -110,8 +113,10 @@ public class GroupQueueWorker implements Runnable {
 
     }
 
-
-
-
+    @PreDestroy
+    public void destroy()
+    {
+        cacheManager.removeFromSet(Constants.GROUP_QUEUE_WORKER_LIST, threadName);
+    }
 
 }

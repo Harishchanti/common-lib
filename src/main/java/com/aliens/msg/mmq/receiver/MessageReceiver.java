@@ -79,7 +79,7 @@ public abstract class MessageReceiver  {
             if(!queueName.equals(mainQueueName))
                 channel.basicQos(1);
 
-            channel.queueDeclare(queueName, false, false, false, null);
+            channel.queueDeclare(queueName, true, false, false, null);
             log.info("listening to queue {}", queueName);
 
             QueueingConsumer consumer = new QueueingConsumer(channel);

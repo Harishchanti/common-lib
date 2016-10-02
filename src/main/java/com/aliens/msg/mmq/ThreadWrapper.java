@@ -1,16 +1,17 @@
 package com.aliens.msg.mmq;
 
-import com.aliens.msg.init.BootStrap;
-import com.aliens.msg.models.ClientStatus;
-import com.aliens.msg.models.Clients;
-import com.aliens.msg.repositories.ClientsRepository;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.Constants;
 import com.aliens.msg.mmq.test.TestMessageSender;
 import com.aliens.msg.mmq.worker.GroupQueueWorker;
 import com.aliens.msg.mmq.worker.MainQueueWorker;
+import com.aliens.msg.models.ClientStatus;
+import com.aliens.msg.models.Clients;
+import com.aliens.msg.repositories.ClientsRepository;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Provider;
@@ -26,7 +27,7 @@ import java.util.stream.IntStream;
 @Slf4j
 @Component
 @Singleton
-public class ThreadWrapper  implements BootStrap {
+public class ThreadWrapper  {
 
     @Autowired
     Provider<GroupQueueWorker> groupQueueWorkerProvider;
@@ -43,10 +44,13 @@ public class ThreadWrapper  implements BootStrap {
     @Autowired
     CacheManager cacheManager;
 
+    List<String> workingClients= Lists.newArrayList();
+
 
     ExecutorService executorService = Executors.newFixedThreadPool(50);
 
-    @Override
+
+    @Scheduled(fixedDelay = 1000*60)
     public void setup()
     {
 
@@ -56,17 +60,19 @@ public class ThreadWrapper  implements BootStrap {
             .forEach(
                 client -> {
 
-            IntStream.range(0,1).forEach( (x)->executorService.submit(mainQueueWorkerProvider.get().withClient(client)));
+                if(cacheManager.isWorkerRequired(client.getName())) {
 
-            IntStream.range(0,client.getConsumerCount()).forEach( (x)->
+                    executorService.submit(mainQueueWorkerProvider.get().withClient(client));
 
-                executorService.submit(groupQueueWorkerProvider.get().withClient(client)));
+                    IntStream.range(0, client.getConsumerCount()).forEach((x) ->
 
-            cacheManager.updateSet(Constants.CLIENTS,client.getName());
+                        executorService.submit(groupQueueWorkerProvider.get().withClient(client)));
 
+                    cacheManager.addToSet(Constants.CLIENTS, client.getName());
+                    workingClients.add(client.getName());
+                }
 
-
-    	});
+                });
 
     }
 
@@ -76,10 +82,17 @@ public class ThreadWrapper  implements BootStrap {
 
         clients.stream().filter(client-> client.getStatus().equals(ClientStatus.ACTIVE))
             .forEach(client -> {
-                IntStream.range(0,2)
+                IntStream.range(0,40)
                     .forEach( (x)->executorService.submit(
                         testMessageSenderProvider.get().withQueName(client.getTopic())
                             .withGroupId(client.getName()+"_g"+String.valueOf(x))));
             });
+    }
+
+    @Scheduled(fixedDelay = 1000*60)
+    public void healthCheck()
+    {
+        workingClients.forEach(client->
+            cacheManager.updateWorkerStatus(client,Constants.WORKER_ACTIVE));
     }
 }

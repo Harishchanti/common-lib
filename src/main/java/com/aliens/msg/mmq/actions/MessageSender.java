@@ -6,6 +6,7 @@ import com.aliens.msg.mmq.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.MessageProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,10 +34,10 @@ public class MessageSender {
              connection =connectionFactory.getConnection();
              channel = connection.createChannel();
 
-            channel.queueDeclare(queName, false, false, false, null);
+            channel.queueDeclare(queName, true, false, false, null);
             String queueMessage = mapper.writeValueAsString(message);
-            channel.basicPublish("", queName, null, queueMessage.getBytes("UTF-8"));
-            log.info("Sent Message messageId {} payload {}", message.getMessageId(), message.getPayload());
+            channel.basicPublish("", queName, MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
+            log.info("Sent Message messageId {}", message.getMessageId());
         }
         catch (Exception e)
         {
