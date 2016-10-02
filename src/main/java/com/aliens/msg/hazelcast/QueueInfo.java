@@ -8,7 +8,7 @@ import org.joda.time.LocalDateTime;
 
 import java.io.Serializable;
 
-import static com.aliens.msg.hazelcast.Constants.timeZone;
+import static com.aliens.msg.Constants.timeZone;
 
 /**
  * Created by jayant on 21/9/16.
@@ -23,7 +23,7 @@ public class QueueInfo implements Serializable {
 
     String createdAt = LocalDateTime.now(timeZone).toString();
 
-    String qname;
+    String queueName;
     String clientName;
     String groupName;
     String threadName;

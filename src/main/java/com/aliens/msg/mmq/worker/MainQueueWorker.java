@@ -2,7 +2,7 @@ package com.aliens.msg.mmq.worker;
 
 import com.aliens.msg.models.Clients;
 import com.aliens.msg.hazelcast.CacheManager;
-import com.aliens.msg.hazelcast.Constants;
+import com.aliens.msg.Constants;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.aliens.msg.mmq.receiver.MainQueueMessageReceiver;
 import lombok.AllArgsConstructor;

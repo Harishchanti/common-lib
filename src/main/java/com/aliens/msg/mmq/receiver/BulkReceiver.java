@@ -1,5 +1,6 @@
 package com.aliens.msg.mmq.receiver;
 
+import com.aliens.msg.mmq.actions.SendMessageToClient;
 import com.aliens.msg.models.InboundMessages;
 import com.aliens.msg.repositories.InboundMessagesRepository;
 import com.aliens.msg.mmq.Message;
@@ -21,8 +22,13 @@ public class BulkReceiver extends BaseBulkMessageReceiver {
     @Autowired
     InboundMessagesRepository inboundMessagesRepository;
 
+    @Autowired
+    SendMessageToClient sendMessageToClient;
+
     @Override
     public Status action(List<Message> messageList) throws Exception {
+
+        sendMessageToClient.withClient(client).withMessageList(messageList).invoke();
 
         for(Message message: messageList) {
             InboundMessages inboundMessages = new InboundMessages();

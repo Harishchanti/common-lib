@@ -1,5 +1,6 @@
 package com.aliens.msg.mmq.receiver;
 
+import com.aliens.msg.actions.BackupQueueInfoProxy;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-import static com.aliens.msg.hazelcast.Constants.timeZone;
+import static com.aliens.msg.Constants.timeZone;
 
 /**
  * Created by jayant on 25/9/16.
@@ -27,6 +28,8 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
     @Autowired
     CacheManager cacheManager;
+    @Autowired
+    BackupQueueInfoProxy backupQueueInfoProxy;
 
     @Autowired
     MessageSender messageSender;
@@ -44,7 +47,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
         if(queueInfoOptional.isPresent())
         {
-            String qname=queueInfoOptional.get().getQname();
+            String qname=queueInfoOptional.get().getQueueName();
             messageSender.sendMessage(message,qname);
             return Status.SUCCESS;
         }
@@ -62,7 +65,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
                 messageSender.sendMessage(message,groupId);
 
                 QueueInfo queueInfo=QueueInfo.builder()
-                    .qname(groupId)
+                    .queueName(groupId)
                     .createdAt(LocalDateTime.now(timeZone).toString())
                     .clientName(clientName)
                     .groupName(groupId)
@@ -70,6 +73,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 cacheManager.updateData(queueInfo, QueueState.IDLE);
                 cacheManager.updateAvailbleQueue(clientName,groupId);
+                backupQueueInfoProxy.save(queueInfo);
                 return Status.SUCCESS;
             }
             else
