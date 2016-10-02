@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq;
 
 import com.aliens.msg.hazelcast.CacheManager;
-import com.aliens.msg.hazelcast.Constants;
+import com.aliens.msg.Constants;
 import com.aliens.msg.mmq.test.TestMessageSender;
 import com.aliens.msg.mmq.worker.GroupQueueWorker;
 import com.aliens.msg.mmq.worker.MainQueueWorker;
@@ -82,7 +82,7 @@ public class ThreadWrapper  {
 
         clients.stream().filter(client-> client.getStatus().equals(ClientStatus.ACTIVE))
             .forEach(client -> {
-                IntStream.range(0,40)
+                IntStream.range(0,10)
                     .forEach( (x)->executorService.submit(
                         testMessageSenderProvider.get().withQueName(client.getTopic())
                             .withGroupId(client.getName()+"_g"+String.valueOf(x))));
@@ -92,6 +92,7 @@ public class ThreadWrapper  {
     @Scheduled(fixedDelay = 1000*60)
     public void healthCheck()
     {
+
         workingClients.forEach(client->
             cacheManager.updateWorkerStatus(client,Constants.WORKER_ACTIVE));
     }

@@ -17,7 +17,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static com.aliens.msg.hazelcast.Constants.*;
+import static com.aliens.msg.Constants.*;
 
 /**
  * Created by jayant on 25/9/16.

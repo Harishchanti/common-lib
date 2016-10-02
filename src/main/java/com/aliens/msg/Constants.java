@@ -1,4 +1,4 @@
-package com.aliens.msg.hazelcast;
+package com.aliens.msg;
 
 import lombok.experimental.UtilityClass;
 import org.joda.time.DateTimeZone;
@@ -24,6 +24,10 @@ public class Constants {
     public final static String CLIENTS= "clients";
 
     public final static String WORKER_ACTIVE ="active";
+    public final static String SAVE_QUEUE="SAVE";
+    public final static String DELETE_QUEUE="DELETE";
+
+    public final static String DUMMY_USER ="dummy";
 
     public static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
 

@@ -1,8 +1,9 @@
 package com.aliens.msg.mmq.worker;
 
+import com.aliens.msg.actions.BackupQueueInfoProxy;
 import com.aliens.msg.config.RabbitMqConfig;
 import com.aliens.msg.hazelcast.CacheManager;
-import com.aliens.msg.hazelcast.Constants;
+import com.aliens.msg.Constants;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.ChannelResponse;
@@ -42,6 +43,7 @@ public class GroupQueueWorker implements Runnable {
 
     final Provider<GroupQueueMessageReceiver> groupQueueMessageReceiverProvider;
     final Provider<BulkReceiver> bulkReceiverProvider;
+    final BackupQueueInfoProxy backupQueueInfo;
 
     @Wither
     Clients client;
@@ -63,7 +65,7 @@ public class GroupQueueWorker implements Runnable {
             if(queueInfoOptional.isPresent())
             {
                 QueueInfo queueInfo =queueInfoOptional.get();
-                String qname=queueInfo.getQname();
+                String qname=queueInfo.getQueueName();
                 queueInfo.setThreadName(threadName);
                 cacheManager.updateData(queueInfo, QueueState.PROCESSING);
 
@@ -99,6 +101,11 @@ public class GroupQueueWorker implements Runnable {
 
 
                 cacheManager.updateData(queueInfo,response);
+
+                if(response.equals(ChannelResponse.QUEUE_PROCESSED))
+                {
+                    backupQueueInfo.delete(queueInfo);
+                }
             }
             else {
                 log.info("No idle queue found : let me sleep {}",sleepInterval);
