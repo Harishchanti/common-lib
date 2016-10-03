@@ -29,6 +29,7 @@ apply plugin: 'war'
 apply plugin: 'propdeps'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'net.ltgt.apt'
+apply plugin: 'maven-publish'
 /* downgrade Hibernate to 4.3 */
 ext['hibernate.version'] = '${hibernate_entitymanager_version}'
 defaultTasks 'bootRun'
@@ -197,6 +198,16 @@ dependencies {
     compile 'com.mashape.unirest:unirest-java:1.4.9'
     compile 'com.hazelcast:hazelcast:3.7.1'
     compile 'com.hazelcast:hazelcast-client:3.7.1'
+}
+
+
+configurations {
+    all*.exclude group: 'javassist'
+}
+
+jar {
+    baseName = 'msg'
+    version = '0.0.1'
 }
 
 clean {
