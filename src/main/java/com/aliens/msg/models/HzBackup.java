@@ -19,4 +19,7 @@ public class HzBackup {
 
     @Column(name = "queue_name")
     private String queueName;
+
+    @Column(name = "client_name")
+    private String clientName;
 }
