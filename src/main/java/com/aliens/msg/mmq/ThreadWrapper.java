@@ -50,7 +50,7 @@ public class ThreadWrapper  {
     ExecutorService executorService = Executors.newFixedThreadPool(50);
 
 
-    //@Scheduled(fixedDelay = 1000*60)
+    @Scheduled(fixedDelay = 1000*60)
     public void setup()
     {
 

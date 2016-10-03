@@ -1,6 +1,8 @@
 package com.aliens.hipster;
 
 import com.aliens.hipster.config.DefaultProfileUtil;
+import com.aliens.msg.init.Initialize;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
@@ -10,8 +12,8 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
  */
 public class ApplicationWebXml extends SpringBootServletInitializer {
 
-//    @Autowired
-//    Initialize initialize;
+    @Autowired
+     Initialize initialize;
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
