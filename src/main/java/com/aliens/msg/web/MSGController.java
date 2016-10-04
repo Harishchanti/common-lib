@@ -1,5 +1,6 @@
 package com.aliens.msg.web;
 
+import com.aliens.msg.actions.DeleteGroupAction;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.HzStat;
 import com.aliens.msg.hazelcast.QueueState;
@@ -28,6 +29,9 @@ public class MSGController {
 
     @Autowired
     VerifyGrouping verifyGrouping;
+
+    @Autowired
+    DeleteGroupAction deleteGroupAction;
 
 
 
@@ -81,6 +85,14 @@ public class MSGController {
     	cacheManager.resetQueue(groupId, QueueState.IDLE);
     	return ResponseEntity.ok().body("Queue is reset");
         }
+
+    @RequestMapping(value = "/delete/{groupId}",
+        method = RequestMethod.POST,
+        produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<?> deleteQueue(@RequestBody Object req,@PathVariable("groupId") String groupId) throws Exception {
+        deleteGroupAction.withGroupId(groupId).invoke();
+        return ResponseEntity.ok().body("Queue is deleted");
+    }
 
 
 

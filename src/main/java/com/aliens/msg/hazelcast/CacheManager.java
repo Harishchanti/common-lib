@@ -34,6 +34,8 @@ public interface CacheManager<T>  {
 
     int getSize();
 
+    void deleteKey(String key);
+
     void updateData(T queueInfo, ChannelResponse response);
 
     void updateData(T queueInfo, QueueState queueState);

@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import static com.aliens.msg.Constants.timeZone;
 
@@ -62,10 +63,12 @@ public class MainQueueMessageReceiver extends MessageReceiver {
                     return Status.WAITING;
                 }
 
-                messageSender.sendMessage(message,groupId);
+                String queueName = UUID.randomUUID().toString();
+
+                messageSender.sendMessage(message,queueName);
 
                 QueueInfo queueInfo=QueueInfo.builder()
-                    .queueName(groupId)
+                    .queueName(queueName)
                     .createdAt(LocalDateTime.now(timeZone).toString())
                     .clientName(clientName)
                     .groupName(groupId)

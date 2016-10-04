@@ -143,6 +143,13 @@ public class HzCacheManager implements BootStrap,CacheManager<QueueInfo> {
     }
 
     @Override
+    public void deleteKey(String key)
+    {
+        IMap<String, QueueInfo> dataMap = instance.getMap(QUEUE_MAPPINGS);
+        dataMap.remove(key);
+    }
+
+    @Override
     public synchronized void updateData(QueueInfo queueInfo, ChannelResponse response) {
 
         //synchronized (queueInfo.getGroupName())
@@ -202,6 +209,7 @@ public class HzCacheManager implements BootStrap,CacheManager<QueueInfo> {
         	queueInfo.setRetry(0);
         	dataMap.put(groupId, queueInfo);
     	}
+    	updateAvailbleQueue(queueInfo.getClientName(),groupId);
     }
 
 
