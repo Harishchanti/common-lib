@@ -65,6 +65,8 @@ spring:
          username:
          password:
          poolSize: 5
+    hazelcast:
+         aws: false
     keycloakCreds:
         keycloakGetAccessTokenUrl: https://keycloak-qa.ailiens.com/auth/realms/AILSecureQA/tokens/grants/access
         Authorization: Basic b2RpblFBOjUwYjgwZDQ3LWIxMDAtNDNhMC1iMzU1LTNhMmEwYWYyYjA1MQ==

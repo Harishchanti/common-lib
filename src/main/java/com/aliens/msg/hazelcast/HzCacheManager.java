@@ -1,8 +1,10 @@
 package com.aliens.msg.hazelcast;
 
+import com.aliens.hipster.config.JHipsterProperties;
+import com.aliens.msg.config.HazelcastConfig;
 import com.aliens.msg.init.BootStrap;
 import com.aliens.msg.mmq.ChannelResponse;
-import com.hazelcast.config.Config;
+import com.hazelcast.config.*;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
@@ -10,6 +12,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Map;
 import java.util.Optional;
@@ -34,13 +37,94 @@ public class HzCacheManager implements BootStrap,CacheManager<QueueInfo> {
 
     private HazelcastInstance instance;
 
+    @Inject
+    HazelcastConfig hazelcastConfig;
+
     @Override
     public void setup() {
-        Config config = new Config();
+        Config config = getConfig();
         config.getGroupConfig().setName(CLUSTERNAME);
         instance = Hazelcast.newHazelcastInstance(config);
 
         log.info("Hazelcast instance created {}", instance.getName());
+    }
+
+    public Config getConfig() {
+        log.debug("Configuring Hazelcast");
+        Config config = new Config();
+        config.setInstanceName("msg");
+        config.getNetworkConfig().setPort(5701);
+        config.getNetworkConfig().setPortAutoIncrement(true);
+
+        // In development, remove multicast auto-configuration
+        if (hazelcastConfig.isAws()) {
+            config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
+            config.getNetworkConfig().getJoin().getTcpIpConfig().setEnabled(false);
+            AwsConfig awsCondif = config.getNetworkConfig().getJoin().getAwsConfig();
+            awsCondif.setEnabled(true);
+            awsCondif.setAccessKey(hazelcastConfig.getAccessKey());
+            awsCondif.setSecretKey(hazelcastConfig.getSecretKey());
+            awsCondif.setRegion(hazelcastConfig.getRegionCode());
+            // awsCondif.setHostHeader(hostHeader);
+            awsCondif.setSecurityGroupName(hazelcastConfig.getSecurityGroup());
+            awsCondif.setTagKey(hazelcastConfig.getTagKey());
+            awsCondif.setTagValue(hazelcastConfig.getTagValue());
+        } else {
+            System.setProperty("hazelcast.local.localAddress", "127.0.0.1");
+            config.getNetworkConfig().getJoin().getAwsConfig().setEnabled(false);
+            config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
+            config.getNetworkConfig().getJoin().getTcpIpConfig().setEnabled(false);
+        }
+
+        config.getMapConfigs().put("default", initializeDefaultMapConfig());
+        //config.getMapConfigs().put("com.aliens.msg.models.*", initializeDomainMapConfig(jHipsterProperties));
+
+        return config;
+    }
+
+    private MapConfig initializeDefaultMapConfig() {
+        MapConfig mapConfig = new MapConfig();
+
+        /*
+            Number of backups. If 1 is set as the backup-count for example,
+            then all entries of the map will be copied to another JVM for
+            fail-safety. Valid numbers are 0 (no backup), 1, 2, 3.
+         */
+        mapConfig.setBackupCount(0);
+
+        /*
+            Valid values are:
+            NONE (no eviction),
+            LRU (Least Recently Used),
+            LFU (Least Frequently Used).
+            NONE is the default.
+         */
+        mapConfig.setEvictionPolicy(EvictionPolicy.NONE);
+
+        /*
+            Maximum size of the map. When max size is reached,
+            map is evicted based on the policy defined.
+            Any integer between 0 and Integer.MAX_VALUE. 0 means
+            Integer.MAX_VALUE. Default is 0.
+         */
+        mapConfig.setMaxSizeConfig(new MaxSizeConfig(0, MaxSizeConfig.MaxSizePolicy.USED_HEAP_SIZE));
+
+        /*
+            When max. size is reached, specified percentage of
+            the map will be evicted. Any integer between 0 and 100.
+            If 25 is set for example, 25% of the entries will
+            get evicted.
+         */
+        mapConfig.setEvictionPercentage(25);
+
+        return mapConfig;
+    }
+
+    private MapConfig initializeDomainMapConfig(JHipsterProperties jHipsterProperties) {
+        MapConfig mapConfig = new MapConfig();
+
+        //mapConfig.setTimeToLiveSeconds(jHipsterProperties.getCache().getTimeToLiveSeconds());
+        return mapConfig;
     }
 
     @Override
