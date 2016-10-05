@@ -1,14 +1,14 @@
 package com.aliens.msg.mmq;
 
-import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.Constants;
+import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.mmq.test.TestMessageSender;
 import com.aliens.msg.mmq.worker.GroupQueueWorker;
 import com.aliens.msg.mmq.worker.MainQueueWorker;
 import com.aliens.msg.models.ClientStatus;
 import com.aliens.msg.models.Clients;
 import com.aliens.msg.repositories.ClientsRepository;
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
@@ -44,11 +45,24 @@ public class ThreadWrapper  {
     @Autowired
     CacheManager cacheManager;
 
-    List<String> workingClients= Lists.newArrayList();
+    Set<String> workingClients= Sets.newHashSet();
+    final int maxClients=4;
 
 
     ExecutorService executorService = Executors.newFixedThreadPool(50);
 
+
+    public void startThreads(Clients client)
+    {
+        executorService.submit(mainQueueWorkerProvider.get().withClient(client));
+
+        IntStream.range(0, client.getConsumerCount()).forEach((x) ->
+
+            executorService.submit(groupQueueWorkerProvider.get().withClient(client)));
+
+        cacheManager.addToSet(Constants.CLIENTS, client.getName());
+        workingClients.add(client.getName());
+    }
 
     @Scheduled(fixedDelay = 1000*60)
     public void setup()
@@ -56,20 +70,14 @@ public class ThreadWrapper  {
 
     	List<Clients> clients = clientsRepository.findAll();
 
+
     	clients.stream().filter(client-> client.getStatus().equals(ClientStatus.ACTIVE))
             .forEach(
                 client -> {
 
-                if(cacheManager.isWorkerRequired(client.getName())) {
+                if(cacheManager.isWorkerRequired(client.getName()) && workingClients.size()<maxClients) {
 
-                    executorService.submit(mainQueueWorkerProvider.get().withClient(client));
-
-                    IntStream.range(0, client.getConsumerCount()).forEach((x) ->
-
-                        executorService.submit(groupQueueWorkerProvider.get().withClient(client)));
-
-                    cacheManager.addToSet(Constants.CLIENTS, client.getName());
-                    workingClients.add(client.getName());
+                    startThreads(client);
                 }
 
                 });
@@ -82,7 +90,7 @@ public class ThreadWrapper  {
 
         clients.stream().filter(client-> client.getStatus().equals(ClientStatus.ACTIVE))
             .forEach(client -> {
-                IntStream.range(0,10)
+                IntStream.range(0,5)
                     .forEach( (x)->executorService.submit(
                         testMessageSenderProvider.get().withQueName(client.getTopic())
                             .withGroupId(client.getName()+"_g"+String.valueOf(x))));

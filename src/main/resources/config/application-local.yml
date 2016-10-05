@@ -57,7 +57,7 @@ spring:
         mycroftEventPath: /event
     rabbit:
          host:  localhost
-         queueLimit: 4
+         queueLimit: 5
          timeout: 10000
          threadLifeTime: 10000
          sleepInterval: 5000
@@ -67,6 +67,16 @@ spring:
          poolSize: 5
     hazelcast:
          aws: false
+         awsUrl: http://test.com
+         instanceName: msg
+         port: 5701
+         accessKey: test
+         secretKey: test
+         regionCode: test
+         tagKey: test
+         tagValue: test
+
+
     keycloakCreds:
         keycloakGetAccessTokenUrl: https://keycloak-qa.ailiens.com/auth/realms/AILSecureQA/tokens/grants/access
         Authorization: Basic b2RpblFBOjUwYjgwZDQ3LWIxMDAtNDNhMC1iMzU1LTNhMmEwYWYyYjA1MQ==

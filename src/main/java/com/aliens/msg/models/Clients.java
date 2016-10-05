@@ -35,7 +35,7 @@ public class Clients implements Serializable {
     @Enumerated(EnumType.STRING)
     private ConsumerType consumerType=ConsumerType.SINGLE;
 
-    @Column(name = "bulk_count")
+
     int bulkCount;
 
     @Enumerated(EnumType.STRING)
@@ -44,5 +44,8 @@ public class Clients implements Serializable {
     @ManyToOne(fetch =FetchType.EAGER )
     @JoinColumn(name="keycloak_user")
     private KeycloakUser keycloakUser;
+
+
+    private boolean groupingEnabled;
 
 }

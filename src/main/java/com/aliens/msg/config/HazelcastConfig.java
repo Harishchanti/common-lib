@@ -28,4 +28,7 @@ public class HazelcastConfig {
     String tagKey;
     String tagValue;
     boolean aws;
+    String instanceName;
+    String awsUrl;
+    int port;
 }
