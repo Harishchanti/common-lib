@@ -74,6 +74,16 @@ spring:
                 username: nodeuser
                 password: qanode
                 clientId: odinQA
+    hazelcast:
+         aws: true
+         awsUrl: http://169.254.169.254
+         instanceName: msg
+         port: 5701
+         accessKey: AKIAJH4UYWUOO55TBVKQ
+         secretKey: 2Ui1d4q3eMUx1vD5mN180VZuWdYdrkkcDDUV
+         regionCode: us-east-1
+         tagKey: application2
+         tagValue: msg
 
 liquibase:
     contexts: dev

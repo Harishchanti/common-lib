@@ -23,12 +23,12 @@ public class HazelcastConfig {
     String accessKey;
     String secretKey;
     String regionCode;
-    String hostHeader;
-    String securityGroup;
     String tagKey;
     String tagValue;
     boolean aws;
     String instanceName;
     String awsUrl;
     int port;
+    String hostHeader;
+    String securityGroup;
 }
