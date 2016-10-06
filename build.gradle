@@ -228,11 +228,16 @@ configurations {
 subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'
-    apply plugin: 'spring-boot'
     apply plugin: 'propdeps'
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'net.ltgt.apt'
     apply plugin: 'maven-publish'
+
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.boot:spring-boot-starter-parent:1.2.4.RELEASE'
+        }
+    }
 
     buildscript{
         repositories {
@@ -274,7 +279,8 @@ subprojects {
     dependencies {
 
         compile localGroovy()
-        compile 'org.projectlombok:lombok:1.16.10'
+        provided 'org.projectlombok:lombok:1.16.10'
+        apt 'org.projectlombok:lombok:1.16.10'
 
         compile "org.springframework.boot:spring-boot-actuator"
         compile "org.springframework.boot:spring-boot-autoconfigure"
@@ -298,11 +304,11 @@ subprojects {
         compile("io.springfox:springfox-swagger2:${springfox_version}"){
             exclude module: 'mapstruct'
         }
+
+        compile 'com.mashape.unirest:unirest-java:1.4.9'
     }
 
-    bootRepackage {
-        mainClass = 'com.aliens.common.Dummy'
-    }
+
 }
 
 dependencies

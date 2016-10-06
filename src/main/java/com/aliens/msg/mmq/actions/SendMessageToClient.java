@@ -3,7 +3,7 @@ package com.aliens.msg.mmq.actions;
 import com.aliens.msg.Constants;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.models.Clients;
-import com.aliens.msg.utils.RestUtil;
+import com.aliens.common.RestUtil;
 import com.google.common.base.Strings;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -36,7 +36,7 @@ public class SendMessageToClient {
         {
             if(!client.getKeycloakUser().getName().equals(Constants.DUMMY_USER))
             {
-                restUtil=restUtil.withKeycloakUser(client.getKeycloakUser());
+                restUtil=restUtil.withUser(client.getKeycloakUser().getName());
             }
 
             if(messageList==null)

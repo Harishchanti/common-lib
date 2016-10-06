@@ -1,6 +1,6 @@
 package com.aliens.msg.hazelcast;
 
-import com.aliens.msg.init.BootStrap;
+import com.aliens.common.BootStrap;
 import com.aliens.msg.mmq.ChannelResponse;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;

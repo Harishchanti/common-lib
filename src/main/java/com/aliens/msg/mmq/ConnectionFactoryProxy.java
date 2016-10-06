@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq;
 
 import com.aliens.msg.config.RabbitMqConfig;
-import com.aliens.msg.init.BootStrap;
+import com.aliens.common.BootStrap;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.rabbitmq.client.Connection;

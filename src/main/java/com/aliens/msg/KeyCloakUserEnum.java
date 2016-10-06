@@ -1,4 +1,4 @@
-package com.aliens.msg.keycloak;
+package com.aliens.msg;
 
 /**
  * Created by jayant on 14/9/16.

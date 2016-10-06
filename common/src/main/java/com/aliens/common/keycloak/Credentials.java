@@ -1,7 +1,6 @@
-package com.aliens.msg.keycloak;
+package com.aliens.common.keycloak;
 
-import com.aliens.msg.config.KeyCloakConfig;
-import com.aliens.msg.utils.RestUtil;
+import com.aliens.common.RestUtil;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -13,12 +12,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Singleton;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
-@Singleton
 @Component
 public class Credentials {
 

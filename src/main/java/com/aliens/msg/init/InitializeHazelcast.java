@@ -1,5 +1,6 @@
 package com.aliens.msg.init;
 
+import com.aliens.common.BootStrap;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;

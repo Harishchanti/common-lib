@@ -1,6 +1,5 @@
 package com.aliens.msg;
 
-import com.aliens.common.Dummy;
 import lombok.experimental.UtilityClass;
 import org.joda.time.DateTimeZone;
 
@@ -32,5 +31,4 @@ public class Constants {
 
     public static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
 
-    Dummy dummy = new Dummy();
 }

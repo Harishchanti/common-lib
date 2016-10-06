@@ -1,10 +1,7 @@
-package com.aliens.msg.utils;
+package com.aliens.common;
 
 
-import com.aliens.msg.init.BootStrap;
-import com.aliens.msg.models.KeycloakUser;
-import com.aliens.msg.keycloak.Credentials;
-import com.aliens.msg.keycloak.KeyCloakUserEnum;
+import com.aliens.common.keycloak.Credentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,15 +45,13 @@ public class RestUtil implements BootStrap {
     Map<String,String> headers = new HashMap<>();
 
     @Wither
-    KeyCloakUserEnum keyCloakUserEnum;
+    String user;
 
-    @Wither
-    KeycloakUser keycloakUser;
+
 
     public RestUtil()
     {
         headers.put("content-type",MediaType.APPLICATION_JSON_VALUE);
-        keyCloakUserEnum =null;
     }
 
 
@@ -74,6 +69,13 @@ public class RestUtil implements BootStrap {
         checkStatus(response);
 
         return response.getBody();
+    }
+
+    public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws Exception {
+
+        String responseStr= get(url,String.class);
+        List<T> responseList=objectMapper.readValue(responseStr,typeReference);
+        return responseList;
     }
 
     public  <T> T post(String url, Object payload, Class <? extends T> responseClass) throws Exception {
@@ -115,16 +117,7 @@ public class RestUtil implements BootStrap {
 
     private String getKeycloakKey()
     {
-        if(keyCloakUserEnum !=null)
-        {
-            return keyCloakUserEnum.name();
-        }
-        else if(keycloakUser!=null)
-        {
-            return keycloakUser.getName();
-
-        }
-        return  null;
+        return  user;
     }
 
     public void checkKeyCloak() throws ExecutionException {

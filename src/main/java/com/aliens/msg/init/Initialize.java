@@ -1,5 +1,6 @@
 package com.aliens.msg.init;
 
+import com.aliens.common.BootStrap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 

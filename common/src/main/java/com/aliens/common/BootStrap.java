@@ -1,4 +1,4 @@
-package com.aliens.msg.init;
+package com.aliens.common;
 
 /**
  * Created by jayant on 1/10/16.

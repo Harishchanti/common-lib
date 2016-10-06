@@ -1,8 +1,9 @@
 package com.aliens.msg.init;
 
+import com.aliens.common.BootStrap;
 import com.aliens.msg.repositories.KeycloakUserRepository;
-import com.aliens.msg.config.KeyCloakConfig;
-import com.aliens.msg.keycloak.UserCredentials;
+import com.aliens.common.keycloak.KeyCloakConfig;
+import com.aliens.common.keycloak.UserCredentials;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
