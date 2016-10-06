@@ -22,7 +22,7 @@ import java.util.concurrent.TimeoutException;
 @Component
 @Singleton
 @Slf4j
-public class ConnectionFactoryProxy   implements BootStrap {
+public class ConnectionFactoryProxy   implements BootStrap  {
 
     ConnectionFactory factory = new ConnectionFactory();
 

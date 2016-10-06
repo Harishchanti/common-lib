@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.receiver;
 
-import com.aliens.msg.models.InboundMessages;
-import com.aliens.msg.repositories.InboundMessagesRepository;
+import com.aliens.msg.models.OutboundMessages;
+import com.aliens.msg.repositories.OutboundMessagesRepository;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
 import com.aliens.msg.mmq.actions.SendMessageToClient;
@@ -20,7 +20,7 @@ public class GroupQueueMessageReceiver extends MessageReceiver {
     SendMessageToClient sendMessageToClient;
 
 	@Autowired
-	InboundMessagesRepository inboundMessagesRepository;
+    OutboundMessagesRepository outboundMessagesRepository;
 
 	@Override
 	public Status action(Message message) throws Exception
@@ -29,10 +29,10 @@ public class GroupQueueMessageReceiver extends MessageReceiver {
         sendMessageToClient.withMessage(message)
             .withClient(client).invoke();
 
-        InboundMessages inboundMessages = new InboundMessages();
-        inboundMessages.setGroupId(message.getGroupId());
-        inboundMessages.setMessageId(message.getMessageId());
-        inboundMessagesRepository.save(inboundMessages);
+        OutboundMessages outboundMessages = new OutboundMessages();
+        outboundMessages.setGroupId(message.getGroupId());
+        outboundMessages.setMessageId(message.getMessageId());
+        outboundMessagesRepository.save(outboundMessages);
         return Status.SUCCESS;
     }
 

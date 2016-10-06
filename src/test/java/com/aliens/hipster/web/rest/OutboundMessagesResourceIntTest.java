@@ -2,8 +2,8 @@ package com.aliens.hipster.web.rest;
 
 import com.aliens.hipster.MsgApp;
 import com.aliens.msg.web.InboundMessagesResource;
-import com.aliens.msg.models.InboundMessages;
-import com.aliens.msg.repositories.InboundMessagesRepository;
+import com.aliens.msg.models.OutboundMessages;
+import com.aliens.msg.repositories.OutboundMessagesRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,14 +36,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MsgApp.class)
-public class InboundMessagesResourceIntTest {
+public class OutboundMessagesResourceIntTest {
     private static final String DEFAULT_MESSAGE_ID = "AAAAA";
     private static final String UPDATED_MESSAGE_ID = "BBBBB";
     private static final String DEFAULT_GROUP_ID = "AAAAA";
     private static final String UPDATED_GROUP_ID = "BBBBB";
 
     @Inject
-    private InboundMessagesRepository inboundMessagesRepository;
+    private OutboundMessagesRepository outboundMessagesRepository;
 
     @Inject
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -56,13 +56,13 @@ public class InboundMessagesResourceIntTest {
 
     private MockMvc restInboundMessagesMockMvc;
 
-    private InboundMessages inboundMessages;
+    private OutboundMessages outboundMessages;
 
     @PostConstruct
     public void setup() {
         MockitoAnnotations.initMocks(this);
         InboundMessagesResource inboundMessagesResource = new InboundMessagesResource();
-        ReflectionTestUtils.setField(inboundMessagesResource, "inboundMessagesRepository", inboundMessagesRepository);
+        ReflectionTestUtils.setField(inboundMessagesResource, "inboundMessagesRepository", outboundMessagesRepository);
         this.restInboundMessagesMockMvc = MockMvcBuilders.standaloneSetup(inboundMessagesResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setMessageConverters(jacksonMessageConverter).build();
@@ -74,50 +74,50 @@ public class InboundMessagesResourceIntTest {
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
      */
-    public static InboundMessages createEntity(EntityManager em) {
-        InboundMessages inboundMessages = new InboundMessages();
-        inboundMessages = new InboundMessages()
+    public static OutboundMessages createEntity(EntityManager em) {
+        OutboundMessages outboundMessages = new OutboundMessages();
+        outboundMessages = new OutboundMessages()
                 .messageId(DEFAULT_MESSAGE_ID)
                 .groupId(DEFAULT_GROUP_ID);
-        return inboundMessages;
+        return outboundMessages;
     }
 
     @Before
     public void initTest() {
-        inboundMessages = createEntity(em);
+        outboundMessages = createEntity(em);
     }
 
     @Test
     @Transactional
     public void createInboundMessages() throws Exception {
-        int databaseSizeBeforeCreate = inboundMessagesRepository.findAll().size();
+        int databaseSizeBeforeCreate = outboundMessagesRepository.findAll().size();
 
         // Create the InboundMessages
 
         restInboundMessagesMockMvc.perform(post("/api/inbound-messages")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(inboundMessages)))
+                .content(TestUtil.convertObjectToJsonBytes(this.outboundMessages)))
                 .andExpect(status().isCreated());
 
         // Validate the InboundMessages in the database
-        List<InboundMessages> inboundMessages = inboundMessagesRepository.findAll();
-        assertThat(inboundMessages).hasSize(databaseSizeBeforeCreate + 1);
-        InboundMessages testInboundMessages = inboundMessages.get(inboundMessages.size() - 1);
-        assertThat(testInboundMessages.getMessageId()).isEqualTo(DEFAULT_MESSAGE_ID);
-        assertThat(testInboundMessages.getGroupId()).isEqualTo(DEFAULT_GROUP_ID);
+        List<OutboundMessages> outboundMessages = outboundMessagesRepository.findAll();
+        assertThat(outboundMessages).hasSize(databaseSizeBeforeCreate + 1);
+        OutboundMessages testOutboundMessages = outboundMessages.get(outboundMessages.size() - 1);
+        assertThat(testOutboundMessages.getMessageId()).isEqualTo(DEFAULT_MESSAGE_ID);
+        assertThat(testOutboundMessages.getGroupId()).isEqualTo(DEFAULT_GROUP_ID);
     }
 
     @Test
     @Transactional
     public void getAllInboundMessages() throws Exception {
         // Initialize the database
-        inboundMessagesRepository.saveAndFlush(inboundMessages);
+        outboundMessagesRepository.saveAndFlush(outboundMessages);
 
         // Get all the inboundMessages
         restInboundMessagesMockMvc.perform(get("/api/inbound-messages?sort=id,desc"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$.[*].id").value(hasItem(inboundMessages.getId().intValue())))
+                .andExpect(jsonPath("$.[*].id").value(hasItem(outboundMessages.getId().intValue())))
                 .andExpect(jsonPath("$.[*].messageId").value(hasItem(DEFAULT_MESSAGE_ID.toString())))
                 .andExpect(jsonPath("$.[*].groupId").value(hasItem(DEFAULT_GROUP_ID.toString())));
     }
@@ -126,13 +126,13 @@ public class InboundMessagesResourceIntTest {
     @Transactional
     public void getInboundMessages() throws Exception {
         // Initialize the database
-        inboundMessagesRepository.saveAndFlush(inboundMessages);
+        outboundMessagesRepository.saveAndFlush(outboundMessages);
 
         // Get the inboundMessages
-        restInboundMessagesMockMvc.perform(get("/api/inbound-messages/{id}", inboundMessages.getId()))
+        restInboundMessagesMockMvc.perform(get("/api/inbound-messages/{id}", outboundMessages.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-            .andExpect(jsonPath("$.id").value(inboundMessages.getId().intValue()))
+            .andExpect(jsonPath("$.id").value(outboundMessages.getId().intValue()))
             .andExpect(jsonPath("$.messageId").value(DEFAULT_MESSAGE_ID.toString()))
             .andExpect(jsonPath("$.groupId").value(DEFAULT_GROUP_ID.toString()));
     }
@@ -149,42 +149,42 @@ public class InboundMessagesResourceIntTest {
     @Transactional
     public void updateInboundMessages() throws Exception {
         // Initialize the database
-        inboundMessagesRepository.saveAndFlush(inboundMessages);
-        int databaseSizeBeforeUpdate = inboundMessagesRepository.findAll().size();
+        outboundMessagesRepository.saveAndFlush(this.outboundMessages);
+        int databaseSizeBeforeUpdate = outboundMessagesRepository.findAll().size();
 
         // Update the inboundMessages
-        InboundMessages updatedInboundMessages = inboundMessagesRepository.findOne(inboundMessages.getId());
-        updatedInboundMessages
+        OutboundMessages updatedOutboundMessages = outboundMessagesRepository.findOne(this.outboundMessages.getId());
+        updatedOutboundMessages
                 .messageId(UPDATED_MESSAGE_ID)
                 .groupId(UPDATED_GROUP_ID);
 
         restInboundMessagesMockMvc.perform(put("/api/inbound-messages")
                 .contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(updatedInboundMessages)))
+                .content(TestUtil.convertObjectToJsonBytes(updatedOutboundMessages)))
                 .andExpect(status().isOk());
 
         // Validate the InboundMessages in the database
-        List<InboundMessages> inboundMessages = inboundMessagesRepository.findAll();
-        assertThat(inboundMessages).hasSize(databaseSizeBeforeUpdate);
-        InboundMessages testInboundMessages = inboundMessages.get(inboundMessages.size() - 1);
-        assertThat(testInboundMessages.getMessageId()).isEqualTo(UPDATED_MESSAGE_ID);
-        assertThat(testInboundMessages.getGroupId()).isEqualTo(UPDATED_GROUP_ID);
+        List<OutboundMessages> outboundMessages = outboundMessagesRepository.findAll();
+        assertThat(outboundMessages).hasSize(databaseSizeBeforeUpdate);
+        OutboundMessages testOutboundMessages = outboundMessages.get(outboundMessages.size() - 1);
+        assertThat(testOutboundMessages.getMessageId()).isEqualTo(UPDATED_MESSAGE_ID);
+        assertThat(testOutboundMessages.getGroupId()).isEqualTo(UPDATED_GROUP_ID);
     }
 
     @Test
     @Transactional
     public void deleteInboundMessages() throws Exception {
         // Initialize the database
-        inboundMessagesRepository.saveAndFlush(inboundMessages);
-        int databaseSizeBeforeDelete = inboundMessagesRepository.findAll().size();
+        outboundMessagesRepository.saveAndFlush(this.outboundMessages);
+        int databaseSizeBeforeDelete = outboundMessagesRepository.findAll().size();
 
         // Get the inboundMessages
-        restInboundMessagesMockMvc.perform(delete("/api/inbound-messages/{id}", inboundMessages.getId())
+        restInboundMessagesMockMvc.perform(delete("/api/inbound-messages/{id}", this.outboundMessages.getId())
                 .accept(TestUtil.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk());
 
         // Validate the database is empty
-        List<InboundMessages> inboundMessages = inboundMessagesRepository.findAll();
-        assertThat(inboundMessages).hasSize(databaseSizeBeforeDelete - 1);
+        List<OutboundMessages> outboundMessages = outboundMessagesRepository.findAll();
+        assertThat(outboundMessages).hasSize(databaseSizeBeforeDelete - 1);
     }
 }

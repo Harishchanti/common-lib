@@ -7,13 +7,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * A InboundMessages.
- */
+
 @Entity
-@Table(name = "inbound_messages")
+@Table(name = "outbound_messages")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class InboundMessages implements Serializable {
+public class OutboundMessages implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +37,7 @@ public class InboundMessages implements Serializable {
         return messageId;
     }
 
-    public InboundMessages messageId(String messageId) {
+    public OutboundMessages messageId(String messageId) {
         this.messageId = messageId;
         return this;
     }
@@ -52,7 +50,7 @@ public class InboundMessages implements Serializable {
         return groupId;
     }
 
-    public InboundMessages groupId(String groupId) {
+    public OutboundMessages groupId(String groupId) {
         this.groupId = groupId;
         return this;
     }
@@ -69,11 +67,11 @@ public class InboundMessages implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        InboundMessages inboundMessages = (InboundMessages) o;
-        if(inboundMessages.id == null || id == null) {
+        OutboundMessages outboundMessages = (OutboundMessages) o;
+        if(outboundMessages.id == null || id == null) {
             return false;
         }
-        return Objects.equals(id, inboundMessages.id);
+        return Objects.equals(id, outboundMessages.id);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.aliens.msg.web;
 
 import com.codahale.metrics.annotation.Timed;
-import com.aliens.msg.models.InboundMessages;
+import com.aliens.msg.models.OutboundMessages;
 
-import com.aliens.msg.repositories.InboundMessagesRepository;
+import com.aliens.msg.repositories.OutboundMessagesRepository;
 import com.aliens.hipster.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,12 +28,12 @@ public class InboundMessagesResource {
     private final Logger log = LoggerFactory.getLogger(InboundMessagesResource.class);
 
     @Inject
-    private InboundMessagesRepository inboundMessagesRepository;
+    private OutboundMessagesRepository outboundMessagesRepository;
 
     /**
      * POST  /inbound-messages : Create a new inboundMessages.
      *
-     * @param inboundMessages the inboundMessages to create
+     * @param outboundMessages the inboundMessages to create
      * @return the ResponseEntity with status 201 (Created) and with body the new inboundMessages, or with status 400 (Bad Request) if the inboundMessages has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
@@ -41,12 +41,12 @@ public class InboundMessagesResource {
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<InboundMessages> createInboundMessages(@RequestBody InboundMessages inboundMessages) throws URISyntaxException {
-        log.debug("REST request to save InboundMessages : {}", inboundMessages);
-        if (inboundMessages.getId() != null) {
+    public ResponseEntity<OutboundMessages> createInboundMessages(@RequestBody OutboundMessages outboundMessages) throws URISyntaxException {
+        log.debug("REST request to save InboundMessages : {}", outboundMessages);
+        if (outboundMessages.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("inboundMessages", "idexists", "A new inboundMessages cannot already have an ID")).body(null);
         }
-        InboundMessages result = inboundMessagesRepository.save(inboundMessages);
+        OutboundMessages result = outboundMessagesRepository.save(outboundMessages);
         return ResponseEntity.created(new URI("/api/inbound-messages/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert("inboundMessages", result.getId().toString()))
             .body(result);
@@ -55,7 +55,7 @@ public class InboundMessagesResource {
     /**
      * PUT  /inbound-messages : Updates an existing inboundMessages.
      *
-     * @param inboundMessages the inboundMessages to update
+     * @param outboundMessages the inboundMessages to update
      * @return the ResponseEntity with status 200 (OK) and with body the updated inboundMessages,
      * or with status 400 (Bad Request) if the inboundMessages is not valid,
      * or with status 500 (Internal Server Error) if the inboundMessages couldnt be updated
@@ -65,14 +65,14 @@ public class InboundMessagesResource {
         method = RequestMethod.PUT,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<InboundMessages> updateInboundMessages(@RequestBody InboundMessages inboundMessages) throws URISyntaxException {
-        log.debug("REST request to update InboundMessages : {}", inboundMessages);
-        if (inboundMessages.getId() == null) {
-            return createInboundMessages(inboundMessages);
+    public ResponseEntity<OutboundMessages> updateInboundMessages(@RequestBody OutboundMessages outboundMessages) throws URISyntaxException {
+        log.debug("REST request to update InboundMessages : {}", outboundMessages);
+        if (outboundMessages.getId() == null) {
+            return createInboundMessages(outboundMessages);
         }
-        InboundMessages result = inboundMessagesRepository.save(inboundMessages);
+        OutboundMessages result = outboundMessagesRepository.save(outboundMessages);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert("inboundMessages", inboundMessages.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert("inboundMessages", outboundMessages.getId().toString()))
             .body(result);
     }
 
@@ -85,9 +85,9 @@ public class InboundMessagesResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public List<InboundMessages> getAllInboundMessages() {
+    public List<OutboundMessages> getAllInboundMessages() {
         log.debug("REST request to get all InboundMessages");
-        List<InboundMessages> inboundMessages = inboundMessagesRepository.findAll();
+        List<OutboundMessages> inboundMessages = outboundMessagesRepository.findAll();
         return inboundMessages;
     }
 
@@ -101,10 +101,10 @@ public class InboundMessagesResource {
         method = RequestMethod.GET,
         produces = MediaType.APPLICATION_JSON_VALUE)
     @Timed
-    public ResponseEntity<InboundMessages> getInboundMessages(@PathVariable Long id) {
+    public ResponseEntity<OutboundMessages> getInboundMessages(@PathVariable Long id) {
         log.debug("REST request to get InboundMessages : {}", id);
-        InboundMessages inboundMessages = inboundMessagesRepository.findOne(id);
-        return Optional.ofNullable(inboundMessages)
+        OutboundMessages outboundMessages = outboundMessagesRepository.findOne(id);
+        return Optional.ofNullable(outboundMessages)
             .map(result -> new ResponseEntity<>(
                 result,
                 HttpStatus.OK))
@@ -123,7 +123,7 @@ public class InboundMessagesResource {
     @Timed
     public ResponseEntity<Void> deleteInboundMessages(@PathVariable Long id) {
         log.debug("REST request to delete InboundMessages : {}", id);
-        inboundMessagesRepository.delete(id);
+        outboundMessagesRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("inboundMessages", id.toString())).build();
     }
 
