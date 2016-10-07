@@ -82,7 +82,7 @@ spring:
          accessKey: AKIAJH4UYWUOO55TBVKQ
          secretKey: 2Ui1d4q3eMUx1vD5mN180VZuWdYdrkkcDDUV
          regionCode: us-east-1
-         tagKey: application2
+         tagKey: Application2
          tagValue: msg
 
 liquibase:
