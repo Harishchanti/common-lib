@@ -1,8 +1,10 @@
 package com.aliens.msg.mmq.receiver;
 
 
+import com.aliens.common.ConnectionFactoryProxy;
+import com.aliens.common.MMQUtil;
 import com.aliens.msg.models.Clients;
-import com.aliens.msg.config.RabbitMqConfig;
+import com.aliens.common.RabbitMqConfig;
 import com.aliens.msg.mmq.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;

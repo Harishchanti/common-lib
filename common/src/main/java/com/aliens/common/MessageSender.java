@@ -1,8 +1,5 @@
-package com.aliens.msg.mmq.actions;
+package com.aliens.common;
 
-import com.aliens.msg.mmq.ConnectionFactoryProxy;
-import com.aliens.msg.mmq.MMQUtil;
-import com.aliens.msg.mmq.Message;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -25,7 +22,7 @@ public class MessageSender {
     ConnectionFactoryProxy connectionFactory;
 
 
-    public  void sendMessage(Message message, String queName) throws Exception {
+    public  void sendMessage(Object message, String queName) throws Exception {
 
         Connection connection=null;
         Channel channel=null;
@@ -37,7 +34,6 @@ public class MessageSender {
             channel.queueDeclare(queName, true, false, false, null);
             String queueMessage = mapper.writeValueAsString(message);
             channel.basicPublish("", queName, MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
-            log.info("Sent Message messageId {}", message.getMessageId());
         }
         catch (Exception e)
         {

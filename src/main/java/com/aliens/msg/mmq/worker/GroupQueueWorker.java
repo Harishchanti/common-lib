@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.worker;
 
 import com.aliens.msg.actions.BackupQueueInfoProxy;
-import com.aliens.msg.config.RabbitMqConfig;
+import com.aliens.common.RabbitMqConfig;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.Constants;
 import com.aliens.msg.hazelcast.QueueInfo;

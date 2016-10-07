@@ -306,6 +306,7 @@ subprojects {
         }
 
         compile 'com.mashape.unirest:unirest-java:1.4.9'
+        compile 'com.rabbitmq:amqp-client:3.6.5'
     }
 
 

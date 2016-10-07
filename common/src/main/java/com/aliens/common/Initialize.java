@@ -1,12 +1,10 @@
-package com.aliens.msg.init;
+package com.aliens.common;
 
-import com.aliens.common.BootStrap;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.List;
 
 /**
@@ -15,10 +13,9 @@ import java.util.List;
 
 @Component
 @Slf4j
-@Singleton
 public class Initialize {
 
-    @Inject
+    @Autowired
     List<BootStrap> bootStrapList;
 
     @PostConstruct

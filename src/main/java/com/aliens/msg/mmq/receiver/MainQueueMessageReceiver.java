@@ -1,12 +1,12 @@
 package com.aliens.msg.mmq.receiver;
 
+import com.aliens.common.MessageSender;
 import com.aliens.msg.actions.BackupQueueInfoProxy;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
 import com.aliens.msg.hazelcast.QueueState;
 import com.aliens.msg.mmq.Message;
 import com.aliens.msg.mmq.Status;
-import com.aliens.msg.mmq.actions.MessageSender;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.LocalDateTime;
