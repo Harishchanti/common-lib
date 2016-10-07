@@ -3,8 +3,8 @@ package com.aliens.msg.hazelcast;
 import com.aliens.hipster.config.JHipsterProperties;
 import com.aliens.msg.config.HazelcastConfig;
 import com.hazelcast.config.*;
-import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.instance.HazelcastInstanceFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -116,7 +116,7 @@ public class HzInstanceFactory {
        if(hazelcastInstance!=null)return hazelcastInstance;
 
         Config config = getConfig();
-        hazelcastInstance = Hazelcast.newHazelcastInstance(config);
+        hazelcastInstance = HazelcastInstanceFactory.newHazelcastInstance(config);
         return hazelcastInstance;
     }
 
