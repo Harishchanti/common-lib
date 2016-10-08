@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.actions;
 
-import com.aliens.msg.models.InboundMessages;
-import com.aliens.msg.repositories.InboundMessagesRepository;
+import com.aliens.msg.models.OutboundMessages;
+import com.aliens.msg.repositories.OutboundMessagesRepository;
 import com.google.common.collect.Sets;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,19 +20,19 @@ import java.util.stream.Collectors;
 public class VerifyGrouping {
 
     @Autowired
-    InboundMessagesRepository inboundMessagesRepository;
+    OutboundMessagesRepository outboundMessagesRepository;
 
     public Set<String> invoke()
     {
         boolean health=true;
         Set<String> st= Sets.newConcurrentHashSet();
 
-        Map<String,List<InboundMessages>> map=
-        inboundMessagesRepository
+        Map<String,List<OutboundMessages>> map=
+        outboundMessagesRepository
             .findAll().stream()
-            .collect(Collectors.groupingBy(InboundMessages::getGroupId));
+            .collect(Collectors.groupingBy(OutboundMessages::getGroupId));
 
-         for(List<InboundMessages> list: map.values()) {
+         for(List<OutboundMessages> list: map.values()) {
              int i, sz = list.size();
              for (i = 1; i <= sz; i++) {
                  int x=Integer.parseInt(list.get(i - 1).getMessageId());

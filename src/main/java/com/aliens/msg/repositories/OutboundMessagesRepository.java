@@ -1,6 +1,6 @@
 package com.aliens.msg.repositories;
 
-import com.aliens.msg.models.InboundMessages;
+import com.aliens.msg.models.OutboundMessages;
 
 import org.springframework.data.jpa.repository.*;
 
@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.*;
  * Spring Data JPA repository for the InboundMessages entity.
  */
 @SuppressWarnings("unused")
-public interface InboundMessagesRepository extends JpaRepository<InboundMessages,Long> {
+public interface OutboundMessagesRepository extends JpaRepository<OutboundMessages,Long> {
 
 }

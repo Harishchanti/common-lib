@@ -3,8 +3,8 @@ package com.aliens.msg.hazelcast;
 import com.aliens.hipster.config.JHipsterProperties;
 import com.aliens.msg.config.HazelcastConfig;
 import com.hazelcast.config.*;
-import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
+import com.hazelcast.instance.HazelcastInstanceFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +42,8 @@ public class HzInstanceFactory {
 
 
         if (hazelcastConfig.isAws()) {
-            config.getNetworkConfig().setPublicAddress(getAwsMetaData(buildCommand(hazelcastConfig.getAwsUrl(),"local-ipv4")));
+            //config.getNetworkConfig().setPublicAddress(getAwsMetaData(buildCommand(hazelcastConfig.getAwsUrl(),"local-ipv4")));
+            config.getNetworkConfig().setPublicAddress("172.31.23.238");
             config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
             config.getNetworkConfig().getJoin().getTcpIpConfig().setEnabled(false);
             AwsConfig awsCondif = config.getNetworkConfig().getJoin().getAwsConfig();
@@ -50,7 +51,8 @@ public class HzInstanceFactory {
             awsCondif.setAccessKey(hazelcastConfig.getAccessKey());
             awsCondif.setSecretKey(hazelcastConfig.getSecretKey());
             awsCondif.setRegion(hazelcastConfig.getRegionCode());
-            awsCondif.setSecurityGroupName(getAwsMetaData(buildCommand(hazelcastConfig.getAwsUrl(),"security-groups")));
+            //awsCondif.setSecurityGroupName(getAwsMetaData(buildCommand(hazelcastConfig.getAwsUrl(),"security-groups")));
+            awsCondif.setSecurityGroupName("awseb-e-8p3ppsmugf-stack-AWSEBSecurityGroup-5689U7LMVIFZ");
             awsCondif.setTagKey(hazelcastConfig.getTagKey());
             awsCondif.setTagValue(hazelcastConfig.getTagValue());
         } else {
@@ -116,7 +118,7 @@ public class HzInstanceFactory {
        if(hazelcastInstance!=null)return hazelcastInstance;
 
         Config config = getConfig();
-        hazelcastInstance = Hazelcast.newHazelcastInstance(config);
+        hazelcastInstance = HazelcastInstanceFactory.newHazelcastInstance(config);
         return hazelcastInstance;
     }
 
