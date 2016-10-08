@@ -12,29 +12,12 @@ buildscript {
     }
 }
 
-
-
-
 repositories {
     flatDir {
         name "fileRepo"
         dirs "build/libs"
     }
 }
-
-//uploadArchives {
-//    repositories {
-//        add project.repositories.fileRepo
-//        ivy {
-//            credentials {
-//                username "admin"
-//                password "admin123"
-//            }
-//            url "http://scrolls.ailiens.com:8081/repository/test/"
-//        }
-//    }
-//}
-
 
 
 
@@ -60,13 +43,12 @@ release {
 
     uploadArchives {
         repositories.mavenDeployer {
-//            credentials {
-//                username "admin"
-//                password "admin123"
-//            }
+
             repository(
                 url: 'http://scrolls.ailiens.com:8081/repository/test/')
-            snapshotRepository(url: 'http://scrolls.ailiens.com:8081/repository/test/')
+                {
+                    authentication(userName: "admin", password: "admin123")
+                }
         }
     }
 
