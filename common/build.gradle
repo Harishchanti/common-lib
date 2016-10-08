@@ -22,18 +22,18 @@ repositories {
     }
 }
 
-uploadArchives {
-    repositories {
-        add project.repositories.fileRepo
-        ivy {
-            credentials {
-                username "admin"
-                password "admin123"
-            }
-            url "http://scrolls.ailiens.com:8081/repository/test/"
-        }
-    }
-}
+//uploadArchives {
+//    repositories {
+//        add project.repositories.fileRepo
+//        ivy {
+//            credentials {
+//                username "admin"
+//                password "admin123"
+//            }
+//            url "http://scrolls.ailiens.com:8081/repository/test/"
+//        }
+//    }
+//}
 
 
 
@@ -58,13 +58,17 @@ release {
         archives sourceJar
     }
 
-//    uploadArchives {
-//        repositories.mavenDeployer {
-//            repository(
-//                url: 'http://artifactory.nm.flipkart.com:8081/artifactory/libs-releases-local/')
-//            snapshotRepository(url: 'http://artifactory.nm.flipkart.com:8081/artifactory/libs-snapshots-local/')
-//        }
-//    }
+    uploadArchives {
+        repositories.mavenDeployer {
+//            credentials {
+//                username "admin"
+//                password "admin123"
+//            }
+            repository(
+                url: 'http://scrolls.ailiens.com:8081/repository/test/')
+            snapshotRepository(url: 'http://scrolls.ailiens.com:8081/repository/test/')
+        }
+    }
 
 
 createReleaseTag.dependsOn subprojects.tasks.uploadArchives
