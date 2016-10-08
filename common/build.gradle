@@ -1,0 +1,74 @@
+group 'com.aliens.hipster'
+version '0.0.1'
+
+apply plugin: 'java'
+apply plugin: 'release'
+apply plugin: 'maven'
+
+
+buildscript {
+    dependencies {
+        classpath 'com.github.townsfolk:gradle-release:1.2'
+    }
+}
+
+
+
+
+repositories {
+    flatDir {
+        name "fileRepo"
+        dirs "build/libs"
+    }
+}
+
+uploadArchives {
+    repositories {
+        add project.repositories.fileRepo
+        ivy {
+            credentials {
+                username "admin"
+                password "admin123"
+            }
+            url "http://scrolls.ailiens.com:8081/repository/test/"
+        }
+    }
+}
+
+
+
+
+release {
+    failOnSnapshotDependencies = false
+    tagPrefix = 'RELEASE'
+    git.requireBranch = null
+    failOnPublishNeeded = true
+}
+
+
+
+
+
+    task sourceJar(type: Jar) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+
+    artifacts {
+        archives sourceJar
+    }
+
+//    uploadArchives {
+//        repositories.mavenDeployer {
+//            repository(
+//                url: 'http://artifactory.nm.flipkart.com:8081/artifactory/libs-releases-local/')
+//            snapshotRepository(url: 'http://artifactory.nm.flipkart.com:8081/artifactory/libs-snapshots-local/')
+//        }
+//    }
+
+
+createReleaseTag.dependsOn subprojects.tasks.uploadArchives
+
+
+
+ext.'gradle.release.useAutomaticVersion' = "true"

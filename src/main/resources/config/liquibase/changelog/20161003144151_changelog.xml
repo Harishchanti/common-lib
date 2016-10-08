@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="tech (generated)" id="1475485922367-1">
+        <dropForeignKeyConstraint baseTableName="clients" constraintName="fk_clients_keycloak_user_map_id"/>
+    </changeSet>
+    <changeSet author="tech (generated)" id="1475485922367-2">
+        <dropTable tableName="clients"/>
+    </changeSet>
+    <changeSet author="tech (generated)" id="1475485922367-3">
+        <dropTable tableName="hzbackup"/>
+    </changeSet>
+    <changeSet author="tech (generated)" id="1475485922367-4">
+        <dropTable tableName="inbound_messages"/>
+    </changeSet>
+    <changeSet author="tech (generated)" id="1475485922367-5">
+        <dropTable tableName="keycloak_user"/>
+    </changeSet>
+    <changeSet author="tech (generated)" id="1475485922367-6">
+        <dropDefaultValue columnDataType="datetime" columnName="last_modified_date" tableName="jhi_user"/>
+    </changeSet>
+</databaseChangeLog>

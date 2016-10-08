@@ -1,0 +1,19 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "messageId",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "groupId",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20160926082531",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "inbound_messages",
+    "pagination": "no"
+}
