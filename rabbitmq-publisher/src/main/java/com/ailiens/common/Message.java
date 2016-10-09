@@ -1,4 +1,4 @@
-package com.aliens.msg.mmq;
+package com.ailiens.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.joda.time.DateTimeZone;
 
 import java.io.Serializable;
 
@@ -20,7 +19,6 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Message implements Serializable {
 
-    protected static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
 
     String payload;
     String createdAt;

@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.test;
 
-import com.aliens.common.MessageSender;
-import com.aliens.msg.mmq.Message;
+import com.ailiens.common.Message;
+import com.ailiens.common.MessageSender;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;

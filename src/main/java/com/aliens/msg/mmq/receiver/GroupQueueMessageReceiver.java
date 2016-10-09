@@ -2,7 +2,7 @@ package com.aliens.msg.mmq.receiver;
 
 import com.aliens.msg.models.OutboundMessages;
 import com.aliens.msg.repositories.OutboundMessagesRepository;
-import com.aliens.msg.mmq.Message;
+import com.ailiens.common.Message;
 import com.aliens.msg.mmq.Status;
 import com.aliens.msg.mmq.actions.SendMessageToClient;
 import org.springframework.beans.factory.annotation.Autowired;

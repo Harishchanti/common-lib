@@ -1,6 +1,6 @@
 package com.aliens.msg.mmq.actions;
 
-import com.aliens.common.ConnectionFactoryProxy;
+import com.ailiens.common.ConnectionFactoryProxy;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import lombok.AllArgsConstructor;

@@ -365,6 +365,7 @@ subprojects {
 dependencies
     {
         compile project(':common')
+        compile project(':rabbitmq-publisher')
     }
 
 clean {

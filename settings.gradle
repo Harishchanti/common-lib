@@ -1,3 +1,4 @@
 rootProject.name = 'msg'
 include 'common'
+include 'rabbitmq-publisher'
 

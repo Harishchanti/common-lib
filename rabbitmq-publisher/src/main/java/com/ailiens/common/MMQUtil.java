@@ -1,4 +1,4 @@
-package com.aliens.common;
+package com.ailiens.common;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
