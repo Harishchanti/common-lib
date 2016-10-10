@@ -31,8 +31,9 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'net.ltgt.apt'
 apply plugin: 'maven-publish'
 apply plugin: 'release'
+apply plugin: 'war'
 
-jar {
+war {
     baseName = 'msg'
     version = '0.0.1'
 }
