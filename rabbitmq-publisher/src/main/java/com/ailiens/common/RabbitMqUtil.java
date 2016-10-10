@@ -9,7 +9,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
  * Created by jayant on 27/9/16.
  */
 @Slf4j
-public class MMQUtil {
+public class RabbitMqUtil {
 
     public static void ensureClosure(Connection connection, Channel channel)
     {

@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.receiver;
 
 import com.ailiens.common.ConnectionFactoryProxy;
-import com.ailiens.common.MMQUtil;
+import com.ailiens.common.RabbitMqUtil;
 import com.ailiens.common.Message;
 import com.aliens.common.RabbitMqConfig;
 import com.aliens.msg.mmq.ChannelResponse;
@@ -118,7 +118,7 @@ public abstract class BaseBulkMessageReceiver {
             log.info("got error while reading queue {} {}", queueName, ExceptionUtils.getStackTrace(e));
             return ChannelResponse.ERROR;
         } finally {
-            MMQUtil.ensureClosure(connection, channel);
+            RabbitMqUtil.ensureClosure(connection, channel);
         }
     }
 

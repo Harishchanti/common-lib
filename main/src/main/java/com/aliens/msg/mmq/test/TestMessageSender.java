@@ -1,7 +1,7 @@
 package com.aliens.msg.mmq.test;
 
 import com.ailiens.common.Message;
-import com.ailiens.common.MessageSender;
+import com.ailiens.common.RabbitMqMessageSender;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Wither;
@@ -23,7 +23,7 @@ public class TestMessageSender  implements Runnable {
     String queName;
 
     @Autowired
-    MessageSender messageSender;
+    RabbitMqMessageSender rabbitMqMessageSender;
 
     @Override
     public void run() {
@@ -35,7 +35,7 @@ public class TestMessageSender  implements Runnable {
                 Message message = new Message();
                 message.setMessageId(String.valueOf(i));
                 message.setGroupId(groupId);
-                messageSender.sendMessage(message, queName);
+                rabbitMqMessageSender.sendMessage(message, queName);
             }catch (Exception e)
             {
             	System.out.println("Excepion in sending mesage");

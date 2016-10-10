@@ -1,6 +1,6 @@
 package com.aliens.msg.mmq.receiver;
 import com.ailiens.common.Message;
-import com.ailiens.common.MessageSender;
+import com.ailiens.common.RabbitMqMessageSender;
 import com.aliens.msg.actions.BackupQueueInfoProxy;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.QueueInfo;
@@ -32,7 +32,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
     BackupQueueInfoProxy backupQueueInfoProxy;
 
     @Autowired
-    MessageSender messageSender;
+    RabbitMqMessageSender rabbitMqMessageSender;
 
     @Override
     public Status action(Message message) throws Exception {
@@ -48,7 +48,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
         if(queueInfoOptional.isPresent())
         {
             String qname=queueInfoOptional.get().getQueueName();
-            messageSender.sendMessage(message,qname);
+            rabbitMqMessageSender.sendMessage(message,qname);
             return Status.SUCCESS;
         }
         else
@@ -64,7 +64,7 @@ public class MainQueueMessageReceiver extends MessageReceiver {
 
                 String queueName = UUID.randomUUID().toString();
 
-                messageSender.sendMessage(message,queueName);
+                rabbitMqMessageSender.sendMessage(message,queueName);
 
                 QueueInfo queueInfo=QueueInfo.builder()
                     .queueName(queueName)
