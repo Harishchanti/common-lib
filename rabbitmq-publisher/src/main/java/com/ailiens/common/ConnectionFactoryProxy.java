@@ -4,6 +4,9 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -17,26 +20,52 @@ import java.util.concurrent.TimeoutException;
  */
 @Component
 @Slf4j
+@NoArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ConnectionFactoryProxy   {
 
-    static ConnectionFactory factory = new ConnectionFactory();
+    ConnectionFactory factory = new ConnectionFactory();
+
+    String host;
+    String userName;
+    String password;
+    int poolSize;
+    PoolType poolType;
+
+    List<Connection> pool = Lists.newArrayList();
+    int ptr;
 
 
 
-    static List<Connection> connectionList = Lists.newArrayList();
-    static int ptr;
-    static final int poolSize=3;
+    public ConnectionFactoryProxy(String host,String username,String password,int poolSize,PoolType poolType) throws IOException, TimeoutException {
+        this.host=host;
+        this.userName=username;
+        this.password=password;
+        this.poolSize=poolSize;
+        this.poolType =poolType;
+        this.ptr=0;
+        setup();
+    }
 
-    public static synchronized Connection getConnection() throws Exception
+
+
+    public Connection getConnection() throws Exception
     {
-        Connection connection= connectionList.get(ptr);
+        if(ptr> pool.size()-1)addConnectionToPool();
+
+        Connection connection= pool.get(ptr);
         ptr=(ptr+1)%poolSize;
         return connection;
     }
 
+    public void addConnectionToPool() throws IOException, TimeoutException {
+        log.info("Creating connection");
+        pool.add(factory.newConnection());
+    }
 
-    public static void setup(String host,String userName,String password) throws IOException, TimeoutException {
+    public  void setup() throws IOException, TimeoutException {
         factory.setHost(host);
+
 
         if(!Strings.isNullOrEmpty(userName))
         factory.setUsername(userName);
@@ -44,18 +73,22 @@ public class ConnectionFactoryProxy   {
         if(!Strings.isNullOrEmpty(password))
         factory.setPassword(password);
 
+        log.info("Factory set up");
 
-        for(int i=0;i<poolSize;i++)
-            connectionList.add(factory.newConnection());
+        switch (poolType) {
+            case EAGER:
+            for (int i = 0; i < poolSize; i++)
+                addConnectionToPool();
 
-        log.info("Connection pool created");
-
+            log.info("Connection pool created");
+        }
     }
 
     @PreDestroy
     public void destroy() throws IOException {
         log.info("Closing Connections");
-        for(Connection connection: connectionList)
+        for(Connection connection: pool)
+            if(connection.isOpen())
             connection.close();
     }
 }

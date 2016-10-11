@@ -5,7 +5,13 @@ import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.MessageProperties;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -15,10 +21,17 @@ import java.util.Map;
  */
 @Slf4j
 @Component
+@Scope("prototype")
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@AllArgsConstructor
+@NoArgsConstructor
 public class RabbitMqMessageSender {
 
 
     static ObjectMapper mapper = new ObjectMapper();
+
+    @Wither
+    String clusterName;
 
     public  void sendMessage(Object message, String queName) throws Exception {
 
@@ -26,7 +39,7 @@ public class RabbitMqMessageSender {
         Channel channel=null;
         try {
 
-             connection =ConnectionFactoryProxy.getConnection();
+             connection =RabbitMqConnectionManager.getConnection(clusterName);
              channel = connection.createChannel();
 
             channel.queueDeclare(queName, true, false, false, null);
@@ -48,7 +61,7 @@ public class RabbitMqMessageSender {
         Channel channel=null;
         try {
 
-            connection =ConnectionFactoryProxy.getConnection();
+            connection =RabbitMqConnectionManager.getConnection(clusterName);
             channel = connection.createChannel();
 
             channel.queueDeclare(queName, true, false, false, null);
