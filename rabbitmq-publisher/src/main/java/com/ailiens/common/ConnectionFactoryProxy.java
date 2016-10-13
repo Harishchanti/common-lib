@@ -65,7 +65,7 @@ public class ConnectionFactoryProxy   {
 
     public  void setup() throws IOException, TimeoutException {
         factory.setHost(host);
-
+        factory.setAutomaticRecoveryEnabled(true);
 
         if(!Strings.isNullOrEmpty(userName))
         factory.setUsername(userName);
