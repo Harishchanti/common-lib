@@ -133,7 +133,6 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply plugin: 'net.ltgt.apt'
     apply plugin: 'maven-publish'
-    apply plugin: 'release'
 
     dependencyManagement {
         imports {
@@ -285,55 +284,10 @@ subprojects {
         configurations {
             all*.exclude group: 'javassist'
         }
+
+        apply from: '../gradle/release.gradle'
     }
 
-
-
-        repositories {
-        flatDir {
-            name "fileRepo"
-            dirs "build/libs"
-        }
-    }
-
-
-    release {
-        failOnSnapshotDependencies = false
-        tagPrefix = 'RELEASE'
-        git.requireBranch = null
-        failOnPublishNeeded = true
-    }
-
-
-
-
-
-    task sourceJar(type: Jar) {
-        classifier = 'sources'
-        from sourceSets.main.allSource
-    }
-
-    artifacts {
-        archives sourceJar
-    }
-
-    uploadArchives {
-        repositories.mavenDeployer {
-
-            repository(
-                url: 'http://scrolls.ailiens.com:8081/repository/maven-releases/')
-                {
-                    authentication(userName: "admin", password: "admin123")
-                }
-        }
-    }
-
-
-    createReleaseTag.dependsOn subprojects.tasks.uploadArchives
-
-
-
-    ext.'gradle.release.useAutomaticVersion' = "true"
 }
 
 dependencies
