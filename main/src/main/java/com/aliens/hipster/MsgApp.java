@@ -22,7 +22,7 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
-@ComponentScan("com.aliens")
+@ComponentScan({"com.aliens","com.ailiens"})
 @EntityScan(basePackages = {"com.aliens.hipster.domain","com.aliens.msg.models"})
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ JHipsterProperties.class, LiquibaseProperties.class })

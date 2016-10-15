@@ -1,6 +1,7 @@
 package com.ailiens.common.restutil;
 
 
+import com.ailiens.common.restutil.exceptions.UnauthorizedAccessException;
 import com.ailiens.common.restutil.keycloak.Credentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -16,6 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -33,7 +37,8 @@ import java.util.concurrent.ExecutionException;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Slf4j
-public class RestUtil  {
+@EnableRetry(proxyTargetClass=true)
+public class RestUtil implements CheckResponse {
 
     @Autowired
     ObjectMapper objectMapper;
@@ -56,6 +61,7 @@ public class RestUtil  {
 
 
 
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
     public  <T> T get(String url,  Class <? extends T> responseClass) throws Exception {
 
         checkKeyCloak();
@@ -71,14 +77,7 @@ public class RestUtil  {
         return response.getBody();
     }
 
-
-    public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws Exception {
-
-        String responseStr= get(url,String.class);
-        List<T> responseList=objectMapper.readValue(responseStr,typeReference);
-        return responseList;
-    }
-
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
     public  <T> T post(String url, Object payload, Class <? extends T> responseClass) throws Exception {
 
         checkKeyCloak();
@@ -94,6 +93,7 @@ public class RestUtil  {
         return response.getBody();
     }
 
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
     public  <T> T put(String url, Object payload, Class <? extends T> responseClass) throws Exception {
 
         checkKeyCloak();
@@ -107,6 +107,13 @@ public class RestUtil  {
         checkStatus(response);
 
         return response.getBody();
+    }
+
+    public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws Exception {
+
+        String responseStr= get(url,String.class);
+        List<T> responseList=objectMapper.readValue(responseStr,typeReference);
+        return responseList;
     }
 
     public  <T> List<T> post(String url, Object payload, TypeReference<List<T>> typeReference) throws Exception {
@@ -141,9 +148,7 @@ public class RestUtil  {
             credentials.updateKey(key);
         }
 
-        if(response.getStatus()/100!=2)
-            throw new Exception("Got error while calling: "+response.getStatusText());
-
+        checkResponse(response.getStatus());
     }
 
     public void setupUnirest()

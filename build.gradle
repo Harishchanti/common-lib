@@ -379,6 +379,7 @@ subprojects {
         compile 'com.mashape.unirest:unirest-java:1.4.9'
         compile 'com.hazelcast:hazelcast:3.7.1'
         compile 'com.hazelcast:hazelcast-client:3.7.1'
+        compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
 
 
         configurations {

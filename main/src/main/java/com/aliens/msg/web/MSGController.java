@@ -1,5 +1,6 @@
 package com.aliens.msg.web;
 
+import com.ailiens.common.restutil.RestUtil;
 import com.aliens.msg.actions.DeleteGroupAction;
 import com.aliens.msg.hazelcast.CacheManager;
 import com.aliens.msg.hazelcast.HzStat;
@@ -32,6 +33,9 @@ public class MSGController {
 
     @Autowired
     DeleteGroupAction deleteGroupAction;
+
+    @Autowired
+    RestUtil restUtil;
 
 
 
@@ -92,6 +96,14 @@ public class MSGController {
     public ResponseEntity<?> deleteQueue(@RequestBody Object req,@PathVariable("groupId") String groupId) throws Exception {
         deleteGroupAction.withGroupId(groupId).invoke();
         return ResponseEntity.ok().body("Queue is deleted");
+    }
+
+    @RequestMapping(value = "/retryTest",
+        method = RequestMethod.GET,
+        produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<?> deleteQueue() throws Exception {
+        restUtil.get("http://www.googlee.com",String.class);
+        return ResponseEntity.ok().body("Done");
     }
 
 
