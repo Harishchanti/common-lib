@@ -173,6 +173,8 @@ public class RestUtil implements CheckResponse {
                 }
             }
         });
+
+        Unirest.setTimeouts(10*1000,2*60*1000);
     }
 
 

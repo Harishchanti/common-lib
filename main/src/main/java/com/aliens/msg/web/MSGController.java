@@ -98,14 +98,5 @@ public class MSGController {
         return ResponseEntity.ok().body("Queue is deleted");
     }
 
-    @RequestMapping(value = "/retryTest",
-        method = RequestMethod.GET,
-        produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<?> deleteQueue() throws Exception {
-        restUtil.get("http://www.googlee.com",String.class);
-        return ResponseEntity.ok().body("Done");
-    }
-
-
 
 }
