@@ -1,4 +1,4 @@
-package com.aliens.common.keycloak;
+package com.ailiens.common.restutil.keycloak;
 
 
 import lombok.AllArgsConstructor;

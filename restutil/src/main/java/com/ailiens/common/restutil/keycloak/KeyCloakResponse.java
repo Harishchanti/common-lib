@@ -1,4 +1,4 @@
-package com.aliens.common.keycloak;
+package com.ailiens.common.restutil.keycloak;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;

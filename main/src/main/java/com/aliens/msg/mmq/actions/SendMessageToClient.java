@@ -1,9 +1,9 @@
 package com.aliens.msg.mmq.actions;
 
-import com.aliens.msg.Constants;
 import com.ailiens.common.Message;
+import com.ailiens.common.restutil.RestUtil;
+import com.aliens.msg.Constants;
 import com.aliens.msg.models.Clients;
-import com.aliens.common.RestUtil;
 import com.google.common.base.Strings;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

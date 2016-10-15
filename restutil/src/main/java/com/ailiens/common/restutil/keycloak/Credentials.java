@@ -1,6 +1,7 @@
-package com.aliens.common.keycloak;
+package com.ailiens.common.restutil.keycloak;
 
-import com.aliens.common.RestUtil;
+
+import com.ailiens.common.restutil.RestUtil;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;

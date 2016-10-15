@@ -446,6 +446,7 @@ project(':main')
             {
                 compile project(':common')
                 compile project(':rabbitmq-publisher')
+                compile project(':restutil')
             }
     }
 

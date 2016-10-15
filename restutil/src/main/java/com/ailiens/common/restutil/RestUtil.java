@@ -1,7 +1,7 @@
-package com.aliens.common;
+package com.ailiens.common.restutil;
 
 
-import com.aliens.common.keycloak.Credentials;
+import com.ailiens.common.restutil.keycloak.Credentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,7 +33,7 @@ import java.util.concurrent.ExecutionException;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @Slf4j
-public class RestUtil implements BootStrap {
+public class RestUtil  {
 
     @Autowired
     ObjectMapper objectMapper;
@@ -70,6 +70,7 @@ public class RestUtil implements BootStrap {
 
         return response.getBody();
     }
+
 
     public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws Exception {
 
@@ -170,7 +171,7 @@ public class RestUtil implements BootStrap {
     }
 
 
-    @Override
+
     public void setup() throws Exception {
         setupUnirest();
     }
