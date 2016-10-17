@@ -34,7 +34,7 @@ apply plugin: 'release'
 apply plugin: 'war'
 
 war {
-    baseName = 'msg'
+    baseName = 'ailiens-common'
     version = '0.0.1'
 }
 

@@ -1,4 +1,4 @@
-rootProject.name = 'msg'
+rootProject.name = 'ailiens-common'
 include 'common'
 include 'rabbitmq-publisher'
 include 'main'
