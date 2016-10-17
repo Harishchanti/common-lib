@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDateTime;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Created by jayant on 15/9/16.
@@ -19,9 +22,12 @@ import java.io.Serializable;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Message implements Serializable {
 
+    private static final long serialVersionUID = 1L;
 
-    String payload;
-    String createdAt;
-    String messageId;
-    String groupId;
+    public static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
+
+    String payload="";
+    String createdAt= LocalDateTime.now(timeZone).toString();;
+    String messageId = UUID.randomUUID().toString();
+    String groupId=UUID.randomUUID().toString();
 }

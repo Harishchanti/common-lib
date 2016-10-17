@@ -1,5 +1,4 @@
 rootProject.name = 'ailiens-common'
-include 'common'
 include 'rabbitmq-publisher'
 include 'main'
 include 'restutil'

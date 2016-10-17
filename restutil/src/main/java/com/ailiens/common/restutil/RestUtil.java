@@ -52,6 +52,12 @@ public class RestUtil implements CheckResponse {
     @Wither
     String user;
 
+    public RestUtil header(String key,String value)
+    {
+        headers.put(key,value);
+        return this;
+    }
+
 
 
     public RestUtil()
