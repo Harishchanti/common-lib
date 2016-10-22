@@ -101,7 +101,7 @@ Desktop.ini
 # Directories
 ######################
 /build/**
-/common/build/**
+/**/build/**
 /bin/**
 /spring_loaded/**
 /deploy/**
