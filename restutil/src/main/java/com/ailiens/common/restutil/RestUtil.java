@@ -1,6 +1,7 @@
 package com.ailiens.common.restutil;
 
 
+import com.ailiens.common.restutil.exceptions.GenericServiceException;
 import com.ailiens.common.restutil.exceptions.UnauthorizedAccessException;
 import com.ailiens.common.restutil.keycloak.Credentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -68,7 +70,7 @@ public class RestUtil implements CheckResponse {
 
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> T get(String url,  Class <? extends T> responseClass) throws Exception {
+    public  <T> T get(String url,  Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException {
 
         checkKeyCloak();
 
@@ -84,7 +86,7 @@ public class RestUtil implements CheckResponse {
     }
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> T post(String url, Object payload, Class <? extends T> responseClass) throws Exception {
+    public  <T> T post(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException {
 
         checkKeyCloak();
         log.info(url);
@@ -100,7 +102,7 @@ public class RestUtil implements CheckResponse {
     }
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> T put(String url, Object payload, Class <? extends T> responseClass) throws Exception {
+    public  <T> T put(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException  {
 
         checkKeyCloak();
         log.info(url);
@@ -115,14 +117,14 @@ public class RestUtil implements CheckResponse {
         return response.getBody();
     }
 
-    public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws Exception {
+    public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws ExecutionException, UnirestException, GenericServiceException, IOException {
 
         String responseStr= get(url,String.class);
         List<T> responseList=objectMapper.readValue(responseStr,typeReference);
         return responseList;
     }
 
-    public  <T> List<T> post(String url, Object payload, TypeReference<List<T>> typeReference) throws Exception {
+    public  <T> List<T> post(String url, Object payload, TypeReference<List<T>> typeReference) throws ExecutionException, UnirestException, GenericServiceException, IOException {
 
         String responseStr= post(url,payload,String.class);
         List<T> responseList=objectMapper.readValue(responseStr,typeReference);
@@ -144,7 +146,7 @@ public class RestUtil implements CheckResponse {
         }
     }
 
-    public  void checkStatus(HttpResponse response) throws Exception {
+    public  void checkStatus(HttpResponse response) throws GenericServiceException {
 
         log.info(response.getBody().toString());
         String key= getKeycloakKey();
@@ -185,7 +187,7 @@ public class RestUtil implements CheckResponse {
 
 
 
-    public void setup() throws Exception {
+    public void setup()  {
         setupUnirest();
     }
 }

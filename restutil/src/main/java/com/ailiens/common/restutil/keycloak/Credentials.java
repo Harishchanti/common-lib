@@ -42,7 +42,7 @@ public class Credentials {
 		cache.refresh(user);
 	}
 
-	public String getAccessToken(String user) throws ExecutionException {
+	public  String getAccessToken(String user) throws ExecutionException {
 		return cache.get(user);
 	}
 
