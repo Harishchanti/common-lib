@@ -1,6 +1,7 @@
 package com.ailiens.common.restutil.exceptions;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
@@ -8,9 +9,10 @@ import lombok.NoArgsConstructor;
  */
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class GenericServiceException extends RuntimeException {
-  String message;
-    int status;
+  private String message;
+    private int status;
 
     public GenericServiceException(int status)
     {
