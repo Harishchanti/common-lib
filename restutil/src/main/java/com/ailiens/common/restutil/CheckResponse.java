@@ -25,9 +25,9 @@ public interface CheckResponse {
             case 404:
                 throw new InvalidResourceException();
             case 422:
-                throw new InvalidInputException();
+                throw new InvalidInputException(status);
             default:
-                throw new GenericServiceException();
+                throw new GenericServiceException(status);
         }
     }
 
