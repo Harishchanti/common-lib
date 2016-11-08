@@ -299,7 +299,7 @@ project(':main')
     {
         dependencies
             {
-                compile project(':rabbitmq-publisher')
+                compile project(':msg-publisher')
                 compile project(':restutil')
             }
     }
