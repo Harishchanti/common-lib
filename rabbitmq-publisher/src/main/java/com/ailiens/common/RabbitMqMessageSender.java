@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +33,9 @@ public class RabbitMqMessageSender {
 
     @Wither
     String clusterName;
+
+    @Autowired
+    MessageRepository messageRepository;
 
     public  void sendMessage(Object message, String queName) throws Exception {
 
@@ -73,6 +77,29 @@ public class RabbitMqMessageSender {
 
             AMQP.BasicProperties properties = builder.build();
             channel.basicPublish("", queName, properties, queueMessage.getBytes("UTF-8"));
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally {
+            RabbitMqUtil.ensureClosure(connection,channel);
+        }
+    }
+
+    public void sendMessage(Message message,String queueName) throws Exception
+    {
+        Connection connection=null;
+        Channel channel=null;
+        try {
+
+            connection =RabbitMqConnectionManager.getConnection(clusterName);
+            channel = connection.createChannel();
+
+            channel.queueDeclare(queueName, true, false, false, null);
+            String queueMessage = mapper.writeValueAsString(message);
+            channel.basicPublish("", queueName, MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
+            messageRepository.save(message);
         }
         catch (Exception e)
         {

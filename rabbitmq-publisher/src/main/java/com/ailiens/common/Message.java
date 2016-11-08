@@ -9,6 +9,7 @@ import lombok.experimental.FieldDefaults;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -20,6 +21,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Entity
+@Table(name = "outbound_messages")
 public class Message implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,4 +33,9 @@ public class Message implements Serializable {
     String createdAt= LocalDateTime.now(timeZone).toString();;
     String messageId = UUID.randomUUID().toString();
     String groupId=UUID.randomUUID().toString();
+    String eventId;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 }
