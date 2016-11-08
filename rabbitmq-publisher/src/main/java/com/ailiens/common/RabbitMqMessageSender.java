@@ -34,6 +34,9 @@ public class RabbitMqMessageSender {
     @Wither
     String clusterName;
 
+    @Wither
+    boolean dbPersist=true;
+
     @Autowired
     MessageRepository messageRepository;
 
@@ -99,6 +102,8 @@ public class RabbitMqMessageSender {
             channel.queueDeclare(queueName, true, false, false, null);
             String queueMessage = mapper.writeValueAsString(message);
             channel.basicPublish("", queueName, MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
+
+            if(dbPersist)
             messageRepository.save(message);
         }
         catch (Exception e)

@@ -31,8 +31,14 @@ public class Message implements Serializable {
 
     String payload="";
     String createdAt= LocalDateTime.now(timeZone).toString();;
+
+    @Column(name = "message_id")
     String messageId = UUID.randomUUID().toString();
+
+    @Column(name = "group_id")
     String groupId=UUID.randomUUID().toString();
+
+    @Column(name = "event_id")
     String eventId;
 
     @Id
