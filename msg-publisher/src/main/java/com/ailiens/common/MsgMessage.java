@@ -23,7 +23,7 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "outbound_messages")
-public class Message implements Serializable {
+public class MsgMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

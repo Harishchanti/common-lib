@@ -26,7 +26,7 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class RabbitMqMessageSender {
+public class MsgPublisher {
 
 
     static ObjectMapper mapper = new ObjectMapper();
@@ -40,7 +40,7 @@ public class RabbitMqMessageSender {
     @Autowired
     MessageRepository messageRepository;
 
-    public  void sendMessage(Object message, String queName) throws Exception {
+    public  void publish(Object message, String queName) throws Exception {
 
         Connection connection=null;
         Channel channel=null;
@@ -62,7 +62,7 @@ public class RabbitMqMessageSender {
         }
     }
 
-    public  void sendMessage(Object message, String queName,Map<String,Object> headers,boolean persist) throws Exception {
+    public  void publish(Object message, String queName,Map<String,Object> headers,boolean persist) throws Exception {
 
         Connection connection=null;
         Channel channel=null;
@@ -90,7 +90,7 @@ public class RabbitMqMessageSender {
         }
     }
 
-    public void sendMessage(Message message,String queueName) throws Exception
+    public void publish(MsgMessage msgMessage, String queueName) throws Exception
     {
         Connection connection=null;
         Channel channel=null;
@@ -100,11 +100,11 @@ public class RabbitMqMessageSender {
             channel = connection.createChannel();
 
             channel.queueDeclare(queueName, true, false, false, null);
-            String queueMessage = mapper.writeValueAsString(message);
+            String queueMessage = mapper.writeValueAsString(msgMessage);
             channel.basicPublish("", queueName, MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
 
             if(dbPersist)
-            messageRepository.save(message);
+            messageRepository.save(msgMessage);
         }
         catch (Exception e)
         {
