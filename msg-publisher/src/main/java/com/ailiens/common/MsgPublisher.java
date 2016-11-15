@@ -92,6 +92,8 @@ public class MsgPublisher {
 
     public void publish(MsgMessage msgMessage, String queueName) throws Exception
     {
+        log.info("Sending message {} payload {}",msgMessage.getMessageId(),msgMessage.getPayload());
+
         Connection connection=null;
         Channel channel=null;
         try {

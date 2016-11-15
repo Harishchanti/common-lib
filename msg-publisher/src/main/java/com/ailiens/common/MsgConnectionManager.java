@@ -15,7 +15,7 @@ public class MsgConnectionManager {
         String CLUSTER_NAME="MSG";
         String rabbitMqHost="ac521f15ea4b211e69b1f1283e06dba7-1417201917.us-east-1.elb.amazonaws.com";
         RabbitMqConnectionManager.setPoolType(PoolType.EAGER);
-        RabbitMqConnectionManager.setPoolSize(2);
+        RabbitMqConnectionManager.setPoolSize(1);
         RabbitMqConnectionManager.createConnectionPool(CLUSTER_NAME,rabbitMqHost,"","");
 
         RabbitMqConnectionManager.setDefaultCluster(CLUSTER_NAME);
