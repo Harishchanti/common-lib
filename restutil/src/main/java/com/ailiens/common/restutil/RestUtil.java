@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -53,6 +54,9 @@ public class RestUtil implements CheckResponse {
 
     @Wither
     String user;
+
+    @Wither
+    int pageSize=0;
 
     public RestUtil header(String key,String value)
     {
@@ -119,9 +123,30 @@ public class RestUtil implements CheckResponse {
 
     public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws ExecutionException, UnirestException, GenericServiceException, IOException {
 
-        String responseStr= get(url,String.class);
-        List<T> responseList=objectMapper.readValue(responseStr,typeReference);
-        return responseList;
+        if(pageSize==0) {
+            String responseStr = get(url, String.class);
+            return objectMapper.readValue(responseStr, typeReference);
+        }
+        else
+        {
+            List<T> responseList = Lists.newArrayList();
+            int page=0;
+            boolean hasMore=true;
+            char beginChar='?';
+            if(url.contains("?"))
+                beginChar='&';
+
+            do {
+                String pageUrl=String.format("%s%cpage=%d&size=%d",url,beginChar,page,pageSize);
+                String responseStr = get(pageUrl, String.class);
+                List<T> list= objectMapper.readValue(responseStr, typeReference);
+                responseList.addAll(list);
+                page++;
+                if(list.size()==0)hasMore=false;
+            }while (hasMore);
+
+            return responseList;
+        }
     }
 
     public  <T> List<T> post(String url, Object payload, TypeReference<List<T>> typeReference) throws ExecutionException, UnirestException, GenericServiceException, IOException {

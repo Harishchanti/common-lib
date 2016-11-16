@@ -1,7 +1,9 @@
 package com.ailiens.common;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
+import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -9,7 +11,19 @@ import java.util.concurrent.TimeoutException;
  * Created by jayant on 15/11/16.
  */
 @Slf4j
+@Component
+@Singleton
 public class MsgConnectionManager {
+
+    public MsgConnectionManager()  {
+        try {
+            setup();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void setup() throws IOException, TimeoutException {
         String CLUSTER_NAME="MSG";
