@@ -300,7 +300,25 @@ project(':main')
         dependencies
             {
                 compile project(':msg-publisher')
+                compile project(':msg-receiver')
+                compile project(':msg-common')
                 compile project(':restutil')
+            }
+    }
+
+project(':msg-receiver')
+    {
+        dependencies
+            {
+                compile project(':msg-common')
+            }
+    }
+
+project(':msg-publisher')
+    {
+        dependencies
+            {
+                compile project(':msg-common')
             }
     }
 

@@ -41,6 +41,10 @@ public class MsgMessage implements Serializable {
     @Column(name = "event_id")
     String eventId;
 
+    @Transient
+    String eventType;
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
