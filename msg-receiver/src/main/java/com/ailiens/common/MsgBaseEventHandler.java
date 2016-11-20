@@ -41,6 +41,7 @@ public class MsgBaseEventHandler {
     public EventResponse handle(MsgMessage msgMessage)
     {
         String eventType=msgMessage.getEventType();
+        if(eventType==null)eventType="";
         if(handlerMap.containsKey(eventType))
         {
             return handlerMap.get(eventType).invoke(msgMessage);
