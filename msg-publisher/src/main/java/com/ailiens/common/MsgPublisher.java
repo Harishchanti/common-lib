@@ -40,29 +40,9 @@ public class MsgPublisher {
     @Autowired
     MessageRepository messageRepository;
 
-    public  void publish(Object message, String queName) throws Exception {
 
-        Connection connection=null;
-        Channel channel=null;
-        try {
 
-             connection =RabbitMqConnectionManager.getConnection(clusterName);
-             channel = connection.createChannel();
-
-            channel.queueDeclare(queName, true, false, false, null);
-            String queueMessage = mapper.writeValueAsString(message);
-            channel.basicPublish("", queName, MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally {
-            RabbitMqUtil.ensureClosure(connection,channel);
-        }
-    }
-
-    public  void publish(Object message, String queName,Map<String,Object> headers,boolean persist) throws Exception {
+    public  void publish(MsgMessage message, String queName,Map<String,Object> headers,boolean persist) throws Exception {
 
         Connection connection=null;
         Channel channel=null;
@@ -107,6 +87,34 @@ public class MsgPublisher {
 
             if(dbPersist)
             messageRepository.save(msgMessage);
+        }
+        catch (Exception e)
+        {
+            throw e;
+        }
+        finally {
+            RabbitMqUtil.ensureClosure(connection,channel);
+        }
+    }
+
+
+    public void exchangePublish(MsgMessage msgMessage, String exchangeName) throws Exception
+    {
+        log.info("Sending message {} payload {}",msgMessage.getMessageId(),msgMessage.getPayload());
+
+        Connection connection=null;
+        Channel channel=null;
+        try {
+
+            connection =RabbitMqConnectionManager.getConnection(clusterName);
+            channel = connection.createChannel();
+
+            String queueMessage = mapper.writeValueAsString(msgMessage);
+            channel.exchangeDeclare(exchangeName,"fanout");
+            channel.basicPublish(exchangeName, "", MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
+
+            if(dbPersist)
+                messageRepository.save(msgMessage);
         }
         catch (Exception e)
         {
