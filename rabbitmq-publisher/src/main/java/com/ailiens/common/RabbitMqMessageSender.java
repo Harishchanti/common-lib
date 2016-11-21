@@ -25,7 +25,7 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 @NoArgsConstructor
-public class RabbitMqPublisher {
+public class RabbitMqMessageSender {
 
 
     static ObjectMapper mapper = new ObjectMapper();
@@ -36,7 +36,7 @@ public class RabbitMqPublisher {
     @Wither
     boolean dbPersist=true;
 
-    public  void publish(Object message, String queName) throws Exception {
+    public  void sendMessage(Object message, String queName) throws Exception {
 
         Connection connection=null;
         Channel channel=null;
@@ -58,7 +58,7 @@ public class RabbitMqPublisher {
         }
     }
 
-    public  void publish(Object message, String queName,Map<String,Object> headers,boolean persist) throws Exception {
+    public  void sendMessage(Object message, String queName,Map<String,Object> headers,boolean persist) throws Exception {
 
         Connection connection=null;
         Channel channel=null;
