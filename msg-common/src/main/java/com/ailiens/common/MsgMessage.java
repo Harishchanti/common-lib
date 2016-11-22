@@ -27,6 +27,8 @@ public class MsgMessage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    private static final int MAX_PAYLOAD_SIZE =10000;
+
     public static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
 
     String payload="";
@@ -48,4 +50,17 @@ public class MsgMessage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String clip(String str)
+    {
+        if(str.length()>MAX_PAYLOAD_SIZE)
+            return str.substring(0,MAX_PAYLOAD_SIZE)+"...clipped";
+        else return str;
+    }
+
+    @PrePersist
+    public void checkSize()
+    {
+        payload=clip(payload);
+    }
 }
