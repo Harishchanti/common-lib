@@ -6,4 +6,5 @@ include 'msg-receiver'
 include 'msg-common'
 include 'rabbitmq-publisher'
 include 'message-sender'
+include 'demo'
 

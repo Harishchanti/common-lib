@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -21,21 +22,27 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MsgBaseEventHandler {
 
-    @Autowired
+    @Autowired(required = false)
     List<MsgEventHandler> msgEventHandlers;
 
-    @Autowired
+    @Autowired(required = false)
     List<MsgBulkEventHandler> msgBulkEventHandlerList;
 
-    Map<String,MsgEventHandler> handlerMap;
-    Map<String,MsgBulkEventHandler> bulkEventHandlerMap;
+    Map<String,MsgEventHandler> handlerMap = new HashMap<>();
+    Map<String,MsgBulkEventHandler> bulkEventHandlerMap = new HashMap<>();
 
     @PostConstruct
     public void setup()
     {
         log.info("Constructing EventHandler map");
-        handlerMap =msgEventHandlers.stream().collect(Collectors.toMap(MsgEventHandler::getEventType, Function.identity()));
-        bulkEventHandlerMap =msgBulkEventHandlerList.stream().collect(Collectors.toMap(MsgBulkEventHandler::getEventType, Function.identity()));
+        if(msgEventHandlers!=null)
+        {
+            handlerMap =msgEventHandlers.stream().collect(Collectors.toMap(MsgEventHandler::getEventType, Function.identity()));
+        }
+        if(msgBulkEventHandlerList!=null)
+        {
+            bulkEventHandlerMap =msgBulkEventHandlerList.stream().collect(Collectors.toMap(MsgBulkEventHandler::getEventType, Function.identity()));
+        }
     }
 
     public EventResponse handle(MsgMessage msgMessage)
@@ -46,7 +53,7 @@ public class MsgBaseEventHandler {
         {
             return handlerMap.get(eventType).invoke(msgMessage);
         }
-        else return new EventResponse(400,"No handlers found for eventType "+eventType);
+        else return new EventResponse(200,"No handlers found for eventType "+eventType);
     }
 
     public EventResponse handle(List<MsgMessage> msgMessageList)
@@ -56,6 +63,6 @@ public class MsgBaseEventHandler {
         {
             return bulkEventHandlerMap.get(eventType).invoke(msgMessageList);
         }
-        else return new EventResponse(400,"No handlers found for eventType "+eventType);
+        else return new EventResponse(200,"No handlers found for eventType "+eventType);
     }
 }

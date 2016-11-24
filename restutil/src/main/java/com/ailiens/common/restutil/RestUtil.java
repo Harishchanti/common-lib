@@ -121,6 +121,22 @@ public class RestUtil implements CheckResponse {
         return response.getBody();
     }
 
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
+    public  <T> T delete(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException  {
+
+        checkKeyCloak();
+        log.info(url);
+        log.info(payload.toString());
+        HttpResponse<T> response = Unirest.delete(url)
+            .headers(headers)
+            .body(payload)
+            .asObject(responseClass);
+
+        checkStatus(response);
+
+        return response.getBody();
+    }
+
     public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws ExecutionException, UnirestException, GenericServiceException, IOException {
 
         if(pageSize==0) {

@@ -304,6 +304,7 @@ project(':main')
                 compile project(':msg-common')
                 compile project(':restutil')
                 compile project(':message-sender')
+                compile project(':demo')
                 compile project(':rabbitmq-publisher')
             }
     }
@@ -313,6 +314,19 @@ project(':msg-receiver')
         dependencies
             {
                 compile project(':msg-common')
+            }
+    }
+
+project(':demo')
+    {
+        dependencies
+            {
+                compile project(':msg-publisher')
+                compile project(':msg-receiver')
+                compile project(':msg-common')
+                compile project(':restutil')
+                compile project(':message-sender')
+                compile project(':rabbitmq-publisher')
             }
     }
 
