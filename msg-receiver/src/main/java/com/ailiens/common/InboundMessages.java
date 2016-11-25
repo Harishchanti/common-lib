@@ -1,6 +1,7 @@
 package com.ailiens.common;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
@@ -14,6 +15,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "inbound_messages")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+@Slf4j
 public class InboundMessages implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,13 +40,17 @@ public class InboundMessages implements Serializable {
     private String clip(String str)
     {
         if(str.length()>MAX_PAYLOAD_SIZE)
+        {
+            log.info("Clipping data");
             return str.substring(0,MAX_PAYLOAD_SIZE)+"...clipped";
+        }
         else return str;
     }
 
     @PrePersist
     public void checkSize()
     {
+        log.info("Pre-Persist-Checks");
         payload=clip(payload);
         response=clip(response);
     }
