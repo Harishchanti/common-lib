@@ -40,6 +40,7 @@ public class RestUtilHelper implements CheckResponse {
     Map<String,String> headers = new HashMap<>();
     String user;
     int pageSize=0;
+    boolean logRequests=true;
 
 
     public static final String REQ_ID_MDC ="REQ-ID";
@@ -49,6 +50,7 @@ public class RestUtilHelper implements CheckResponse {
 
     protected void logPayload(Object payload)
     {
+        if(!logRequests)return;
         if(payload==null)return;
         String contentType= headers.get("content-type");
 
@@ -63,14 +65,25 @@ public class RestUtilHelper implements CheckResponse {
 
     }
 
+    protected void preProcess(String url,Object payload) throws ExecutionException {
+        addReqIdHeader();
+        checkKeyCloak();
+        log.info(url);
+        logPayload(payload);
+    }
+
     protected void addReqIdHeader()
     {
         if(headers.containsKey(REQ_ID_HEADER)) return;
 
-        String reqId= MDC.get(REQ_ID_MDC).toString();
-        if(Strings.isNullOrEmpty(reqId))
-        {
-            reqId= UUID.randomUUID().toString();
+        Object obj= MDC.get(REQ_ID_MDC);
+        String reqId=null;
+        if(obj!=null) {
+            reqId = obj.toString();
+        }
+        if (Strings.isNullOrEmpty(reqId)) {
+            reqId = UUID.randomUUID().toString();
+            MDC.put(REQ_ID_MDC,reqId);
         }
         headers.put(REQ_ID_HEADER,reqId);
     }
@@ -86,7 +99,7 @@ public class RestUtilHelper implements CheckResponse {
 
         if(!Strings.isNullOrEmpty(key)) {
             String auth = credentials.getAccessToken(key);
-            headers.put("Authorization", "Bearer " + auth);
+            headers.replace("Authorization", "Bearer " + auth);
         }
     }
 
@@ -126,7 +139,5 @@ public class RestUtilHelper implements CheckResponse {
                 }
             }
         });
-
-        // Unirest.setTimeouts(10*1000,2*60*1000);
     }
 }

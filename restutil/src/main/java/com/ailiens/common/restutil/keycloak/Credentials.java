@@ -13,11 +13,13 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Singleton;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @Component
+@Singleton
 public class Credentials {
 
 	@Autowired

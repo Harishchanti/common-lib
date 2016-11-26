@@ -45,10 +45,7 @@ public class RestUtil  extends RestUtilHelper  {
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
     public  <T> T get(String url,  Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException {
 
-        checkKeyCloak();
-
-        log.info(url);
-        addReqIdHeader();
+        preProcess(url,null);
 
         HttpResponse<T> response = Unirest.get(url)
                 .headers(headers)
@@ -62,11 +59,8 @@ public class RestUtil  extends RestUtilHelper  {
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
     public  <T> T post(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException {
 
-        checkKeyCloak();
-        log.info(url);
-        log.info(payload.toString());
 
-        addReqIdHeader();
+        preProcess(url,payload);
         HttpResponse<T> response = Unirest.post(url)
                 .headers(headers)
                 .body(payload)
@@ -80,10 +74,7 @@ public class RestUtil  extends RestUtilHelper  {
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
     public  <T> T put(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException  {
 
-        checkKeyCloak();
-        log.info(url);
-        log.info(payload.toString());
-        addReqIdHeader();
+        preProcess(url,payload);
         HttpResponse<T> response = Unirest.put(url)
                 .headers(headers)
                 .body(payload)
@@ -97,10 +88,7 @@ public class RestUtil  extends RestUtilHelper  {
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
     public  <T> T delete(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException  {
 
-        checkKeyCloak();
-        log.info(url);
-        log.info(payload.toString());
-        addReqIdHeader();
+        preProcess(url,payload);
         HttpResponse<T> response = Unirest.delete(url)
             .headers(headers)
             .body(payload)
@@ -166,9 +154,15 @@ public class RestUtil  extends RestUtilHelper  {
         return this;
     }
 
-    public RestUtil withPage(int pageSize)
+    public RestUtil withPageSize(int pageSize)
     {
         this.pageSize =pageSize;
+        return this;
+    }
+
+    public RestUtil logRequest(boolean logRequest)
+    {
+        this.logRequests=logRequest;
         return this;
     }
 
