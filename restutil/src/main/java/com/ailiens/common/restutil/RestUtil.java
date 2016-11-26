@@ -3,21 +3,14 @@ package com.ailiens.common.restutil;
 
 import com.ailiens.common.restutil.exceptions.GenericServiceException;
 import com.ailiens.common.restutil.exceptions.UnauthorizedAccessException;
-import com.ailiens.common.restutil.keycloak.Credentials;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.http.MediaType;
 import org.springframework.retry.annotation.Backoff;
@@ -26,7 +19,6 @@ import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
@@ -38,32 +30,9 @@ import java.util.concurrent.ExecutionException;
 @Component
 @Scope("prototype")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
 @Slf4j
 @EnableRetry(proxyTargetClass=true)
-public class RestUtil implements CheckResponse {
-
-    @Autowired
-    ObjectMapper objectMapper;
-
-    @Autowired
-    Credentials credentials;
-
-    @Wither
-    Map<String,String> headers = new HashMap<>();
-
-    @Wither
-    String user;
-
-    @Wither
-    int pageSize=0;
-
-    public RestUtil header(String key,String value)
-    {
-        headers.put(key,value);
-        return this;
-    }
-
+public class RestUtil  extends RestUtilHelper  {
 
 
     public RestUtil()
@@ -79,6 +48,7 @@ public class RestUtil implements CheckResponse {
         checkKeyCloak();
 
         log.info(url);
+        addReqIdHeader();
 
         HttpResponse<T> response = Unirest.get(url)
                 .headers(headers)
@@ -95,6 +65,8 @@ public class RestUtil implements CheckResponse {
         checkKeyCloak();
         log.info(url);
         log.info(payload.toString());
+
+        addReqIdHeader();
         HttpResponse<T> response = Unirest.post(url)
                 .headers(headers)
                 .body(payload)
@@ -111,6 +83,7 @@ public class RestUtil implements CheckResponse {
         checkKeyCloak();
         log.info(url);
         log.info(payload.toString());
+        addReqIdHeader();
         HttpResponse<T> response = Unirest.put(url)
                 .headers(headers)
                 .body(payload)
@@ -127,6 +100,7 @@ public class RestUtil implements CheckResponse {
         checkKeyCloak();
         log.info(url);
         log.info(payload.toString());
+        addReqIdHeader();
         HttpResponse<T> response = Unirest.delete(url)
             .headers(headers)
             .body(payload)
@@ -172,63 +146,31 @@ public class RestUtil implements CheckResponse {
         return responseList;
     }
 
-    private String getKeycloakKey()
+    //withers
+
+    public RestUtil header(String key,String value)
     {
-        return  user;
+        headers.put(key,value);
+        return this;
     }
 
-    public void checkKeyCloak() throws ExecutionException {
-
-        String key= getKeycloakKey();
-
-        if(!Strings.isNullOrEmpty(key)) {
-            String auth = credentials.getAccessToken(key);
-            headers.put("Authorization", "Bearer " + auth);
-        }
-    }
-
-    public  void checkStatus(HttpResponse response) throws GenericServiceException {
-
-        log.info(response.getBody().toString());
-        String key= getKeycloakKey();
-
-        if(response.getStatus()==401 && !Strings.isNullOrEmpty(key) )
-        {
-            credentials.updateKey(key);
-        }
-
-        checkResponse(response.getStatus());
-    }
-
-    public void setupUnirest()
+    public RestUtil withHeaders(Map<String,String> headers)
     {
-        Unirest.setObjectMapper(new com.mashape.unirest.http.ObjectMapper() {
-            private ObjectMapper jacksonObjectMapper
-                = new ObjectMapper();
+        this.headers=headers;
+        return this;
+    }
 
-            public <T> T readValue(String value, Class<T> valueType) {
-                try {
-                    return jacksonObjectMapper.readValue(value, valueType);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
+    public RestUtil withUser(String user)
+    {
+        this.user=user;
+        return this;
+    }
 
-            public String writeValue(Object value) {
-                try {
-                    return jacksonObjectMapper.writeValueAsString(value);
-                } catch (JsonProcessingException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        });
-
-        Unirest.setTimeouts(10*1000,2*60*1000);
+    public RestUtil withPage(int pageSize)
+    {
+        this.pageSize =pageSize;
+        return this;
     }
 
 
-
-    public void setup()  {
-        setupUnirest();
-    }
 }

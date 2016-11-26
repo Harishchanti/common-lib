@@ -1,5 +1,6 @@
-package com.ailiens.common.restutil;
+package com.ailiens.common.restutil.setup;
 
+import com.ailiens.common.restutil.RestUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,15 +16,23 @@ import javax.inject.Singleton;
 @Component
 @Singleton
 @Slf4j
-public class RestClientSetup {
+public class ConfigureRestClient {
 
     @Autowired
     RestUtil restUtil;
 
+    @Autowired(required = false)
+    RestUtilSetup restUtilSetup;
+
+
     @PostConstruct
     public void setup()
     {
-       restUtil.setup();
+        restUtil.setup();
+        if(restUtilSetup!=null)
+        {
+            restUtilSetup.setup();
+        }
         log.info("Setup done");
     }
 }
