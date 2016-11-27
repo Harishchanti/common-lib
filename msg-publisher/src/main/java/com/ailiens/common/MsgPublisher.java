@@ -3,7 +3,6 @@ package com.ailiens.common;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.MessageProperties;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -44,12 +43,11 @@ public class MsgPublisher {
 
     public  void publish(MsgMessage message, String queName,Map<String,Object> headers,boolean persist) throws Exception {
 
-        Connection connection=null;
+
         Channel channel=null;
         try {
 
-            connection =RabbitMqConnectionManager.getConnection(clusterName);
-            channel = connection.createChannel();
+            channel =RabbitMqConnectionManager.getChannel(clusterName);
 
             channel.queueDeclare(queName, true, false, false, null);
             String queueMessage = mapper.writeValueAsString(message);
@@ -66,7 +64,7 @@ public class MsgPublisher {
             throw e;
         }
         finally {
-            RabbitMqUtil.ensureClosure(connection,channel);
+            RabbitMqUtil.ensureClosure(channel);
         }
     }
 
@@ -74,12 +72,11 @@ public class MsgPublisher {
     {
         log.info("Sending message {} payload {}",msgMessage.getMessageId(),msgMessage.getPayload());
 
-        Connection connection=null;
+
         Channel channel=null;
         try {
 
-            connection =RabbitMqConnectionManager.getConnection(clusterName);
-            channel = connection.createChannel();
+            channel =RabbitMqConnectionManager.getChannel(clusterName);
 
             channel.queueDeclare(queueName, true, false, false, null);
             String queueMessage = mapper.writeValueAsString(msgMessage);
@@ -93,7 +90,7 @@ public class MsgPublisher {
             throw e;
         }
         finally {
-            RabbitMqUtil.ensureClosure(connection,channel);
+            RabbitMqUtil.ensureClosure(channel);
         }
     }
 
@@ -102,12 +99,11 @@ public class MsgPublisher {
     {
         log.info("Sending message {} payload {}",msgMessage.getMessageId(),msgMessage.getPayload());
 
-        Connection connection=null;
+
         Channel channel=null;
         try {
 
-            connection =RabbitMqConnectionManager.getConnection(clusterName);
-            channel = connection.createChannel();
+            channel =RabbitMqConnectionManager.getChannel(clusterName);
 
             String queueMessage = mapper.writeValueAsString(msgMessage);
             channel.exchangeDeclare(exchangeName,"fanout");
@@ -121,7 +117,7 @@ public class MsgPublisher {
             throw e;
         }
         finally {
-            RabbitMqUtil.ensureClosure(connection,channel);
+            RabbitMqUtil.ensureClosure(channel);
         }
     }
 }

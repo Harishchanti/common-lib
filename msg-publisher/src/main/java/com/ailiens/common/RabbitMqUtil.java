@@ -1,7 +1,6 @@
 package com.ailiens.common;
 
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
@@ -11,11 +10,9 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 @Slf4j
 public class RabbitMqUtil {
 
-    public static void ensureClosure(Connection connection, Channel channel)
+    public static void ensureClosure(Channel channel)
     {
-
         try {
-
             if (channel != null && channel.isOpen())
                 channel.close();
         }

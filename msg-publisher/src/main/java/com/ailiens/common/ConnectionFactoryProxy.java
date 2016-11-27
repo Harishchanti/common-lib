@@ -2,10 +2,12 @@ package com.ailiens.common;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
+import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.Synchronized;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -49,6 +51,7 @@ public class ConnectionFactoryProxy   {
 
 
 
+    @Synchronized
     public Connection getConnection() throws Exception
     {
         if(ptr> pool.size()-1)addConnectionToPool();
@@ -56,6 +59,12 @@ public class ConnectionFactoryProxy   {
         Connection connection= pool.get(ptr);
         ptr=(ptr+1)%poolSize;
         return connection;
+    }
+
+    @Synchronized
+    public Channel getChannel() throws Exception
+    {
+        return getConnection().createChannel();
     }
 
     public void addConnectionToPool() throws IOException, TimeoutException {

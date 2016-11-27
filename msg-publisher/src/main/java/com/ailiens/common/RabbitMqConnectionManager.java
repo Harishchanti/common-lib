@@ -1,13 +1,17 @@
 package com.ailiens.common;
 
 import com.google.common.base.Strings;
+import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import lombok.AccessLevel;
 import lombok.Setter;
+import lombok.Synchronized;
 import lombok.experimental.FieldDefaults;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -31,11 +35,14 @@ public class RabbitMqConnectionManager {
         map.put(clusterName,new ConnectionFactoryProxy(host, username, password,poolSize,poolType));
     }
 
+    @Synchronized
     public static Connection getConnection(String name) throws Exception {
         if(Strings.isNullOrEmpty(name))return getConnection();
         return map.get(name).getConnection();
     }
 
+
+    @Synchronized
     public static Connection getConnection() throws Exception {
         if(Strings.isNullOrEmpty(defaultCluster))
         {
@@ -50,6 +57,30 @@ public class RabbitMqConnectionManager {
         }
         return map.get(defaultCluster).getConnection();
     }
+
+    @Synchronized
+    public static Channel getChannel(String name) throws Exception {
+        if(Strings.isNullOrEmpty(name))return getChannel();
+        return map.get(name).getChannel();
+    }
+
+    @Synchronized
+    public static Channel getChannel() throws Exception {
+        if(Strings.isNullOrEmpty(defaultCluster))
+        {
+            if(map.size()==1) {
+                Collection<ConnectionFactoryProxy> connectionFactoryProxies= map.values();
+
+                for(ConnectionFactoryProxy proxy: connectionFactoryProxies)
+                    return proxy.getChannel();
+
+            }
+            throw new Exception("Default cluster not set");
+        }
+        return map.get(defaultCluster).getChannel();
+    }
+
+
 
     public static void destroy() throws IOException {
         for(ConnectionFactoryProxy proxy: map.values())
