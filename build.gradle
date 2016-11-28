@@ -305,6 +305,7 @@ project(':main')
                 compile project(':restutil')
                 compile project(':message-sender')
                 compile project(':demo')
+                compile project(':common')
                 compile project(':rabbitmq-publisher')
             }
     }
