@@ -32,6 +32,7 @@ public class LoggingFilter implements Filter {
             MDC.put(REQ_ID_MDC,reqId);
         }
         chain.doFilter(request,response);
+        MDC.clear();
     }
 
     @Override
