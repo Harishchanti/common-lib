@@ -1,5 +1,6 @@
 package com.ailiens.common.restutil;
 
+import com.ailiens.common.LoggingFilter;
 import com.ailiens.common.restutil.exceptions.GenericServiceException;
 import com.ailiens.common.restutil.keycloak.Credentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -18,8 +19,10 @@ import org.springframework.http.MediaType;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+
+import static com.ailiens.common.LoggingFilter.REQ_ID_HEADER;
+import static com.ailiens.common.LoggingFilter.REQ_ID_MDC;
 
 
 /**
@@ -43,8 +46,7 @@ public class RestUtilHelper implements CheckResponse {
     boolean logRequests=true;
 
 
-    public static final String REQ_ID_MDC ="REQ-ID";
-    public static final String REQ_ID_HEADER="X-REQ-ID";
+
 
     static Gson gson = new Gson();
 
@@ -76,15 +78,9 @@ public class RestUtilHelper implements CheckResponse {
     {
         if(headers.containsKey(REQ_ID_HEADER)) return;
 
-        Object obj= MDC.get(REQ_ID_MDC);
-        String reqId=null;
-        if(obj!=null) {
-            reqId = obj.toString();
-        }
-        if (Strings.isNullOrEmpty(reqId)) {
-            reqId = UUID.randomUUID().toString();
-            MDC.put(REQ_ID_MDC,reqId);
-        }
+        String reqId= LoggingFilter.getRequestId();
+
+        MDC.put(REQ_ID_MDC,reqId);
         headers.put(REQ_ID_HEADER,reqId);
     }
 

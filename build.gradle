@@ -318,6 +318,15 @@ project(':msg-receiver')
             }
     }
 
+
+project(':restutil')
+    {
+        dependencies
+            {
+                compile project(':common')
+            }
+    }
+
 project(':demo')
     {
         dependencies
