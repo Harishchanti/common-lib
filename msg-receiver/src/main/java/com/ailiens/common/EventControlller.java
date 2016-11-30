@@ -1,5 +1,6 @@
 package com.ailiens.common;
 
+import com.codahale.metrics.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class EventControlller {
     @RequestMapping(value = "/msgEvent",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)
+    @Timed
     public ResponseEntity<?> processMsgEvent(@RequestBody MsgMessage message) throws Exception {
 
         EventResponse response= msgBaseEventHandler.handle(message);
@@ -35,6 +37,7 @@ public class EventControlller {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    @Timed
     @RequestMapping(value = "/bulk/msgEvent",
         method = RequestMethod.POST,
         produces = MediaType.APPLICATION_JSON_VALUE)

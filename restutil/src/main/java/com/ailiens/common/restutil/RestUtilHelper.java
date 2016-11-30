@@ -95,7 +95,7 @@ public class RestUtilHelper implements CheckResponse {
 
         if(!Strings.isNullOrEmpty(key)) {
             String auth = credentials.getAccessToken(key);
-            headers.replace("Authorization", "Bearer " + auth);
+            headers.put("Authorization", "Bearer " + auth);
         }
     }
 
