@@ -53,7 +53,7 @@ public class MsgBaseEventHandler {
         {
             return handlerMap.get(eventType).invoke(msgMessage);
         }
-        else return new EventResponse(200,"No handlers found for eventType "+eventType);
+        else return new EventResponse(400,"No handlers found for eventType "+eventType);
     }
 
     public EventResponse handle(List<MsgMessage> msgMessageList)

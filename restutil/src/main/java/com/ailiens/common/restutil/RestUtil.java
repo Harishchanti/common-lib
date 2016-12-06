@@ -127,11 +127,11 @@ public class RestUtil  extends RestUtilHelper  {
         }
     }
 
-    public  <T> List<T> post(String url, Object payload, TypeReference<List<T>> typeReference) throws ExecutionException, UnirestException, GenericServiceException, IOException {
+    public  <T> T post(String url, Object payload, TypeReference<T> typeReference) throws ExecutionException, UnirestException, GenericServiceException, IOException {
 
         String responseStr= post(url,payload,String.class);
-        List<T> responseList=objectMapper.readValue(responseStr,typeReference);
-        return responseList;
+        T response=objectMapper.readValue(responseStr,typeReference);
+        return response;
     }
 
     //withers

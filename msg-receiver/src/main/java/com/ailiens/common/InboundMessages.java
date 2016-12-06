@@ -47,7 +47,6 @@ public class InboundMessages implements Serializable {
     @PrePersist
     public void checkSize()
     {
-        log.info("Pre-Persist-Checks");
         payload=clip(payload);
         response=clip(response);
     }
