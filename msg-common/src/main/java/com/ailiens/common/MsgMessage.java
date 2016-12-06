@@ -12,7 +12,9 @@ import org.joda.time.LocalDateTime;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
-
+import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.*;
 /**
  * Created by jayant on 15/9/16.
  */
@@ -44,6 +46,8 @@ public class MsgMessage implements Serializable {
     String eventId;
 
     @Transient
+    @JsonProperty("eventType")
+    @Getter @Setter
     String eventType;
 
 
