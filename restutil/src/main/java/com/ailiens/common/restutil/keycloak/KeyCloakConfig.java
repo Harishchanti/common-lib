@@ -16,8 +16,7 @@ import java.util.HashMap;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class KeyCloakConfig {
 
-	String Authorization;
-	String keycloakGetAccessTokenUrl;
+    String keycloakGetAccessTokenUrl;
     long  cacheDuration;
 
 	HashMap<String, UserCredentials> map=new HashMap<>();

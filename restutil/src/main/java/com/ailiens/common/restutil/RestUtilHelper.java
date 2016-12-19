@@ -44,9 +44,7 @@ public class RestUtilHelper implements CheckResponse {
     String user;
     int pageSize=0;
     boolean logRequests=true;
-
-
-
+    boolean logResponse =true;
 
     static Gson gson = new Gson();
 
@@ -106,6 +104,7 @@ public class RestUtilHelper implements CheckResponse {
 
         if(response.getStatus()==401 && !Strings.isNullOrEmpty(key) )
         {
+            log.info("Refreshing accessToken");
             credentials.updateKey(key);
         }
 

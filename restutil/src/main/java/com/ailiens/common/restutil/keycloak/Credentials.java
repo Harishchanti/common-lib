@@ -52,10 +52,9 @@ public class Credentials {
 
 	    HttpResponse<KeyCloakResponse> httpResponse = Unirest.post(keyCloakConfig.getKeycloakGetAccessTokenUrl())
             .header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-            .header("Authorization", keyCloakConfig.getAuthorization())
             .field("username", userCredentials.getUsername())
             .field("password", userCredentials.getPassword())
-            .field("client", userCredentials.getClientId()).asObject(KeyCloakResponse.class);
+            .field("client_id", userCredentials.getClientId()).asObject(KeyCloakResponse.class);
 
         restUtil.checkStatus(httpResponse);
 
