@@ -167,5 +167,11 @@ public class RestUtil  extends RestUtilHelper  {
         return this;
     }
 
+    public RestUtil logResponse(boolean logResponse)
+    {
+        this.logResponse=logResponse;
+        return this;
+    }
+
 
 }

@@ -99,7 +99,10 @@ public class RestUtilHelper implements CheckResponse {
 
     public void checkStatus(HttpResponse response) throws GenericServiceException {
 
-        log.info(response.getBody().toString());
+        if(logResponse)
+        {
+            log.info(response.getBody().toString());
+        }
         String key= getKeycloakKey();
 
         if(response.getStatus()==401 && !Strings.isNullOrEmpty(key) )

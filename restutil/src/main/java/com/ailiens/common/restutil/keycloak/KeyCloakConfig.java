@@ -1,5 +1,6 @@
 package com.ailiens.common.restutil.keycloak;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 @Component
 @ConfigurationProperties(prefix = "spring.keycloakCreds")
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class KeyCloakConfig {
 
     String keycloakGetAccessTokenUrl;
