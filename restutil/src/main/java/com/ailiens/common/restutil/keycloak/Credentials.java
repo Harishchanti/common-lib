@@ -9,6 +9,7 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -49,10 +50,15 @@ public class Credentials {
 
     private  KeyCloakResponse call(UserCredentials userCredentials) throws Exception {
 
-	    HttpResponse<KeyCloakResponse> httpResponse = Unirest.post(keyCloakConfig.getKeycloakGetAccessTokenUrl())
-            .field("username", userCredentials.getUsername())
-            .field("password", userCredentials.getPassword())
-            .field("client_id", userCredentials.getClientId()).asObject(KeyCloakResponse.class);
+	    String body=String.format("username=%s&password=%s&client_id=%s",
+            userCredentials.getUsername(),
+            userCredentials.getPassword(),
+            userCredentials.getClientId());
+
+        HttpResponse<KeyCloakResponse> httpResponse = Unirest.post(keyCloakConfig.getKeycloakGetAccessTokenUrl())
+            .header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+            .body(body)
+            .asObject(KeyCloakResponse.class);
 
         restUtil.checkStatus(httpResponse);
 
