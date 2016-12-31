@@ -125,64 +125,93 @@ repositories {
 }
 
 
-subprojects {
-    apply plugin: 'java'
-    apply plugin: 'maven'
-    apply plugin: 'spring-boot'
-    apply plugin: 'propdeps'
-    apply plugin: 'io.spring.dependency-management'
-    apply plugin: 'net.ltgt.apt'
-    apply plugin: 'maven-publish'
+subprojects
+    {
 
-    dependencyManagement {
-        imports {
-            mavenBom 'org.springframework.boot:spring-boot-starter-parent:1.2.4.RELEASE'
+        apply plugin: 'java'
+        apply plugin: 'maven'
+        apply plugin: 'spring-boot'
+        apply plugin: 'propdeps'
+        apply plugin: 'io.spring.dependency-management'
+        apply plugin: 'net.ltgt.apt'
+        apply plugin: 'maven-publish'
+
+        dependencyManagement {
+            imports {
+                mavenBom 'org.springframework.boot:spring-boot-starter-parent:1.2.4.RELEASE'
+            }
         }
-    }
 
-    gradle.taskGraph.whenReady { graph ->
-        def badTasks = ['bootRepackage']
-        graph.allTasks.findAll {it.name in badTasks}.each { task ->
-            task.enabled = false
+        gradle.taskGraph.whenReady { graph ->
+            def badTasks = ['bootRepackage']
+            graph.allTasks.findAll {it.name in badTasks}.each { task ->
+                task.enabled = false
+            }
         }
-    }
 
-    buildscript {
+        buildscript {
+            repositories {
+                mavenLocal()
+                mavenCentral()
+                jcenter()
+                maven { url "http://repo.spring.io/plugins-release" }
+                maven { url "http://repo.spring.io/milestone" }
+                maven { url "https://plugins.gradle.org/m2/" }
+            }
+            dependencies {
+                classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
+                classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
+
+                classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.0.1"
+                classpath "net.ltgt.gradle:gradle-apt-plugin:0.6"
+                classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
+                classpath "com.moowork.gradle:gradle-node-plugin:0.12"
+                classpath "com.moowork.gradle:gradle-gulp-plugin:0.12"
+                classpath "se.transmode.gradle:gradle-docker:1.2"
+                classpath 'com.github.townsfolk:gradle-release:1.2'
+
+                //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
+            }
+        }
+
         repositories {
             mavenLocal()
             mavenCentral()
             jcenter()
-            maven { url "http://repo.spring.io/plugins-release" }
-            maven { url "http://repo.spring.io/milestone" }
-            maven { url "https://plugins.gradle.org/m2/" }
+            maven { url 'http://repo.spring.io/milestone' }
+            maven { url 'http://repo.spring.io/snapshot' }
+            maven { url 'https://repository.jboss.org/nexus/content/repositories/releases' }
+            maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+            maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+            maven { url 'http://repo.maven.apache.org/maven2' }
         }
-        dependencies {
-            classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
-            classpath "io.spring.gradle:dependency-management-plugin:0.5.6.RELEASE"
 
-            classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.0.1"
-            classpath "net.ltgt.gradle:gradle-apt-plugin:0.6"
-            classpath "org.springframework.build.gradle:propdeps-plugin:0.0.7"
-            classpath "com.moowork.gradle:gradle-node-plugin:0.12"
-            classpath "com.moowork.gradle:gradle-gulp-plugin:0.12"
-            classpath "se.transmode.gradle:gradle-docker:1.2"
-            classpath 'com.github.townsfolk:gradle-release:1.2'
+        dependencies{
+            provided 'org.projectlombok:lombok:1.16.10'
+            apt 'org.projectlombok:lombok:1.16.10'
 
-            //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
+            compile "org.springframework.boot:spring-boot-actuator"
+            compile "org.springframework.boot:spring-boot-autoconfigure"
+            compile "org.springframework.boot:spring-boot-loader-tools"
+            compile "org.springframework.boot:spring-boot-starter-logging"
+            compile "org.springframework.boot:spring-boot-starter-aop"
+            compile "org.springframework.boot:spring-boot-starter-data-jpa"
+            compile "org.springframework.boot:spring-boot-starter-security"
+            compile "org.springframework.boot:spring-boot-starter-web"
+            compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+
+            configurations {
+                all*.exclude group: 'javassist'
+            }
+
+            apply from: '../gradle/release.gradle'
         }
     }
 
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        jcenter()
-        maven { url 'http://repo.spring.io/milestone' }
-        maven { url 'http://repo.spring.io/snapshot' }
-        maven { url 'https://repository.jboss.org/nexus/content/repositories/releases' }
-        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-        maven { url 'http://repo.maven.apache.org/maven2' }
-    }
+
+
+configure (subprojects- project(':graphite-reporter') ){
+
 
     dependencies {
         compile localGroovy()
@@ -229,15 +258,6 @@ subprojects {
             exclude(module: 'jetty-servlet')
         }
         compile "com.mattbertolini:liquibase-slf4j:${liquibase_slf4j_version}"
-        compile "org.springframework.boot:spring-boot-actuator"
-        compile "org.springframework.boot:spring-boot-autoconfigure"
-        compile "org.springframework.boot:spring-boot-loader-tools"
-        compile "org.springframework.boot:spring-boot-starter-logging"
-        compile "org.springframework.boot:spring-boot-starter-aop"
-        compile "org.springframework.boot:spring-boot-starter-data-jpa"
-        compile "org.springframework.boot:spring-boot-starter-security"
-        compile "org.springframework.boot:spring-boot-starter-web"
-        compile "org.springframework.boot:spring-boot-starter-thymeleaf"
         compile "org.springframework.cloud:spring-cloud-cloudfoundry-connector"
         compile "org.springframework.cloud:spring-cloud-spring-service-connector"
         compile "org.springframework.cloud:spring-cloud-localconfig-connector"
@@ -272,20 +292,12 @@ subprojects {
         //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
 
         //commons
-        provided 'org.projectlombok:lombok:1.16.10'
-        apt 'org.projectlombok:lombok:1.16.10'
+
         compile 'com.rabbitmq:amqp-client:3.6.5'
         compile 'com.mashape.unirest:unirest-java:1.4.9'
         compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
         compile 'com.google.code.gson:gson:2.8.0'
 
-
-
-        configurations {
-            all*.exclude group: 'javassist'
-        }
-
-        apply from: '../gradle/release.gradle'
     }
 
 }
@@ -304,10 +316,31 @@ project(':main')
                 compile project(':msg-common')
                 compile project(':restutil')
                 compile project(':message-sender')
-                compile project(':demo')
                 compile project(':common')
                 compile project(':rabbitmq-publisher')
             }
+    }
+
+project(':graphite-reporter')
+    {
+        dependencies {
+            compile "io.dropwizard.metrics:metrics-core"
+            compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-healthchecks:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-jvm:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-servlet:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-json:${dropwizard_metrics_version}"
+            compile("io.dropwizard.metrics:metrics-servlets:${dropwizard_metrics_version}") {
+                exclude(module: 'metrics-healthchecks')
+            }
+
+            compile("com.ryantenney.metrics:metrics-spring:${metrics_spring_version}") {
+                exclude(module: 'metrics-core')
+                exclude(module: 'metrics-healthchecks')
+            }
+        }
     }
 
 project(':msg-receiver')
