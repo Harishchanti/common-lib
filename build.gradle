@@ -389,18 +389,7 @@ project(':restutil')
             }
     }
 
-project(':demo')
-    {
-        dependencies
-            {
-                compile project(':msg-publisher')
-                compile project(':msg-receiver')
-                compile project(':msg-common')
-                compile project(':restutil')
-                compile project(':message-sender')
-                compile project(':rabbitmq-publisher')
-            }
-    }
+
 
 project(':msg-publisher')
     {
