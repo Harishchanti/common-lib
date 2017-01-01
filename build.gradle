@@ -210,7 +210,10 @@ subprojects
 
 
 
-configure (subprojects- project(':graphite-reporter') ){
+configure (subprojects- project(':graphite-reporter')
+    - project(':graphite-reporter-extensions')
+
+){
 
 
     dependencies {
@@ -342,6 +345,32 @@ project(':graphite-reporter')
             }
         }
     }
+
+
+project(':graphite-reporter-extensions')
+    {
+        dependencies {
+            compile "io.dropwizard.metrics:metrics-core"
+            compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-healthchecks:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-jvm:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-servlet:${dropwizard_metrics_version}"
+            compile "io.dropwizard.metrics:metrics-json:${dropwizard_metrics_version}"
+            compile("io.dropwizard.metrics:metrics-servlets:${dropwizard_metrics_version}") {
+                exclude(module: 'metrics-healthchecks')
+            }
+
+            compile("com.ryantenney.metrics:metrics-spring:${metrics_spring_version}") {
+                exclude(module: 'metrics-core')
+                exclude(module: 'metrics-healthchecks')
+            }
+
+            compile("io.dropwizard.metrics:metrics-servlets:3.1.2")
+        }
+    }
+
 
 project(':msg-receiver')
     {

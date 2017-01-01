@@ -14,8 +14,10 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "graphite")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class GraphiteConfig {
-  String host;
-  Integer port;
-  String prefix;
-  boolean enabled;
+    String host;
+    Integer port;
+    String prefix;
+    int flushInterval = 30;
+    boolean enabled=false;
+
 }

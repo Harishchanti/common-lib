@@ -9,4 +9,5 @@ include 'message-sender'
 include 'demo'
 include 'common'
 include 'graphite-reporter'
+include 'graphite-reporter-extensions'
 

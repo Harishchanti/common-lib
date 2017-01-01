@@ -42,13 +42,13 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter
 
 
 
-    //@Override
+    @Override
     @Bean
     public MetricRegistry getMetricRegistry() {
         return metricRegistry;
     }
 
-    //@Override
+    @Override
     @Bean
     public HealthCheckRegistry getHealthCheckRegistry() {
         return healthCheckRegistry;
@@ -96,7 +96,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter
                     .prefixedWith(graphitePrefix)
                     .build(graphite);
 
-                graphiteReporter.start(30, TimeUnit.SECONDS);
+                graphiteReporter.start(graphiteConfig.getFlushInterval(), TimeUnit.SECONDS);
             }
         }
     }
