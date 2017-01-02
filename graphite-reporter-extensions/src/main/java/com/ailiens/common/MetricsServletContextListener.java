@@ -10,8 +10,9 @@ import javax.servlet.annotation.WebListener;
 /**
  * Created by jayant on 1/1/17.
  */
-@Component
+
 @WebListener
+@Component
 public class MetricsServletContextListener extends MetricsServlet.ContextListener {
 
     @Autowired
