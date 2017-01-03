@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import javax.sql.DataSource;
 
 @Configuration
-@EnableJpaRepositories({"com.aliens.hipster.repository","com.aliens.msg.repositories"})
+@EnableJpaRepositories({"com.aliens.hipster.repository","com.aliens.msg.repositories","com.ailiens"})
 @EnableJpaAuditing(auditorAwareRef = "springSecurityAuditorAware")
 @EnableTransactionManagement
 public class DatabaseConfiguration {

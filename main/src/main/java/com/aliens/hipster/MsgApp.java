@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.Collection;
 
 @ComponentScan({"com.aliens","com.ailiens"})
-@EntityScan(basePackages = {"com.aliens.hipster.domain","com.aliens.msg.models"})
+@EntityScan(basePackages = {"com.aliens.hipster.domain","com.aliens.msg.models","com.ailiens"})
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ JHipsterProperties.class, LiquibaseProperties.class })
 public class MsgApp {

@@ -13,13 +13,14 @@ import java.util.HashMap;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Component
-@ConfigurationProperties(prefix = "spring.keycloakCreds")
+@ConfigurationProperties(prefix = "keycloak")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KeyCloakConfig {
 
     String keycloakGetAccessTokenUrl;
     long  cacheDuration;
+    String realm;
 
 	HashMap<String, UserCredentials> map=new HashMap<>();
 

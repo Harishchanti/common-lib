@@ -17,10 +17,10 @@ spring:
         serialization.write_dates_as_timestamps: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:msg;DB_CLOSE_DELAY=-1
+        url: jdbc:mysql://localhost:3306/commons?useUnicode=true&characterEncoding=utf8&useSSL=false
         name:
-        username:
-        password:
+        username: root
+        password: root
     jpa:
         database-platform: com.aliens.hipster.domain.util.FixedH2Dialect
         database: H2
@@ -96,3 +96,14 @@ jhipster:
         contactEmail:
         license:
         licenseUrl:
+
+keycloak:
+    keycloakGetAccessTokenUrl: https://localhost:8080
+    cacheDuration: 10
+    realm: master
+    map:
+        NODEUSER:
+            username: nodeuser
+            password: qanode
+            clientId: odinQA
+            clientSecret: secret

@@ -12,4 +12,5 @@ public class UserCredentials {
   String username;
   String password;
   String clientId;
+  String clientSecret;
 }
