@@ -5,6 +5,7 @@ import com.ailiens.common.restutil.RestUtil;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.net.HttpHeaders;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import lombok.extern.slf4j.Slf4j;
@@ -56,7 +57,7 @@ public class Credentials {
             userCredentials.getClientId());
 
         HttpResponse<KeyCloakResponse> httpResponse = Unirest.post(keyCloakConfig.getKeycloakGetAccessTokenUrl())
-            .header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+            .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
             .body(body)
             .asObject(KeyCloakResponse.class);
 
