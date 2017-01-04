@@ -103,7 +103,7 @@ public class Credentials {
 		log.info("Getting new Token for {}", user);
 		UserCredentials userCredentials;
 
-        userCredentials=keyCloakConfig.getMap().getOrDefault(user, null);
+        userCredentials=keyCloakConfig.getUsers().getOrDefault(user, null);
 
 		if (userCredentials == null) {
 			log.error("Keycloak user not found");
