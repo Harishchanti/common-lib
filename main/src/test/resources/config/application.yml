@@ -98,12 +98,12 @@ jhipster:
         licenseUrl:
 
 keycloak:
-    keycloakGetAccessTokenUrl: https://localhost:8080
+    baseUrl: http://keycloak-dev.ailiens.com
     cacheDuration: 10
-    realm: master
-    map:
-        NODEUSER:
-            username: nodeuser
-            password: qanode
-            clientId: odinQA
-            clientSecret: secret
+    users:
+        TESTUSER:
+            username: test
+            password: test
+            clientId: commonDev
+            clientSecret: 3977945a-2ac0-4c93-8dcf-dcc726cf3fe7
+            realm: AILSECURE

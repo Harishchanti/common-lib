@@ -2,11 +2,13 @@ package com.ailiens.common.restutil.keycloak;
 
 
 import com.ailiens.common.restutil.RestUtil;
+import com.google.common.base.Strings;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.request.HttpRequestWithBody;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +33,14 @@ public class Credentials {
 	private LoadingCache<String, String> cache;
 
     static Base64.Encoder encoder=Base64.getEncoder();
+    static final String KEYCLOAK_PATH ="/auth/realms/%s/protocol/openid-connect/token";
 
     @PostConstruct
     public void setup()
     {
         cache = CacheBuilder.newBuilder().maximumSize(100)
-            .expireAfterWrite(keyCloakConfig.getCacheDuration(), TimeUnit.MINUTES).build(new CacheLoader<String, String>() {
+            .expireAfterWrite(keyCloakConfig.getCacheDuration(), TimeUnit.MINUTES)
+            .build(new CacheLoader<String, String>() {
                 @Override
                 public String load(String key) throws Exception {
                     return generateAccessToken(key);
@@ -67,18 +71,26 @@ public class Credentials {
             userCredentials.getPassword(),
             userCredentials.getClientId());
 
-        String authHeader=generateAuthHeader(userCredentials);
 
-        URIBuilder uriBuilder =new URIBuilder(keyCloakConfig.getKeycloakGetAccessTokenUrl());
-        uriBuilder.setPath( String.format("/auth/realms/%s/protocol/openid-connect/token",keyCloakConfig.getRealm()));
-
+        String path=String.format(KEYCLOAK_PATH,userCredentials.getRealm());
+        URIBuilder uriBuilder =new URIBuilder(keyCloakConfig.getBaseUrl()+path);
         URI uri =uriBuilder.build();
 
 
-        HttpResponse<KeyCloakResponse> httpResponse = Unirest.post(uri.toString())
-            .header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-            .header("Authorization",authHeader)
-            .body(body)
+
+
+            HttpRequestWithBody requestWithBody= Unirest.post(uri.toString())
+            .header("content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE);
+
+           if(!Strings.isNullOrEmpty(userCredentials.getClientSecret()))
+           {
+               String authHeader=generateAuthHeader(userCredentials);
+               requestWithBody=requestWithBody.header("Authorization",authHeader);
+           }
+
+
+        HttpResponse<KeyCloakResponse> httpResponse =requestWithBody
+                .body(body)
             .asObject(KeyCloakResponse.class);
 
         restUtil.checkStatus(httpResponse);

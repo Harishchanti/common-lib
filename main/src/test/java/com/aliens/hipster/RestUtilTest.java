@@ -23,7 +23,7 @@ public class RestUtilTest {
     @SneakyThrows
     public void test()
     {
-       restUtil.withUser("NODEUSER")
+       restUtil.withUser("TESTUSER")
            .get("http://www.google.com",String.class);
     }
 

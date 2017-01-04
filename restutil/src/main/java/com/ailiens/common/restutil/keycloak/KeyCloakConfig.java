@@ -18,10 +18,9 @@ import java.util.HashMap;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class KeyCloakConfig {
 
-    String keycloakGetAccessTokenUrl;
-    long  cacheDuration;
-    String realm;
+    String baseUrl;
+    long  cacheDuration=100;
 
-	HashMap<String, UserCredentials> map=new HashMap<>();
+	HashMap<String, UserCredentials> users=new HashMap<>();
 
 }

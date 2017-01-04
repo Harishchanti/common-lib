@@ -13,4 +13,5 @@ public class UserCredentials {
   String password;
   String clientId;
   String clientSecret;
+  String realm;
 }
