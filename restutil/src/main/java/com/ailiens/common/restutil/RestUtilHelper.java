@@ -101,6 +101,7 @@ public class RestUtilHelper implements CheckResponse {
 
         if(logResponse)
         {
+            if(response.getBody()!=null)
             log.info(response.getBody().toString());
         }
         String key= getKeycloakKey();
