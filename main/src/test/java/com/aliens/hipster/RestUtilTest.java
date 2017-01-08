@@ -1,6 +1,7 @@
 package com.aliens.hipster;
 
-import com.ailiens.common.restutil.RestUtil;
+import com.ailiens.common.restutil.RestUtilProvider;
+import com.mashape.unirest.http.HttpResponse;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,14 +18,24 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class RestUtilTest {
 
     @Autowired
-    RestUtil restUtil;
+    RestUtilProvider restUtilProvider;
+
+    String url="https://kong-qa.ailiens.com:8443/pricingengine/promotionsMetaData/ba2b74c5-0e96-4b3c-a125-d212200abee9";
+    String KEYCLOAKUSER="NODEUSR";
 
     @Test
     @SneakyThrows
     public void test()
     {
-       restUtil.withUser("TESTUSER")
-           .get("http://www.google.com",String.class);
+
+        HttpResponse<String> httpResponse=restUtilProvider.getInstance()
+            .withUser("NODEUSER")
+            .header("custom-header-1","value1")
+            .header("custom-header-2","value2")
+            .logRequest(false)
+            .logResponse(false)
+            .get(url,String.class);
+
     }
 
 }

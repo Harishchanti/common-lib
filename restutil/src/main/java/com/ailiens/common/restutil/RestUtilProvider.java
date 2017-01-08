@@ -16,7 +16,7 @@ public class RestUtilProvider {
     @Autowired
     Provider<RestUtil> restUtilProvider;
 
-    public RestUtil get()
+    public RestUtil getInstance()
     {
         return restUtilProvider.get();
     }

@@ -20,6 +20,7 @@ public class KeyCloakConfig {
 
     String baseUrl;
     long  cacheDuration=100;
+    String keycloakPath="/auth/realms/%s/protocol/openid-connect/token";
 
 	HashMap<String, UserCredentials> users=new HashMap<>();
 

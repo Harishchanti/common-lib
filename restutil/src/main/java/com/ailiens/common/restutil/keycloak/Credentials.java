@@ -33,7 +33,7 @@ public class Credentials {
 	private LoadingCache<String, String> cache;
 
     static Base64.Encoder encoder=Base64.getEncoder();
-    static final String KEYCLOAK_PATH ="/auth/realms/%s/protocol/openid-connect/token";
+
 
     @PostConstruct
     public void setup()
@@ -72,7 +72,7 @@ public class Credentials {
             userCredentials.getClientId());
 
 
-        String path=String.format(KEYCLOAK_PATH,userCredentials.getRealm());
+        String path=String.format(keyCloakConfig.getKeycloakPath(),userCredentials.getRealm());
         URIBuilder uriBuilder =new URIBuilder(keyCloakConfig.getBaseUrl()+path);
         URI uri =uriBuilder.build();
 
