@@ -27,7 +27,6 @@ public class MsgConnectionManager {
         int poolSize=msgConfig.getPoolSize();
         if(poolSize==0)poolSize=1;
 
-        //default profile qa
         String rabbitMqHost="ac521f15ea4b211e69b1f1283e06dba7-1417201917.us-east-1.elb.amazonaws.com";
         String userName="";
         String password="";
@@ -41,12 +40,6 @@ public class MsgConnectionManager {
         else if("prod".equals(msgConfig.getEnv()) )
         {
             rabbitMqHost="ac14beb47a59811e69f9602bdb402d33-896170883.ap-southeast-1.elb.amazonaws.com";
-        }
-        else if("development".equals(msgConfig.getEnv()))
-        {
-            rabbitMqHost="a08f6ca2fd25511e6bbba123cc1aef16-1127466792.us-east-1.elb.amazonaws.com";
-            userName="guest";
-            password="guest";
         }
         String CLUSTER_NAME="MSG";
         RabbitMqConnectionManager.setPoolType(PoolType.LAZY);
