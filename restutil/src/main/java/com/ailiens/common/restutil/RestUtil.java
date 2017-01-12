@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by jayant on 13/9/16.
@@ -43,7 +42,7 @@ public class RestUtil  extends RestUtilHelper  {
 
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> HttpResponse<T> get(String url,  Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException {
+    public  <T> HttpResponse<T> get(String url,  Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
 
 
         preProcess(url,null);
@@ -58,7 +57,7 @@ public class RestUtil  extends RestUtilHelper  {
     }
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> HttpResponse<T> post(String url, String payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException {
+    public  <T> HttpResponse<T> post(String url, String payload, Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
 
 
         preProcess(url,payload);
@@ -74,7 +73,7 @@ public class RestUtil  extends RestUtilHelper  {
     }
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> HttpResponse<T> post(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException {
+    public  <T> HttpResponse<T> post(String url, Object payload, Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
 
 
         preProcess(url,payload);
@@ -90,7 +89,7 @@ public class RestUtil  extends RestUtilHelper  {
     }
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> HttpResponse<T> put(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException  {
+    public  <T> HttpResponse<T> put(String url, Object payload, Class <? extends T> responseClass) throws  UnirestException,GenericServiceException  {
 
         preProcess(url,payload);
         HttpResponse<T> response = Unirest.put(url)
@@ -104,7 +103,7 @@ public class RestUtil  extends RestUtilHelper  {
     }
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> HttpResponse<T> put(String url, String payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException  {
+    public  <T> HttpResponse<T> put(String url, String payload, Class <? extends T> responseClass) throws  UnirestException,GenericServiceException  {
 
         preProcess(url,payload);
         HttpResponse<T> response = Unirest.put(url)
@@ -118,7 +117,7 @@ public class RestUtil  extends RestUtilHelper  {
     }
 
     @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
-    public  <T> HttpResponse<T> delete(String url, Object payload, Class <? extends T> responseClass) throws ExecutionException, UnirestException,GenericServiceException  {
+    public  <T> HttpResponse<T> delete(String url, Object payload, Class <? extends T> responseClass) throws UnirestException,GenericServiceException  {
 
         preProcess(url,payload);
         HttpResponse<T> response = Unirest.delete(url)
@@ -131,7 +130,16 @@ public class RestUtil  extends RestUtilHelper  {
         return response;
     }
 
-    public  <T> List<T> get(String url, TypeReference<List<T>> typeReference) throws ExecutionException, UnirestException, GenericServiceException, IOException {
+
+    public  <T> T get(String url, TypeReference<T> typeReference) throws  UnirestException,GenericServiceException, IOException {
+
+
+            String responseStr = get(url, String.class).getBody();
+            return objectMapper.readValue(responseStr, typeReference);
+
+    }
+
+    public  <T> List<T> getPaginated(String url, TypeReference<List<T>> typeReference) throws  UnirestException,GenericServiceException, IOException {
 
         if(pageSize==0) {
             String responseStr = get(url, String.class).getBody();

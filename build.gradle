@@ -212,7 +212,7 @@ subprojects
 
 
 configure (subprojects- project(':graphite-reporter')
-    - project(':graphite-reporter-extensions')
+    - project(':graphite-reporter-extensions')  - project(':common') - project(':restutil')
 
 ){
 
@@ -387,6 +387,14 @@ project(':restutil')
         dependencies
             {
                 compile project(':common')
+
+                compile 'com.mashape.unirest:unirest-java:1.4.9'
+                compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
+                compile 'com.google.code.gson:gson:2.8.0'
+                compile "javax.inject:javax.inject:1"
+
+                compile "commons-lang:commons-lang:2.6"
+                compile "commons-io:commons-io:2.5"
             }
     }
 
@@ -397,6 +405,15 @@ project(':msg-publisher')
         dependencies
             {
                 compile project(':msg-common')
+            }
+    }
+
+
+project(':common')
+    {
+        dependencies
+            {
+                compile 'com.google.guava:guava:20.0'
             }
     }
 

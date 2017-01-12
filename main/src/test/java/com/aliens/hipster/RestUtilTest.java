@@ -1,7 +1,6 @@
 package com.aliens.hipster;
 
 import com.ailiens.common.restutil.RestUtilProvider;
-import com.mashape.unirest.http.HttpResponse;
 import lombok.SneakyThrows;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,13 +27,13 @@ public class RestUtilTest {
     public void test()
     {
 
-        HttpResponse<String> httpResponse=restUtilProvider.getInstance()
-            .withUser("NODEUSER")
-            .header("custom-header-1","value1")
-            .header("custom-header-2","value2")
-            .logRequest(false)
-            .logResponse(false)
-            .get(url,String.class);
+//        HttpResponse<String> httpResponse=restUtilProvider.getInstance()
+//            .withUser("NODEUSER")
+//            .header("custom-header-1","value1")
+//            .header("custom-header-2","value2")
+//            .logRequest(false)
+//            .logResponse(false)
+//            .get(url,String.class);
 
     }
 

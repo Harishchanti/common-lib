@@ -13,10 +13,16 @@ import javax.inject.Singleton;
 @Singleton
 public class RestUtilProvider {
 
-    @Autowired
-    Provider<RestUtil> restUtilProvider;
 
-    public RestUtil getInstance()
+    static Provider<RestUtil> restUtilProvider;
+
+    @Autowired
+    public RestUtilProvider(Provider<RestUtil> injectedRestUtilProvider)
+    {
+        restUtilProvider=injectedRestUtilProvider;
+    }
+
+    public static RestUtil getInstance()
     {
         return restUtilProvider.get();
     }

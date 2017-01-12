@@ -53,8 +53,14 @@ public class Credentials {
 		cache.refresh(user);
 	}
 
-	public  String getAccessToken(String user) throws ExecutionException {
-		return cache.get(user);
+	public  String getAccessToken(String user)  {
+		try {
+            return cache.get(user);
+        }catch (ExecutionException e)
+        {
+            //log.error("{}", ExceptionUtils.getMessage(e));
+            return null;
+        }
 	}
 
 	private String generateAuthHeader(UserCredentials userCredentials)
