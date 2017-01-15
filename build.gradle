@@ -205,6 +205,11 @@ subprojects
             }
 
             apply from: '../gradle/release.gradle'
+
+            compile 'com.google.code.gson:gson:2.8.0'
+            compile 'com.google.guava:guava:18.0'
+
+            compile "javax.inject:javax.inject:${javax_inject_version}"
         }
     }
 
@@ -212,6 +217,8 @@ subprojects
 
 configure (subprojects- project(':graphite-reporter')
     - project(':graphite-reporter-extensions')
+    -project(':msg-publisher')
+    -project(':msg-common')
 
 ){
 
@@ -248,7 +255,7 @@ configure (subprojects- project(':graphite-reporter')
         }
         compile "commons-lang:commons-lang:${commons_lang_version}"
         compile "commons-io:commons-io:${commons_io_version}"
-        compile "javax.inject:javax.inject:${javax_inject_version}"
+
         compile "javax.transaction:javax.transaction-api"
         compile "org.apache.geronimo.javamail:geronimo-javamail_1.4_mail:${geronimo_javamail_1_4_mail_version}"
 
@@ -296,10 +303,11 @@ configure (subprojects- project(':graphite-reporter')
 
         //commons
 
-        compile 'com.rabbitmq:amqp-client:3.6.5'
+
         compile 'com.mashape.unirest:unirest-java:1.4.9'
         compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
         compile 'com.google.code.gson:gson:2.8.0'
+        compile 'com.rabbitmq:amqp-client:3.6.5'
 
     }
 
@@ -380,6 +388,13 @@ project(':msg-receiver')
             }
     }
 
+project('msg-common')
+    {
+        dependencies
+            {
+                compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+            }
+    }
 
 project(':restutil')
     {
@@ -396,7 +411,13 @@ project(':msg-publisher')
         dependencies
             {
                 compile project(':msg-common')
+                compile group: 'org.apache.kafka', name: 'kafka-clients', version: '0.10.1.1'
+                compile group: 'org.apache.kafka', name: 'kafka_2.11', version: '0.10.1.1'
+                compile 'com.rabbitmq:amqp-client:3.6.5'
+                compile 'org.apache.commons:commons-lang3:3.3.2'
             }
+
+
     }
 
 clean {
