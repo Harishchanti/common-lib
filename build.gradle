@@ -411,8 +411,6 @@ project(':msg-publisher')
         dependencies
             {
                 compile project(':msg-common')
-                compile group: 'org.apache.kafka', name: 'kafka-clients', version: '0.10.1.1'
-                compile group: 'org.apache.kafka', name: 'kafka_2.11', version: '0.10.1.1'
                 compile 'com.rabbitmq:amqp-client:3.6.5'
                 compile 'org.apache.commons:commons-lang3:3.3.2'
             }
