@@ -68,7 +68,7 @@ public class MsgPublisher {
         }
     }
 
-    public void publish(MsgMessage msgMessage, String queueName) throws Exception
+    public void publish(MsgMessage msgMessage, String queueName)
     {
         log.info("Sending message {} payload {}",msgMessage.getMessageId(),msgMessage.getPayload());
 
@@ -87,7 +87,10 @@ public class MsgPublisher {
         }
         catch (Exception e)
         {
-            throw e;
+            msgMessage.setSent(false);
+            messageRepository.save(msgMessage);
+            log.error("Unable to send message {}",e.getMessage());
+
         }
         finally {
             RabbitMqUtil.ensureClosure(channel);
@@ -95,7 +98,7 @@ public class MsgPublisher {
     }
 
 
-    public void exchangePublish(MsgMessage msgMessage, String exchangeName) throws Exception
+    public void exchangePublish(MsgMessage msgMessage, String exchangeName)
     {
         log.info("Sending message {} payload {}",msgMessage.getMessageId(),msgMessage.getPayload());
 
@@ -114,7 +117,9 @@ public class MsgPublisher {
         }
         catch (Exception e)
         {
-            throw e;
+            msgMessage.setSent(false);
+            messageRepository.save(msgMessage);
+            log.error("Unable to send message {}",e.getMessage());
         }
         finally {
             RabbitMqUtil.ensureClosure(channel);

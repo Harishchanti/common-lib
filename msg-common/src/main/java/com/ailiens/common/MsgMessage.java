@@ -1,10 +1,8 @@
 package com.ailiens.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDateTime;
@@ -12,9 +10,6 @@ import org.joda.time.LocalDateTime;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
-import lombok.Getter;
-import lombok.Setter;
-import com.fasterxml.jackson.annotation.*;
 /**
  * Created by jayant on 15/9/16.
  */
@@ -42,13 +37,13 @@ public class MsgMessage implements Serializable {
     @Column(name = "group_id")
     String groupId=UUID.randomUUID().toString();
 
-    @Column(name = "event_id")
-    String eventId;
 
     @Transient
     @JsonProperty("eventType")
     @Getter @Setter
     String eventType;
+
+    boolean sent=true;
 
 
     @Id
