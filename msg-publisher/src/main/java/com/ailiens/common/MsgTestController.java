@@ -3,6 +3,7 @@ package com.ailiens.common;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/msg")
-public class MsgController {
+public class MsgTestController {
 
     @Autowired
     MsgPublisher msgPublisher;
@@ -30,10 +31,10 @@ public class MsgController {
     }
 
 
-    @RequestMapping(value = "/retry", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> retry() throws Exception {
+    @RequestMapping(value = "/retry/{pageSize}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> retry(@PathVariable int pageSize) throws Exception {
 
-        int num=retryMessages.invoke();
+        int num=retryMessages.invoke(pageSize);
         return ResponseEntity.ok(num);
     }
 

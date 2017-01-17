@@ -1,7 +1,6 @@
 package com.ailiens.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rabbitmq.client.AMQP;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.MessageProperties;
 import lombok.AccessLevel;
@@ -10,11 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.Wither;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
 
 /**
  * Created by jayant on 14/9/16.
@@ -34,41 +32,16 @@ public class MsgPublisher {
     String clusterName;
 
     @Wither
-    boolean dbPersist=true;
+    boolean logging =true;
+
+    @Wither
+    boolean exceptionLogging =true;
 
     @Autowired
-    MessageRepository messageRepository;
+    OutboundMessageRepository outboundMessageRepository;
 
 
-
-    public  void publish(MsgMessage message, String queName,Map<String,Object> headers,boolean persist) throws Exception {
-
-
-        Channel channel=null;
-        try {
-
-            channel =RabbitMqConnectionManager.getChannel(clusterName);
-
-            channel.queueDeclare(queName, true, false, false, null);
-            String queueMessage = mapper.writeValueAsString(message);
-            AMQP.BasicProperties.Builder builder = new AMQP.BasicProperties.Builder().headers(headers);
-
-            if(persist)
-                builder.deliveryMode(2);
-
-            AMQP.BasicProperties properties = builder.build();
-            channel.basicPublish("", queName, properties, queueMessage.getBytes("UTF-8"));
-        }
-        catch (Exception e)
-        {
-            throw e;
-        }
-        finally {
-            RabbitMqUtil.ensureClosure(channel);
-        }
-    }
-
-    public void publish(MsgMessage msgMessage, String queueName)
+    public PublishResponse publish(MsgMessage msgMessage, String queueName)
     {
         log.info("Sending message {} payload {}",msgMessage.getMessageId(),msgMessage.getPayload());
 
@@ -82,15 +55,25 @@ public class MsgPublisher {
             String queueMessage = mapper.writeValueAsString(msgMessage);
             channel.basicPublish("", queueName, MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
 
-            if(dbPersist)
-            messageRepository.save(msgMessage);
+            if(logging)
+            {
+                OutboundMessage outboundMessage= mapper.convertValue(msgMessage,OutboundMessage.class);
+                outboundMessage.setTopic(queueName);
+                outboundMessageRepository.save(outboundMessage);
+            }
+            return PublishResponse.PUBLISHED;
         }
         catch (Exception e)
         {
-            msgMessage.setSent(false);
-            messageRepository.save(msgMessage);
+            if(exceptionLogging) {
+                OutboundMessage outboundMessage = mapper.convertValue(msgMessage, OutboundMessage.class);
+                outboundMessage.setTopic(queueName);
+                outboundMessage.setSent(false);
+                outboundMessage.setStatus(ExceptionUtils.getMessage(e));
+                outboundMessageRepository.save(outboundMessage);
+            }
             log.error("Unable to send message {}",e.getMessage());
-
+            return PublishResponse.ERROR;
         }
         finally {
             RabbitMqUtil.ensureClosure(channel);
@@ -98,7 +81,7 @@ public class MsgPublisher {
     }
 
 
-    public void exchangePublish(MsgMessage msgMessage, String exchangeName)
+    public PublishResponse exchangePublish(MsgMessage msgMessage, String exchangeName)
     {
         log.info("Sending message {} payload {}",msgMessage.getMessageId(),msgMessage.getPayload());
 
@@ -112,14 +95,25 @@ public class MsgPublisher {
             channel.exchangeDeclare(exchangeName,"fanout");
             channel.basicPublish(exchangeName, "", MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
 
-            if(dbPersist)
-                messageRepository.save(msgMessage);
+            if(logging)
+            {
+                OutboundMessage outboundMessage= mapper.convertValue(msgMessage,OutboundMessage.class);
+                outboundMessage.setTopic(exchangeName);
+                outboundMessageRepository.save(outboundMessage);
+            }
+            return PublishResponse.PUBLISHED;
         }
         catch (Exception e)
         {
-            msgMessage.setSent(false);
-            messageRepository.save(msgMessage);
+            if(exceptionLogging) {
+                OutboundMessage outboundMessage = mapper.convertValue(msgMessage, OutboundMessage.class);
+                outboundMessage.setTopic(exchangeName);
+                outboundMessage.setSent(false);
+                outboundMessage.setStatus(ExceptionUtils.getMessage(e));
+                outboundMessageRepository.save(outboundMessage);
+            }
             log.error("Unable to send message {}",e.getMessage());
+            return PublishResponse.ERROR;
         }
         finally {
             RabbitMqUtil.ensureClosure(channel);
