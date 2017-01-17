@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/msg")
-public class MsgTestController {
+public class MsgController {
 
     @Autowired
     MsgPublisher msgPublisher;
+
+    @Autowired
+    RetryMessages retryMessages;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> test() throws Exception {
@@ -24,6 +27,14 @@ public class MsgTestController {
         msgMessage.setPayload("test message");
         msgPublisher.publish(msgMessage,"test");
         return ResponseEntity.ok("sent test message to MSG");
+    }
+
+
+    @RequestMapping(value = "/retry", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> retry() throws Exception {
+
+        int num=retryMessages.invoke();
+        return ResponseEntity.ok(num);
     }
 
 }
