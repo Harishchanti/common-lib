@@ -3,7 +3,9 @@ package com.ailiens.common.restutil;
 
 import com.ailiens.common.restutil.exceptions.GenericServiceException;
 import com.ailiens.common.restutil.exceptions.UnauthorizedAccessException;
+import com.ailiens.common.restutil.keycloak.Credentials;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.Lists;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
@@ -37,6 +39,12 @@ public class RestUtil  extends RestUtilHelper  {
     public RestUtil()
     {
         headers.put("content-type",MediaType.APPLICATION_JSON_VALUE);
+    }
+
+    public RestUtil(ObjectMapper objectMapper, Credentials credentials)
+    {
+        this.objectMapper =objectMapper;
+        this.credentials = credentials;
     }
 
 

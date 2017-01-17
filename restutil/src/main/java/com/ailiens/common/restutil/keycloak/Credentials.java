@@ -34,6 +34,11 @@ public class Credentials {
 
     static Base64.Encoder encoder=Base64.getEncoder();
 
+    public  Credentials(KeyCloakConfig keyCloakConfig)
+    {
+        this.keyCloakConfig =keyCloakConfig;
+    }
+
 
     @PostConstruct
     public void setup()
