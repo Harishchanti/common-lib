@@ -219,6 +219,7 @@ configure (subprojects- project(':graphite-reporter')
     - project(':graphite-reporter-extensions')
     -project(':msg-publisher')
     -project(':msg-common')
+    -project(':msg-receiver')
 
 ){
 
@@ -385,6 +386,11 @@ project(':msg-receiver')
         dependencies
             {
                 compile project(':msg-common')
+                compile 'org.apache.commons:commons-lang3:3.3.2'
+                compile "io.dropwizard.metrics:metrics-core"
+                compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
+                compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
+                compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
             }
     }
 
