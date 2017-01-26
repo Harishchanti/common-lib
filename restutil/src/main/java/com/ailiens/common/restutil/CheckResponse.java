@@ -17,6 +17,8 @@ public interface CheckResponse {
             case 201:
             case 204:
                 //request successful, do nothing
+            case 302:
+            case 304:
             case 409:
                 break;
             case 400:
