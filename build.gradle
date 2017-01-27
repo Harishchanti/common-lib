@@ -220,6 +220,7 @@ configure (subprojects- project(':graphite-reporter')
     -project(':msg-publisher')
     -project(':msg-common')
     -project(':msg-receiver')
+    -project(':ando-models')
 
 ){
 
@@ -422,6 +423,15 @@ project(':msg-publisher')
             }
 
 
+    }
+
+
+project(':ando-models')
+    {
+        dependencies {
+            compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-elasticsearch'
+            compile group: 'org.hibernate', name: 'hibernate-envers'
+          }
     }
 
 clean {
