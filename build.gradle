@@ -420,6 +420,11 @@ project(':msg-publisher')
                 compile project(':msg-common')
                 compile 'com.rabbitmq:amqp-client:3.6.5'
                 compile 'org.apache.commons:commons-lang3:3.3.2'
+
+                compile "io.dropwizard.metrics:metrics-core"
+                compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
+                compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
+                compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
             }
 
 

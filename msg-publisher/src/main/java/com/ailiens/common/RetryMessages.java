@@ -37,8 +37,6 @@ public class RetryMessages {
           outboundMessage.incRetries();
 
           PublishResponse response=msgPublisher
-              .withLogging(false)
-              .withExceptionLogging(false)
               .exchangePublish(msgMessage,outboundMessage.getTopic());
 
 
