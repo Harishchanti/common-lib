@@ -8,11 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
+
 /**
  * Created by jayant on 16/1/17.
  */
 @RestController
 @RequestMapping("/msg")
+@Transactional
 public class MsgTestController {
 
     @Autowired

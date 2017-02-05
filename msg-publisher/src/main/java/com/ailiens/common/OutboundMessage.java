@@ -38,7 +38,7 @@ public class OutboundMessage implements Serializable {
 
     String status;
 
-    @Transient
+
     @JsonProperty("eventType")
     @Getter
     @Setter

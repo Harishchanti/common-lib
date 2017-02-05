@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -29,15 +31,17 @@ public class RetryMessages {
     public int invoke(int pageSize )
   {
       List<OutboundMessage> outboundMessageList= outboundMessageRepository.getFailedMessages(new PageRequest(0,pageSize));
-      log.info("Retrying {} messages",outboundMessageList.size());
+      if(outboundMessageList.size()==0)return 0;
 
       for(OutboundMessage outboundMessage : outboundMessageList) {
           MsgMessage msgMessage=objectMapper.convertValue(outboundMessage,MsgMessage.class);
 
           outboundMessage.incRetries();
 
+          log.info("Retrying  message: {}",msgMessage.getMessageId());
+
           PublishResponse response=msgPublisher
-              .exchangePublish(msgMessage,outboundMessage.getTopic());
+              .retry(msgMessage,outboundMessage.getTopic());
 
 
           if(response==PublishResponse.PUBLISHED)
@@ -47,4 +51,12 @@ public class RetryMessages {
       }
       return  outboundMessageList.size();
   }
+
+    @Scheduled(cron = "0 */15  * * * ?")
+    @Transactional
+    public void retry()
+    {
+        invoke(100);
+
+    }
 }

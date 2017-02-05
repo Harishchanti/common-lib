@@ -16,10 +16,10 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "MSG")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MsgConfig {
-  String env;
-  String userName;
-  String password;
-  int poolSize;
-  boolean logging=true;
-  boolean exceptionLogging=true;
+    String env;
+    String userName;
+    String password;
+    int poolSize;
+    boolean logging = true;
+    boolean exceptionLogging = true;
 }

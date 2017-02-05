@@ -112,4 +112,31 @@ public class MsgPublisher {
             RabbitMqUtil.ensureClosure(channel);
         }
     }
+
+
+    @Timed
+    public PublishResponse retry(MsgMessage msgMessage, String exchangeName)
+    {
+
+
+        Channel channel=null;
+        try {
+
+            channel =RabbitMqConnectionManager.getChannel();
+
+            String queueMessage = mapper.writeValueAsString(msgMessage);
+            channel.exchangeDeclare(exchangeName,"fanout");
+            channel.basicPublish(exchangeName, "", MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
+
+
+            return PublishResponse.PUBLISHED;
+        }
+        catch (Exception e)
+        {
+            return PublishResponse.ERROR;
+        }
+        finally {
+            RabbitMqUtil.ensureClosure(channel);
+        }
+    }
 }
