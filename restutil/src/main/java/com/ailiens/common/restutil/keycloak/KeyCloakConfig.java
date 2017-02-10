@@ -19,8 +19,8 @@ import java.util.HashMap;
 public class KeyCloakConfig {
 
     String baseUrl;
-    long  cacheDuration=100;
-    String keycloakPath="/auth/realms/%s/protocol/openid-connect/token";
+    long  cacheDuration=10;
+    String keycloakPath;
 
 	HashMap<String, UserCredentials> users=new HashMap<>();
 

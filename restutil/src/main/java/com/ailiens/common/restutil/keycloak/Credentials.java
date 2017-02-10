@@ -90,6 +90,7 @@ public class Credentials {
         URI uri =uriBuilder.build();
 
 
+        log.info(uri.toString());
 
 
             HttpRequestWithBody requestWithBody= Unirest.post(uri.toString())
