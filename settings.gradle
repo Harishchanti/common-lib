@@ -10,5 +10,6 @@ include 'common'
 include 'graphite-reporter'
 include 'graphite-reporter-extensions'
 include 'ando-models'
+include 'msg-publisher-extension-spring-jpa'
 include 'galactus-models'
 

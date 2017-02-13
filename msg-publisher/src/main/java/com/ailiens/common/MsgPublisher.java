@@ -26,8 +26,8 @@ public class MsgPublisher {
 
     ObjectMapper mapper = new ObjectMapper();
 
-    @Autowired
-    OutboundMessageRepository outboundMessageRepository;
+    @Autowired(required = false)
+    MessageLoggingService messageLogger;
 
     @Autowired
     MsgConfig msgConfig;
@@ -47,22 +47,17 @@ public class MsgPublisher {
             String queueMessage = mapper.writeValueAsString(msgMessage);
             channel.basicPublish("", queueName, MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
 
-            if(msgConfig.isLogging())
+            if(msgConfig.isLogging() && messageLogger!=null)
             {
-                OutboundMessage outboundMessage= mapper.convertValue(msgMessage,OutboundMessage.class);
-                outboundMessage.setTopic(queueName);
-                outboundMessageRepository.save(outboundMessage);
+                messageLogger.save(msgMessage,queueName);
             }
             return PublishResponse.PUBLISHED;
         }
         catch (Exception e)
         {
-            if(msgConfig.isExceptionLogging()) {
-                OutboundMessage outboundMessage = mapper.convertValue(msgMessage, OutboundMessage.class);
-                outboundMessage.setTopic(queueName);
-                outboundMessage.setSent(false);
-                outboundMessage.setStatus(ExceptionUtils.getMessage(e));
-                outboundMessageRepository.save(outboundMessage);
+            if(msgConfig.isExceptionLogging() && messageLogger!=null) {
+
+                messageLogger.saveUndiveleredMessage(msgMessage,queueName,ExceptionUtils.getMessage(e));
             }
 
             return PublishResponse.ERROR;
@@ -88,22 +83,17 @@ public class MsgPublisher {
             channel.exchangeDeclare(exchangeName,"fanout");
             channel.basicPublish(exchangeName, "", MessageProperties.PERSISTENT_TEXT_PLAIN, queueMessage.getBytes("UTF-8"));
 
-            if(msgConfig.isLogging())
+            if(msgConfig.isLogging() && messageLogger!=null)
             {
-                OutboundMessage outboundMessage= mapper.convertValue(msgMessage,OutboundMessage.class);
-                outboundMessage.setTopic(exchangeName);
-                outboundMessageRepository.save(outboundMessage);
+                messageLogger.save(msgMessage,exchangeName);
             }
             return PublishResponse.PUBLISHED;
         }
         catch (Exception e)
         {
-            if(msgConfig.isExceptionLogging()) {
-                OutboundMessage outboundMessage = mapper.convertValue(msgMessage, OutboundMessage.class);
-                outboundMessage.setTopic(exchangeName);
-                outboundMessage.setSent(false);
-                outboundMessage.setStatus(ExceptionUtils.getMessage(e));
-                outboundMessageRepository.save(outboundMessage);
+            if(msgConfig.isExceptionLogging() && messageLogger!=null) {
+
+                messageLogger.saveUndiveleredMessage(msgMessage,exchangeName,ExceptionUtils.getMessage(e));
             }
 
             return PublishResponse.ERROR;
