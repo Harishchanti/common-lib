@@ -215,13 +215,15 @@ subprojects
 
 
 
-configure (subprojects- project(':graphite-reporter')
+configure (subprojects
+    - project(':graphite-reporter')
     - project(':graphite-reporter-extensions')
     -project(':msg-publisher')
     -project(':msg-common')
     -project(':msg-receiver')
     -project(':ando-models')
     -project(':galactus-models')
+    -project(':msg-publisher-extension-spring-jpa')
 
 ){
 
@@ -412,6 +414,12 @@ project(':restutil')
             }
     }
 
+project(':msg-publisher-extension-spring-jpa')
+    {
+        dependencies {
+            compile project(':msg-common')
+        }
+    }
 
 
 project(':msg-publisher')
@@ -419,6 +427,8 @@ project(':msg-publisher')
         dependencies
             {
                 compile project(':msg-common')
+                compile project(':msg-publisher-extension-spring-jpa')
+
                 compile 'com.rabbitmq:amqp-client:3.6.5'
                 compile 'org.apache.commons:commons-lang3:3.3.2'
 
@@ -447,6 +457,16 @@ project(':galactus-models')
 
         }
     }
+
+project(':security-adapter')
+    {
+        dependencies {
+
+        }
+    }
+
+
+
 
 clean {
     delete "target"

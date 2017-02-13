@@ -7,6 +7,7 @@ import com.rabbitmq.client.MessageProperties;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,7 @@ import javax.inject.Singleton;
 @Singleton
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
+@Slf4j
 public class MsgPublisher {
 
 
@@ -40,6 +42,7 @@ public class MsgPublisher {
 
         Channel channel=null;
         try {
+            log.info("Sending message {}",msgMessage.getMessageId());
 
             channel =RabbitMqConnectionManager.getChannel();
 
@@ -76,6 +79,8 @@ public class MsgPublisher {
 
         Channel channel=null;
         try {
+
+            log.info("Sending message {}",msgMessage.getMessageId());
 
             channel =RabbitMqConnectionManager.getChannel();
 
