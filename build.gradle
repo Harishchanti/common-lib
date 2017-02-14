@@ -224,6 +224,7 @@ configure (subprojects
     -project(':ando-models')
     -project(':galactus-models')
     -project(':msg-publisher-extension-spring-jpa')
+    -project(':security-adapter')
 
 ){
 
@@ -461,7 +462,8 @@ project(':galactus-models')
 project(':security-adapter')
     {
         dependencies {
-
+            compile("org.keycloak:keycloak-spring-security-adapter:2.4.0.Final")
+            compile("org.keycloak:keycloak-authz-client:2.4.0.Final")
         }
     }
 
