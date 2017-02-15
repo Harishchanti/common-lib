@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 /**
  * Created by jayant on 12/2/17.
  */
@@ -34,6 +36,12 @@ public class JPAMessageLogger implements MessageLoggingService {
         outboundMessage.setSent(false);
         outboundMessage.setStatus(exceptionMessage);
         outboundMessageRepository.save(outboundMessage);
+    }
+
+    @Override
+    public List<OutboundMessage> search(String messageId)
+    {
+        return outboundMessageRepository.searchByMessageId(messageId);
     }
 
 
