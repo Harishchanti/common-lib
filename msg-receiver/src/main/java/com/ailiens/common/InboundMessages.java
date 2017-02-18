@@ -34,6 +34,8 @@ public class InboundMessages implements Serializable {
 
     private String response;
 
+    private String handlerResponse;
+
     private String clip(String str)
     {
         if(str.length()>MAX_PAYLOAD_SIZE)
@@ -49,6 +51,7 @@ public class InboundMessages implements Serializable {
     {
         payload=clip(payload);
         response=clip(response);
+        handlerResponse=clip(handlerResponse);
     }
 
 

@@ -10,7 +10,7 @@ public interface MsgEventHandler {
     String getEventType();
     String handle(String payload) throws Exception;
 
-    void postProcess(MsgMessage message, String response);
+    void postProcess(MsgMessage message, String response,String handlerResponse);
 
     EventResponse invoke(MsgMessage message);
 }

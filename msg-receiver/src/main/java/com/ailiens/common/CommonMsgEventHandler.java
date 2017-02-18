@@ -20,13 +20,15 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
     InboundMessagesRepository inboundMessagesRepository;
 
 
-    public void postProcess(MsgMessage message, String response)
+    @Override
+    public void postProcess(MsgMessage message, String response,String handlerResponse)
     {
         InboundMessages inboundMessages = new InboundMessages();
         inboundMessages.setGroupId(message.getGroupId());
         inboundMessages.setMessageId(message.getMessageId());
         inboundMessages.setPayload(message.getPayload());
         inboundMessages.setResponse(response);
+        inboundMessages.setHandlerResponse(handlerResponse);
         inboundMessagesRepository.save(inboundMessages);
     }
 
@@ -51,9 +53,10 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
         String payload= message.getPayload();
 
         String response=PROCESSED;
+        String handlerResponse="";
         int status=200;
         try {
-            response=handle(payload);
+            handlerResponse=handle(payload);
         }
         catch (Exception e)
         {
@@ -62,7 +65,7 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
             log.error(ExceptionUtils.getMessage(e));
         }
         finally {
-            postProcess(message,response);
+            postProcess(message,response,handlerResponse);
             return new EventResponse(status,response);
         }
     }
