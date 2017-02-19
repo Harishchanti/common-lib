@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Table(name = "inbound_messages")
 @Slf4j
 @Data
-public class InboundMessages implements Serializable {
+public class InboundMessages implements Serializable,MsgInbound {
 
     private static final long serialVersionUID = 1L;
     private static final int MAX_PAYLOAD_SIZE =10000;

@@ -34,7 +34,7 @@ public class MsgTestController {
 
         MsgMessage msgMessage = new MsgMessage();
         msgMessage.setPayload("test message");
-        msgPublisher.publish(msgMessage,"test");
+        msgPublisher.exchangePublish(msgMessage,"test");
         return ResponseEntity.ok("sent test message to MSG");
     }
 
