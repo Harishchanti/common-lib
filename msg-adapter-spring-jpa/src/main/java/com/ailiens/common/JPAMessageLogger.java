@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -22,15 +23,20 @@ public class JPAMessageLogger implements MessageLoggingService {
     @Autowired
     OutboundMessageRepository outboundMessageRepository;
 
+
     @Override
+    @Transactional
     public void save(MsgMessage message, String topic) {
+
         OutboundMessage outboundMessage = mapper.convertValue(message, OutboundMessage.class);
         outboundMessage.setTopic(topic);
         outboundMessageRepository.save(outboundMessage);
+
     }
 
     @Override
-    public void saveUndiveleredMessage(MsgMessage message, String topic, String exceptionMessage) {
+    @Transactional
+    public void saveUndelivered(MsgMessage message, String topic, String exceptionMessage) {
         OutboundMessage outboundMessage = mapper.convertValue(message, OutboundMessage.class);
         outboundMessage.setTopic(topic);
         outboundMessage.setSent(false);

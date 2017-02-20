@@ -9,7 +9,7 @@ import java.util.List;
 public interface MessageLoggingService {
     void save(MsgMessage message, String topic);
 
-    default void saveUndiveleredMessage(MsgMessage message, String topic, String exceptionMessage) {}
+    default void saveUndelivered(MsgMessage message, String topic, String exceptionMessage) {}
 
     default List<? extends MsgOutbound> search(String messageId)
     {

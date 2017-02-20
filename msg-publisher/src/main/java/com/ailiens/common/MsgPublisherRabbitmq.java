@@ -14,6 +14,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
+
+
 /**
  * Created by jayant on 14/9/16.
  */
@@ -41,7 +43,7 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
 
     public void registerCallback() {
         if (!TransactionSynchronizationManager.isSynchronizationActive()) {
-            log.error("Sync is not enabled in JPA");
+            log.error("Sync is not enabled");
             return;
         }
         TransactionSynchronizationManager.registerSynchronization(this);
@@ -66,8 +68,8 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
     {
         this.msgMessage = msgMessage;
         this.queueName = queueName;
-        registerCallback();
-
+        //registerCallback();
+        publishToQueue(msgMessage,queueName);
         return PublishResponse.PUBLISHED;
     }
 
@@ -78,8 +80,8 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
         this.msgMessage = msgMessage;
         this.queueName = queueName;
         this.exchangePublish=true;
-        registerCallback();
-
+        //registerCallback();
+        publishToExchange(msgMessage,queueName);
         return PublishResponse.PUBLISHED;
     }
 
@@ -135,7 +137,7 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
         {
             if(msgConfig.isExceptionLogging() && messageLogger!=null) {
 
-                messageLogger.saveUndiveleredMessage(msgMessage,queueName,ExceptionUtils.getMessage(e));
+                messageLogger.saveUndelivered(msgMessage,queueName,ExceptionUtils.getMessage(e));
             }
 
             return PublishResponse.ERROR;
@@ -173,7 +175,7 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
         {
             if(msgConfig.isExceptionLogging() && messageLogger!=null) {
 
-                messageLogger.saveUndiveleredMessage(msgMessage,exchangeName,ExceptionUtils.getMessage(e));
+                messageLogger.saveUndelivered(msgMessage,exchangeName,ExceptionUtils.getMessage(e));
             }
 
             return PublishResponse.ERROR;
