@@ -221,6 +221,9 @@ configure (subprojects- project(':graphite-reporter')
     -project(':msg-common')
     -project(':msg-receiver')
     -project(':ando-models')
+    -project(':custom-logging')
+    -project(':common')
+
 
 ){
 
@@ -437,6 +440,15 @@ project(':ando-models')
             compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-elasticsearch'
             compile group: 'org.hibernate', name: 'hibernate-envers'
           }
+    }
+
+project(':custom-logging')
+    {
+        dependencies
+            {
+                compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+
+            }
     }
 
 clean {

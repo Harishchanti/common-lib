@@ -6,6 +6,8 @@ import com.ailiens.common.restutil.exceptions.InvalidInputException;
 import com.ailiens.common.restutil.exceptions.InvalidResourceException;
 import com.ailiens.common.restutil.exceptions.UnauthorizedAccessException;
 
+import org.slf4j.Marker;
+
 /**
  * Created by jayant on 15/10/16.
  */
