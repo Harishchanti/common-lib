@@ -11,4 +11,7 @@ include 'graphite-reporter'
 include 'graphite-reporter-extensions'
 include 'ando-models'
 include 'custom-logging'
+include 'galactus-models'
+include 'msg-adapter-spring-jpa'
+include 'security-adapter'
 

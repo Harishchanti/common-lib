@@ -14,4 +14,7 @@ public interface OutboundMessageRepository extends JpaRepository<OutboundMessage
     @Query("select m from OutboundMessage m where m.sent=0 order by id ASC")
     List<OutboundMessage> getFailedMessages(Pageable pageable);
 
+    @Query("select m from OutboundMessage m where m.messageId=?1")
+    List<OutboundMessage> searchByMessageId(String messageId);
+
 }

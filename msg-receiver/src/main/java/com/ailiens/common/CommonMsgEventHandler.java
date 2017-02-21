@@ -17,24 +17,20 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
 
     @Autowired
     @Setter
-    InboundMessagesRepository inboundMessagesRepository;
+    InboundLoggingService inboundLoggingService;
 
 
-    public void postProcess(MsgMessage message, String response)
+    @Override
+    public void postProcess(MsgMessage message, String response,String handlerResponse)
     {
-        InboundMessages inboundMessages = new InboundMessages();
-        inboundMessages.setGroupId(message.getGroupId());
-        inboundMessages.setMessageId(message.getMessageId());
-        inboundMessages.setPayload(message.getPayload());
-        inboundMessages.setResponse(response);
-        inboundMessagesRepository.save(inboundMessages);
+       inboundLoggingService.save(message,response,handlerResponse);
     }
 
     public EventResponse preProcess(MsgMessage message)
     {
         String messageId= message.getMessageId();
 
-        List<String> inboundMessagesList=inboundMessagesRepository.findByMessageId(messageId);
+        List<String> inboundMessagesList=inboundLoggingService.findByMessageId(messageId);
         if(inboundMessagesList.size()>0 && inboundMessagesList.get(0).equals(PROCESSED))
         {
             return new EventResponse(200,"Message already processed");
@@ -51,9 +47,10 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
         String payload= message.getPayload();
 
         String response=PROCESSED;
+        String handlerResponse="";
         int status=200;
         try {
-            response=handle(payload);
+            handlerResponse=handle(payload);
         }
         catch (Exception e)
         {
@@ -62,7 +59,7 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
             log.error(ExceptionUtils.getMessage(e));
         }
         finally {
-            postProcess(message,response);
+            postProcess(message,response,handlerResponse);
             return new EventResponse(status,response);
         }
     }

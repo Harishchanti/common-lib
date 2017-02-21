@@ -5,12 +5,9 @@ package com.ailiens.common;
  */
 
 
-public interface MsgEventHandler {
+public interface MsgEventHandler extends MsgHandler {
 
-    String getEventType();
     String handle(String payload) throws Exception;
-
-    void postProcess(MsgMessage message, String response);
 
     EventResponse invoke(MsgMessage message);
 }

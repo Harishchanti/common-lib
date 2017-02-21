@@ -215,7 +215,8 @@ subprojects
 
 
 
-configure (subprojects- project(':graphite-reporter')
+configure (subprojects
+    - project(':graphite-reporter')
     - project(':graphite-reporter-extensions')
     -project(':msg-publisher')
     -project(':msg-common')
@@ -224,6 +225,9 @@ configure (subprojects- project(':graphite-reporter')
     -project(':custom-logging')
     -project(':common')
 
+    -project(':galactus-models')
+    -project(':msg-adapter-spring-jpa')
+    -project(':security-adapter')
 
 ){
 
@@ -390,6 +394,7 @@ project(':msg-receiver')
         dependencies
             {
                 compile project(':msg-common')
+                compile project(':msg-adapter-spring-jpa')
                 compile 'org.apache.commons:commons-lang3:3.3.2'
                 compile "io.dropwizard.metrics:metrics-core"
                 compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
@@ -414,6 +419,12 @@ project(':restutil')
             }
     }
 
+project(':msg-adapter-spring-jpa')
+    {
+        dependencies {
+            compile project(':msg-common')
+        }
+    }
 
 
 project(':msg-publisher')
@@ -421,6 +432,8 @@ project(':msg-publisher')
         dependencies
             {
                 compile project(':msg-common')
+                compile project(':msg-adapter-spring-jpa')
+
                 compile 'com.rabbitmq:amqp-client:3.6.5'
                 compile 'org.apache.commons:commons-lang3:3.3.2'
 
@@ -450,6 +463,25 @@ project(':custom-logging')
 
             }
     }
+
+
+project(':galactus-models')
+    {
+        dependencies {
+
+        }
+    }
+
+project(':security-adapter')
+    {
+        dependencies {
+            compile("org.keycloak:keycloak-spring-security-adapter:2.4.0.Final")
+            compile("org.keycloak:keycloak-authz-client:2.4.0.Final")
+        }
+    }
+
+
+
 
 clean {
     delete "target"

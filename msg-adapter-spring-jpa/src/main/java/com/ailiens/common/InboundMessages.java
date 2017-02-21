@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Table(name = "inbound_messages")
 @Slf4j
 @Data
-public class InboundMessages implements Serializable {
+public class InboundMessages implements Serializable,MsgInbound {
 
     private static final long serialVersionUID = 1L;
     private static final int MAX_PAYLOAD_SIZE =10000;
@@ -34,6 +34,8 @@ public class InboundMessages implements Serializable {
 
     private String response;
 
+    private String handlerResponse;
+
     private String clip(String str)
     {
         if(str.length()>MAX_PAYLOAD_SIZE)
@@ -49,6 +51,7 @@ public class InboundMessages implements Serializable {
     {
         payload=clip(payload);
         response=clip(response);
+        handlerResponse=clip(handlerResponse);
     }
 
 

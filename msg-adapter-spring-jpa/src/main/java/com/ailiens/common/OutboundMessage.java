@@ -19,7 +19,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "outbound_messages")
 @Data
-public class OutboundMessage implements Serializable {
+public class OutboundMessage implements Serializable,MsgOutbound {
 
     private static final long serialVersionUID = 1L;
 
