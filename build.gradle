@@ -225,6 +225,7 @@ configure (subprojects
     -project(':galactus-models')
     -project(':msg-adapter-spring-jpa')
     -project(':security-adapter')
+    -project(':msg-adapter-cassandra')
 
 ){
 
@@ -420,6 +421,15 @@ project(':msg-adapter-spring-jpa')
     {
         dependencies {
             compile project(':msg-common')
+        }
+    }
+
+project(':msg-adapter-cassandra')
+    {
+        dependencies {
+            compile project(':msg-common')
+            compile('org.springframework.boot:spring-boot-starter-data-cassandra')
+            compile group: 'com.datastax.cassandra', name: 'cassandra-driver-mapping', version: '2.1.0-rc1'
         }
     }
 
