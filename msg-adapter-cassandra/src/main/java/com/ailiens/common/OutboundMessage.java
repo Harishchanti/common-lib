@@ -1,5 +1,6 @@
 package com.ailiens.common;
 
+import com.datastax.driver.core.utils.UUIDs;
 import com.google.common.base.Strings;
 import lombok.Data;
 import org.joda.time.DateTimeZone;
@@ -22,14 +23,12 @@ import java.util.concurrent.atomic.AtomicLong;
 @Data
 public class OutboundMessage implements MsgOutbound,Serializable {
 
-    private static final AtomicLong sequence = new AtomicLong();
-
     private static final int MAX_PAYLOAD_SIZE =10000;
 
     public static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
 
     @PrimaryKeyColumn(name="id",ordinal = 0,type = PrimaryKeyType.PARTITIONED)
-    private Long id = sequence.incrementAndGet();
+    private UUID id = UUIDs.timeBased();
 
     @Column(value = "payload")
     String payload="";
