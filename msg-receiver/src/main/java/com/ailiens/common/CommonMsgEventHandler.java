@@ -54,13 +54,13 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
         }
         catch (Exception e)
         {
-            response="Exception "+ExceptionUtils.getMessage(e);
+            handlerResponse=response=ExceptionUtils.getMessage(e);
             status=500;
-            log.error(ExceptionUtils.getMessage(e));
+            log.error(handlerResponse);
         }
         finally {
             postProcess(message,response,handlerResponse);
-            return new EventResponse(status,response);
+            return new EventResponse(status,handlerResponse);
         }
     }
 }

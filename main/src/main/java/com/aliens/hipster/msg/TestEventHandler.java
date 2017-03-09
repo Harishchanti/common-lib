@@ -23,7 +23,10 @@ public class TestEventHandler  extends CommonMsgEventHandler {
     public String handle(String payload) throws Exception {
         DummyMessage dummyMessage = objectMapper.readValue(payload,DummyMessage.class);
 
-        //do stuff
-        return PROCESSED;
+        if(true)
+        {
+            throw new Exception("test exception");
+        }
+        return "Test message success";
     }
 }

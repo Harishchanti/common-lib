@@ -73,9 +73,9 @@ server:
 
 
 MSG:
-  env: qa
+  env: localhost
   userName: guest
-  password: wrongpass
+  password: guest
 
 
 # ===================================================================
