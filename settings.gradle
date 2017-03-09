@@ -15,4 +15,5 @@ include 'galactus-models'
 include 'msg-adapter-spring-jpa'
 include 'security-adapter'
 include 'msg-adapter-cassandra'
+include 'optimusprime-models'
 

@@ -486,6 +486,12 @@ project(':galactus-models')
 project(':optimusprime-models')
     {
         dependencies {
+            compile group: 'commons-lang', name: 'commons-lang', version: '2.2'
+            compile "org.hibernate:hibernate-envers"
+            compile group: 'org.json', name: 'json', version: '20160810'
+
+
+            compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.5'
 
         }
     }
