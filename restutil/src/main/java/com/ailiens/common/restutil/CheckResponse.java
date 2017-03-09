@@ -6,14 +6,12 @@ import com.ailiens.common.restutil.exceptions.InvalidInputException;
 import com.ailiens.common.restutil.exceptions.InvalidResourceException;
 import com.ailiens.common.restutil.exceptions.UnauthorizedAccessException;
 
-import org.slf4j.Marker;
-
 /**
  * Created by jayant on 15/10/16.
  */
 public interface CheckResponse {
 
-    default void checkResponse(Integer status) throws GenericServiceException {
+    default void checkResponse(Integer status,String responseBody) throws GenericServiceException {
         switch (status) {
             case 200:
             case 201:
@@ -21,15 +19,15 @@ public interface CheckResponse {
                 //request successful, do nothing
                 break;
             case 400:
-                throw new InvalidInputException();
+                throw new InvalidInputException(responseBody);
             case 401:
-                throw new UnauthorizedAccessException();
+                throw new UnauthorizedAccessException(responseBody);
             case 404:
-                throw new InvalidResourceException();
+                throw new InvalidResourceException(responseBody);
             case 422:
-                throw new InvalidInputException(status);
+                throw new InvalidInputException(responseBody,status);
             default:
-                throw new GenericServiceException(status);
+                throw new GenericServiceException(responseBody,status);
         }
     }
 
