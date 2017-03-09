@@ -93,6 +93,12 @@ liquibase:
 server:
     port: 8020
 
+
+MSG:
+  env: local
+  userName: guest
+  password: guest
+
 # ===================================================================
 # JHipster specific properties
 # ===================================================================

@@ -31,7 +31,6 @@ public class MsgMessage implements Serializable {
     String groupId=UUID.randomUUID().toString();
 
     @JsonProperty("eventType")
-    @Getter @Setter
     String eventType;
 
 

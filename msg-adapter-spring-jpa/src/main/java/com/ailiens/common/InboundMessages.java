@@ -34,6 +34,7 @@ public class InboundMessages implements Serializable,MsgInbound {
 
     private String response;
 
+    @Column(name = "handler_response")
     private String handlerResponse;
 
     private String clip(String str)
