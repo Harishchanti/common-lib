@@ -2,8 +2,8 @@ package com.ailiens.optimusprime.autobots.rest.dto.n3ow.refundPayment;
 
 import javax.annotation.Generated;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.math.BigDecimal;
 

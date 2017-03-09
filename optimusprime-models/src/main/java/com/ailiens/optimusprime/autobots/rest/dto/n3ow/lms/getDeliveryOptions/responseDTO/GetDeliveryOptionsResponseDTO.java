@@ -4,8 +4,9 @@ package com.ailiens.optimusprime.autobots.rest.dto.n3ow.lms.getDeliveryOptions.r
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @Generated("org.jsonschema2pojo")
 @JsonIgnoreProperties(ignoreUnknown = true)
