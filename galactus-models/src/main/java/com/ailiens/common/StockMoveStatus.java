@@ -3,6 +3,6 @@ package com.ailiens.common;
 /**
  * The StockMoveStatus enumeration.
  */
-public enum   {
+public enum  StockMoveStatus {
 	Reserve,Stock,Out
 }
