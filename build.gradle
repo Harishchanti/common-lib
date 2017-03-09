@@ -125,7 +125,6 @@ repositories {
 }
 
 
-
 subprojects
     {
 
@@ -206,13 +205,33 @@ subprojects
             }
 
             apply from: '../gradle/release.gradle'
+
+            compile 'com.google.code.gson:gson:2.8.0'
+            compile 'com.google.guava:guava:18.0'
+
+            compile "javax.inject:javax.inject:${javax_inject_version}"
+            
         }
     }
 
 
 
-configure (subprojects- project(':graphite-reporter')
-    - project(':graphite-reporter-extensions')  - project(':common') - project(':restutil')
+configure (subprojects
+    - project(':graphite-reporter')
+    - project(':graphite-reporter-extensions')
+    -project(':msg-publisher')
+    -project(':msg-common')
+    -project(':msg-receiver')
+    -project(':ando-models')
+    -project(':custom-logging')
+    -project(':common')
+
+    -project(':galactus-models')
+    -project(':msg-adapter-spring-jpa')
+    -project(':security-adapter')
+    -project(':msg-adapter-cassandra')
+    -project(':galactus-models')
+    -project(':optimusprime-models')
 
 ){
 
@@ -249,7 +268,7 @@ configure (subprojects- project(':graphite-reporter')
         }
         compile "commons-lang:commons-lang:${commons_lang_version}"
         compile "commons-io:commons-io:${commons_io_version}"
-        compile "javax.inject:javax.inject:${javax_inject_version}"
+
         compile "javax.transaction:javax.transaction-api"
         compile "org.apache.geronimo.javamail:geronimo-javamail_1.4_mail:${geronimo_javamail_1_4_mail_version}"
 
@@ -297,10 +316,11 @@ configure (subprojects- project(':graphite-reporter')
 
         //commons
 
-        compile 'com.rabbitmq:amqp-client:3.6.5'
+
         compile 'com.mashape.unirest:unirest-java:1.4.9'
         compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
         compile 'com.google.code.gson:gson:2.8.0'
+        compile 'com.rabbitmq:amqp-client:3.6.5'
 
     }
 
@@ -378,26 +398,46 @@ project(':msg-receiver')
         dependencies
             {
                 compile project(':msg-common')
+                compile project(':msg-adapter-spring-jpa')
+                compile 'org.apache.commons:commons-lang3:3.3.2'
+                compile "io.dropwizard.metrics:metrics-core"
+                compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
+                compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
+                compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
             }
     }
 
+project('msg-common')
+    {
+        dependencies
+            {
+                compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+            }
+    }
 
 project(':restutil')
     {
         dependencies
             {
                 compile project(':common')
-
-                compile 'com.mashape.unirest:unirest-java:1.4.9'
-                compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
-                compile 'com.google.code.gson:gson:2.8.0'
-                compile "javax.inject:javax.inject:1"
-
-                compile "commons-lang:commons-lang:2.6"
-                compile "commons-io:commons-io:2.5"
             }
     }
 
+project(':msg-adapter-spring-jpa')
+    {
+        dependencies {
+            compile project(':msg-common')
+        }
+    }
+
+project(':msg-adapter-cassandra')
+    {
+        dependencies {
+            compile project(':msg-common')
+            compile('org.springframework.boot:spring-boot-starter-data-cassandra')
+            compile group: 'com.datastax.cassandra', name: 'cassandra-driver-mapping', version: '2.1.0-rc1'
+        }
+    }
 
 
 project(':msg-publisher')
@@ -405,17 +445,65 @@ project(':msg-publisher')
         dependencies
             {
                 compile project(':msg-common')
+                compile project(':msg-adapter-spring-jpa')
+
+                compile 'com.rabbitmq:amqp-client:3.6.5'
+                compile 'org.apache.commons:commons-lang3:3.3.2'
+
+                compile "io.dropwizard.metrics:metrics-core"
+                compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
+                compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
+                compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
             }
+
+
     }
 
 
-project(':common')
+project(':ando-models')
+    {
+        dependencies {
+            compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-elasticsearch'
+            compile group: 'org.hibernate', name: 'hibernate-envers'
+          }
+    }
+
+project(':custom-logging')
     {
         dependencies
             {
-                compile 'com.google.guava:guava:20.0'
+                compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+
             }
     }
+
+
+project(':galactus-models')
+    {
+        dependencies {
+
+        }
+    }
+project(':optimusprime-models')
+    {
+        dependencies {
+            compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+            compile 'org.json:json:20090211'
+            compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.2'
+            compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.6.3'
+            compile group: 'org.hibernate', name: 'hibernate-envers'
+        }
+    }
+project(':security-adapter')
+    {
+        dependencies {
+            compile("org.keycloak:keycloak-spring-security-adapter:2.4.0.Final")
+            compile("org.keycloak:keycloak-authz-client:2.4.0.Final")
+        }
+    }
+
+
+
 
 clean {
     delete "target"

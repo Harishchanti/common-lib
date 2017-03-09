@@ -71,6 +71,13 @@ server:
     port: 10344
     address: localhost
 
+
+MSG:
+  env: localhost
+  userName: guest
+  password: guest
+
+
 # ===================================================================
 # JHipster specific properties
 # ===================================================================

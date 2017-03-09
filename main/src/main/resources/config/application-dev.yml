@@ -21,10 +21,10 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/commons?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://52.3.43.18:3306/msg?useUnicode=true&characterEncoding=utf8&useSSL=false
         name:
-        username: root
-        password: root
+        username: admin
+        password: <w*MSh6?ANuE$nQP
         hikari:
             data-source-properties:
                 cachePrepStmts: true
@@ -65,6 +65,15 @@ spring:
          username: holmesqanew
          password: holmesqanew
          poolSize: 5
+    keycloakCreds:
+        keycloakGetAccessTokenUrl: https://54.169.57.64/auth/realms/AILSecureQA/tokens/grants/access
+        Authorization: Basic b2RpblFBOjUwYjgwZDQ3LWIxMDAtNDNhMC1iMzU1LTNhMmEwYWYyYjA1MQ==
+        cacheDuration: 10
+        map:
+            NODEUSER:
+                username: nodeuser
+                password: qanode
+                clientId: odinQA
     hazelcast:
          aws: true
          awsUrl: http://169.254.169.254
@@ -117,13 +126,3 @@ jhipster:
             host: localhost
             port: 5000
             queueSize: 512
-
-keycloak:
-        keycloakGetAccessTokenUrl: https://localhost:8080
-        cacheDuration: 10
-        map:
-            NODEUSER:
-                username: nodeuser
-                password: qanode
-                clientId: odinQA
-                clientSecret: secret

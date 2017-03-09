@@ -98,10 +98,16 @@ public class RestUtilHelper implements CheckResponse {
 
     public void checkStatus(HttpResponse response) throws GenericServiceException {
 
+        String responseBody="";
+
+        if(response.getBody()!=null)
+        {
+            responseBody=response.getBody().toString();
+        }
         if(logResponse)
         {
-            if(response.getBody()!=null)
-            log.info(response.getBody().toString());
+
+            log.info(responseBody);
         }
         String key= getKeycloakKey();
 
@@ -112,7 +118,7 @@ public class RestUtilHelper implements CheckResponse {
         }
 
 
-        checkResponse(response.getStatus());
+        checkResponse(response.getStatus(),responseBody);
     }
 
     public void setup()

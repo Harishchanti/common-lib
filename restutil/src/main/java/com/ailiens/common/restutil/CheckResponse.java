@@ -11,7 +11,7 @@ import com.ailiens.common.restutil.exceptions.UnauthorizedAccessException;
  */
 public interface CheckResponse {
 
-    default void checkResponse(Integer status) throws GenericServiceException {
+    default void checkResponse(Integer status,String responseBody) throws GenericServiceException {
         switch (status) {
             case 200:
             case 201:
@@ -22,15 +22,15 @@ public interface CheckResponse {
             case 409:
                 break;
             case 400:
-                throw new InvalidInputException();
+                throw new InvalidInputException(responseBody);
             case 401:
-                throw new UnauthorizedAccessException();
+                throw new UnauthorizedAccessException(responseBody);
             case 404:
-                throw new InvalidResourceException();
+                throw new InvalidResourceException(responseBody);
             case 422:
-                throw new InvalidInputException(status);
+                throw new InvalidInputException(responseBody,status);
             default:
-                throw new GenericServiceException(status);
+                throw new GenericServiceException(responseBody,status);
         }
     }
 
