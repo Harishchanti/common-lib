@@ -1,7 +1,6 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
-import com.ailiens.optimusprime.autobots.utils.ServicesConfiguration;
-import org.json.JSONException;
+import com.ailiens.optimusprime.autobots.utils.ServicesConfiguration;;
 import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +22,7 @@ public class SingletonKeycloakToken {
 		SingletonKeycloakToken.getAccess_token(false);
 		return SingletonKeycloakToken.access_token;
 	}
-	
+
 
 	private static void getAccess_token(Boolean refresh) {
 		if (SingletonKeycloakToken.access_token == null || refresh) {

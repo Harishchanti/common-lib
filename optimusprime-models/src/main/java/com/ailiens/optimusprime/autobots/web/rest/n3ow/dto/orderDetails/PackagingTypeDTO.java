@@ -5,7 +5,6 @@ import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import com.ailiens.optimusprime.domain.OrderLine;
-import com.mysql.jdbc.StringUtils;
 
 @Generated("org.jsonschema2pojo")
 public class PackagingTypeDTO {
