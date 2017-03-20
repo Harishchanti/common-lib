@@ -233,6 +233,7 @@ configure (subprojects
     -project(':galactus-models')
     -project(':optimusprime-models')
     -project(':swagger')
+    -project(':profx-models')
 
 ){
 
@@ -514,6 +515,16 @@ project(':swagger')
                 exclude module: 'mapstruct'
             }
         }
+    }
+
+
+project(':profx-models')
+    {
+
+        dependencies
+            {
+                compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+            }
     }
 
 

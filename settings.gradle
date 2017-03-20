@@ -17,4 +17,5 @@ include 'security-adapter'
 include 'msg-adapter-cassandra'
 include 'optimusprime-models'
 include 'swagger'
+include 'profx-models'
 
