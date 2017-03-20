@@ -210,7 +210,7 @@ subprojects
             compile 'com.google.guava:guava:18.0'
 
             compile "javax.inject:javax.inject:${javax_inject_version}"
-            
+
         }
     }
 
@@ -232,6 +232,7 @@ configure (subprojects
     -project(':msg-adapter-cassandra')
     -project(':galactus-models')
     -project(':optimusprime-models')
+    -project(':swagger')
 
 ){
 
@@ -499,6 +500,19 @@ project(':security-adapter')
         dependencies {
             compile("org.keycloak:keycloak-spring-security-adapter:2.4.0.Final")
             compile("org.keycloak:keycloak-authz-client:2.4.0.Final")
+        }
+    }
+
+project(':swagger')
+    {
+        dependencies {
+            compile("io.springfox:springfox-swagger2:2.6.1"){
+                exclude module: 'mapstruct'
+            }
+
+            compile("io.springfox:springfox-swagger-ui:2.6.1"){
+                exclude module: 'mapstruct'
+            }
         }
     }
 

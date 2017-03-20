@@ -36,16 +36,16 @@ public class TestMessageSender {
         msgMessage.setEventType("TEST_EVENT");
 
         msgMessage.getUriMap().put("galactus1", UriInfo.builder()
-            .uri(new URI("https://kong-qa.ailiens.com:8443/galactus/"))
-            .method("GET")
+            .uri(new URI("http://localhost:8020/event/msgEvent"))
+            .method("POST")
             .timeout(60)
             .build()
         );
 
         msgMessage.getUriMap().put("galactus2", UriInfo.builder()
-            .uri(new URI("https://kong-qa.ailiens.com:8443/galactusReloaded/"))
+            .uri(new URI("http://localhost:8020/event/msgEvent"))
             .timeout(60)
-            .method("GET")
+            .method("POST")
             .build()
         );
 
