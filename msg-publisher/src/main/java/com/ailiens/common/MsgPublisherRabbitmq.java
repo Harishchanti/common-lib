@@ -68,8 +68,9 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
     {
         this.msgMessage = msgMessage;
         this.queueName = queueName;
-        //registerCallback();
-        return publishToQueue(msgMessage,queueName);
+        registerCallback();
+        return PublishResponse.PUBLISHED;
+        //return publishToQueue(msgMessage,queueName);
     }
 
 

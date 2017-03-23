@@ -18,4 +18,5 @@ include 'msg-adapter-cassandra'
 include 'optimusprime-models'
 include 'swagger'
 include 'profx-models'
+include 'pcm-models'
 

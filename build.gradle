@@ -234,6 +234,7 @@ configure (subprojects
     -project(':optimusprime-models')
     -project(':swagger')
     -project(':profx-models')
+    -project(':pcm-models')
 
 ){
 
@@ -406,6 +407,7 @@ project(':msg-receiver')
                 compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
                 compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
                 compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
+
             }
     }
 
@@ -525,6 +527,25 @@ project(':profx-models')
             {
                 compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
             }
+    }
+
+
+project(':pcm-models')
+    {
+        dependencies{
+            compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.6'
+            compile("org.mongodb.morphia:morphia:0.111")
+
+            compile "com.fasterxml.jackson.datatype:jackson-datatype-json-org:${jackson_version}"
+            compile "com.fasterxml.jackson.datatype:jackson-datatype-hppc:${jackson_version}"
+            compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson_version}"
+            compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4"
+            compile "com.fasterxml.jackson.core:jackson-annotations:${jackson_version}"
+            compile "com.fasterxml.jackson.core:jackson-databind:${jackson_version}"
+            compile("org.mongodb.morphia:morphia:0.111")
+
+            compile "commons-lang:commons-lang:${commons_lang_version}"
+        }
     }
 
 
