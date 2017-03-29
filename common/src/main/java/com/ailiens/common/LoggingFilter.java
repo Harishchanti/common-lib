@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -44,6 +45,8 @@ public class LoggingFilter implements Filter {
         else MDC.put(TRACE_ID_MDC,UUID.randomUUID().toString());
 
         chain.doFilter(request,response);
+         HttpServletResponse httpServletResponse= (HttpServletResponse)response;
+        int status=httpServletResponse.getStatus();
         MDC.clear();
     }
 

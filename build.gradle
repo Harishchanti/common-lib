@@ -189,6 +189,7 @@ subprojects
         dependencies{
             provided 'org.projectlombok:lombok:1.16.10'
             apt 'org.projectlombok:lombok:1.16.10'
+            compile 'org.projectlombok:lombok:1.16.10'
 
             compile "org.springframework.boot:spring-boot-actuator"
             compile "org.springframework.boot:spring-boot-autoconfigure"
@@ -225,7 +226,7 @@ configure (subprojects
     -project(':ando-models')
     -project(':custom-logging')
     -project(':common')
-
+    -project(':restutil')
     -project(':galactus-models')
     -project(':msg-adapter-spring-jpa')
     -project(':security-adapter')
@@ -320,8 +321,7 @@ configure (subprojects
         //commons
 
 
-        compile 'com.mashape.unirest:unirest-java:1.4.9'
-        compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
+
         compile 'com.google.code.gson:gson:2.8.0'
         compile 'com.rabbitmq:amqp-client:3.6.5'
 
@@ -341,7 +341,6 @@ project(':main')
                 compile project(':msg-publisher')
                 compile project(':msg-receiver')
                 compile project(':msg-common')
-                compile project(':restutil')
                 compile project(':message-sender')
                 compile project(':common')
                 compile project(':rabbitmq-publisher')
@@ -424,6 +423,8 @@ project(':restutil')
         dependencies
             {
                 compile project(':common')
+                compile 'com.mashape.unirest:unirest-java:1.4.9'
+                compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
             }
     }
 
