@@ -13,9 +13,9 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "swagger")
 public class Swagger {
 
-    private String title = "APIs";
+    private String title ;
 
-    private String description = "API documentation";
+    private String description = "";
 
     private String version = "0.0.1";
 
@@ -31,7 +31,7 @@ public class Swagger {
 
     private String licenseUrl;
 
-    private boolean enabled;
+    private boolean enabled=true;
 
-    private String includePattern = "/api/.*";
+    private String includePattern ="/api/.*";
 }

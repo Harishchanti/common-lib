@@ -2,9 +2,10 @@ package com.ailiens.common;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StopWatch;
 import springfox.documentation.builders.PathSelectors;
@@ -17,18 +18,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Date;
 
 
+@Slf4j
 @Configuration
 @EnableSwagger2
-@Slf4j
-@Profile("swagger")
+@ComponentScan("springfox")
+@ConditionalOnProperty(name = "swagger.enabled", havingValue = "true")
 public class SwaggerConfiguration {
+
 
     @Bean
     public Docket swaggerSpringfoxDocket(Swagger swagger) {
-        if(!swagger.isEnabled())
-        {
-            return null;
-        }
         log.debug("Starting Swagger");
         StopWatch watch = new StopWatch();
         watch.start();
@@ -55,7 +54,7 @@ public class SwaggerConfiguration {
             .directModelSubstitute(java.time.ZonedDateTime.class, Date.class)
             .directModelSubstitute(java.time.LocalDateTime.class, Date.class)
             .select()
-                .paths(PathSelectors.regex(swagger.getIncludePattern()))
+            .paths(PathSelectors.regex(swagger.getIncludePattern()))
             .build();
         watch.stop();
         log.debug("Started Swagger in {} ms", watch.getTotalTimeMillis());
