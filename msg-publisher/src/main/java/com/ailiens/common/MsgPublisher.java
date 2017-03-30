@@ -7,6 +7,8 @@ package com.ailiens.common;
 public interface MsgPublisher {
     PublishResponse publish(MsgMessage msgMessage, String queueName);
 
+    PublishResponse publish(MsgMessage msgMessage, String queueName,String cluster);
+
     default PublishResponse exchangePublish(MsgMessage msgMessage, String exchangeName)
     {
         return publish(msgMessage, exchangeName);

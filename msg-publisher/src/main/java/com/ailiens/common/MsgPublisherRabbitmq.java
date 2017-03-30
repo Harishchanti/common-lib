@@ -10,6 +10,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
@@ -24,16 +25,19 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Slf4j
+@Scope("prototype")
 public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter implements MsgPublisher {
 
 
-    static ObjectMapper mapper = new ObjectMapper();
+    @Autowired
+    ObjectMapper mapper;
 
     @Autowired(required = false)
     MessageLoggingService messageLogger;
 
     @Autowired
     MsgConfig msgConfig;
+
 
     MsgMessage msgMessage;
     String queueName;
@@ -57,7 +61,7 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
                 publishToExchange(msgMessage,queueName);
             }
             else {
-                publishToQueue(msgMessage,queueName);
+                publishToQueue(msgMessage,queueName,"");
             }
         }
     }
@@ -70,7 +74,14 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
         this.queueName = queueName;
         //registerCallback();
         //return PublishResponse.PUBLISHED;
-        return publishToQueue(msgMessage,queueName);
+        return publishToQueue(msgMessage,queueName,"");
+    }
+
+    @Override
+    public PublishResponse publish(MsgMessage msgMessage, String queueName, String cluster) {
+        this.msgMessage = msgMessage;
+        this.queueName = queueName;
+        return publishToQueue(msgMessage,queueName,cluster);
     }
 
 
@@ -112,7 +123,7 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
     }
 
     @Timed
-    public PublishResponse publishToQueue(MsgMessage msgMessage, String queueName)
+    public PublishResponse publishToQueue(MsgMessage msgMessage, String queueName,String cluster)
     {
 
 
@@ -120,7 +131,7 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
         try {
             log.info("Sending message {}",msgMessage.getMessageId());
 
-            channel =RabbitMqConnectionManager.getChannel();
+            channel =RabbitMqConnectionManager.getChannel(cluster);
 
             channel.queueDeclare(queueName, true, false, false, null);
             String queueMessage = mapper.writeValueAsString(msgMessage);
