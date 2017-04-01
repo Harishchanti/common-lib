@@ -95,7 +95,7 @@ server:
 
 
 MSG:
-  env: local
+  env: prod
   userName: guest
   password: guest
 

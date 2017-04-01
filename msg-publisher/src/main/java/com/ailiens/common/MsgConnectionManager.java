@@ -39,7 +39,7 @@ public class MsgConnectionManager {
             .build());
 
         configHashMap.put("prod-default",RabbitmqConfig.builder()
-            .host("172.31.2.176")
+            .host("ec2-52-221-72-59.ap-southeast-1.compute.amazonaws.com")
             .userName("guest")
             .password("guest")
             .build());
