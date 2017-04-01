@@ -19,4 +19,5 @@ include 'optimusprime-models'
 include 'swagger'
 include 'profx-models'
 include 'pcm-models'
+include 'msg-adapter-mongo'
 

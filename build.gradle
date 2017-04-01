@@ -236,6 +236,7 @@ configure (subprojects
     -project(':swagger')
     -project(':profx-models')
     -project(':pcm-models')
+    -project(':msg-adapter-mongo')
 
 ){
 
@@ -400,7 +401,7 @@ project(':msg-receiver')
         dependencies
             {
                 compile project(':msg-common')
-                compile project(':msg-adapter-spring-jpa')
+                compile project(':msg-adapter-mongo')
                 compile 'org.apache.commons:commons-lang3:3.3.2'
                 compile "io.dropwizard.metrics:metrics-core"
                 compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
@@ -547,6 +548,15 @@ project(':pcm-models')
 
             compile "commons-lang:commons-lang:${commons_lang_version}"
         }
+    }
+
+
+project(':msg-adapter-mongo')
+    {
+        dependencies {
+                compile project(':msg-common')
+                compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+                }
     }
 
 
