@@ -4,6 +4,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
 
     @Autowired
     @Setter
+    @Qualifier("mongoInboundLogger")
     InboundLoggingService inboundLoggingService;
 
 
@@ -37,6 +39,7 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
         }
         else return null;
     }
+
 
     public EventResponse invoke(MsgMessage message)
     {
