@@ -32,6 +32,7 @@ public class TestMessageSender {
         String payload= objectMapper.writeValueAsString(dummyMessage);
         msgMessage.setPayload(payload);
         msgMessage.setEventType("TEST_EVENT");
+        msgMessage.addHeader("key","value");
 
 
         PublishResponse publishResponse =msgPublisher.publish(msgMessage,"test");

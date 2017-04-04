@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by jayant on 20/2/17.
  */
-public interface InboundLoggingService {
+    public interface InboundLoggingService {
 
     List<String> findByMessageId(String messageId);
 

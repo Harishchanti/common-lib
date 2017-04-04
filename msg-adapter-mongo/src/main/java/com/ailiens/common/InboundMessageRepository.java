@@ -17,3 +17,4 @@ public interface InboundMessageRepository extends
     @Query(value = "{ 'messageId' : ?0 , 'status':'Processed'}",fields="{ 'status' : 1}")
     List<InboundMessage> findByMessageId(String messageId);
 }
+

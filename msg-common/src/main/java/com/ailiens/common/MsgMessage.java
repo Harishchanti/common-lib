@@ -2,7 +2,6 @@ package com.ailiens.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,10 +36,16 @@ public class MsgMessage implements Serializable {
     String messageId = UUID.randomUUID().toString();
     String groupId=UUID.randomUUID().toString();
 
-    @JsonProperty("eventType")
     String eventType;
 
     Map<String,UriInfo> uriMap = new HashMap<>();
+
+    Map<String,String> headers = new HashMap<>();
+
+    public void addHeader(String key,String value)
+    {
+        headers.put(key,value);
+    }
 
 
 }

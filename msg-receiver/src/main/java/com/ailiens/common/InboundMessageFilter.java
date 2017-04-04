@@ -2,7 +2,6 @@ package com.ailiens.common;
 
 import com.google.common.base.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
@@ -22,7 +21,6 @@ public class InboundMessageFilter implements Filter {
     static final String MESSAGE_ID_HEADER ="X-MESSAGE-ID";
 
     @Autowired
-    @Qualifier("mongoInboundLogger")
     InboundLoggingService inboundLoggingService;
 
     @Override
