@@ -30,7 +30,7 @@ public interface CheckResponse {
             case 422:
                 throw new InvalidInputException(responseBody,status);
             default:
-                throw new GenericServiceException(responseBody,status);
+                throw new GenericServiceException(String.format("StatusCode: %s , Response: %s",String.valueOf(status),responseBody),status);
         }
     }
 

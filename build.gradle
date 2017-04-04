@@ -401,7 +401,7 @@ project(':msg-receiver')
         dependencies
             {
                 compile project(':msg-common')
-                compile project(':msg-adapter-mongo')
+                compile project(':msg-adapter-spring-jpa')
                 compile 'org.apache.commons:commons-lang3:3.3.2'
                 compile "io.dropwizard.metrics:metrics-core"
                 compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"

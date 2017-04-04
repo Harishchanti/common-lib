@@ -98,7 +98,7 @@ public class RestUtilHelper implements CheckResponse {
 
     public void checkStatus(HttpResponse response) throws GenericServiceException {
 
-        String responseBody="";
+        String responseBody="No Response";
 
         if(response.getBody()!=null)
         {
