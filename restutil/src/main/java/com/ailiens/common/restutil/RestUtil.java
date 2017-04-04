@@ -49,7 +49,7 @@ public class RestUtil  extends RestUtilHelper  {
 
 
 
-    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class,GenericServiceException.class})
     public  <T> HttpResponse<T> get(String url,  Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
 
 
@@ -64,7 +64,7 @@ public class RestUtil  extends RestUtilHelper  {
         return response;
     }
 
-    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class,GenericServiceException.class})
     public  <T> HttpResponse<T> post(String url, String payload, Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
 
 
@@ -80,7 +80,7 @@ public class RestUtil  extends RestUtilHelper  {
         return response;
     }
 
-    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class,GenericServiceException.class})
     public  <T> HttpResponse<T> post(String url, Object payload, Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
 
 
@@ -96,7 +96,7 @@ public class RestUtil  extends RestUtilHelper  {
         return response;
     }
 
-    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class,GenericServiceException.class})
     public  <T> HttpResponse<T> put(String url, Object payload, Class <? extends T> responseClass) throws  UnirestException,GenericServiceException  {
 
         preProcess(url,payload);
@@ -110,7 +110,7 @@ public class RestUtil  extends RestUtilHelper  {
         return response;
     }
 
-    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class,GenericServiceException.class})
     public  <T> HttpResponse<T> put(String url, String payload, Class <? extends T> responseClass) throws  UnirestException,GenericServiceException  {
 
         preProcess(url,payload);
@@ -124,7 +124,7 @@ public class RestUtil  extends RestUtilHelper  {
         return response;
     }
 
-    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class,GenericServiceException.class})
     public  <T> HttpResponse<T> delete(String url, Object payload, Class <? extends T> responseClass) throws UnirestException,GenericServiceException  {
 
         preProcess(url,payload);
