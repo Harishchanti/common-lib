@@ -49,7 +49,7 @@ public class RestUtil  extends RestUtilHelper  {
 
 
 
-    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class,GenericServiceException.class})
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 2000),include = {UnauthorizedAccessException.class})
     public  <T> HttpResponse<T> get(String url,  Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
 
 
@@ -188,6 +188,11 @@ public class RestUtil  extends RestUtilHelper  {
     {
         this.headers=headers;
         return this;
+    }
+
+    public void addHeaders(Map<String,String> headers)
+    {
+        this.headers.putAll(headers);
     }
 
     public RestUtil withUser(String user)
