@@ -237,6 +237,7 @@ configure (subprojects
     -project(':profx-models')
     -project(':pcm-models')
     -project(':msg-adapter-mongo')
+    -project(':healthcheck')
 
 ){
 
@@ -345,6 +346,7 @@ project(':main')
                 compile project(':message-sender')
                 compile project(':common')
                 compile project(':rabbitmq-publisher')
+                compile project(':healthcheck')
             }
     }
 
@@ -557,6 +559,13 @@ project(':msg-adapter-mongo')
                 compile project(':msg-common')
                 compile('org.springframework.boot:spring-boot-starter-data-mongodb')
                 }
+    }
+
+project(':healthcheck')
+    {
+       dependencies{
+           compile 'org.apache.commons:commons-lang3:3.3.2'
+       }
     }
 
 
