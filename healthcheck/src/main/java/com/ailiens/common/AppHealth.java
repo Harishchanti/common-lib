@@ -2,7 +2,7 @@ package com.ailiens.common;
 
 import org.springframework.stereotype.Component;
 
-import static com.ailiens.common.HealthCheckService.HEALTH_SUCCESS;
+import static com.ailiens.common.Constants.HEALTH_SUCCESS;
 
 /**
  * Created by jayant on 7/4/17.

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import static com.ailiens.common.HealthCheckService.HEALTH_SUCCESS;
+import static com.ailiens.common.Constants.HEALTH_SUCCESS;
 
 /**
  * Created by jayant on 7/4/17.
