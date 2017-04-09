@@ -32,6 +32,7 @@ apply plugin: 'net.ltgt.apt'
 apply plugin: 'maven-publish'
 apply plugin: 'release'
 apply plugin: 'war'
+defaultTasks 'bootRun'
 
 war {
     baseName = 'ailiens-common'
@@ -39,7 +40,12 @@ war {
 }
 
 bootRepackage {
-    mainClass = 'com.aliens.hipster.MsgApp'
+    mainClass = 'com.aliens.hipster.CommonsApp'
+}
+
+springBoot {
+    mainClass = 'com.aliens.hipster.CommonsApp'
+    executable = true
 }
 
 gradle.taskGraph.whenReady { graph ->
