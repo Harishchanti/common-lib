@@ -1,8 +1,8 @@
 package com.ailiens.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 
 @Component
-@Slf4j
+@Primary
 public class JPAMessageLogger implements MessageLoggingService {
 
     @Autowired

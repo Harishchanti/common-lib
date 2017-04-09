@@ -2,9 +2,12 @@ package com.ailiens.common;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+import static com.ailiens.common.MsgMessage.timeZone;
 
 /**
  * A InboundMessages.
@@ -33,6 +36,9 @@ public class InboundMessages implements Serializable,MsgInbound {
 
 
     private String response;
+    private String eventType;
+
+    String createdAt= LocalDateTime.now(timeZone).toString();;
 
     @Column(name = "handler_response")
     private String handlerResponse;

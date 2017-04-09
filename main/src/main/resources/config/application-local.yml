@@ -96,7 +96,7 @@ liquibase:
     contexts: dev
 
 server:
-    port: 8020
+    port: 8030
 
 
 MSG:
@@ -139,3 +139,5 @@ jhipster:
             host: localhost
             port: 5000
             queueSize: 512
+
+basePath: /api
