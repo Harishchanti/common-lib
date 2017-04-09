@@ -4,7 +4,7 @@ import com.ailiens.common.MsgMessage;
 import com.ailiens.common.MsgPublisher;
 import com.ailiens.common.PublishResponse;
 import com.ailiens.common.RetryMessages;
-import com.aliens.hipster.MsgApp;
+import com.aliens.hipster.CommonsApp;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
  */
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MsgApp.class)
+@SpringBootTest(classes = CommonsApp.class)
 @Slf4j
 public class MsgTest {
 

@@ -1,6 +1,6 @@
 package com.aliens.hipster.web.rest;
 
-import com.aliens.hipster.MsgApp;
+import com.aliens.hipster.CommonsApp;
 import com.aliens.hipster.config.audit.AuditEventConverter;
 import com.aliens.hipster.domain.PersistentAuditEvent;
 import com.aliens.hipster.repository.PersistenceAuditEventRepository;
@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MsgApp.class)
+@SpringBootTest(classes = CommonsApp.class)
 @Transactional
 public class AuditResourceIntTest {
 
