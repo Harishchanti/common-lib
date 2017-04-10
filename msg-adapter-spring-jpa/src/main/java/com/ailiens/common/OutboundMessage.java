@@ -59,7 +59,7 @@ public class OutboundMessage implements Serializable,MsgOutbound {
 
     private String clip(String str)
     {
-        if(Strings.isNullOrEmpty(str))return null;
+        if(Strings.isNullOrEmpty(str))return "";
         if(str.length()>MAX_PAYLOAD_SIZE)
             return str.substring(0,MAX_PAYLOAD_SIZE)+"...clipped";
         else return str;
