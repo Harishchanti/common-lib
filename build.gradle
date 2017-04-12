@@ -200,6 +200,8 @@ subprojects
             compile "org.springframework.boot:spring-boot-starter-security"
             compile "org.springframework.boot:spring-boot-starter-web"
             compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+            
+            compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'            
 
             configurations {
                 all*.exclude group: 'javassist'
@@ -303,6 +305,8 @@ configure (subprojects
         compile "mysql:mysql-connector-java"
         compile "fr.ippon.spark.metrics:metrics-spark-reporter:${metrics_spark_reporter_version}"
         compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
+        
+        
         testCompile "com.jayway.awaitility:awaitility:${awaility_version}"
         testCompile "com.jayway.jsonpath:json-path"
         testCompile "org.springframework.boot:spring-boot-starter-test"
