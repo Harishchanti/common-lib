@@ -15,7 +15,7 @@ import java.util.List;
 
 @Component
 @Primary
-public class JPAMessageLogger implements MessageLoggingService {
+public class JPAOutboundLogger implements MessageLoggingService {
 
     @Autowired
     ObjectMapper mapper;
