@@ -1,7 +1,7 @@
 package com.ailiens.common;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * Created by jayant on 12/2/17.
  */
 @Component
-@Slf4j
+@Primary
 public class JPAMessageRetry implements MessageRetryService<OutboundMessage> {
 
     @Autowired

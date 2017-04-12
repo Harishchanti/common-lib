@@ -26,9 +26,9 @@ import java.util.Collection;
 @EntityScan(basePackages = {"com.aliens.hipster.domain","com.aliens.msg.models","com.ailiens.common"})
 @EnableAutoConfiguration(exclude = { MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class })
 @EnableConfigurationProperties({ JHipsterProperties.class, LiquibaseProperties.class })
-public class MsgApp {
+public class CommonsApp {
 
-    private static final Logger log = LoggerFactory.getLogger(MsgApp.class);
+    private static final Logger log = LoggerFactory.getLogger(CommonsApp.class);
 
     @Inject
     private Environment env;
@@ -64,7 +64,7 @@ public class MsgApp {
      * @throws UnknownHostException if the local host name could not be resolved into an address
      */
     public static void main(String[] args) throws UnknownHostException {
-        SpringApplication app = new SpringApplication(MsgApp.class);
+        SpringApplication app = new SpringApplication(CommonsApp.class);
         DefaultProfileUtil.addDefaultProfile(app);
         Environment env = app.run(args).getEnvironment();
         log.info("\n----------------------------------------------------------\n\t" +

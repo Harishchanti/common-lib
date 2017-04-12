@@ -1,6 +1,6 @@
 package com.aliens.hipster.web.rest;
 
-import com.aliens.hipster.MsgApp;
+import com.aliens.hipster.CommonsApp;
 import com.aliens.hipster.domain.Authority;
 import com.aliens.hipster.domain.User;
 import com.aliens.hipster.repository.AuthorityRepository;
@@ -41,7 +41,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see UserService
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MsgApp.class)
+@SpringBootTest(classes = CommonsApp.class)
 public class AccountResourceIntTest {
 
     @Inject

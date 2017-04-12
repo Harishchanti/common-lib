@@ -1,10 +1,14 @@
 package com.ailiens.common;
 
+import com.google.common.base.Strings;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.LocalDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
+import static com.ailiens.common.MsgMessage.timeZone;
 
 /**
  * A InboundMessages.
@@ -28,17 +32,22 @@ public class InboundMessages implements Serializable,MsgInbound {
     @Column(name = "group_id")
     private String groupId;
 
-    @Column(name = "payload")
+    @Column(name = "payload",length = 11000)
     private String payload;
 
 
     private String response;
+    private String eventType;
 
-    @Column(name = "handler_response")
+    String createdAt= LocalDateTime.now(timeZone).toString();;
+
+    @Column(name = "handler_response",length = 11000)
     private String handlerResponse;
 
     private String clip(String str)
     {
+        if(Strings.isNullOrEmpty(str))return "";
+
         if(str.length()>MAX_PAYLOAD_SIZE)
         {
             log.info("Clipping data");

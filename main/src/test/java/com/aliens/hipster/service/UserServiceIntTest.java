@@ -1,6 +1,6 @@
 package com.aliens.hipster.service;
 
-import com.aliens.hipster.MsgApp;
+import com.aliens.hipster.CommonsApp;
 import com.aliens.hipster.domain.PersistentToken;
 import com.aliens.hipster.domain.User;
 import com.aliens.hipster.repository.PersistentTokenRepository;
@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.*;
  * @see UserService
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MsgApp.class)
+@SpringBootTest(classes = CommonsApp.class)
 @Transactional
 public class UserServiceIntTest {
 

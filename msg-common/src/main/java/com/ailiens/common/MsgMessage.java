@@ -30,7 +30,7 @@ public class MsgMessage implements Serializable {
     public static final DateTimeZone timeZone = DateTimeZone.forID("Asia/Kolkata");
 
     String payload="";
-    String createdAt= LocalDateTime.now(timeZone).toString();;
+    String createdAt= LocalDateTime.now(timeZone).toString();
 
 
     String messageId = UUID.randomUUID().toString();
