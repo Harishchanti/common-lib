@@ -32,6 +32,7 @@ apply plugin: 'net.ltgt.apt'
 apply plugin: 'maven-publish'
 apply plugin: 'release'
 apply plugin: 'war'
+defaultTasks 'bootRun'
 
 war {
     baseName = 'ailiens-common'
@@ -39,7 +40,12 @@ war {
 }
 
 bootRepackage {
-    mainClass = 'com.aliens.hipster.MsgApp'
+    mainClass = 'com.aliens.hipster.CommonsApp'
+}
+
+springBoot {
+    mainClass = 'com.aliens.hipster.CommonsApp'
+    executable = true
 }
 
 gradle.taskGraph.whenReady { graph ->
@@ -189,6 +195,7 @@ subprojects
         dependencies{
             provided 'org.projectlombok:lombok:1.16.10'
             apt 'org.projectlombok:lombok:1.16.10'
+            compile 'org.projectlombok:lombok:1.16.10'
 
             compile "org.springframework.boot:spring-boot-actuator"
             compile "org.springframework.boot:spring-boot-autoconfigure"
@@ -199,6 +206,8 @@ subprojects
             compile "org.springframework.boot:spring-boot-starter-security"
             compile "org.springframework.boot:spring-boot-starter-web"
             compile "org.springframework.boot:spring-boot-starter-thymeleaf"
+            
+            compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.3'            
 
             configurations {
                 all*.exclude group: 'javassist'
@@ -210,6 +219,7 @@ subprojects
             compile 'com.google.guava:guava:18.0'
 
             compile "javax.inject:javax.inject:${javax_inject_version}"
+
         }
     }
 
@@ -222,8 +232,20 @@ configure (subprojects
     -project(':msg-common')
     -project(':msg-receiver')
     -project(':ando-models')
+    -project(':custom-logging')
+    -project(':common')
+    -project(':restutil')
     -project(':galactus-models')
-    -project(':msg-publisher-extension-spring-jpa')
+    -project(':msg-adapter-spring-jpa')
+    -project(':security-adapter')
+    -project(':msg-adapter-cassandra')
+    -project(':galactus-models')
+    -project(':optimusprime-models')
+    -project(':swagger')
+    -project(':profx-models')
+    -project(':pcm-models')
+    -project(':msg-adapter-mongo')
+    -project(':healthcheck')
 
 ){
 
@@ -290,6 +312,8 @@ configure (subprojects
         compile "mysql:mysql-connector-java"
         compile "fr.ippon.spark.metrics:metrics-spark-reporter:${metrics_spark_reporter_version}"
         compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
+        
+        
         testCompile "com.jayway.awaitility:awaitility:${awaility_version}"
         testCompile "com.jayway.jsonpath:json-path"
         testCompile "org.springframework.boot:spring-boot-starter-test"
@@ -309,8 +333,7 @@ configure (subprojects
         //commons
 
 
-        compile 'com.mashape.unirest:unirest-java:1.4.9'
-        compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
+
         compile 'com.google.code.gson:gson:2.8.0'
         compile 'com.rabbitmq:amqp-client:3.6.5'
 
@@ -330,10 +353,10 @@ project(':main')
                 compile project(':msg-publisher')
                 compile project(':msg-receiver')
                 compile project(':msg-common')
-                compile project(':restutil')
                 compile project(':message-sender')
                 compile project(':common')
                 compile project(':rabbitmq-publisher')
+                compile project(':healthcheck')
             }
     }
 
@@ -390,11 +413,13 @@ project(':msg-receiver')
         dependencies
             {
                 compile project(':msg-common')
+                compile project(':msg-adapter-spring-jpa')
                 compile 'org.apache.commons:commons-lang3:3.3.2'
                 compile "io.dropwizard.metrics:metrics-core"
                 compile "io.dropwizard.metrics:metrics-annotation:${dropwizard_metrics_version}"
                 compile "io.dropwizard.metrics:metrics-ehcache:${dropwizard_metrics_version}"
                 compile "io.dropwizard.metrics:metrics-graphite:${dropwizard_metrics_version}"
+
             }
     }
 
@@ -411,13 +436,24 @@ project(':restutil')
         dependencies
             {
                 compile project(':common')
+                compile 'com.mashape.unirest:unirest-java:1.4.9'
+                compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
             }
     }
 
-project(':msg-publisher-extension-spring-jpa')
+project(':msg-adapter-spring-jpa')
     {
         dependencies {
             compile project(':msg-common')
+        }
+    }
+
+project(':msg-adapter-cassandra')
+    {
+        dependencies {
+            compile project(':msg-common')
+            compile('org.springframework.boot:spring-boot-starter-data-cassandra')
+            compile group: 'com.datastax.cassandra', name: 'cassandra-driver-mapping', version: '2.1.0-rc1'
         }
     }
 
@@ -427,7 +463,7 @@ project(':msg-publisher')
         dependencies
             {
                 compile project(':msg-common')
-                compile project(':msg-publisher-extension-spring-jpa')
+                compile project(':msg-adapter-spring-jpa')
 
                 compile 'com.rabbitmq:amqp-client:3.6.5'
                 compile 'org.apache.commons:commons-lang3:3.3.2'
@@ -450,6 +486,15 @@ project(':ando-models')
           }
     }
 
+project(':custom-logging')
+    {
+        dependencies
+            {
+                compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+
+            }
+    }
+
 
 project(':galactus-models')
     {
@@ -457,12 +502,80 @@ project(':galactus-models')
 
         }
     }
-
+project(':optimusprime-models')
+    {
+        dependencies {
+            compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+            compile 'org.json:json:20090211'
+            compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.2'
+            compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.6.3'
+            compile group: 'org.hibernate', name: 'hibernate-envers'
+        }
+    }
 project(':security-adapter')
     {
         dependencies {
-
+            compile("org.keycloak:keycloak-spring-security-adapter:2.4.0.Final")
+            compile("org.keycloak:keycloak-authz-client:2.4.0.Final")
         }
+    }
+
+project(':swagger')
+    {
+        dependencies {
+            compile("io.springfox:springfox-swagger2:2.6.1"){
+                exclude module: 'mapstruct'
+            }
+
+            compile("io.springfox:springfox-swagger-ui:2.6.1"){
+                exclude module: 'mapstruct'
+            }
+        }
+    }
+
+
+project(':profx-models')
+    {
+
+        dependencies
+            {
+                compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+            }
+    }
+
+
+project(':pcm-models')
+    {
+        dependencies{
+            compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.6'
+            compile("org.mongodb.morphia:morphia:0.111")
+
+            compile "com.fasterxml.jackson.datatype:jackson-datatype-json-org:${jackson_version}"
+            compile "com.fasterxml.jackson.datatype:jackson-datatype-hppc:${jackson_version}"
+            compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:${jackson_version}"
+            compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate4"
+            compile "com.fasterxml.jackson.core:jackson-annotations:${jackson_version}"
+            compile "com.fasterxml.jackson.core:jackson-databind:${jackson_version}"
+            compile("org.mongodb.morphia:morphia:0.111")
+
+            compile "commons-lang:commons-lang:${commons_lang_version}"
+        }
+    }
+
+
+project(':msg-adapter-mongo')
+    {
+        dependencies {
+                compile project(':msg-common')
+                compile('org.springframework.boot:spring-boot-starter-data-mongodb')
+                }
+    }
+
+project(':healthcheck')
+    {
+       dependencies{
+           compile 'org.apache.commons:commons-lang3:3.3.2'
+       }
     }
 
 

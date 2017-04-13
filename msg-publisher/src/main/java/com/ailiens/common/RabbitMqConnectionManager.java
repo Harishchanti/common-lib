@@ -32,7 +32,10 @@ public class RabbitMqConnectionManager {
     static PoolType poolType=PoolType.EAGER;
 
     public static void createConnectionPool(String clusterName,String host,String username,String password) throws IOException, TimeoutException {
-        map.put(clusterName,new ConnectionFactoryProxy(host, username, password,poolSize,poolType));
+        if(!map.containsKey(clusterName))
+        {
+            map.put(clusterName,new ConnectionFactoryProxy(host, username, password,poolSize,poolType));
+        }
     }
 
     @Synchronized

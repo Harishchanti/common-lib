@@ -15,8 +15,8 @@ public class InvalidInputException extends GenericServiceException {
         super(message,400);
     }
 
-    public InvalidInputException(int responseCode)
+    public InvalidInputException(String message,int responseCode)
     {
-        super("InvalidInput",responseCode);
+        super(message,responseCode);
     }
 }

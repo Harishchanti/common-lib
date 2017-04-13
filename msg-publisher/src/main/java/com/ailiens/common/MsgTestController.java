@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by jayant on 16/1/17.
@@ -23,6 +25,9 @@ public class MsgTestController {
 
     @Autowired
     RetryMessages retryMessages;
+
+    @Autowired(required = false)
+    MessageLoggingService messageLogger;
 
     @RequestMapping(value = "/test", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> test() throws Exception {
@@ -39,6 +44,16 @@ public class MsgTestController {
 
         int num=retryMessages.invoke(pageSize);
         return ResponseEntity.ok(num);
+    }
+
+    @RequestMapping(value = "/search/{messageId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<? extends MsgOutbound> search(@PathVariable String messageId) throws Exception {
+
+        return Optional.ofNullable(messageLogger)
+            .map(logger->  logger.search(messageId))
+             .orElse(null);
+
+
     }
 
 }

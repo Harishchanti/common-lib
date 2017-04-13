@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class MsgConfig {
     String env;
+    String cluster;
     String userName;
     String password;
     int poolSize;

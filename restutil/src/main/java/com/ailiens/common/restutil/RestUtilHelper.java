@@ -19,7 +19,6 @@ import org.springframework.http.MediaType;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 import static com.ailiens.common.LoggingFilter.REQ_ID_HEADER;
 import static com.ailiens.common.LoggingFilter.REQ_ID_MDC;
@@ -65,7 +64,7 @@ public class RestUtilHelper implements CheckResponse {
 
     }
 
-    protected void preProcess(String url,Object payload) throws ExecutionException {
+    protected void preProcess(String url,Object payload)  {
         addReqIdHeader();
         checkKeyCloak();
         log.info(url);
@@ -87,7 +86,7 @@ public class RestUtilHelper implements CheckResponse {
         return  user;
     }
 
-    protected void checkKeyCloak() throws ExecutionException {
+    protected void checkKeyCloak()  {
 
         String key= getKeycloakKey();
 
@@ -99,9 +98,16 @@ public class RestUtilHelper implements CheckResponse {
 
     public void checkStatus(HttpResponse response) throws GenericServiceException {
 
+        String responseBody="No Response";
+
+        if(response.getBody()!=null)
+        {
+            responseBody=response.getBody().toString();
+        }
         if(logResponse)
         {
-            log.info(response.getBody().toString());
+
+            log.info(responseBody);
         }
         String key= getKeycloakKey();
 
@@ -112,7 +118,7 @@ public class RestUtilHelper implements CheckResponse {
         }
 
 
-        checkResponse(response.getStatus());
+        checkResponse(response.getStatus(),responseBody);
     }
 
     public void setup()

@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -17,24 +18,20 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
 
     @Autowired
     @Setter
-    InboundMessagesRepository inboundMessagesRepository;
+    InboundLoggingService inboundLoggingService;
 
 
-    public void postProcess(MsgMessage message, String response)
+    @Override
+    public void postProcess(MsgMessage message, String response,String handlerResponse)
     {
-        InboundMessages inboundMessages = new InboundMessages();
-        inboundMessages.setGroupId(message.getGroupId());
-        inboundMessages.setMessageId(message.getMessageId());
-        inboundMessages.setPayload(message.getPayload());
-        inboundMessages.setResponse(response);
-        inboundMessagesRepository.save(inboundMessages);
+       inboundLoggingService.save(message,response,handlerResponse);
     }
 
     public EventResponse preProcess(MsgMessage message)
     {
         String messageId= message.getMessageId();
 
-        List<String> inboundMessagesList=inboundMessagesRepository.findByMessageId(messageId);
+        List<String> inboundMessagesList=inboundLoggingService.findByMessageId(messageId);
         if(inboundMessagesList.size()>0 && inboundMessagesList.get(0).equals(PROCESSED))
         {
             return new EventResponse(200,"Message already processed");
@@ -42,28 +39,30 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
         else return null;
     }
 
+
+    @Transactional
     public EventResponse invoke(MsgMessage message)
     {
         log.info("Received Message Id {}",message.getMessageId());
         EventResponse eventResponse=preProcess(message);
         if(eventResponse!=null)return eventResponse;
 
-        String payload= message.getPayload();
 
         String response=PROCESSED;
+        String handlerResponse="";
         int status=200;
         try {
-            response=handle(payload);
+            handlerResponse=handle(message);
         }
         catch (Exception e)
         {
-            response="Exception "+e.getStackTrace();
+            handlerResponse=response=ExceptionUtils.getMessage(e);
             status=500;
-            log.error(ExceptionUtils.getMessage(e));
+            log.error(handlerResponse);
         }
         finally {
-            postProcess(message,response);
-            return new EventResponse(status,response);
+            postProcess(message,response,handlerResponse);
+            return new EventResponse(status,handlerResponse);
         }
     }
 }
