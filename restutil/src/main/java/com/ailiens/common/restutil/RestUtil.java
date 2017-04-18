@@ -138,6 +138,20 @@ public class RestUtil  extends RestUtilHelper  {
         return response;
     }
 
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class,GenericServiceException.class})
+    public  <T> HttpResponse<T> delete(String url, String payload, Class <? extends T> responseClass) throws UnirestException,GenericServiceException  {
+
+        preProcess(url,payload);
+        HttpResponse<T> response = Unirest.delete(url)
+            .headers(headers)
+            .body(payload)
+            .asObject(responseClass);
+
+        checkStatus(response);
+
+        return response;
+    }
+
 
     public  <T> T get(String url, TypeReference<T> typeReference) throws  UnirestException,GenericServiceException, IOException {
 

@@ -19,7 +19,9 @@ import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.lang.management.ManagementFactory;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
 @Configuration
@@ -89,6 +91,12 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter
                 String graphiteHost = graphiteConfig.getHost();
                 Integer graphitePort = graphiteConfig.getPort();
                 String graphitePrefix = graphiteConfig.getPrefix();
+                try {
+                    graphitePrefix=graphitePrefix.concat("-"+ InetAddress.getLocalHost().getHostAddress());
+                } catch (UnknownHostException e) {
+                    log.error(e.getMessage());
+                }
+                log.info("Prefix {}",graphitePrefix);
                 Graphite graphite = new Graphite(new InetSocketAddress(graphiteHost, graphitePort));
                 GraphiteReporter graphiteReporter = GraphiteReporter.forRegistry(metricRegistry)
                     .convertRatesTo(TimeUnit.SECONDS)
