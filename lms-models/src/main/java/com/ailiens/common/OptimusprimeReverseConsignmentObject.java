@@ -1,4 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import org.joda.time.DateTime;
 
@@ -15,7 +15,7 @@ public class OptimusprimeReverseConsignmentObject {
     private String serviceType;
     private String fedexBarCode;
     private String dcCode;
-    
+
 	public String getLogisticsId() {
 		return logisticsId;
 	}
@@ -88,6 +88,6 @@ public class OptimusprimeReverseConsignmentObject {
 	public void setDcCode(String dcCode) {
 		this.dcCode = dcCode;
 	}
-	
+
 
 }

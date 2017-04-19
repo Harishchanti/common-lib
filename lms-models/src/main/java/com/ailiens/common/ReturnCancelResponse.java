@@ -1,4 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 /**
  * Created by rajesh on 8/30/16.

@@ -1,4 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ public class DeliveryOptions {
 	private List<DeliveryOptionsStore> stores;
 	private String shipmentValue;
 	private DestinationAddress destinationAddress;
-	
+
 	public String getShipmentValue() {
 		return shipmentValue;
 	}
@@ -32,5 +32,5 @@ public class DeliveryOptions {
 	public void setItemId(String itemId) {
 		this.itemId = itemId;
 	}
-	 
+
 }

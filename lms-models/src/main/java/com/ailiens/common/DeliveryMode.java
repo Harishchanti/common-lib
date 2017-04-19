@@ -1,6 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
-
-import java.util.List;
+package com.ailiens.common;
 
 public class DeliveryMode {
 	private Integer code;
@@ -24,5 +22,5 @@ public class DeliveryMode {
 	public void setDeliveryCost(DeliveryCost deliveryCost) {
 		this.deliveryCost = deliveryCost;
 	}
-	
+
 }

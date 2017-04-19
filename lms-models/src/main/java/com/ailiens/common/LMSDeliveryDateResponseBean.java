@@ -1,4 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 public class LMSDeliveryDateResponseBean {
 

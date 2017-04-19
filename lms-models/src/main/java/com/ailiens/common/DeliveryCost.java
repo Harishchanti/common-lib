@@ -1,9 +1,9 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import java.math.BigDecimal;
 
 public class DeliveryCost {
-	
+
 	private String currencyIso;
 	private BigDecimal value;
 	public String getCurrencyIso() {
@@ -18,5 +18,5 @@ public class DeliveryCost {
 	public void setValue(BigDecimal value) {
 		this.value = value;
 	}
-	
+
 }

@@ -1,4 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import java.util.List;
 
@@ -18,5 +18,5 @@ public class Store {
 	public void setDeliveryModes(List<DeliveryMode> deliveryModes) {
 		this.deliveryModes = deliveryModes;
 	}
-	
+
 }

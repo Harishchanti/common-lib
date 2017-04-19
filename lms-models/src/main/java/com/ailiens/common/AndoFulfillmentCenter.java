@@ -1,15 +1,11 @@
 
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
+import com.fasterxml.jackson.annotation.*;
+
+import javax.annotation.Generated;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
@@ -93,7 +89,7 @@ public class AndoFulfillmentCenter {
     private String contactPerson;
     @JsonProperty("tinNo")
     private String tinNo;
-    
+
     @JsonProperty("contactNo")
     public String getContactNo() {
 		return contactNo;
@@ -123,7 +119,7 @@ public class AndoFulfillmentCenter {
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     * 
+     *
      * @return
      *     The id
      */
@@ -133,7 +129,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param id
      *     The id
      */
@@ -143,7 +139,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The fcId
      */
@@ -153,7 +149,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param fcId
      *     The fcId
      */
@@ -163,7 +159,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The sapCode
      */
@@ -173,7 +169,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param sapCode
      *     The sapCode
      */
@@ -183,7 +179,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The fcName
      */
@@ -193,7 +189,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param fcName
      *     The fcName
      */
@@ -203,7 +199,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The streetNo
      */
@@ -213,7 +209,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param streetNo
      *     The streetNo
      */
@@ -223,7 +219,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The streetName
      */
@@ -233,7 +229,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param streetName
      *     The streetName
      */
@@ -243,7 +239,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The town
      */
@@ -253,7 +249,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param town
      *     The town
      */
@@ -263,7 +259,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The postCode
      */
@@ -273,7 +269,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param postCode
      *     The postCode
      */
@@ -283,7 +279,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The city
      */
@@ -293,7 +289,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param city
      *     The city
      */
@@ -303,7 +299,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The state
      */
@@ -313,7 +309,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param state
      *     The state
      */
@@ -323,7 +319,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The country
      */
@@ -333,7 +329,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param country
      *     The country
      */
@@ -343,7 +339,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The latitude
      */
@@ -353,7 +349,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param latitude
      *     The latitude
      */
@@ -363,7 +359,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The longitude
      */
@@ -373,7 +369,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param longitude
      *     The longitude
      */
@@ -383,7 +379,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The openingHours
      */
@@ -393,7 +389,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param openingHours
      *     The openingHours
      */
@@ -403,7 +399,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The openingMins
      */
@@ -413,7 +409,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param openingMins
      *     The openingMins
      */
@@ -422,9 +418,9 @@ public class AndoFulfillmentCenter {
         this.openingMins = openingMins;
     }
 
-    
+
     /**
-     * 
+     *
      * @return
      *     The closingHours
      */
@@ -434,7 +430,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param closingHours
      *     The closingHours
      */
@@ -442,9 +438,9 @@ public class AndoFulfillmentCenter {
     public void setClosingHours(Integer closingHours) {
         this.closingHours = closingHours;
     }
-    
+
     /**
-     * 
+     *
      * @return
      *     The closingMins
      */
@@ -454,7 +450,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param closingMins
      *     The closingMins
      */
@@ -464,7 +460,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The workingDays
      */
@@ -474,7 +470,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param workingDays
      *     The workingDays
      */
@@ -484,7 +480,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The holidays
      */
@@ -494,7 +490,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param holidays
      *     The holidays
      */
@@ -504,7 +500,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The storeEnabled
      */
@@ -514,7 +510,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param storeEnabled
      *     The storeEnabled
      */
@@ -524,7 +520,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The fcType
      */
@@ -534,7 +530,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param fcType
      *     The fcType
      */
@@ -544,7 +540,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @return
      *     The operatingType
      */
@@ -554,7 +550,7 @@ public class AndoFulfillmentCenter {
     }
 
     /**
-     * 
+     *
      * @param operatingType
      *     The operatingType
      */

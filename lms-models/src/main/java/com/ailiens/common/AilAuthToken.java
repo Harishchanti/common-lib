@@ -1,16 +1,11 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 
+import com.fasterxml.jackson.annotation.*;
 
+import javax.annotation.Generated;
 import java.util.HashMap;
 import java.util.Map;
-import javax.annotation.Generated;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
@@ -46,7 +41,7 @@ public class AilAuthToken {
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * The accessToken
 	 */
@@ -56,7 +51,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param accessToken
 	 * The access_token
 	 */
@@ -66,7 +61,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * The expiresIn
 	 */
@@ -76,7 +71,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param expiresIn
 	 * The expires_in
 	 */
@@ -86,7 +81,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * The refreshExpiresIn
 	 */
@@ -96,7 +91,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refreshExpiresIn
 	 * The refresh_expires_in
 	 */
@@ -106,7 +101,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * The refreshToken
 	 */
@@ -116,7 +111,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param refreshToken
 	 * The refresh_token
 	 */
@@ -126,7 +121,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * The tokenType
 	 */
@@ -136,7 +131,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param tokenType
 	 * The token_type
 	 */
@@ -146,7 +141,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * The idToken
 	 */
@@ -156,7 +151,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param idToken
 	 * The id_token
 	 */
@@ -166,7 +161,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * The notBeforePolicy
 	 */
@@ -176,7 +171,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param notBeforePolicy
 	 * The not-before-policy
 	 */
@@ -186,7 +181,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return
 	 * The sessionState
 	 */
@@ -196,7 +191,7 @@ public class AilAuthToken {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param sessionState
 	 * The session-state
 	 */

@@ -1,4 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import javax.validation.constraints.NotNull;
 
@@ -39,7 +39,7 @@ public class LmsQcStatusInfo {
 	public void setQcStatus(String qcStatus) {
 		this.qcStatus = qcStatus;
 	}
-	
+
 	public String getReturnedPackageStatus() {
 		return returnedPackageStatus;
 	}

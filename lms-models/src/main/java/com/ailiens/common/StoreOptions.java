@@ -1,10 +1,10 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import java.util.HashMap;
 import java.util.List;
 
 public class StoreOptions {
-	
+
 	String fcId;
 	HashMap<String,List<String>> paymentDeliveryMethods;
 	public String getFcId() {
@@ -20,5 +20,5 @@ public class StoreOptions {
 		this.paymentDeliveryMethods = paymentDeliveryMethods;
 	}
 
-	
+
 }

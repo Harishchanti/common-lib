@@ -1,15 +1,10 @@
-package com.ail.mbo.bumblebee.mbo.beans;
-import java.util.HashMap;
-import java.util.Map;
+package com.ailiens.common;
+
+import com.fasterxml.jackson.annotation.*;
 
 import javax.annotation.Generated;
-
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.HashMap;
+import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Generated("org.jsonschema2pojo")
@@ -21,10 +16,10 @@ public class UsiTicketOmsDetail {
 
 	@JsonProperty("consignment_id")
 	private String consignmentId;
-	
+
 	@JsonProperty("order_id")
 	private String orderId;
-	
+
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 	@JsonProperty("consignment_id")
@@ -43,12 +38,12 @@ public class UsiTicketOmsDetail {
 	public void setOrderId(String orderId) {
 	this.orderId = orderId;
 	}
-	
+
 	@JsonAnyGetter
 	public Map<String, Object> getAdditionalProperties() {
 	return this.additionalProperties;
 	}
-	
+
 	@JsonAnySetter
 	public void setAdditionalProperty(String name, Object value) {
 	this.additionalProperties.put(name, value);

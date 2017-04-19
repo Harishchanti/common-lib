@@ -1,4 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -10,8 +10,8 @@ public class ProductLineItem {
 	private long quantity;
 	private List<Store> stores;
 	private String productId;
-	
-	
+
+
 	public String getId() {
 		return id;
 	}
@@ -42,6 +42,6 @@ public class ProductLineItem {
 	public void setProductId(String productId) {
 		this.productId = productId;
 	}
-	
-	
+
+
 }

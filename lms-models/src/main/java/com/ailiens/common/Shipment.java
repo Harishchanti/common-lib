@@ -1,17 +1,17 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import java.util.List;
 
 public class Shipment {
 
 	private String id;
-	
+
 	private List<ProductLineItem> productLineItems;
-	
+
 	private String orderDate;
-	
+
 	private ShippingAddress shippingAddress;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -36,5 +36,5 @@ public class Shipment {
 	public void setShippingAddress(ShippingAddress shippingAddress) {
 		this.shippingAddress = shippingAddress;
 	}
-	
+
 }

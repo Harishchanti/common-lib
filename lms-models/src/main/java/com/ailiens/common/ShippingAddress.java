@@ -1,4 +1,4 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 public class ShippingAddress {
 
@@ -11,5 +11,5 @@ public class ShippingAddress {
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
-	
+
 }

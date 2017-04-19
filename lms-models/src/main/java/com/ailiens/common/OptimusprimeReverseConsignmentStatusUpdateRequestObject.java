@@ -1,13 +1,13 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 public class OptimusprimeReverseConsignmentStatusUpdateRequestObject {
 	private String comment;
 	private OptimusprimeReverseConsignmentObject logisticDetails;
 	private String status;
 	private String consignmentId;
-	
-	
-	
+
+
+
 	public String getConsignmentId() {
 		return consignmentId;
 	}

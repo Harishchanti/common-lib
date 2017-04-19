@@ -1,11 +1,9 @@
-package com.ail.mbo.bumblebee.mbo.beans;
+package com.ailiens.common;
 
 import java.util.List;
 
-import com.ail.mbo.bumblebee.domain.Customer;
-
 public class ReturnShipment {
-	
+
 	private String consignmentId;
 	private String invoiceId;
 	private String destinationStoreId;
@@ -90,6 +88,6 @@ public class ReturnShipment {
 	public void setReturns(List<ProductsDetails> returns) {
 		this.returns = returns;
 	}
-	
+
 
 }
