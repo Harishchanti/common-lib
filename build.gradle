@@ -217,6 +217,9 @@ subprojects
 
             compile 'com.google.code.gson:gson:2.8.0'
 
+            compile group: 'com.google.guava', name: 'guava', version: '21.0'
+
+
 
             compile "javax.inject:javax.inject:${javax_inject_version}"
 
