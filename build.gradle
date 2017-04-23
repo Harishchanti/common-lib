@@ -467,7 +467,7 @@ project(':msg-publisher')
         dependencies
             {
                 compile project(':msg-common')
-                compile project(':msg-adapter-mongo')
+                compile project(':msg-adapter-spring-jpa')
 
                 compile 'com.rabbitmq:amqp-client:3.6.5'
                 compile 'org.apache.commons:commons-lang3:3.3.2'

@@ -10,7 +10,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.support.TransactionSynchronizationAdapter;
@@ -33,8 +32,7 @@ public class MsgPublisherRabbitmq extends TransactionSynchronizationAdapter impl
     @Autowired
     ObjectMapper mapper;
 
-    @Autowired(required = true)
-    @Qualifier("MongoOutboundLogger")
+    @Autowired(required = false)
     MessageLoggingService messageLogger;
 
     @Autowired
