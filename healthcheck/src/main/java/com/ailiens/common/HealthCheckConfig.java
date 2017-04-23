@@ -7,7 +7,10 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jayant on 7/4/17.
@@ -20,4 +23,17 @@ public class HealthCheckConfig {
 
     List<Service> services = Lists.newArrayList();
     String baseUrl;
+
+    HashMap<String,Service> service = new HashMap<>();
+
+    @PostConstruct
+    public void init()
+    {
+       for(Map.Entry<String,Service> entry:  service.entrySet())
+       {
+           Service service = entry.getValue();
+           service.setHost(entry.getKey());
+           services.add(service);
+       }
+    }
 }
