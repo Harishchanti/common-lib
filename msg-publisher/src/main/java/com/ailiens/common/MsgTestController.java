@@ -3,10 +3,7 @@ package com.ailiens.common;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -46,14 +43,12 @@ public class MsgTestController {
         return ResponseEntity.ok(num);
     }
 
-    @RequestMapping(value = "/search/{messageId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<? extends MsgOutbound> search(@PathVariable String messageId) throws Exception {
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<? extends MsgOutbound> search(@RequestParam(value = "messageId") String messageId) throws Exception {
 
         return Optional.ofNullable(messageLogger)
             .map(logger->  logger.search(messageId))
              .orElse(null);
-
-
     }
 
 }
