@@ -32,7 +32,7 @@ public class HealthCheckConfig {
        for(Map.Entry<String,Service> entry:  service.entrySet())
        {
            Service service = entry.getValue();
-           service.setHost(entry.getKey());
+           service.setName(entry.getKey());
            services.add(service);
        }
     }
