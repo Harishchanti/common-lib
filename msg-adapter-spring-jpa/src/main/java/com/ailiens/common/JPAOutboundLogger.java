@@ -2,7 +2,6 @@ package com.ailiens.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,7 +13,6 @@ import java.util.List;
 
 
 @Component
-@Primary
 public class JPAOutboundLogger implements MessageLoggingService {
 
     @Autowired
