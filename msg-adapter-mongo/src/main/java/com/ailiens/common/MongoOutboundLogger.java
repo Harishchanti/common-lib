@@ -4,12 +4,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
  * Created by surabhi on 23/4/17.
  */
+
 @Component
 public class MongoOutboundLogger implements  MessageLoggingService{
 
@@ -36,8 +36,7 @@ public class MongoOutboundLogger implements  MessageLoggingService{
 
     public List<? extends MsgOutbound> search(String messageId)
     {
-
-        return Collections.emptyList();
+        return outboundMessageRepository.findByMessageId(messageId);
     }
 
 }

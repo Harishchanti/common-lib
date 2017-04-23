@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * Created by jayant on 23/4/17.
+ * Created by surabhi on 23/4/17.
  */
 @Component
 public class MongoMessageRetry implements MessageRetryService<OutboundMessage> {

@@ -6,10 +6,11 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 /**
- * Created by jayant on 23/4/17.
+ * Created by surabhi on 23/4/17.
  */
 public interface OutboundMessageRepository extends MongoRepository<OutboundMessage,String> {
 
     List<OutboundMessage> findBySentIsFalse(Pageable pageable);
 
+    List<OutboundMessage> findByMessageId(String messageId);
 }
