@@ -18,7 +18,7 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/event")
+@RequestMapping("${MSG.baseUrl}/event")
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class EventControlller {

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 public class MsgConfig {
     String env;
     String cluster;
+    String baseUrl;
     String userName;
     String password;
     int poolSize;

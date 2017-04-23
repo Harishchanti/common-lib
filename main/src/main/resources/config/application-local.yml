@@ -100,7 +100,8 @@ server:
 
 
 MSG:
-  env: prod
+  env: qa
+  baseUrl: /api/info
   userName: guest
   password: guest
 
@@ -141,3 +142,5 @@ jhipster:
             queueSize: 512
 
 basePath: /api
+
+
