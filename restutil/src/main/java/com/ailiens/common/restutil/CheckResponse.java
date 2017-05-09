@@ -18,7 +18,7 @@ public interface CheckResponse {
             case 204:
                 //request successful, do nothing
             case 302:
-            case 304:
+            case 304: break;
             case 400:
                 throw new InvalidInputException(responseBody);
             case 401:
