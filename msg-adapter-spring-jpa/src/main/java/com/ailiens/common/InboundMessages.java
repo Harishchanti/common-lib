@@ -1,5 +1,6 @@
 package com.ailiens.common;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.LocalDateTime;
@@ -16,6 +17,7 @@ import static com.ailiens.common.MsgMessage.timeZone;
 @Table(name = "inbound_messages")
 @Slf4j
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class InboundMessages implements Serializable,MsgInbound {
 
     private static final long serialVersionUID = 1L;
