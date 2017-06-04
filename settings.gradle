@@ -22,4 +22,5 @@ include 'pcm-models'
 include 'msg-adapter-mongo'
 include 'healthcheck'
 include 'lms-models'
+include 'utilities'
 

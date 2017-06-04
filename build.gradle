@@ -250,6 +250,7 @@ configure (subprojects
     -project(':msg-adapter-mongo')
     -project(':healthcheck')
     -project(':lms-models')
+    -project(':utilities')
 
 ){
 
@@ -586,6 +587,19 @@ project(':lms-models')
     {
         dependencies{
             compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+        }
+    }
+
+
+
+project(':utilities')
+    {
+        dependencies{
+            compile 'com.mashape.unirest:unirest-java:1.4.9'
+            compile ("org.springframework:spring-context-support") {
+                exclude(module: 'quartz')
+            }
+            compile "javax.mail:mail:1.4.1"
         }
     }
 
