@@ -1,5 +1,7 @@
 package com.ailiens.common;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -10,6 +12,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -86,7 +89,9 @@ public class ThreadDumpAnalyzer {
         }
         finally {
          if(fw!=null)
+         {
              fw.close();
+         }
         }
     }
 
@@ -115,5 +120,31 @@ public class ThreadDumpAnalyzer {
         {
             log.error(e.getMessage());
         }
+    }
+
+
+    @PostConstruct
+    public void setup()
+    {
+        Unirest.setObjectMapper(new com.mashape.unirest.http.ObjectMapper() {
+            private ObjectMapper jacksonObjectMapper
+                = new ObjectMapper();
+
+            public <T> T readValue(String value, Class<T> valueType) {
+                try {
+                    return jacksonObjectMapper.readValue(value, valueType);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            public String writeValue(Object value) {
+                try {
+                    return jacksonObjectMapper.writeValueAsString(value);
+                } catch (JsonProcessingException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
     }
 }
