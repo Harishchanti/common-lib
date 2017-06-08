@@ -29,6 +29,13 @@ public class MsgConnectionManager {
     public void init()
     {
         configHashMap.put("qa-default",RabbitmqConfig.builder().host("ac521f15ea4b211e69b1f1283e06dba7-1417201917.us-east-1.elb.amazonaws.com").build());
+
+        configHashMap.put("qa-ec2",RabbitmqConfig.builder()
+            .host("ec2-34-207-234-128.compute-1.amazonaws.com")
+            .userName("msg")
+            .password("msg")
+            .build());
+
         configHashMap.put("dev-default",RabbitmqConfig.builder().host("a08f6ca2fd25511e6bbba123cc1aef16-1127466792.us-east-1.elb.amazonaws.com").build());
 
 
@@ -91,7 +98,7 @@ public class MsgConnectionManager {
 
 
         String CLUSTER_NAME="MSG";
-        RabbitMqConnectionManager.setPoolType(PoolType.LAZY);
+        RabbitMqConnectionManager.setPoolType(PoolType.EAGER);
         RabbitMqConnectionManager.setPoolSize(poolSize);
         RabbitMqConnectionManager.createConnectionPool(CLUSTER_NAME,rabbitMqHost,userName,password);
         RabbitMqConnectionManager.setDefaultCluster(CLUSTER_NAME);
