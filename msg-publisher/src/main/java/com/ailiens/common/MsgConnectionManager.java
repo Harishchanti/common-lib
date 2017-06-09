@@ -28,10 +28,10 @@ public class MsgConnectionManager {
     @PostConstruct
     public void init()
     {
-        configHashMap.put("qa-default",RabbitmqConfig.builder().host("ac521f15ea4b211e69b1f1283e06dba7-1417201917.us-east-1.elb.amazonaws.com").build());
+        configHashMap.put("qa-kube",RabbitmqConfig.builder().host("ac521f15ea4b211e69b1f1283e06dba7-1417201917.us-east-1.elb.amazonaws.com").build());
 
-        configHashMap.put("qa-ec2",RabbitmqConfig.builder()
-            .host("ec2-34-207-234-128.compute-1.amazonaws.com")
+        configHashMap.put("qa-default",RabbitmqConfig.builder()
+            .host("msg-rabbitmq-qa.ailiens.com")
             .userName("msg")
             .password("msg")
             .build());
