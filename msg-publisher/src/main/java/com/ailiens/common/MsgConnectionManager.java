@@ -98,7 +98,7 @@ public class MsgConnectionManager {
 
 
         String CLUSTER_NAME="MSG";
-        RabbitMqConnectionManager.setPoolType(PoolType.EAGER);
+        RabbitMqConnectionManager.setPoolType(PoolType.LAZY);
         RabbitMqConnectionManager.setPoolSize(poolSize);
         RabbitMqConnectionManager.createConnectionPool(CLUSTER_NAME,rabbitMqHost,userName,password);
         RabbitMqConnectionManager.setDefaultCluster(CLUSTER_NAME);
