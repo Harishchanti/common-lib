@@ -13,5 +13,8 @@ public interface MsgEventHandler extends MsgHandler {
 
     EventResponse invoke(MsgMessage message);
 
-
+    default boolean checkDuplicate()
+    {
+        return true;
+    }
 }

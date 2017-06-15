@@ -30,6 +30,7 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
     public EventResponse preProcess(MsgMessage message)
     {
         String messageId= message.getMessageId();
+        if(!checkDuplicate())return null;
 
         List<String> inboundMessagesList=inboundLoggingService.findByMessageId(messageId);
         if(inboundMessagesList.size()>0 && inboundMessagesList.get(0).equals(PROCESSED))
