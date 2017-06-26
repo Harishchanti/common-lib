@@ -1,38 +1,33 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.FullfilmentCenter;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.FullfilmentCenter;
-import com.ailiens.optimusprime.domain.OrderLine;
-import com.ailiens.optimusprime.domain.Orders;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class FfCenterDTO {
 
-	public String fcid;
-	public String sapCode;
-	public String fcName;
-	public String brand;
-	public String fcType;
-	public String postCode;
+    public String fcid;
+    public String sapCode;
+    public String fcName;
+    public String brand;
+    public String fcType;
+    public String postCode;
 
-	public FfCenterDTO(FullfilmentCenter fullfilmentCenter) {
-		if(fullfilmentCenter != null){
-			this.setFcid(fullfilmentCenter.getFullfilmentCenterId());
-			this.setBrand(fullfilmentCenter.getBrandName());
-			this.setFcName(fullfilmentCenter.getFulfilmentCenterName());
-			this.setFcType(fullfilmentCenter.getFcType());
-			this.setPostCode(fullfilmentCenter.getPostCode());
-			this.setSapCode(fullfilmentCenter.getSapCode());
-		}
-	}
+    public FfCenterDTO(FullfilmentCenter fullfilmentCenter) {
+    	if(fullfilmentCenter != null){
+    		this.setFcid(fullfilmentCenter.getFullfilmentCenterId());
+    		this.setBrand(fullfilmentCenter.getBrandName());
+    		this.setFcName(fullfilmentCenter.getFulfilmentCenterName());
+    		this.setFcType(fullfilmentCenter.getFcType());
+    		this.setPostCode(fullfilmentCenter.getPostCode());
+    		this.setSapCode(fullfilmentCenter.getSapCode());
+    	}
+    }
 
 
-	public FfCenterDTO(){
-
-	}
 	public String getFcid() {
 		return fcid;
 	}
@@ -106,8 +101,8 @@ public class FfCenterDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

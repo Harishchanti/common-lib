@@ -1,35 +1,32 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.Consignment;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.Consignment;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class ConsignmentStatusDTO {
 
-	public Long id;
-	public String consignmentStatus;
-	public String consignmentStatusType;
-	public String consignmentStatusToCustomer;
+    public Long id;
+    public String consignmentStatus;
+    public String consignmentStatusType;
+    public String consignmentStatusToCustomer;
 
-	public ConsignmentStatusDTO(Consignment consignment) {
-		if(consignment.getConsignmentStates()!=null){
+    public ConsignmentStatusDTO(Consignment consignment) {
+    	if(consignment.getConsignmentStates()!=null){
 			this.setId(consignment.getConsignmentStates().getId());
 			this.setConsignmentStatus(consignment.getConsignmentStates().getName());
 			this.setConsignmentStatusType(consignment.getConsignmentStates().getType());
 			this.setConsignmentStatusToCustomer(consignment.getConsignmentStates().getStatusToCustomer());
-		}
+    	}
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public ConsignmentStatusDTO(){
-
-	}
 
 
 	public void setId(Long id) {
@@ -75,8 +72,8 @@ public class ConsignmentStatusDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

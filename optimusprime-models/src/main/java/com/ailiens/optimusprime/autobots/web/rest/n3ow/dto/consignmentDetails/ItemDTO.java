@@ -1,45 +1,41 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
 import com.ailiens.optimusprime.domain.OrderLine;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
+import java.util.ArrayList;
+import java.util.List;
 
 @Generated("org.jsonschema2pojo")
 public class ItemDTO {
 
-	public String itemId;
-	public String warehouseItemId;
-	public String sapOrderNo;
-	public ProductDTO product;
-	public String slaEndTime;
-	public ItemStatusDTO itemStatus;
-	public InitialFfTypeDTO initialFfType;
-	public FfTypeDTO ffType;
-	public AddressDetailsDTO addressDetails;
-	public FfCenterDTO ffCenter;
-	public LogisticsDetailsDTO logistics;
-	public ItemPricingDetailsDTO itemPricingDetails;
-	public List<ImageDTO> images;
-	public List<String> relatedItems = new ArrayList<String>();
-	public List<History> orderItemHistory = new ArrayList<History>();
+    public String itemId;
+    public String warehouseItemId;
+    public String sapOrderNo;
+    public ProductDTO product;
+    public String slaEndTime;
+    public ItemStatusDTO itemStatus;
+    public InitialFfTypeDTO initialFfType;
+    public FfTypeDTO ffType;
+    public AddressDetailsDTO addressDetails;
+    public FfCenterDTO ffCenter;
+    public LogisticsDetailsDTO logistics;
+    public ItemPricingDetailsDTO itemPricingDetails;
+    public List<ImageDTO> images;
+    public List<String> relatedItems = new ArrayList<String>();
+    public List<History> orderItemHistory = new ArrayList<History>();
 
-
-
-	public ItemDTO(OrderLine orderLine) {
+    public ItemDTO(OrderLine orderLine) {
 		this.setItemId(orderLine.getOrderLineId());
 		this.setWarehouseItemId(orderLine.getWarehoueItemId());
-		this.setSapOrderNo(orderLine.getSapOrderNo());
+        this.setSapOrderNo(orderLine.getSapOrderNo());
 		this.setSlaEndTime(String.valueOf(orderLine.getSlaEndTime()));
 	}
 
-	public ItemDTO(){
 
-	}
 
 	public String getItemId() {
 		return itemId;
@@ -183,33 +179,33 @@ public class ItemDTO {
 		this.orderItemHistory = orderItemHistory;
 	}
 
-	public String getSapOrderNo() {
-		return sapOrderNo;
-	}
+    public String getSapOrderNo() {
+        return sapOrderNo;
+    }
 
-	public void setSapOrderNo(String sapOrderNo) {
-		this.sapOrderNo = sapOrderNo;
-	}
+    public void setSapOrderNo(String sapOrderNo) {
+        this.sapOrderNo = sapOrderNo;
+    }
 
-	public List<ImageDTO> getImages() {
-		return images;
-	}
+    public List<ImageDTO> getImages() {
+        return images;
+    }
 
-	public void setImages(List<ImageDTO> images) {
-		this.images = images;
-	}
+    public void setImages(List<ImageDTO> images) {
+        this.images = images;
+    }
 
-	public InitialFfTypeDTO getInitialFfType() {
-		return initialFfType;
-	}
+    public InitialFfTypeDTO getInitialFfType() {
+        return initialFfType;
+    }
 
-	public void setInitialFfType(InitialFfTypeDTO initialFfType) {
-		this.initialFfType = initialFfType;
-	}
+    public void setInitialFfType(InitialFfTypeDTO initialFfType) {
+        this.initialFfType = initialFfType;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

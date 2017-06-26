@@ -12,44 +12,42 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class InitialFfTypeDTO {
 
-	public String ffType;
-	public String type;
+    public String ffType;
+    public String type;
 
-	public InitialFfTypeDTO(OrderLine orderLine) {
-		this.setFfType(orderLine.getInitialFullfilmentType().getName());
-		this.setType(orderLine.getInitialFullfilmentType().getType());
-	}
-
-	public InitialFfTypeDTO(){
-
-	}
-
-	public String getFfType() {
-		return ffType;
-	}
+    public InitialFfTypeDTO(OrderLine orderLine) {
+        this.setFfType(orderLine.getInitialFullfilmentType().getName());
+        this.setType(orderLine.getInitialFullfilmentType().getType());
+    }
 
 
 
-	public void setFfType(String ffType) {
-		this.ffType = ffType;
-	}
+    public String getFfType() {
+        return ffType;
+    }
 
 
 
-	public String getType() {
-		return type;
-	}
+    public void setFfType(String ffType) {
+        this.ffType = ffType;
+    }
 
 
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public String getType() {
+        return type;
+    }
 
 
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

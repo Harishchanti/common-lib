@@ -1,18 +1,17 @@
 package com.ailiens.optimusprime.domain;
 
+import com.ailiens.optimusprime.domain.enumeration.service;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
-
-import com.ailiens.optimusprime.domain.enumeration.service;
+import java.util.Set;
 
 /**
  * A Orders.
@@ -36,6 +35,9 @@ public class Orders implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "service")
     private service service;
+
+    @Column(name = "ordering_channel")
+    private String orderingChannel;
 
     @Column(name = "workflow_id")
     private String workflowId;
@@ -90,6 +92,14 @@ public class Orders implements Serializable {
 
     public void setService(service service) {
         this.service = service;
+    }
+
+    public String getOrderingChannel() {
+        return orderingChannel;
+    }
+
+    public void setOrderingChannel(String orderingChannel) {
+        this.orderingChannel = orderingChannel;
     }
 
     public String getWorkflowId() {

@@ -7,8 +7,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -49,6 +47,10 @@ public class Price implements Serializable {
 
     @Column(name = "tax_exclusive")
     private Boolean taxExclusive;
+
+    @Column(name = "hsn")
+    private String hsn;
+
 
     @OneToOne(mappedBy = "price")
     @JsonIgnore
@@ -134,6 +136,14 @@ public class Price implements Serializable {
         this.taxExclusive = taxExclusive;
     }
 
+    public String getHsn() {
+        return hsn;
+    }
+
+    public void setHsn(String hsn) {
+        this.hsn = hsn;
+    }
+
     public OrderLine getOrderLine() {
         return orderLine;
     }
@@ -172,6 +182,7 @@ public class Price implements Serializable {
             ", tradeSp='" + tradeSp + "'" +
             ", netAmountWithShipping='" + netAmountWithShipping + "'" +
             ", taxExclusive='" + taxExclusive + "'" +
+            ", hsn='" + hsn + "'" +
             '}';
     }
 }

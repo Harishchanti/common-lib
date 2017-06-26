@@ -1,36 +1,33 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class PackagingTypeDTO {
 
-	public String name;
-	public String length;
-	public String breadth;
-	public String height;
-	public String description;
+    public String name;
+    public String length;
+    public String breadth;
+    public String height;
+    public String description;
 
 
 
-	public PackagingTypeDTO(OrderLine orderLine) {
-		if(orderLine.getPackagingType()!=null){
+    public PackagingTypeDTO(OrderLine orderLine) {
+    	if(orderLine.getPackagingType()!=null){
 			this.setName(orderLine.getPackagingType().getPackagingTypeName());
 			this.setLength(String.valueOf((orderLine.getPackagingType().getPackagingLength())));
 			this.setBreadth(String.valueOf(orderLine.getPackagingType().getPackagingBreadth()));
 			this.setHeight(String.valueOf(orderLine.getPackagingType().getPackagingHeight()));
 			this.setDescription(orderLine.getPackagingType().getPackagingDescription());
-		}
+    	}
 	}
 
 
-	public PackagingTypeDTO(){
-
-	}
 
 	public String getName() {
 		return name;
@@ -93,8 +90,8 @@ public class PackagingTypeDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

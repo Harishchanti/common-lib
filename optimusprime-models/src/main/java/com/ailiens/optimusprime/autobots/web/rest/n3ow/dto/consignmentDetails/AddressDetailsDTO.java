@@ -1,12 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import javax.annotation.Generated;
-import javax.persistence.Column;
-
+import com.ailiens.optimusprime.domain.OrderLine;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class AddressDetailsDTO {
@@ -33,9 +31,7 @@ public class AddressDetailsDTO {
         }
 	}
 
-public AddressDetailsDTO(){
-	
-}
+
 
 	public String getAddressId() {
 		return addressId;

@@ -1,11 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.Accounts;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.Accounts;
-import com.ailiens.optimusprime.domain.Orders;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class AccountsDetailsDTO {
@@ -22,7 +21,7 @@ public class AccountsDetailsDTO {
     public String email;
 
     public AccountsDetailsDTO(Accounts accounts) {
-	
+
     	if(accounts!=null){
     		this.setUserId(accounts.getAccountId());
     		this.setDateOfBirth(String.valueOf(accounts.getDateOfBirth()));
@@ -37,11 +36,8 @@ public class AccountsDetailsDTO {
     	}
 	}
 
-    public AccountsDetailsDTO()
-    {
-    	
-    }
-    
+
+
 	public String getUsername() {
 		return username;
 	}

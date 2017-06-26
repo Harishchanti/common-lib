@@ -1,18 +1,18 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class FfTypeDTO {
 
-	public String ffType;
-	public String type;
+    public String ffType;
+    public String type;
 
-	public FfTypeDTO(OrderLine orderLine) {
+    public FfTypeDTO(OrderLine orderLine) {
 		this.setFfType(orderLine.getFullfilmentType().getName());
 		this.setType(orderLine.getFullfilmentType().getType());
 	}
@@ -23,9 +23,7 @@ public class FfTypeDTO {
 		return ffType;
 	}
 
-	public FfTypeDTO(){
 
-	}
 
 	public void setFfType(String ffType) {
 		this.ffType = ffType;
@@ -46,8 +44,8 @@ public class FfTypeDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

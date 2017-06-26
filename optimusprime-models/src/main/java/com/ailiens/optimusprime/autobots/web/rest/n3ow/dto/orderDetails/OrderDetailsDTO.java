@@ -1,39 +1,36 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
+import javax.annotation.Generated;
+import java.util.ArrayList;
+import java.util.List;
 
 @Generated("org.jsonschema2pojo")
 public class OrderDetailsDTO {
 
-	public String orderId;
-	public String orderDate;
-	public FfCenterDTO orderingCenter;
-	public AccountsDetailsDTO customerDetails;
-	public AccountsDetailsDTO storeStaffDetails;
-	public OrderStatusDTO orderStatus;
-	public TotalPricingDetails totalPricingDetails;
-	public PaymentSummaryDTO paymentSummary;
-	public PaymentSummaryDTO refundSummary;
-	public List<ConsignmentDTO> consignments = new ArrayList<ConsignmentDTO>();
-	public List<History> orderHistory = new ArrayList<History>();
+    public String orderId;
+    public String orderDate;
+    public FfCenterDTO orderingCenter;
+    public AccountsDetailsDTO customerDetails;
+    public AccountsDetailsDTO storeStaffDetails;
+    public OrderStatusDTO orderStatus;
+    public TotalPricingDetails totalPricingDetails;
+    public PaymentSummaryDTO paymentSummary;
+    public PaymentSummaryDTO refundSummary;
+    public List<ConsignmentDTO> consignments = new ArrayList<ConsignmentDTO>();
+    public List<History> orderHistory = new ArrayList<History>();
 
 
 
 
-	public TotalPricingDetails getTotalPricingDetails() {
+    public TotalPricingDetails getTotalPricingDetails() {
 		return totalPricingDetails;
 	}
 
 
-	public OrderDetailsDTO(){
-
-	}
 
 	public void setTotalPricingDetails(TotalPricingDetails totalPricingDetails) {
 		this.totalPricingDetails = totalPricingDetails;
@@ -162,8 +159,8 @@ public class OrderDetailsDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

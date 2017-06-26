@@ -1,29 +1,29 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class ItemStatusDTO {
 
-	public String id;
-	public String itemStatus;
-	public String itemStatusType;
-	public String itemStatusToCustomer;
-	public String itemStatusReason;
-	public String itemStatusComment;
-	public Long itemStatusReasonId;
+    public String id;
+    public String itemStatus;
+    public String itemStatusType;
+    public String itemStatusToCustomer;
+    public String itemStatusReason;
+    public String itemStatusComment;
+    public Long itemStatusReasonId;
 
-	public ItemStatusDTO(OrderLine orderLine) {
-		if(orderLine.getOrderLineStates() != null){
-			this.setId(String.valueOf(orderLine.getOrderLineStates().getId()));
+    public ItemStatusDTO(OrderLine orderLine) {
+    	if(orderLine.getOrderLineStates() != null){
+	    	this.setId(String.valueOf(orderLine.getOrderLineStates().getId()));
 			this.setItemStatus(orderLine.getOrderLineStates().getName());
 			this.setItemStatusType(orderLine.getOrderLineStates().getType());
 			this.setItemStatusToCustomer(orderLine.getOrderLineStates().getStatusToCustomer());
-		}
+    	}
 	}
 
 
@@ -32,9 +32,7 @@ public class ItemStatusDTO {
 		return id;
 	}
 
-	public ItemStatusDTO(){
 
-	}
 
 	public void setId(String id) {
 		this.id = id;
@@ -76,33 +74,33 @@ public class ItemStatusDTO {
 		this.itemStatusToCustomer = itemStatusToCustomer;
 	}
 
-	public String getItemStatusReason() {
-		return itemStatusReason;
-	}
+    public String getItemStatusReason() {
+        return itemStatusReason;
+    }
 
-	public void setItemStatusReason(String itemStatusReason) {
-		this.itemStatusReason = itemStatusReason;
-	}
+    public void setItemStatusReason(String itemStatusReason) {
+        this.itemStatusReason = itemStatusReason;
+    }
 
-	public String getItemStatusComment() {
-		return itemStatusComment;
-	}
+    public String getItemStatusComment() {
+        return itemStatusComment;
+    }
 
-	public void setItemStatusComment(String itemStatusComment) {
-		this.itemStatusComment = itemStatusComment;
-	}
+    public void setItemStatusComment(String itemStatusComment) {
+        this.itemStatusComment = itemStatusComment;
+    }
 
-	public Long getItemStatusReasonId() {
-		return itemStatusReasonId;
-	}
+    public Long getItemStatusReasonId() {
+        return itemStatusReasonId;
+    }
 
-	public void setItemStatusReasonId(Long itemStatusReasonId) {
-		this.itemStatusReasonId = itemStatusReasonId;
-	}
+    public void setItemStatusReasonId(Long itemStatusReasonId) {
+        this.itemStatusReasonId = itemStatusReasonId;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

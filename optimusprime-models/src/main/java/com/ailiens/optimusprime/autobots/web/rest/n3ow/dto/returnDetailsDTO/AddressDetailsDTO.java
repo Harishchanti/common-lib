@@ -1,28 +1,25 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import javax.annotation.Generated;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import com.ailiens.optimusprime.domain.Address;
 import com.ailiens.optimusprime.domain.OrderLine;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class AddressDetailsDTO {
 
-	public String addressId;
+    public String addressId;
 
-	public AddressDetailsDTO(OrderLine orderLine) {
-		if(orderLine.getAddress() != null ){
-			this.setAddressId(orderLine.getAddress().getAddressId());
-		}
+    public AddressDetailsDTO(OrderLine orderLine) {
+    	if(orderLine.getAddress() != null ){
+    		this.setAddressId(orderLine.getAddress().getAddressId());
+    	}
 	}
 
 
 
-	public AddressDetailsDTO(){
-
-	}
 	public AddressDetailsDTO(Address address) {
 		this.setAddressId(address.getAddressId());
 	}
@@ -42,8 +39,8 @@ public class AddressDetailsDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

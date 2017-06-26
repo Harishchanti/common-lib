@@ -1,57 +1,55 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class RefundHitRule {
 
-	private String id;
-	private String name;
+    private String id;
+    private String name;
 
-	/**
-	 * 
-	 * @return
-	 *     The id
-	 */
-	public String getId() {
-		return id;
-	}
+    /**
+     *
+     * @return
+     *     The id
+     */
+    public String getId() {
+        return id;
+    }
 
-	/**
-	 * 
-	 * @param id
-	 *     The id
-	 */
-	public RefundHitRule(){
+    /**
+     *
+     * @param id
+     *     The id
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+    /**
+     *
+     * @return
+     *     The name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * 
-	 * @return
-	 *     The name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     *
+     * @param name
+     *     The name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * 
-	 * @param name
-	 *     The name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

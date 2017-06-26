@@ -2,12 +2,10 @@ package com.ailiens.optimusprime.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -24,13 +22,13 @@ public class ReturnStatesChange implements Serializable {
 
     @Column(name = "comment")
     private String comment;
-    
+
     @Column(name = "time")
     private ZonedDateTime time;
-    
+
     @Column(name = "refund_status")
     private String refundStatus;
-    
+
     @ManyToOne
     @JoinColumn(name = "returns_id")
     private Returns returns;
@@ -58,7 +56,7 @@ public class ReturnStatesChange implements Serializable {
     public String getComment() {
         return comment;
     }
-    
+
     public void setComment(String comment) {
         this.comment = comment;
     }
@@ -66,7 +64,7 @@ public class ReturnStatesChange implements Serializable {
     public ZonedDateTime getTime() {
         return time;
     }
-    
+
     public void setTime(ZonedDateTime time) {
         this.time = time;
     }
@@ -74,7 +72,7 @@ public class ReturnStatesChange implements Serializable {
     public String getRefundStatus() {
         return refundStatus;
     }
-    
+
     public void setRefundStatus(String refundStatus) {
         this.refundStatus = refundStatus;
     }

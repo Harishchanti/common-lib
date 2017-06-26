@@ -8,147 +8,144 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class ReturnsHistory {
 
-	private String ffCenter;
-	private String ffCenterId;
-	private String fromState;
-	private String toState;
-	private String comment;
-	private String reason;
-	private String time;
-	private String refundStatus;
+    private String ffCenter;
+    private String ffCenterId;
+    private String fromState;
+    private String toState;
+    private String comment;
+    private String reason;
+    private String time;
+    private String refundStatus;
 
 
 
-	public String getFfCenterId() {
+    public String getFfCenterId() {
 		return ffCenterId;
 	}
 
 	public void setFfCenterId(String ffCenterId) {
 		this.ffCenterId = ffCenterId;
 	}
-	public ReturnsHistory(){
-
-	}
 
 	/**
-	 *
-	 * @return
-	 *     The ffCenter
-	 */
-	public String getFfCenter() {
-		return ffCenter;
-	}
+     *
+     * @return
+     *     The ffCenter
+     */
+    public String getFfCenter() {
+        return ffCenter;
+    }
 
-	/**
-	 *
-	 * @param ffCenter
-	 *     The ffCenter
-	 */
-	public void setFfCenter(String ffCenter) {
-		this.ffCenter = ffCenter;
-	}
+    /**
+     *
+     * @param ffCenter
+     *     The ffCenter
+     */
+    public void setFfCenter(String ffCenter) {
+        this.ffCenter = ffCenter;
+    }
 
-	/**
-	 *
-	 * @return
-	 *     The fromState
-	 */
-	public String getFromState() {
-		return fromState;
-	}
+    /**
+     *
+     * @return
+     *     The fromState
+     */
+    public String getFromState() {
+        return fromState;
+    }
 
-	/**
-	 *
-	 * @param fromState
-	 *     The fromState
-	 */
-	public void setFromState(String fromState) {
-		this.fromState = fromState;
-	}
+    /**
+     *
+     * @param fromState
+     *     The fromState
+     */
+    public void setFromState(String fromState) {
+        this.fromState = fromState;
+    }
 
-	/**
-	 *
-	 * @return
-	 *     The toState
-	 */
-	public String getToState() {
-		return toState;
-	}
+    /**
+     *
+     * @return
+     *     The toState
+     */
+    public String getToState() {
+        return toState;
+    }
 
-	/**
-	 *
-	 * @param toState
-	 *     The toState
-	 */
-	public void setToState(String toState) {
-		this.toState = toState;
-	}
+    /**
+     *
+     * @param toState
+     *     The toState
+     */
+    public void setToState(String toState) {
+        this.toState = toState;
+    }
 
-	/**
-	 *
-	 * @return
-	 *     The comment
-	 */
-	public String getComment() {
-		return comment;
-	}
+    /**
+     *
+     * @return
+     *     The comment
+     */
+    public String getComment() {
+        return comment;
+    }
 
-	/**
-	 *
-	 * @param comment
-	 *     The comment
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    /**
+     *
+     * @param comment
+     *     The comment
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
-	/**
-	 *
-	 * @return
-	 *     The reason
-	 */
-	public String getReason() {
-		return reason;
-	}
+    /**
+     *
+     * @return
+     *     The reason
+     */
+    public String getReason() {
+        return reason;
+    }
 
-	/**
-	 *
-	 * @param reason
-	 *     The reason
-	 */
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
+    /**
+     *
+     * @param reason
+     *     The reason
+     */
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
-	/**
-	 *
-	 * @return
-	 *     The time
-	 */
-	public String getTime() {
-		return time;
-	}
+    /**
+     *
+     * @return
+     *     The time
+     */
+    public String getTime() {
+        return time;
+    }
 
-	/**
-	 *
-	 * @param time
-	 *     The time
-	 */
-	public void setTime(String time) {
-		this.time = time;
-	}
+    /**
+     *
+     * @param time
+     *     The time
+     */
+    public void setTime(String time) {
+        this.time = time;
+    }
 
-	public String getRefundStatus() {
-		return refundStatus;
-	}
+    public String getRefundStatus() {
+        return refundStatus;
+    }
 
-	public void setRefundStatus(String refundStatus) {
-		this.refundStatus = refundStatus;
-	}
+    public void setRefundStatus(String refundStatus) {
+        this.refundStatus = refundStatus;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

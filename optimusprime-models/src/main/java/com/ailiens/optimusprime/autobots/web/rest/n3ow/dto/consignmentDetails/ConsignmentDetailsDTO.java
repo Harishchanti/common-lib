@@ -1,38 +1,34 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
-
 import com.ailiens.optimusprime.autobots.rest.dto.VoucherDetailsDTO;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class ConsignmentDetailsDTO {
 
-	public String orderId;
-	public String orderDate;
-	public FfCenterDTO orderingCenter;
-	public AccountsDetailsDTO customerDetails;
-	public AccountsDetailsDTO storeStaffDetails;
-	public OrderStatusDTO orderStatus;
-	public PaymentSummaryDTO paymentSummary;
-	public PaymentSummaryDTO refundSummary;
-	public VoucherDetailsDTO voucherDetails;
-	public String slaEndTime;
-	public ConsignmentDTO consignment = new ConsignmentDTO();
+    public String orderId;
+    public String orderDate;
+    public FfCenterDTO orderingCenter;
+    public AccountsDetailsDTO customerDetails;
+    public AccountsDetailsDTO storeStaffDetails;
+    public OrderStatusDTO orderStatus;
+    public PaymentSummaryDTO paymentSummary;
+    public PaymentSummaryDTO refundSummary;
+    public VoucherDetailsDTO voucherDetails;
+    public String slaEndTime;
+    public ConsignmentDTO consignment = new ConsignmentDTO();
 
 
 
-	public String getOrderId() {
+    public String getOrderId() {
 		return orderId;
 	}
 
-	public ConsignmentDetailsDTO()
-	{
 
-	}
+
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
 	}
@@ -143,17 +139,17 @@ public class ConsignmentDetailsDTO {
 		this.slaEndTime = slaEndTime;
 	}
 
-	public VoucherDetailsDTO getVoucherDetails() {
-		return voucherDetails;
-	}
+    public VoucherDetailsDTO getVoucherDetails() {
+        return voucherDetails;
+    }
 
-	public void setVoucherDetailsDTO(VoucherDetailsDTO voucherDetails) {
-		this.voucherDetails = voucherDetails;
-	}
+    public void setVoucherDetailsDTO(VoucherDetailsDTO voucherDetails) {
+        this.voucherDetails = voucherDetails;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

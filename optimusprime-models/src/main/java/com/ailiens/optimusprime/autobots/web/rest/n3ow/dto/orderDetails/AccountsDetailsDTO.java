@@ -1,46 +1,42 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.Accounts;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.Accounts;
-import com.ailiens.optimusprime.domain.Orders;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class AccountsDetailsDTO {
 
-	public String username;
-	public String userId;
-	public String title;
-	public String firstName;
-	public String middleName;
-	public String lastName;
-	public String gender;
-	public String dateOfBirth;
-	public String phonenumber;
-	public String email;
+    public String username;
+    public String userId;
+    public String title;
+    public String firstName;
+    public String middleName;
+    public String lastName;
+    public String gender;
+    public String dateOfBirth;
+    public String phonenumber;
+    public String email;
 
-	public AccountsDetailsDTO(Accounts accounts) {
+    public AccountsDetailsDTO(Accounts accounts) {
 
-		if(accounts!=null){
-			this.setUserId(accounts.getAccountId());
-			this.setDateOfBirth(String.valueOf(accounts.getDateOfBirth()));
-			this.setEmail(accounts.getEmail());
-			this.setFirstName(accounts.getFirstName());
-			this.setGender(accounts.getGender());
-			this.setLastName(accounts.getLastName());
-			this.setMiddleName(accounts.getMiddleName());
-			this.setTitle(accounts.getTitle());
-			this.setUsername(accounts.getUsername());
-			this.setPhonenumber(accounts.getPhoneNumber());
-		}
+    	if(accounts!=null){
+    		this.setUserId(accounts.getAccountId());
+    		this.setDateOfBirth(String.valueOf(accounts.getDateOfBirth()));
+    		this.setEmail(accounts.getEmail());
+    		this.setFirstName(accounts.getFirstName());
+    		this.setGender(accounts.getGender());
+    		this.setLastName(accounts.getLastName());
+    		this.setMiddleName(accounts.getMiddleName());
+    		this.setTitle(accounts.getTitle());
+    		this.setUsername(accounts.getUsername());
+    		this.setPhonenumber(accounts.getPhoneNumber());
+    	}
 	}
 
 
-	public AccountsDetailsDTO(){
-
-	}
 
 	public String getUsername() {
 		return username;
@@ -163,8 +159,8 @@ public class AccountsDetailsDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

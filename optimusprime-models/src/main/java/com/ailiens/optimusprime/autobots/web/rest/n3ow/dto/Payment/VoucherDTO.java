@@ -1,38 +1,36 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.Payment;
 
-import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class VoucherDTO {
 
-	private String voucherId;
+    private String voucherId;
 
-	/**
-	 *
-	 * @return
-	 * The voucherId
-	 */
-	public String getVoucherId() {
-		return voucherId;
-	}
+    /**
+     *
+     * @return
+     * The voucherId
+     */
+    public String getVoucherId() {
+        return voucherId;
+    }
 
-	/**
-	 *
-	 * @param voucherId
-	 * The voucherId
-	 */
-	public void setVoucherId(String voucherId) {
-		this.voucherId = voucherId;
-	}
-	public VoucherDTO(){
+    /**
+     *
+     * @param voucherId
+     * The voucherId
+     */
+    public void setVoucherId(String voucherId) {
+        this.voucherId = voucherId;
+    }
 
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

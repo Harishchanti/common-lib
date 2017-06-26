@@ -1,52 +1,49 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import java.math.BigDecimal;
-
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.MBOProduct;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.MBOProduct;
+import javax.annotation.Generated;
+import java.math.BigDecimal;
 
 @Generated("org.jsonschema2pojo")
 public class ProductDTO {
 
-	public String description;
-	public String skuId;
-	public String color;
-	public String size;
-	public String brand;
-	public BigDecimal mrp;
-	public String eanCode;
-	public String category1;
-	public String category2;
-	public String category3;
-	public String image;
-	public String styleId;
-	public String sapStyleId;
+    public String description;
+    public String skuId;
+    public String color;
+    public String size;
+    public String brand;
+    public BigDecimal mrp;
+    public String eanCode;
+    public String category1;
+    public String category2;
+    public String category3;
+    public String image;
+    public String styleId;
+    public String sapStyleId;
 
-	public ProductDTO(MBOProduct mboProduct) {
+    public ProductDTO(MBOProduct mboProduct) {
 
-		this.setBrand(mboProduct.getBrand());
-		this.setCategory1(mboProduct.getCategory1());
-		this.setCategory2(mboProduct.getCategory2());
-		this.setCategory3(mboProduct.getCategory3());
-		this.setColor(mboProduct.getColor());
-		this.setDescription(mboProduct.getDescription());
-		this.setEanCode(mboProduct.getEanCode());
-		this.setImage(mboProduct.getImage());
-		this.setMrp(mboProduct.getMrp());
-		this.setSize(mboProduct.getSize());
-		this.setSkuId(mboProduct.getSku());
-		this.setStyleId(mboProduct.getStyleId());
-		this.setSapStyleId(mboProduct.getSapStyleId());
+    	this.setBrand(mboProduct.getBrand());
+    	this.setCategory1(mboProduct.getCategory1());
+    	this.setCategory2(mboProduct.getCategory2());
+    	this.setCategory3(mboProduct.getCategory3());
+    	this.setColor(mboProduct.getColor());
+    	this.setDescription(mboProduct.getDescription());
+    	this.setEanCode(mboProduct.getEanCode());
+    	this.setImage(mboProduct.getImage());
+    	this.setMrp(mboProduct.getMrp());
+    	this.setSize(mboProduct.getSize());
+    	this.setSkuId(mboProduct.getSku());
+    	this.setStyleId(mboProduct.getStyleId());
+    	this.setSapStyleId(mboProduct.getSapStyleId());
 	}
 
 
 
-	public ProductDTO(){
 
-	}
 	public String getDescription() {
 		return description;
 	}
@@ -207,17 +204,17 @@ public class ProductDTO {
 	}
 
 
-	public String getSapStyleId() {
-		return sapStyleId;
-	}
+    public String getSapStyleId() {
+        return sapStyleId;
+    }
 
-	public void setSapStyleId(String sapStyleId) {
-		this.sapStyleId = sapStyleId;
-	}
+    public void setSapStyleId(String sapStyleId) {
+        this.sapStyleId = sapStyleId;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

@@ -2,12 +2,14 @@ package com.ailiens.optimusprime.web.rest.dto;
 
 import com.ailiens.optimusprime.domain.Authority;
 import com.ailiens.optimusprime.domain.User;
-
 import org.hibernate.validator.constraints.Email;
 
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 /**
  * A DTO representing a user, with his authorities.
  */

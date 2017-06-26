@@ -1,43 +1,41 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Generated;
-
-import com.ailiens.optimusprime.domain.ConsignmentParams;
+import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
+import javax.annotation.Generated;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Generated("org.jsonschema2pojo")
 public class ConsignmentDTO {
 
-	public String consignmentId;
-	public String invoiceId;
-	public String invoiceDate;
-	public Integer itemCount;
-	public String slaEndTime;
-	public PackagingTypeDTO packagingType;
-	public InitialFfTypeDTO initialFfType;
-	public FfTypeDTO ffType;
-	public AddressDetailsDTO addressDetails;
-	public LogisticsDetailsDTO logisticsDetails;
-	public FfCenterDTO ffCenter;
-	public ConsignmentStatusDTO consignmentStatus;
-	public List<ItemDTO> items = new ArrayList<ItemDTO>();
-	public List<History> consignmentHistory = new ArrayList<History>();
-	public List<ConsignmentParamsDTO> consignmentParams = new ArrayList<>();
+    public String consignmentId;
+    public String invoiceId;
+    public String invoiceDate;
+    public Integer itemCount;
+    public String slaEndTime;
+    public BigDecimal consignmentNetAmount = new BigDecimal(0);
+    public PackagingTypeDTO packagingType;
+    public InitialFfTypeDTO initialFfType;
+    public FfTypeDTO ffType;
+    public AddressDetailsDTO addressDetails;
+    public LogisticsDetailsDTO logisticsDetails;
+    public FfCenterDTO ffCenter;
+    public ConsignmentStatusDTO consignmentStatus;
+    public List<ItemDTO> items = new ArrayList<ItemDTO>();
+    public List<History> consignmentHistory = new ArrayList<History>();
+    public List<ConsignmentParamsDTO> consignmentParams = new ArrayList<>();
 
 
 
-	public String getConsignmentId() {
+    public String getConsignmentId() {
 		return consignmentId;
 	}
 
-	public ConsignmentDTO(){
 
-	}
 
 	public void setConsignmentId(String consignmentId) {
 		this.consignmentId = consignmentId;
@@ -188,25 +186,33 @@ public class ConsignmentDTO {
 	}
 
 
-	public List<ConsignmentParamsDTO> getConsignmentParams() {
-		return consignmentParams;
-	}
+    public List<ConsignmentParamsDTO> getConsignmentParams() {
+        return consignmentParams;
+    }
 
-	public void setConsignmentParams(List<ConsignmentParamsDTO> consignmentParams) {
-		this.consignmentParams = consignmentParams;
-	}
+    public void setConsignmentParams(List<ConsignmentParamsDTO> consignmentParams) {
+        this.consignmentParams = consignmentParams;
+    }
 
-	public InitialFfTypeDTO getInitialFfType() {
-		return initialFfType;
-	}
+    public InitialFfTypeDTO getInitialFfType() {
+        return initialFfType;
+    }
 
-	public void setInitialFfType(InitialFfTypeDTO initialFfType) {
-		this.initialFfType = initialFfType;
-	}
+    public void setInitialFfType(InitialFfTypeDTO initialFfType) {
+        this.initialFfType = initialFfType;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public BigDecimal getConsignmentNetAmount() {
+        return consignmentNetAmount;
+    }
+
+    public void setConsignmentNetAmount(BigDecimal consignmentNetAmount) {
+        this.consignmentNetAmount = consignmentNetAmount;
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

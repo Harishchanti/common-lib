@@ -1,31 +1,28 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.Consignment;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.Consignment;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class ConsignmentStatusDTO {
 
-	public Long id;
-	public String consignmentStatus;
-	public String consignmentStatusType;
-	public String consignmentStatusToCustomer;
-	public String consignmentStatusToOms;
+    public Long id;
+    public String consignmentStatus;
+    public String consignmentStatusType;
+    public String consignmentStatusToCustomer;
+    public String consignmentStatusToOms;
 
-	public ConsignmentStatusDTO(Consignment consignment) {
-		if(consignment.getConsignmentStates()!=null){
+    public ConsignmentStatusDTO(Consignment consignment) {
+    	if(consignment.getConsignmentStates()!=null){
 			this.setId(consignment.getConsignmentStates().getId());
 			this.setConsignmentStatus(consignment.getConsignmentStates().getName());
 			this.setConsignmentStatusType(consignment.getConsignmentStates().getType());
 			this.setConsignmentStatusToCustomer(consignment.getConsignmentStates().getStatusToCustomer());
-			this.setConsignmentStatusToOms(consignment.getConsignmentStates().getStatusToOms());
-		}
-	}
-	public ConsignmentStatusDTO(){
-
+            this.setConsignmentStatusToOms(consignment.getConsignmentStates().getStatusToOms());
+    	}
 	}
 
 	public Long getId() {
@@ -74,17 +71,17 @@ public class ConsignmentStatusDTO {
 		this.consignmentStatusToCustomer = consignmentStatusToCustomer;
 	}
 
-	public String getConsignmentStatusToOms() {
-		return consignmentStatusToOms;
-	}
+    public String getConsignmentStatusToOms() {
+        return consignmentStatusToOms;
+    }
 
-	public void setConsignmentStatusToOms(String consignmentStatusToOms) {
-		this.consignmentStatusToOms = consignmentStatusToOms;
-	}
+    public void setConsignmentStatusToOms(String consignmentStatusToOms) {
+        this.consignmentStatusToOms = consignmentStatusToOms;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

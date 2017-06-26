@@ -1,32 +1,30 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class ItemStatusDTO {
 
-	public String id;
-	public String itemStatus;
-	public String itemStatusType;
-	public String itemStatusToCustomer;
+    public String id;
+    public String itemStatus;
+    public String itemStatusType;
+    public String itemStatusToCustomer;
 
-	public ItemStatusDTO(OrderLine orderLine) {
-		if(orderLine.getOrderLineStates() != null){
-			this.setId(String.valueOf(orderLine.getOrderLineStates().getId()));
+    public ItemStatusDTO(OrderLine orderLine) {
+    	if(orderLine.getOrderLineStates() != null){
+	    	this.setId(String.valueOf(orderLine.getOrderLineStates().getId()));
 			this.setItemStatus(orderLine.getOrderLineStates().getName());
 			this.setItemStatusType(orderLine.getOrderLineStates().getType());
 			this.setItemStatusToCustomer(orderLine.getOrderLineStates().getStatusToCustomer());
-		}
+    	}
 	}
 
 
-	public ItemStatusDTO(){
 
-	}
 	public String getId() {
 		return id;
 	}
@@ -76,8 +74,8 @@ public class ItemStatusDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

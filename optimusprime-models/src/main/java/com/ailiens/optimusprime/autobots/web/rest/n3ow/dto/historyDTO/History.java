@@ -1,23 +1,24 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO;
 
-import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class History {
 
-	private String ffCenter;
-	private String ffCenterId;
-	private String fromState;
-	private String toState;
-	private String comment;
-	private String reason;
-	private String time;
+    private String ffCenter;
+    private String ffCenterId;
+    private String fromState;
+    private String toState;
+    private String comment;
+    private String reason;
+    private String time;
 
 
 
-	public String getFfCenterId() {
+    public String getFfCenterId() {
 		return ffCenterId;
 	}
 
@@ -26,120 +27,116 @@ public class History {
 	}
 
 	/**
-	 * 
-	 * @return
-	 *     The ffCenter
-	 */
+     *
+     * @return
+     *     The ffCenter
+     */
+    public String getFfCenter() {
+        return ffCenter;
+    }
 
-	public History(){
+    /**
+     *
+     * @param ffCenter
+     *     The ffCenter
+     */
+    public void setFfCenter(String ffCenter) {
+        this.ffCenter = ffCenter;
+    }
 
-	}
-	public String getFfCenter() {
-		return ffCenter;
-	}
+    /**
+     *
+     * @return
+     *     The fromState
+     */
+    public String getFromState() {
+        return fromState;
+    }
 
-	/**
-	 * 
-	 * @param ffCenter
-	 *     The ffCenter
-	 */
-	public void setFfCenter(String ffCenter) {
-		this.ffCenter = ffCenter;
-	}
+    /**
+     *
+     * @param fromState
+     *     The fromState
+     */
+    public void setFromState(String fromState) {
+        this.fromState = fromState;
+    }
 
-	/**
-	 * 
-	 * @return
-	 *     The fromState
-	 */
-	public String getFromState() {
-		return fromState;
-	}
+    /**
+     *
+     * @return
+     *     The toState
+     */
+    public String getToState() {
+        return toState;
+    }
 
-	/**
-	 * 
-	 * @param fromState
-	 *     The fromState
-	 */
-	public void setFromState(String fromState) {
-		this.fromState = fromState;
-	}
+    /**
+     *
+     * @param toState
+     *     The toState
+     */
+    public void setToState(String toState) {
+        this.toState = toState;
+    }
 
-	/**
-	 * 
-	 * @return
-	 *     The toState
-	 */
-	public String getToState() {
-		return toState;
-	}
+    /**
+     *
+     * @return
+     *     The comment
+     */
+    public String getComment() {
+        return comment;
+    }
 
-	/**
-	 * 
-	 * @param toState
-	 *     The toState
-	 */
-	public void setToState(String toState) {
-		this.toState = toState;
-	}
+    /**
+     *
+     * @param comment
+     *     The comment
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
-	/**
-	 * 
-	 * @return
-	 *     The comment
-	 */
-	public String getComment() {
-		return comment;
-	}
+    /**
+     *
+     * @return
+     *     The reason
+     */
+    public String getReason() {
+        return reason;
+    }
 
-	/**
-	 * 
-	 * @param comment
-	 *     The comment
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    /**
+     *
+     * @param reason
+     *     The reason
+     */
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
 
-	/**
-	 * 
-	 * @return
-	 *     The reason
-	 */
-	public String getReason() {
-		return reason;
-	}
+    /**
+     *
+     * @return
+     *     The time
+     */
+    public String getTime() {
+        return time;
+    }
 
-	/**
-	 * 
-	 * @param reason
-	 *     The reason
-	 */
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
+    /**
+     *
+     * @param time
+     *     The time
+     */
+    public void setTime(String time) {
+        this.time = time;
+    }
 
-	/**
-	 * 
-	 * @return
-	 *     The time
-	 */
-	public String getTime() {
-		return time;
-	}
-
-	/**
-	 * 
-	 * @param time
-	 *     The time
-	 */
-	public void setTime(String time) {
-		this.time = time;
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

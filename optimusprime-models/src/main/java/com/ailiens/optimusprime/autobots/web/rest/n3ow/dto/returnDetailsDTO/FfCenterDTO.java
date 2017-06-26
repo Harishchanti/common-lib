@@ -1,12 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.FullfilmentCenter;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.FullfilmentCenter;
-import com.ailiens.optimusprime.domain.OrderLine;
-import com.ailiens.optimusprime.domain.Orders;
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class FfCenterDTO {

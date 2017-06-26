@@ -6,8 +6,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -57,6 +55,19 @@ public class OrderPricing implements Serializable {
 
     @Column(name = "totalnet_amount_with_shipping", precision=10, scale=2)
     private BigDecimal totalnetAmountWithShipping;
+
+    @Column(name = "total_cgst_amount", precision=10, scale=2)
+    private BigDecimal totalCgstAmount;
+
+    @Column(name = "total_sgst_amount", precision=10, scale=2)
+    private BigDecimal totalSgstAmount;
+
+    @Column(name = "total_igst_amount", precision=10, scale=2)
+    private BigDecimal totalIgstAmount;
+
+    @Column(name = "total_utgst_amount", precision=10, scale=2)
+    private BigDecimal totalUtgstAmount;
+
 
     @ManyToOne
     @JoinColumn(name = "orders_id")
@@ -164,6 +175,38 @@ public class OrderPricing implements Serializable {
 
     public void setTotalnetAmountWithShipping(BigDecimal totalnetAmountWithShipping) {
         this.totalnetAmountWithShipping = totalnetAmountWithShipping;
+    }
+
+    public BigDecimal getTotalCgstAmount() {
+        return totalCgstAmount;
+    }
+
+    public void setTotalCgstAmount(BigDecimal totalCgstAmount) {
+        this.totalCgstAmount = totalCgstAmount;
+    }
+
+    public BigDecimal getTotalSgstAmount() {
+        return totalSgstAmount;
+    }
+
+    public void setTotalSgstAmount(BigDecimal totalSgstAmount) {
+        this.totalSgstAmount = totalSgstAmount;
+    }
+
+    public BigDecimal getTotalIgstAmount() {
+        return totalIgstAmount;
+    }
+
+    public BigDecimal getTotalUtgstAmount() {
+        return totalUtgstAmount;
+    }
+
+    public void setTotalUtgstAmount(BigDecimal totalUtgstAmount) {
+        this.totalUtgstAmount = totalUtgstAmount;
+    }
+
+    public void setTotalIgstAmount(BigDecimal totalIgstAmount) {
+        this.totalIgstAmount = totalIgstAmount;
     }
 
     public Orders getOrders() {

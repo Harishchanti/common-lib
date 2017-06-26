@@ -6,8 +6,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -52,6 +50,12 @@ public class FullfilmentCenter implements Serializable {
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "state_code")
+    private String stateCode;
+
+    @Column(name = "gstn_code")
+    private String gstnCode;
+
     @OneToOne(mappedBy = "fullfilmentCenter")
     @JsonIgnore
     private OrderLine orderLine;
@@ -75,6 +79,8 @@ public class FullfilmentCenter implements Serializable {
         this.contactNo = fullfilmentCenter.contactNo;
         this.postCode = fullfilmentCenter.postCode;
         this.state = fullfilmentCenter.state;
+        this.stateCode = fullfilmentCenter.stateCode;
+        this.gstnCode = fullfilmentCenter.gstnCode;
         this.orderLine = fullfilmentCenter.orderLine;
         this.orders = fullfilmentCenter.orders;
         this.returns = fullfilmentCenter.returns;
@@ -171,6 +177,22 @@ public class FullfilmentCenter implements Serializable {
         this.quantity = quantity;
     }
 
+    public String getStateCode() {
+        return stateCode;
+    }
+
+    public void setStateCode(String stateCode) {
+        this.stateCode = stateCode;
+    }
+
+    public String getGstnCode() {
+        return gstnCode;
+    }
+
+    public void setGstnCode(String gstnCode) {
+        this.gstnCode = gstnCode;
+    }
+
     public OrderLine getOrderLine() {
         return orderLine;
     }
@@ -225,6 +247,8 @@ public class FullfilmentCenter implements Serializable {
             ", contactNo='" + contactNo + "'" +
             ", postCode='" + postCode + "'" +
             ", state='" + state + "'" +
+            ", stateCode='" + stateCode + "'" +
+            ", gstnCode='" + gstnCode + "'" +
             ", quantity='" + quantity + "'" +
             '}';
     }
