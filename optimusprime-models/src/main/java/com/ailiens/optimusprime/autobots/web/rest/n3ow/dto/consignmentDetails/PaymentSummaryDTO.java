@@ -5,6 +5,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.annotation.Generated;
 import java.math.BigDecimal;
+import com.fasterxml.jackson.annotation.JsonCreator;
 
 @Generated("org.jsonschema2pojo")
 public class PaymentSummaryDTO {
@@ -28,6 +29,11 @@ public class PaymentSummaryDTO {
         this.som_cod=som_cod;
         this.som_pos=som_pos;
         this.paymentMode=paymentMode;
+    }
+
+    @JsonCreator
+    public PaymentSummaryDTO(){
+
     }
 
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,

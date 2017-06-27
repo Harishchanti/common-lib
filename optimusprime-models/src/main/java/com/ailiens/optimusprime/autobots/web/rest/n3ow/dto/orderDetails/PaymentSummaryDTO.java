@@ -1,6 +1,7 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import javax.annotation.Generated;
@@ -35,6 +36,11 @@ public class PaymentSummaryDTO {
         this.NNNowCash = nNNowCash;
         this.online = online;
         this.cod=cod;
+    }
+
+    @JsonCreator
+    public PaymentSummaryDTO(){
+
     }
 
     public BigDecimal getVoucher() {
