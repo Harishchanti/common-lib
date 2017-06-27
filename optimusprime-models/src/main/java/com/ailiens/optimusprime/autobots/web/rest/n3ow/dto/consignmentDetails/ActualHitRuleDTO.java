@@ -23,6 +23,9 @@ public class ActualHitRuleDTO {
     	}
 	}
 
+    public  ActualHitRuleDTO() {
+        super();
+    }
 	public String getId() {
 		return id;
 	}

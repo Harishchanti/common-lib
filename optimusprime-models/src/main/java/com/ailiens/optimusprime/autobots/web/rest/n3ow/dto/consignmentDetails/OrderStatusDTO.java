@@ -25,7 +25,9 @@ public class OrderStatusDTO {
     	}
 	}
 
-
+    public OrderStatusDTO() {
+        super();
+    }
 
 
 	public String getId() {

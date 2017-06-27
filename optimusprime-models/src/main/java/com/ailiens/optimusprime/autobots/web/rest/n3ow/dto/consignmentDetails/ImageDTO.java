@@ -5,6 +5,10 @@ public class ImageDTO {
     private String imageLink;
     private String fcId;
 
+    public ImageDTO() {
+        super();
+    }
+
     public String getImageLink() {
         return imageLink;
     }

@@ -17,6 +17,10 @@ public class ItemStatusDTO {
     public String itemStatusComment;
     public Long itemStatusReasonId;
 
+    public  ItemStatusDTO() {
+        super();
+    }
+
     public ItemStatusDTO(OrderLine orderLine) {
     	if(orderLine.getOrderLineStates() != null){
 	    	this.setId(String.valueOf(orderLine.getOrderLineStates().getId()));

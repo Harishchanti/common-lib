@@ -41,7 +41,9 @@ public class ProductDTO {
         this.setSapStyleId(mboProduct.getSapStyleId());
 	}
 
-
+    public ProductDTO() {
+        super();
+    }
 
 
 	public String getDescription() {

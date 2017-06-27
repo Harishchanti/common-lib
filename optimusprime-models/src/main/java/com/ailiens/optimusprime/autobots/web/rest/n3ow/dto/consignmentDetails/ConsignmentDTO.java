@@ -29,7 +29,9 @@ public class ConsignmentDTO {
     public List<History> consignmentHistory = new ArrayList<History>();
     public List<ConsignmentParamsDTO> consignmentParams = new ArrayList<>();
 
-
+    public ConsignmentDTO() {
+        super();
+    }
 
     public String getConsignmentId() {
 		return consignmentId;

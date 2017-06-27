@@ -36,6 +36,10 @@ public class LogisticsDetailsDTO {
     public String fedexBillTc;
     public String fedexBillDt;
 
+    public LogisticsDetailsDTO() {
+        super();
+    }
+
     public LogisticsDetailsDTO(OrderLine orderLine) {
 		if(orderLine.getLogistics() !=null ){
 			this.setAirwayBillNumber(orderLine.getLogistics().getAwbNumber());

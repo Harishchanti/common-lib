@@ -15,6 +15,10 @@ public class ConsignmentStatusDTO {
     public String consignmentStatusToCustomer;
     public String consignmentStatusToOms;
 
+    public ConsignmentStatusDTO() {
+        super();
+    }
+
     public ConsignmentStatusDTO(Consignment consignment) {
     	if(consignment.getConsignmentStates()!=null){
 			this.setId(consignment.getConsignmentStates().getId());

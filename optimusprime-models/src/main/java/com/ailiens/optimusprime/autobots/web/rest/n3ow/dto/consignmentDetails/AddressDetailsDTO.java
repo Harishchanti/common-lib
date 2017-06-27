@@ -18,6 +18,9 @@ public class AddressDetailsDTO {
     private String state;
     private String country;
 
+    public  AddressDetailsDTO() {
+        super();
+    }
     public AddressDetailsDTO(OrderLine orderLine) {
     	if(orderLine.getAddress() != null ){
     		this.setAddressId(orderLine.getAddress().getAddressId());

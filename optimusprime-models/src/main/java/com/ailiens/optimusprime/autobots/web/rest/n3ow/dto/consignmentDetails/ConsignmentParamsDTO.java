@@ -13,6 +13,10 @@ public class ConsignmentParamsDTO {
 
     private Boolean paramRequired;
 
+    public ConsignmentParamsDTO() {
+        super();
+    }
+
     public ConsignmentParamsDTO(ConsignmentParams consignmentParams) {
         if (consignmentParams != null) {
             this.paramName = consignmentParams.getParamName();

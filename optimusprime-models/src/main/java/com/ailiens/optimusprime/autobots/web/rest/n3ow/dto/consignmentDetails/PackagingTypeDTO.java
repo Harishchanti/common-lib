@@ -15,6 +15,9 @@ public class PackagingTypeDTO {
     public String height;
     public String description;
 
+    public  PackagingTypeDTO() {
+        super();
+    }
 
 
     public PackagingTypeDTO(OrderLine orderLine) {

@@ -18,6 +18,9 @@ public class FfCenterDTO {
     public String stateCode;
     public String gstnCode;
 
+    public FfCenterDTO() {
+        super();
+    }
 
     public FfCenterDTO(FullfilmentCenter fullfilmentCenter) {
     	if(fullfilmentCenter != null){

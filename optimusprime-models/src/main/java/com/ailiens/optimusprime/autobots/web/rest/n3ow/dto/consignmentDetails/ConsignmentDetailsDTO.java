@@ -21,7 +21,9 @@ public class ConsignmentDetailsDTO {
     public String slaEndTime;
     public ConsignmentDTO consignment = new ConsignmentDTO();
 
-
+    public ConsignmentDetailsDTO() {
+        super();
+    }
 
     public String getOrderId() {
 		return orderId;

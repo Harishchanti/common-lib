@@ -31,9 +31,9 @@ public class PaymentSummaryDTO {
         this.paymentMode=paymentMode;
     }
 
-    @JsonCreator
-    public PaymentSummaryDTO(){
 
+    public PaymentSummaryDTO(){
+        super();
     }
 
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,

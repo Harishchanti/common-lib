@@ -17,6 +17,9 @@ public class FfTypeDTO {
 		this.setType(orderLine.getFullfilmentType().getType());
 	}
 
+	public FfTypeDTO() {
+        super();
+    }
 
 
 	public String getFfType() {
