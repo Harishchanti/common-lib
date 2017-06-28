@@ -14,6 +14,9 @@ public class ItemStatusDTO {
     public String itemStatusType;
     public String itemStatusToCustomer;
 
+    public ItemStatusDTO() {
+        super();
+    }
     public ItemStatusDTO(OrderLine orderLine) {
     	if(orderLine.getOrderLineStates() != null){
 	    	this.setId(String.valueOf(orderLine.getOrderLineStates().getId()));

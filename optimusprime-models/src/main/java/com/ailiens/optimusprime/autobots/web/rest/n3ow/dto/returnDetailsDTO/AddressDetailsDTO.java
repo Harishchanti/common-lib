@@ -18,6 +18,10 @@ public class AddressDetailsDTO {
     	}
 	}
 
+	public AddressDetailsDTO() {
+        super();
+    }
+
 
 
 	public AddressDetailsDTO(Address address) {

@@ -12,6 +12,9 @@ public class RefundTotalNNNowCashDetails {
     private String refundCartNNNowCash;
     private String refundTotalNNNowCash;
 
+    public RefundTotalNNNowCashDetails() {
+        super();
+    }
     /**
      *
      * @return

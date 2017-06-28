@@ -26,6 +26,9 @@ public class ItemDTO {
     public List<String> relatedItems = new ArrayList<String>();
 
 
+    public ItemDTO() {
+        super();
+    }
 
     public ItemDTO(OrderLine orderLine) {
 		this.setItemId(orderLine.getOrderLineId());

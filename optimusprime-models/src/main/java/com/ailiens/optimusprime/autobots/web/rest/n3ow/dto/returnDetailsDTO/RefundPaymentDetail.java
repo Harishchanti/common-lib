@@ -16,6 +16,9 @@ public class RefundPaymentDetail {
     private String paymentMode;
     private String transactionCreatedDate;
 
+    public RefundPaymentDetail() {
+        super();
+    }
     /**
      *
      * @return

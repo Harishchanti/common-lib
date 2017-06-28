@@ -39,6 +39,9 @@ public class ReturnDetailsDTO {
     private VoucherDetailsDTO voucherDetails;
     public List<ReturnsHistory> returnHistory = new ArrayList<ReturnsHistory>();
 
+    public ReturnDetailsDTO() {
+        super();
+    }
 
     /**
      *

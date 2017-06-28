@@ -11,6 +11,10 @@ public class RefundHitRule {
     private String id;
     private String name;
 
+    public RefundHitRule() {
+        super();
+    }
+
     /**
      *
      * @return

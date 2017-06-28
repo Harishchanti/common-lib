@@ -11,6 +11,10 @@ public class ReturnType {
     private String name;
     private Integer id;
 
+    public ReturnType() {
+        super();
+    }
+
     /**
      *
      * @return

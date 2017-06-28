@@ -11,6 +11,9 @@ public class RefundStatus {
     private String transactionId;
     private String status;
 
+    public RefundStatus() {
+        super();
+    }
     /**
      *
      * @return
