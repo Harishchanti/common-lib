@@ -99,11 +99,12 @@ public class Warehouse implements Serializable {
 
     @Override
     public String toString() {
-        return "Warehouse{" +
-                "id=" + id +
-                ", ftpLocation='" + ftpLocation + "'" +
-                ", username='" + username + "'" +
-                ", password='" + password + "'" +
-                '}';
+        return "{"
+            + "\"id\":\"" + id + "\""
+            + ", \"ftpLocation\":\"" + ftpLocation + "\""
+            + ", \"username\":\"" + username + "\""
+            + ", \"password\":\"" + password + "\""
+            + ", \"fCDetails\":" + fCDetails
+            + "}";
     }
 }

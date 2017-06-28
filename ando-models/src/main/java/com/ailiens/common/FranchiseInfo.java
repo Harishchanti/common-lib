@@ -5,31 +5,26 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * A Brand.
+ * A FranchiseInfo.
  */
 @Entity
-@Table(name = "brand")
+@Table(name = "franchise_info")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName="brand")
-public class Brand implements Serializable {
+@Document(indexName = "franchiseinfo")
+public class FranchiseInfo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
-    @Column(name = "fc_id")
-    private String fcId;
-
-    @ManyToOne
-    private FCDetails fCDetails;
-
-    @ManyToOne
-    private MasterBrand masterBrand;
+    @NotNull
+    @Column(name = "name", nullable = false)
+    private String name;
 
     public Long getId() {
         return id;
@@ -39,28 +34,12 @@ public class Brand implements Serializable {
         this.id = id;
     }
 
-    public String getFcId() {
-        return fcId;
+    public String getName() {
+        return name;
     }
 
-    public void setFcId(String fcId) {
-        this.fcId = fcId;
-    }
-
-    public FCDetails getfCDetails() {
-        return fCDetails;
-    }
-
-    public void setfCDetails(FCDetails fCDetails) {
-        this.fCDetails = fCDetails;
-    }
-
-    public MasterBrand getMasterBrand() {
-        return masterBrand;
-    }
-
-    public void setMasterBrand(MasterBrand masterBrand) {
-        this.masterBrand = masterBrand;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
@@ -71,12 +50,11 @@ public class Brand implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
-        Brand brand = (Brand) o;
-
-        if ( ! Objects.equals(id, brand.id)) return false;
-
-        return true;
+        FranchiseInfo franchiseInfo = (FranchiseInfo) o;
+        if(franchiseInfo.id == null || id == null) {
+            return false;
+        }
+        return Objects.equals(id, franchiseInfo.id);
     }
 
     @Override
@@ -88,9 +66,7 @@ public class Brand implements Serializable {
     public String toString() {
         return "{"
             + "\"id\":\"" + id + "\""
-            + ", \"fcId\":\"" + fcId + "\""
-            + ", \"fCDetails\":" + fCDetails
-            + ", \"masterBrand\":" + masterBrand
+            + ", \"name\":\"" + name + "\""
             + "}";
     }
 }

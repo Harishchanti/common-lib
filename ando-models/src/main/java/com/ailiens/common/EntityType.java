@@ -1,12 +1,12 @@
 package com.ailiens.common;
 
+import lombok.Data;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  * A EntityType.
@@ -14,15 +14,27 @@ import java.util.Objects;
 @Entity
 @Table(name = "entity_type")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName = "entitytype")
+@Document(indexName="entitytype")
+@Data
 public class EntityType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public Long getId()
+    {
+        return id;
+    }
+
+
     @Column(name = "entity_type")
     private String entityType;
+
+    public String getEntityType()
+    {
+        return  entityType;
+    }
 
     @Column(name = "sms_order_confirmed")
     private String smsOrderConfirmed;
@@ -84,227 +96,35 @@ public class EntityType implements Serializable {
     @Column(name = "sms_waiting_store_pickup")
     private String smsWaitingStorePickup;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getEntityType() {
-        return entityType;
-    }
-
-    public void setEntityType(String entityType) {
-        this.entityType = entityType;
-    }
-
-    public String getSmsOrderConfirmed() {
-        return smsOrderConfirmed;
-    }
-
-    public void setSmsOrderConfirmed(String smsOrderConfirmed) {
-        this.smsOrderConfirmed = smsOrderConfirmed;
-    }
-
-    public String getSmsConsignmentShipped() {
-        return smsConsignmentShipped;
-    }
-
-    public void setSmsConsignmentShipped(String smsConsignmentShipped) {
-        this.smsConsignmentShipped = smsConsignmentShipped;
-    }
-
-    public String getSmsConsignmentDelivered() {
-        return smsConsignmentDelivered;
-    }
-
-    public void setSmsConsignmentDelivered(String smsConsignmentDelivered) {
-        this.smsConsignmentDelivered = smsConsignmentDelivered;
-    }
-
-    public String getSmsConsignmentPickupComplete() {
-        return smsConsignmentPickupComplete;
-    }
-
-    public void setSmsConsignmentPickupComplete(String smsConsignmentPickupComplete) {
-        this.smsConsignmentPickupComplete = smsConsignmentPickupComplete;
-    }
-
-    public String getSmsConsignmentReadyForPickup() {
-        return smsConsignmentReadyForPickup;
-    }
-
-    public void setSmsConsignmentReadyForPickup(String smsConsignmentReadyForPickup) {
-        this.smsConsignmentReadyForPickup = smsConsignmentReadyForPickup;
-    }
-
-    public String getSmsConsignmentDeliveryModified() {
-        return smsConsignmentDeliveryModified;
-    }
-
-    public void setSmsConsignmentDeliveryModified(String smsConsignmentDeliveryModified) {
-        this.smsConsignmentDeliveryModified = smsConsignmentDeliveryModified;
-    }
-
-    public String getSmsOrderlineCancelled() {
-        return smsOrderlineCancelled;
-    }
-
-    public void setSmsOrderlineCancelled(String smsOrderlineCancelled) {
-        this.smsOrderlineCancelled = smsOrderlineCancelled;
-    }
-
-    public String getEmailOrderConfirmedHomeDelivery() {
-        return emailOrderConfirmedHomeDelivery;
-    }
-
-    public void setEmailOrderConfirmedHomeDelivery(String emailOrderConfirmedHomeDelivery) {
-        this.emailOrderConfirmedHomeDelivery = emailOrderConfirmedHomeDelivery;
-    }
-
-    public String getEmailOrderConfirmedStorePickup() {
-        return emailOrderConfirmedStorePickup;
-    }
-
-    public void setEmailOrderConfirmedStorePickup(String emailOrderConfirmedStorePickup) {
-        this.emailOrderConfirmedStorePickup = emailOrderConfirmedStorePickup;
-    }
-
-    public String getEmailOrderConfirmedHomeDeliveryStorePickup() {
-        return emailOrderConfirmedHomeDeliveryStorePickup;
-    }
-
-    public void setEmailOrderConfirmedHomeDeliveryStorePickup(String emailOrderConfirmedHomeDeliveryStorePickup) {
-        this.emailOrderConfirmedHomeDeliveryStorePickup = emailOrderConfirmedHomeDeliveryStorePickup;
-    }
-
-    public String getEmailOrderCancelled() {
-        return emailOrderCancelled;
-    }
-
-    public void setEmailOrderCancelled(String emailOrderCancelled) {
-        this.emailOrderCancelled = emailOrderCancelled;
-    }
-
-    public String getEmailOrderlineCancelled() {
-        return emailOrderlineCancelled;
-    }
-
-    public void setEmailOrderlineCancelled(String emailOrderlineCancelled) {
-        this.emailOrderlineCancelled = emailOrderlineCancelled;
-    }
-
-    public String getEmailConsignmentDelivered() {
-        return emailConsignmentDelivered;
-    }
-
-    public void setEmailConsignmentDelivered(String emailConsignmentDelivered) {
-        this.emailConsignmentDelivered = emailConsignmentDelivered;
-    }
-
-    public String getEmailConsignmentPickupComplete() {
-        return emailConsignmentPickupComplete;
-    }
-
-    public void setEmailConsignmentPickupComplete(String emailConsignmentPickupComplete) {
-        this.emailConsignmentPickupComplete = emailConsignmentPickupComplete;
-    }
-
-    public String getEmailConsignmentShipped() {
-        return emailConsignmentShipped;
-    }
-
-    public void setEmailConsignmentShipped(String emailConsignmentShipped) {
-        this.emailConsignmentShipped = emailConsignmentShipped;
-    }
-
-    public String getEmailConsignmentDeliveryModified() {
-        return emailConsignmentDeliveryModified;
-    }
-
-    public void setEmailConsignmentDeliveryModified(String emailConsignmentDeliveryModified) {
-        this.emailConsignmentDeliveryModified = emailConsignmentDeliveryModified;
-    }
-
-    public String getEmailConsignmentCandidateForRto() {
-        return emailConsignmentCandidateForRto;
-    }
-
-    public void setEmailConsignmentCandidateForRto(String emailConsignmentCandidateForRto) {
-        this.emailConsignmentCandidateForRto = emailConsignmentCandidateForRto;
-    }
-
-    public String getInvoiceTemplateUrl() {
-        return invoiceTemplateUrl;
-    }
-
-    public void setInvoiceTemplateUrl(String invoiceTemplateUrl) {
-        this.invoiceTemplateUrl = invoiceTemplateUrl;
-    }
-
-    public String getEmailWaitingStorePickup() {
-        return emailWaitingStorePickup;
-    }
-
-    public void setEmailWaitingStorePickup(String emailWaitingStorePickup) {
-        this.emailWaitingStorePickup = emailWaitingStorePickup;
-    }
-
-    public String getSmsWaitingStorePickup() {
-        return smsWaitingStorePickup;
-    }
-
-    public void setSmsWaitingStorePickup(String smsWaitingStorePickup) {
-        this.smsWaitingStorePickup = smsWaitingStorePickup;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        EntityType entityType = (EntityType) o;
-        if(entityType.id == null || id == null) {
-            return false;
-        }
-        return Objects.equals(id, entityType.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+    @Column(name = "manifest_format", nullable = false, columnDefinition = "varchar(255) default 'A4'")
+    private String manifestFormat;
 
     @Override
     public String toString() {
-        return "EntityType{" +
-            "id=" + id +
-            ", entityType='" + entityType + "'" +
-            ", smsOrderConfirmed='" + smsOrderConfirmed + "'" +
-            ", smsConsignmentShipped='" + smsConsignmentShipped + "'" +
-            ", smsConsignmentDelivered='" + smsConsignmentDelivered + "'" +
-            ", smsConsignmentPickupComplete='" + smsConsignmentPickupComplete + "'" +
-            ", smsConsignmentReadyForPickup='" + smsConsignmentReadyForPickup + "'" +
-            ", smsConsignmentDeliveryModified='" + smsConsignmentDeliveryModified + "'" +
-            ", smsOrderlineCancelled='" + smsOrderlineCancelled + "'" +
-            ", emailOrderConfirmedHomeDelivery='" + emailOrderConfirmedHomeDelivery + "'" +
-            ", emailOrderConfirmedStorePickup='" + emailOrderConfirmedStorePickup + "'" +
-            ", emailOrderConfirmedHomeDeliveryStorePickup='" + emailOrderConfirmedHomeDeliveryStorePickup + "'" +
-            ", emailOrderCancelled='" + emailOrderCancelled + "'" +
-            ", emailOrderlineCancelled='" + emailOrderlineCancelled + "'" +
-            ", emailConsignmentDelivered='" + emailConsignmentDelivered + "'" +
-            ", emailConsignmentPickupComplete='" + emailConsignmentPickupComplete + "'" +
-            ", emailConsignmentShipped='" + emailConsignmentShipped + "'" +
-            ", emailConsignmentDeliveryModified='" + emailConsignmentDeliveryModified + "'" +
-            ", emailConsignmentCandidateForRto='" + emailConsignmentCandidateForRto + "'" +
-            ", invoiceTemplateUrl='" + invoiceTemplateUrl + "'" +
-            ", emailWaitingStorePickup='" + emailWaitingStorePickup + "'" +
-            ", smsWaitingStorePickup='" + smsWaitingStorePickup + "'" +
-            '}';
+        return "{"
+            + "\"id\":\"" + id + "\""
+            + ", \"entityType\":\"" + entityType + "\""
+            + ", \"smsOrderConfirmed\":\"" + smsOrderConfirmed + "\""
+            + ", \"smsConsignmentShipped\":\"" + smsConsignmentShipped + "\""
+            + ", \"smsConsignmentDelivered\":\"" + smsConsignmentDelivered + "\""
+            + ", \"smsConsignmentPickupComplete\":\"" + smsConsignmentPickupComplete + "\""
+            + ", \"smsConsignmentReadyForPickup\":\"" + smsConsignmentReadyForPickup + "\""
+            + ", \"smsConsignmentDeliveryModified\":\"" + smsConsignmentDeliveryModified + "\""
+            + ", \"smsOrderlineCancelled\":\"" + smsOrderlineCancelled + "\""
+            + ", \"emailOrderConfirmedHomeDelivery\":\"" + emailOrderConfirmedHomeDelivery + "\""
+            + ", \"emailOrderConfirmedStorePickup\":\"" + emailOrderConfirmedStorePickup + "\""
+            + ", \"emailOrderConfirmedHomeDeliveryStorePickup\":\"" + emailOrderConfirmedHomeDeliveryStorePickup + "\""
+            + ", \"emailOrderCancelled\":\"" + emailOrderCancelled + "\""
+            + ", \"emailOrderlineCancelled\":\"" + emailOrderlineCancelled + "\""
+            + ", \"emailConsignmentDelivered\":\"" + emailConsignmentDelivered + "\""
+            + ", \"emailConsignmentPickupComplete\":\"" + emailConsignmentPickupComplete + "\""
+            + ", \"emailConsignmentShipped\":\"" + emailConsignmentShipped + "\""
+            + ", \"emailConsignmentDeliveryModified\":\"" + emailConsignmentDeliveryModified + "\""
+            + ", \"emailConsignmentCandidateForRto\":\"" + emailConsignmentCandidateForRto + "\""
+            + ", \"invoiceTemplateUrl\":\"" + invoiceTemplateUrl + "\""
+            + ", \"emailWaitingStorePickup\":\"" + emailWaitingStorePickup + "\""
+            + ", \"smsWaitingStorePickup\":\"" + smsWaitingStorePickup + "\""
+            + ", \"manifestFormat\":\"" + manifestFormat + "\""
+            + "}";
     }
 }

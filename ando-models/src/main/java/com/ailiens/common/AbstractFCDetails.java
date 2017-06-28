@@ -1,40 +1,31 @@
 package com.ailiens.common;
 
-
 import lombok.Data;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
-import java.io.Serializable;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-
-import com.ailiens.common.enumeration.*;
 
 /**
- * A FCDetails.
+ * Created by surya on 11/5/17.
  */
-@Entity
-@Table(name = "fcdetails")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-@Document(indexName="fcdetails")
+
 @Data
-public class FCDetails implements Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
-
+@MappedSuperclass
+@Embeddable
+public class AbstractFCDetails {
 
     @Column(name = "fc_id")
     private String fcId;
 
     @Column(name = "sap_code")
     private String sapCode;
+
+    @Column(name = "post_code")
+    private String postCode;
 
     @Column(name = "fc_name")
     private String fcName;
@@ -50,8 +41,8 @@ public class FCDetails implements Serializable {
     @Column(name = "town")
     private String town;
 
-    @Column(name = "post_code")
-    private String postCode;
+    @Column(name = "ordering_enabled")
+    private String orderingEnabled;
 
     @Column(name = "city")
     private String city;
@@ -68,15 +59,23 @@ public class FCDetails implements Serializable {
     @Column(name = "longitude")
     private Float longitude;
 
+    @Min(0)
+    @Max(23)
     @Column(name = "opening_hours")
     private Integer openingHours;
 
+    @Min(0)
+    @Max(59)
     @Column(name = "opening_mins")
     private Integer openingMins;
 
+    @Min(0)
+    @Max(23)
     @Column(name = "closing_hours")
     private Integer closingHours;
 
+    @Min(0)
+    @Max(59)
     @Column(name = "closing_mins")
     private Integer closingMins;
 
@@ -95,14 +94,6 @@ public class FCDetails implements Serializable {
     @Column(name = "capacity")
     private Integer capacity;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "fc_type")
-    private FCTypes fcType;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "operating_type")
-    private OpsTypes operatingType;
-
     @Column(name = "cin_no")
     private String cinNo;
 
@@ -118,17 +109,17 @@ public class FCDetails implements Serializable {
     @Column(name = "contact_person")
     private String contactPerson;
 
-    @NotNull
-    @Min(value = 0)
-    @Max(value = 100)
-    @Column(name = "marginal_cost", precision=10, scale=2, nullable = false)
-    private BigDecimal marginalCost;
-
-    @Column(name = "dailyorder_volume")
+    @Column(name = "dailyorder_volume", nullable = false, columnDefinition = "int default 0")
     private Integer dailyorderVolume;
 
-    @Column(name = "dailyorder_qty")
+    @Column(name = "dailyorder_qty",nullable = false, columnDefinition = "int default 0")
     private Integer dailyorderQty;
+
+    @Column(name = "buffer")
+    private Integer buffer;
+
+    @Column(name = "cutoff_inclusive",columnDefinition=" default 'true'")
+    private Boolean cutoffInclusive;
 
     @Column(name = "sold_by")
     private String soldBy;
@@ -138,12 +129,6 @@ public class FCDetails implements Serializable {
 
     @Column(name = "sync_end_time")
     private String syncEndTime;
-
-    @Column(name = "buffer")
-    private Integer buffer;
-
-    @Column(name = "cutoff_inclusive")
-    private Boolean cutoffInclusive;
 
     @Column(name = "store_email_id")
     private String storeEmailId;
@@ -160,9 +145,6 @@ public class FCDetails implements Serializable {
     @Column(name = "store_brand")
     private String storeBrand;
 
-    @Column(name = "ordering_enabled")
-    private String orderingEnabled;
-
     @Column(name = "re")
     private String re;
 
@@ -175,31 +157,13 @@ public class FCDetails implements Serializable {
     @Column(name = "gstn_code")
     private String gstnCode;
 
-    @Column(name = "store_score")
+    @Column(name = "store_score", nullable = false, columnDefinition = "int default 0")
     private Integer storeScore;
 
-    @OneToMany(mappedBy = "fCDetails")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Brand> brands = new HashSet<>();
-
-    @OneToMany(mappedBy = "fCDetails")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Staff> staffs = new HashSet<>();
-
-    @OneToOne
-    private MultiBrand multiBrand;
-
-    @OneToOne
-    private Warehouse warehouse;
-
-    @OneToOne
-    private Store store;
-
-    @ManyToOne
-    private EntityType entityType;
-
-    @ManyToOne
-    private FranchiseInfo franchiseInfo;
-
+    @NotNull
+    @Min(value = 0)
+    @Max(value = 100)
+    @Column(name = "marginal_cost", precision = 5, scale = 2, nullable = false)
+    private BigDecimal marginalCost;
 
 }
