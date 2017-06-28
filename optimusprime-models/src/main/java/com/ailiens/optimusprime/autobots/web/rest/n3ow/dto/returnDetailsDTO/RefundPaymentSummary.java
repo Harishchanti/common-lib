@@ -13,6 +13,9 @@ public class RefundPaymentSummary {
     private String NNNowCash;
     private String card;
 
+    public RefundPaymentSummary() {
+        super();
+    }
     /**
      *
      * @return

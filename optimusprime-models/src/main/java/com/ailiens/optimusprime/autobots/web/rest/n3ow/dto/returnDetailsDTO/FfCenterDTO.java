@@ -16,7 +16,9 @@ public class FfCenterDTO {
     public String fcType;
     public String postCode;
 
-    public FfCenterDTO() {}
+    public FfCenterDTO() {
+        super();
+    }
 
     public FfCenterDTO(FullfilmentCenter fullfilmentCenter) {
     	if(fullfilmentCenter != null){

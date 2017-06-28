@@ -17,6 +17,9 @@ public class ReturnStatus {
     private String refundStatus;
     private Long returnStateReasonId;
 
+    public ReturnStatus() {
+        super();
+    }
     /**
      *
      * @return

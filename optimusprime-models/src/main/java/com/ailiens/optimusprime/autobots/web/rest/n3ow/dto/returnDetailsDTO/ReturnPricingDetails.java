@@ -18,6 +18,9 @@ public class ReturnPricingDetails {
     private RefundTotalNNNowCashDetails refundTotalNNNowCashDetails;
     private List<RefundHitRule> refundHitRule = new ArrayList<RefundHitRule>();
 
+    public ReturnPricingDetails() {
+        super();
+    }
     /**
      *
      * @return

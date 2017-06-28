@@ -24,6 +24,10 @@ public class ProductDTO {
     public String styleId;
     public String sapStyleId;
 
+    public ProductDTO() {
+        super();
+    }
+
     public ProductDTO(MBOProduct mboProduct) {
 
     	this.setBrand(mboProduct.getBrand());

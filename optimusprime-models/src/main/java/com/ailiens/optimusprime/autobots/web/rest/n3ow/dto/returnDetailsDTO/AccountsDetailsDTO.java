@@ -20,6 +20,10 @@ public class AccountsDetailsDTO {
     public String phonenumber;
     public String email;
 
+    public AccountsDetailsDTO() {
+        super();
+    }
+
     public AccountsDetailsDTO(Accounts accounts) {
 
     	if(accounts!=null){

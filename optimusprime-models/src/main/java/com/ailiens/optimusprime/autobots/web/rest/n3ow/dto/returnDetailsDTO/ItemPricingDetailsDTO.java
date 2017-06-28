@@ -39,6 +39,9 @@ public class ItemPricingDetailsDTO {
     private BigDecimal utgstPercentage = new BigDecimal(0.0);
     private String hsn;
 
+    public ItemPricingDetailsDTO() {
+        super();
+    }
 
 	public ItemPricingDetailsDTO(OrderLine orderLine, List<Taxes> taxes, List<Discount> discounts) {
 		Price price = orderLine.getPrice();

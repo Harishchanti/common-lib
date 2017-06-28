@@ -11,6 +11,10 @@ public class PaymentType {
     private String id;
     private String typeCode;
 
+    public PaymentType() {
+        super();
+    }
+
     /**
      *
      * @return

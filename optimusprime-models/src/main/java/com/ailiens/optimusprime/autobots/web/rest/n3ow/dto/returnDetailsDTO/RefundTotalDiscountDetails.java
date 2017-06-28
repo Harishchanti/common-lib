@@ -12,6 +12,9 @@ public class RefundTotalDiscountDetails {
     private String refundCartDiscount;
     private String refundTotalDiscount;
 
+    public RefundTotalDiscountDetails() {
+        super();
+    }
     /**
      *
      * @return

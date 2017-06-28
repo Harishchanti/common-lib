@@ -11,6 +11,10 @@ public class ReturnMode {
     private String id;
     private String name;
 
+    public ReturnMode() {
+        super();
+    }
+
     /**
      *
      * @return
