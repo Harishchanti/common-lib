@@ -100,7 +100,7 @@ server:
 
 
 MSG:
-  env: qa
+  env: local
   baseUrl: /api/info
   userName: guest
   password: guest

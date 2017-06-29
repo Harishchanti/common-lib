@@ -22,19 +22,17 @@ spring:
         username: root
         password: root
     jpa:
-        database-platform: com.aliens.hipster.domain.util.FixedH2Dialect
-        database: H2
-        open-in-view: false
+        database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+        database: MYSQL
         show-sql: true
         hibernate:
-            ddl-auto: none
-            naming:
-                strategy: org.springframework.boot.orm.jpa.hibernate.SpringNamingStrategy
+            ddl-auto: update
         properties:
-            hibernate.cache.use_second_level_cache: false
+            hibernate.cache.use_second_level_cache: true
             hibernate.cache.use_query_cache: false
             hibernate.generate_statistics: true
-            hibernate.hbm2ddl.auto: validate
+            hibernate.cache.region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+
     mail:
         host: localhost
     mvc:
@@ -71,9 +69,14 @@ server:
     port: 10344
     address: localhost
 
+healthCheck:
+    baseUrl:
+
+
 
 MSG:
-  env: localhost
+  env: local
+  baseUrl: /api/info
   userName: guest
   password: guest
 

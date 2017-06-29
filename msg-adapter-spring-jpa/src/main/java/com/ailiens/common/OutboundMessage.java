@@ -1,14 +1,19 @@
 package com.ailiens.common;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-import org.joda.time.LocalDateTime;
+import static com.ailiens.common.MsgMessage.timeZone;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.UUID;
-
-import static com.ailiens.common.MsgMessage.timeZone;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
+import lombok.Data;
+import org.joda.time.LocalDateTime;
 
 /**
  * Created by jayant on 18/1/17.
@@ -26,7 +31,7 @@ public class OutboundMessage implements Serializable,MsgOutbound {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(length = MAX_PAYLOAD_SIZE+5)
+    @Column
     String payload="";
 
     @Column(name = "created_at")
@@ -53,7 +58,6 @@ public class OutboundMessage implements Serializable,MsgOutbound {
     @PrePersist
     public void checkSize()
     {
-        payload=clip(payload);
         status=clip(status);
     }
 
