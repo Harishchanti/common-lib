@@ -587,6 +587,7 @@ project(':lms-models')
     {
         dependencies{
             compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+            compile group: 'org.hibernate', name: 'hibernate-envers'
         }
     }
 

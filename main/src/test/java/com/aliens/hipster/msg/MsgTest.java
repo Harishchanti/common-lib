@@ -75,7 +75,7 @@ public class MsgTest {
     public void outBoundTest()
     {
         StringBuffer buffer = new StringBuffer();
-        for(int i=0;i<100l;i++)
+        for(int i=0;i<1000*1000l;i++)
             buffer.append('a');
 
         String payload=buffer.toString();
