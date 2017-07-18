@@ -13,18 +13,18 @@ import com.codahale.metrics.Timer;
 public class TimerAspect {
 	
 	@Autowired(required=false)
-	CustomInterface customInterface;
+	TimerTask timerTask;
 
-	@Around("@annotation(com.ailiens.common.PrivateTimed)")
+	@Around("@annotation(com.ailiens.common.CustomTimed)")
 	public void processTimer(ProceedingJoinPoint pjp) throws Throwable {
 		
 		String methodName = pjp.getSignature().getName();
 		
 		Timer.Context context = CustomMetricsReporter.startTimer(methodName);
 		
-		if(customInterface!=null) customInterface.proceed(context,pjp);
-		
-		else {
+		if(timerTask!=null) {
+			timerTask.proceed(context,pjp);
+		}else {
 			pjp.proceed();		
 			context.stop();
 		}
