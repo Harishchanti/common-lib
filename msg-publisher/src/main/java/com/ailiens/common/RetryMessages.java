@@ -1,13 +1,16 @@
 package com.ailiens.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.base.Strings;
+import java.net.URI;
+import java.util.HashMap;
+import java.util.List;
+import javax.transaction.Transactional;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * Created by jayant on 17/1/17.
@@ -27,6 +30,7 @@ public class RetryMessages {
     MsgPublisher msgPublisher;
 
 
+    @SneakyThrows
     public int invoke(int pageSize) {
         List<MsgOutbound> outboundMessageList = messageRetryService.getFailedMessages(pageSize);
 
@@ -34,6 +38,17 @@ public class RetryMessages {
 
         for (MsgOutbound outboundMessage : outboundMessageList) {
             MsgMessage msgMessage = objectMapper.convertValue(outboundMessage, MsgMessage.class);
+
+            if(!Strings.isNullOrEmpty(outboundMessage.getUrl()))
+            {
+                msgMessage.setUriMap(new HashMap<>());
+                msgMessage.getUriMap().put("retry", UriInfo.builder()
+                    .uri(new URI(outboundMessage.getUrl()))
+                    .method(outboundMessage.getMethod())
+                    .timeout(60)
+                    .build()
+                );
+            }
 
             messageRetryService.incRetry(outboundMessage);
 

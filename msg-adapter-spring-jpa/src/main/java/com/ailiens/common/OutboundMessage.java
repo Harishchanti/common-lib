@@ -57,6 +57,9 @@ public class OutboundMessage implements Serializable,MsgOutbound {
 
     int retries=0;
 
+    String url;
+    String method;
+
     @PrePersist
     public void checkSize()
     {
