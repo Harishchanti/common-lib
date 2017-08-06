@@ -92,7 +92,7 @@ public class MetricsConfiguration extends MetricsConfigurerAdapter
                 Integer graphitePort = graphiteConfig.getPort();
                 String graphitePrefix = graphiteConfig.getPrefix();
                 try {
-                    graphitePrefix=graphitePrefix.concat("-"+ InetAddress.getLocalHost().getHostAddress());
+                    graphitePrefix=graphitePrefix.concat("."+ InetAddress.getLocalHost().getHostAddress());
                 } catch (UnknownHostException e) {
                     log.error(e.getMessage());
                 }

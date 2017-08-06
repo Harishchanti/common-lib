@@ -26,7 +26,7 @@ public class RabbitMqConnectionManager {
     static String defaultCluster;
 
     @Setter
-    static int poolSize=2;
+    static int poolSize=5;
 
     @Setter
     static PoolType poolType=PoolType.EAGER;
@@ -38,14 +38,14 @@ public class RabbitMqConnectionManager {
         }
     }
 
-    @Synchronized
+
     public static Connection getConnection(String name) throws Exception {
         if(Strings.isNullOrEmpty(name))return getConnection();
         return map.get(name).getConnection();
     }
 
 
-    @Synchronized
+
     public static Connection getConnection() throws Exception {
         if(Strings.isNullOrEmpty(defaultCluster))
         {

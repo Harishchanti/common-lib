@@ -49,7 +49,7 @@ public class RestUtil  extends RestUtilHelper  {
 
 
 
-    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class})
+    @Retryable(maxAttempts = 3, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class})
     public  <T> HttpResponse<T> get(String url,  Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
 
 

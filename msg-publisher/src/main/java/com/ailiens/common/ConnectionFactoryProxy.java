@@ -5,17 +5,15 @@ import com.google.common.collect.Lists;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import lombok.Synchronized;
-import lombok.experimental.FieldDefaults;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import javax.annotation.PreDestroy;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
+import javax.annotation.PreDestroy;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by jayant on 28/9/16.
@@ -51,17 +49,23 @@ public class ConnectionFactoryProxy   {
 
 
 
-    @Synchronized
+
     public Connection getConnection() throws Exception
     {
         if(ptr> pool.size()-1)addConnectionToPool();
 
         Connection connection= pool.get(ptr);
+        if(!connection.isOpen())
+        {
+            pool.remove(ptr);
+            connection=factory.newConnection();
+            pool.add(connection);
+        }
         ptr=(ptr+1)%poolSize;
         return connection;
     }
 
-    @Synchronized
+
     public Channel getChannel() throws Exception
     {
         return getConnection().createChannel();
@@ -70,11 +74,13 @@ public class ConnectionFactoryProxy   {
     public void addConnectionToPool() throws IOException, TimeoutException {
         log.info("Creating connection");
         pool.add(factory.newConnection());
+        log.info("Connection created");
     }
 
     public  void setup() throws IOException, TimeoutException {
         factory.setHost(host);
         factory.setAutomaticRecoveryEnabled(true);
+        factory.setConnectionTimeout(10000);
 
         if(!Strings.isNullOrEmpty(userName))
         factory.setUsername(userName);

@@ -1,6 +1,7 @@
 package com.ailiens.common;
 
 import com.google.common.base.Strings;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,6 +30,7 @@ public class InboundMessageFilter implements Filter {
     }
 
     @Override
+    @Transactional
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest servletRequest = (HttpServletRequest)request;
