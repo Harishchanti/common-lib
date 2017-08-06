@@ -46,7 +46,7 @@ public class MsgTestController {
         return ResponseEntity.ok(num);
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/outbound/search", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public List<? extends MsgOutbound> search(@RequestParam(value = "messageId") String messageId) throws Exception {
 
         return Optional.ofNullable(messageLogger)
