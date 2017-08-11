@@ -65,10 +65,11 @@ public class MsgConnectionManager {
 
         String env= msgConfig.getEnv();
         String cluster= msgConfig.getCluster();
+        String poolType=msgConfig.getPoolType();
 
         Preconditions.checkNotNull(env);
 
-        log.info("Msg Env {} ,cluster {}" ,env,cluster);
+        log.info("Msg Env {} ,cluster {} ,poolSize {} ,poolType {}" ,env,cluster,poolSize,poolType);
 
 
         if(env.equals("local"))
@@ -98,7 +99,14 @@ public class MsgConnectionManager {
 
 
         String CLUSTER_NAME="MSG";
-        RabbitMqConnectionManager.setPoolType(PoolType.LAZY);
+        if(Strings.isNullOrEmpty(poolType))
+        {
+            RabbitMqConnectionManager.setPoolType(PoolType.LAZY);
+        }
+        else
+        {
+            RabbitMqConnectionManager.setPoolType(PoolType.valueOf(poolType));
+        }
         RabbitMqConnectionManager.setPoolSize(poolSize);
         RabbitMqConnectionManager.createConnectionPool(CLUSTER_NAME,rabbitMqHost,userName,password);
         RabbitMqConnectionManager.setDefaultCluster(CLUSTER_NAME);

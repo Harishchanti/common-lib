@@ -22,6 +22,7 @@ public class MsgConfig {
     String userName;
     String password;
     int poolSize;
+    String poolType;
     boolean logging = true;
     boolean exceptionLogging = true;
 }
