@@ -1,7 +1,6 @@
 package com.ailiens.optimusprime.web.rest.dto;
 
 import com.ailiens.optimusprime.domain.User;
-
 import java.time.ZonedDateTime;
 
 /**
