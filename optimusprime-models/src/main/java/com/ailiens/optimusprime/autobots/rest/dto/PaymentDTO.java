@@ -1,5 +1,7 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
+import com.ailiens.optimusprime.domain.Payment;
+
 import java.math.BigDecimal;
 
 /**
@@ -11,18 +13,14 @@ public class PaymentDTO {
 
 	private String paymentStatus;
 
-	private BigDecimal paymentAmount;
+    private BigDecimal paymentAmount;
 
 	public PaymentDTO(Payment payment) {
 		if(payment != null) {
 			this.paymentMode = payment.getPaymentMode();
 			this.paymentStatus = payment.getPaymentStatus();
-			this.paymentAmount = payment.getPaymentAmount();
+            this.paymentAmount = payment.getPaymentAmount();
 		}
-	}
-	public PaymentDTO()
-	{
-
 	}
 
 	public String getPaymentMode() {
@@ -41,15 +39,15 @@ public class PaymentDTO {
 		this.paymentStatus = paymentStatus;
 	}
 
-	public BigDecimal getPaymentAmount() {
-		return paymentAmount;
-	}
+    public BigDecimal getPaymentAmount() {
+        return paymentAmount;
+    }
 
-	public void setPaymentAmount(BigDecimal paymentAmount) {
-		this.paymentAmount = paymentAmount;
-	}
+    public void setPaymentAmount(BigDecimal paymentAmount) {
+        this.paymentAmount = paymentAmount;
+    }
 
-	@Override
+    @Override
 	public String toString() {
 		return "PaymentDTO [paymentMode=" + paymentMode + ", paymentStatus=" + paymentStatus + "]";
 	}

@@ -1,5 +1,7 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
+import com.ailiens.optimusprime.domain.MBOProduct;
+
 /**
  * A DTO representing a MBOProduct.
  */
@@ -31,18 +33,15 @@ public class MBOProductDTO {
 		}
 	}
 
-	public MBOProductDTO(){
+    public String getProductId() {
+        return productId;
+    }
 
-	}
-	public String getProductId() {
-		return productId;
-	}
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
 
-	public void setProductId(String productId) {
-		this.productId = productId;
-	}
-
-	public String getSkuId() {
+    public String getSkuId() {
 		return skuId;
 	}
 

@@ -4,6 +4,10 @@ import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ailiens.optimusprime.domain.Consignment;
+import com.ailiens.optimusprime.domain.Orders;
+import com.ailiens.optimusprime.domain.Payment;
+
 /**
  * A DTO representing an order.
  */
@@ -20,7 +24,7 @@ public class OrderDTO {
 	private Set<PaymentDTO> paymentDetails;
 
 	private Set<ConsignmentDTO> consignments;
-
+	
 	public OrderDTO(Orders order) {
 		if(order != null) {
 			this.orderId = String.valueOf(order.getId());
@@ -34,9 +38,6 @@ public class OrderDTO {
 		}
 	}
 
-	public OrderDTO(){
-
-	}
 
 	public void setConsignmentsFromOrder(Orders order) {
 		if(order != null) {

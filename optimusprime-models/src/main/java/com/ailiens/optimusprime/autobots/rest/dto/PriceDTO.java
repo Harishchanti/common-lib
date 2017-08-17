@@ -1,5 +1,6 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
+import com.ailiens.optimusprime.domain.Price;
 import java.math.BigDecimal;
 
 /**
@@ -8,7 +9,7 @@ import java.math.BigDecimal;
 public class PriceDTO {
 
 	private BigDecimal price;
-
+	
 	private BigDecimal finalPrice;
 
 	public PriceDTO(Price price) {
@@ -16,9 +17,6 @@ public class PriceDTO {
 			this.price = price.getOriginalPrice();
 			this.finalPrice = price.getFinalPrice();
 		}
-	}
-	public PriceDTO(){
-
 	}
 
 	public BigDecimal getPrice() {
@@ -41,5 +39,5 @@ public class PriceDTO {
 	public String toString() {
 		return "PriceDTO [price=" + price + ", finalPrice=" + finalPrice + "]";
 	}
-
+	
 }

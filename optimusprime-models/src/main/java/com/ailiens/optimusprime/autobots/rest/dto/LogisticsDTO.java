@@ -2,19 +2,21 @@ package com.ailiens.optimusprime.autobots.rest.dto;
 
 import java.time.ZonedDateTime;
 
+import com.ailiens.optimusprime.domain.Logistics;
+
 /**
  * A DTO representing a Logitics.
  */
 public class LogisticsDTO {
 
 	private String shipmentId;
-
+	
 	private ZonedDateTime deliveryDate;
-
+	
 	private String deliveryType;
-
+	
 	private String logisticsPartner;
-
+	
 	private String logisticsLink;
 
 	public LogisticsDTO(Logistics logistics) {
@@ -25,9 +27,6 @@ public class LogisticsDTO {
 			this.logisticsPartner = logistics.getLogisticsPartner();
 			this.logisticsLink = logistics.getLogisticsLink();
 		}
-	}
-	public LogisticsDTO(){
-
 	}
 
 	public String getShipmentId() {

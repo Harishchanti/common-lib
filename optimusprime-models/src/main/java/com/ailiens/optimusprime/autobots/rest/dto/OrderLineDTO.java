@@ -4,6 +4,9 @@ import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.ailiens.optimusprime.domain.Discount;
+import com.ailiens.optimusprime.domain.MBOProduct;
+import com.ailiens.optimusprime.domain.OrderLine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -13,10 +16,7 @@ public class OrderLineDTO {
 
 	private String itemId;
 
-	private Set<MBOProductDTO> mboProducts;
-
-	@JsonIgnore
-	private Set<ProductDTO> products;
+	private MBOProductDTO mboProducts;
 
 	private ZonedDateTime slaEndTime;
 
@@ -30,7 +30,7 @@ public class OrderLineDTO {
 
 	private PriceDTO priceDetails;
 
-	private InvoiceLineDTO invoiceLine;
+//    private InvoiceLineDTO invoiceLine;
 
 	private Set<DiscountDTO> discountDetails;
 
@@ -52,20 +52,16 @@ public class OrderLineDTO {
 			//setDiscountDetailsFromOrderLine(orderLine);
 		}
 	}
-	public OrderLineDTO(){
-
-	}
 
 	public void setProductsFromOrderLine(OrderLine orderLine) {
 		if(orderLine != null) {
-			Set<ProductDTO> productDTOs = new HashSet<>();
-			Set<Product> products = orderLine.getProducts();
+			MBOProduct products = orderLine.getMboProducts();
 
-			for(Product product : products) {
-				ProductDTO productDTO = new ProductDTO(product);
-				productDTOs.add(productDTO);
-			}
-			this.products = productDTOs;
+
+            MBOProductDTO productDTO = new MBOProductDTO(products);
+//				productDTOs.add(productDTO);
+
+			this.mboProducts = productDTO;
 		}
 	}
 
@@ -90,13 +86,6 @@ public class OrderLineDTO {
 		this.itemId = itemId;
 	}
 
-	public Set<ProductDTO> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<ProductDTO> products) {
-		this.products = products;
-	}
 
 	public ZonedDateTime getSlaEndTime() {
 		return slaEndTime;
@@ -154,28 +143,28 @@ public class OrderLineDTO {
 		this.discountDetails = discountDetails;
 	}
 
-	public Set<MBOProductDTO> getMboProducts() {
-		return mboProducts;
-	}
+    public MBOProductDTO getMboProducts() {
+        return mboProducts;
+    }
 
-	public void setMboProducts(Set<MBOProductDTO> mboProducts) {
-		this.mboProducts = mboProducts;
-	}
+    public void setMboProducts(MBOProductDTO mboProducts) {
+        this.mboProducts = mboProducts;
+    }
 
-	public InvoiceLineDTO getInvoiceLine() {
-		return invoiceLine;
-	}
+//    public InvoiceLineDTO getInvoiceLine() {
+//        return invoiceLine;
+//    }
+//
+//    public void setInvoiceLine(InvoiceLineDTO invoiceLine) {
+//        this.invoiceLine = invoiceLine;
+//    }
 
-	public void setInvoiceLine(InvoiceLineDTO invoiceLine) {
-		this.invoiceLine = invoiceLine;
-	}
-
-	@Override
+    @Override
 	public String toString() {
-		return "OrderLineDTO [itemId=" + itemId + ", mboProducts=" + mboProducts + ", products=" + products
+		return "OrderLineDTO [itemId=" + itemId + ", mboProducts=" + mboProducts
 				+ ", slaEndTime=" + slaEndTime + ", itemStatus=" + itemStatus + ", fullfilmentType=" + fullfilmentType
 				+ ", fullfilmentCenter=" + fullfilmentCenter + ", logistics=" + logistics + ", priceDetails="
-				+ priceDetails + ", discountDetails=" + discountDetails + ", invoiceDetails= "+invoiceLine + "]";
+				+ priceDetails + ", discountDetails=" + discountDetails +  "]";
 	}
 
 }

@@ -1,12 +1,14 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
+import com.ailiens.optimusprime.domain.Accounts;
+
 /**
  * A DTO representing an Account.
  */
 public class AccountDTO {
 
 	private String accountId;
-
+	
 	private String firstName;
 
 	private String middleName;
@@ -22,9 +24,6 @@ public class AccountDTO {
 		}
 	}
 
-	public AccountDTO(){
-
-	}
 	public String getAccountId() {
 		return accountId;
 	}
@@ -62,6 +61,6 @@ public class AccountDTO {
 		return "AccountDTO [accountId=" + accountId + ", firstName=" + firstName + ", middleName=" + middleName
 				+ ", lastName=" + lastName + "]";
 	}
-
-
+	
+	
 }
