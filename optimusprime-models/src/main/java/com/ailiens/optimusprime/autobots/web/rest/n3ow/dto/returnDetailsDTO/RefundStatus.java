@@ -1,9 +1,8 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class RefundStatus {
@@ -11,9 +10,6 @@ public class RefundStatus {
     private String transactionId;
     private String status;
 
-    public RefundStatus() {
-        super();
-    }
     /**
      *
      * @return
@@ -21,6 +17,11 @@ public class RefundStatus {
      */
     public String getTransactionId() {
         return transactionId;
+    }
+
+
+    public RefundStatus() {
+        super();
     }
 
     /**

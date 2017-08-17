@@ -1,11 +1,12 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import com.ailiens.optimusprime.domain.OrderLine;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.math.BigDecimal;
 
 import javax.annotation.Generated;
-import java.math.BigDecimal;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.domain.OrderLine;
 
 @Generated("org.jsonschema2pojo")
 public class LogisticsDetailsDTO {
@@ -35,10 +36,6 @@ public class LogisticsDetailsDTO {
     public String cityCode;
     public String fedexBillTc;
     public String fedexBillDt;
-
-    public LogisticsDetailsDTO() {
-        super();
-    }
 
     public LogisticsDetailsDTO(OrderLine orderLine) {
 		if(orderLine.getLogistics() !=null ){
@@ -129,6 +126,12 @@ public class LogisticsDetailsDTO {
 	public String getCourierName() {
 		return courierName;
 	}
+
+
+
+    public LogisticsDetailsDTO() {
+        super();
+    }
 
 
 

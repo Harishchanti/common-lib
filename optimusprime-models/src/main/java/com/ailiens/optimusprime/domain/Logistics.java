@@ -3,13 +3,13 @@ package com.ailiens.optimusprime.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A Logistics.
@@ -19,8 +19,10 @@ import java.util.Set;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Logistics implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "logistics_id")
@@ -92,10 +94,23 @@ public class Logistics implements Serializable {
     @Column(name = "fedex_bill_dt")
     private String fedexBillDt;
 
+    @Column(name = "master_bag_id")
+    private Long masterBagId;
+    
+    @Column(name = "invoice_path")
+    private String invoicePath;
+    
+    @Column(name = "shipping_label_path")
+    private String shippingLabelPath;
+
     @OneToMany(mappedBy = "logistics")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<OrderLine> orderLines = new HashSet<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "courier_id")
+    private Courier courier;
 
     public Long getId() {
         return id;
@@ -289,12 +304,52 @@ public class Logistics implements Serializable {
         this.fedexBillDt = fedexBillDt;
     }
 
+    public Long getMaster_bag_id() {
+        return masterBagId;
+    }
+
+    public void setMaster_bag_id(Long master_bag_id) {
+        this.masterBagId = master_bag_id;
+    }
+
     public Set<OrderLine> getOrderLines() {
         return orderLines;
     }
 
     public void setOrderLines(Set<OrderLine> orderLines) {
         this.orderLines = orderLines;
+    }
+
+    public Long getMasterBagId() {
+      return masterBagId;
+    }
+
+    public void setMasterBagId(Long masterBagId) {
+      this.masterBagId = masterBagId;
+    }
+
+    public String getInvoicePath() {
+      return invoicePath;
+    }
+
+    public void setInvoicePath(String invoicePath) {
+      this.invoicePath = invoicePath;
+    }
+
+    public String getShippingLabelPath() {
+      return shippingLabelPath;
+    }
+
+    public void setShippingLabelPath(String shippingLabelPath) {
+      this.shippingLabelPath = shippingLabelPath;
+    }
+
+    public Courier getCourier() {
+      return courier;
+    }
+
+    public void setCourier(Courier courier) {
+      this.courier = courier;
     }
 
     @Override
@@ -306,41 +361,32 @@ public class Logistics implements Serializable {
             return false;
         }
         Logistics logistics = (Logistics) o;
-        return Objects.equals(id, logistics.id);
+        if (logistics.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), logistics.getId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(id);
+        return Objects.hashCode(getId());
     }
 
     @Override
     public String toString() {
-        return "Logistics{" +
-            "id=" + id +
-            ", logisticsId='" + logisticsId + "'" +
-            ", shipmentId='" + shipmentId + "'" +
-            ", deliveryDate='" + deliveryDate + "'" +
-            ", deliveryType='" + deliveryType + "'" +
-            ", deliveryStatus='" + deliveryStatus + "'" +
-            ", logisticsPartner='" + logisticsPartner + "'" +
-            ", logisticsLink='" + logisticsLink + "'" +
-            ", expectedDeliveryDate='" + expectedDeliveryDate + "'" +
-            ", awbNumber='" + awbNumber + "'" +
-            ", serviceType='" + serviceType + "'" +
-            ", barCode='" + barCode + "'" +
-            ", codBarCode='" + codBarCode + "'" +
-            ", dcCode='" + dcCode + "'" +
-            ", codAwbNumber='" + codAwbNumber + "'" +
-            ", fedexForwardShipmentType='" + fedexForwardShipmentType + "'" +
-            ", fedexReturnShipmentType='" + fedexReturnShipmentType + "'" +
-            ", fedexForwardFormId='" + fedexForwardFormId + "'" +
-            ", fedexReturnFormId='" + fedexReturnFormId + "'" +
-            ", fedexMeter='" + fedexMeter + "'" +
-            ", countryCode='" + countryCode + "'" +
-            ", cityCode='" + cityCode + "'" +
-            ", fedexBillTc='" + fedexBillTc + "'" +
-            ", fedexBillDt='" + fedexBillDt + "'" +
-            '}';
+      return "Logistics [id=" + id + ", logisticsId=" + logisticsId + ", shipmentId=" + shipmentId
+          + ", deliveryDate=" + deliveryDate + ", deliveryType=" + deliveryType
+          + ", deliveryStatus=" + deliveryStatus + ", logisticsPartner=" + logisticsPartner
+          + ", logisticsLink=" + logisticsLink + ", expectedDeliveryDate=" + expectedDeliveryDate
+          + ", awbNumber=" + awbNumber + ", serviceType=" + serviceType + ", barCode=" + barCode
+          + ", codBarCode=" + codBarCode + ", dcCode=" + dcCode + ", codAwbNumber=" + codAwbNumber
+          + ", fedexForwardShipmentType=" + fedexForwardShipmentType + ", fedexReturnShipmentType="
+          + fedexReturnShipmentType + ", fedexForwardFormId=" + fedexForwardFormId
+          + ", fedexReturnFormId=" + fedexReturnFormId + ", fedexMeter=" + fedexMeter
+          + ", countryCode=" + countryCode + ", cityCode=" + cityCode + ", fedexBillTc="
+          + fedexBillTc + ", fedexBillDt=" + fedexBillDt + ", masterBagId=" + masterBagId
+          + ", invoicePath=" + invoicePath + ", shippingLabelPath=" + shippingLabelPath + ", orderLines="
+          + orderLines + "]";
     }
+
 }

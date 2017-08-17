@@ -2,8 +2,6 @@ package com.ailiens.optimusprime.autobots.rest.dto;
 
 import java.time.ZonedDateTime;
 
-import com.ailiens.optimusprime.domain.Logistics;
-
 /**
  * A DTO representing a Logitics.
  */

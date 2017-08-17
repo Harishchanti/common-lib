@@ -1,17 +1,18 @@
 package com.ailiens.optimusprime.domain;
 
-import com.ailiens.optimusprime.domain.enumeration.service;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
+
+import com.ailiens.optimusprime.domain.enumeration.service;
 
 /**
  * A Orders.
@@ -62,7 +63,33 @@ public class Orders implements Serializable {
 
     @OneToOne    private Accounts storeStaffDetails;
 
+
+    @Column(name = "order_reference")
+    private String order_reference;
+
+    @Column(name = "order_reference2")
+    private String order_reference2;
+
+    @Column(name = "source")
+    private String source;
+
+    @Column(name = "service_order_id")
+    private String serviceOrderId;
+
+
+    @ManyToOne
+    @JoinColumn(name = "source_metadata_id")
+    private SourceMetadata sourceMetadataId;
+
+    @OneToOne private OrderPricing orderPricing;
+
+    @Column(name = "images")
+    private String images;
+
+
+
     public Long getId() {
+
         return id;
     }
 
@@ -158,6 +185,22 @@ public class Orders implements Serializable {
         this.storeStaffDetails = accounts;
     }
 
+    public OrderPricing getOrderPricing() {
+        return orderPricing;
+    }
+
+    public void setOrderPricing(OrderPricing orderPricing) {
+        this.orderPricing = orderPricing;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -185,4 +228,49 @@ public class Orders implements Serializable {
             ", workflowId='" + workflowId + "'" +
             '}';
     }
+
+
+
+	public String getOrder_reference() {
+		return order_reference;
+	}
+
+	public void setOrder_reference(String order_reference) {
+		this.order_reference = order_reference;
+	}
+
+	public String getOrder_reference2() {
+		return order_reference2;
+	}
+
+	public void setOrder_reference2(String order_reference2) {
+		this.order_reference2 = order_reference2;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getServiceOrderId() {
+		return serviceOrderId;
+	}
+
+	public void setServiceOrderId(String serviceOrderId) {
+		this.serviceOrderId = serviceOrderId;
+	}
+
+	public SourceMetadata getSourceMetadataId() {
+		return sourceMetadataId;
+	}
+
+	public void setSourceMetadataId(SourceMetadata sourceMetadataId) {
+		this.sourceMetadataId = sourceMetadataId;
+	}
+
+
+
 }

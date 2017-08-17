@@ -1,18 +1,19 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.autobots.utils.PricingUtils;
-import com.ailiens.optimusprime.domain.Discount;
-import com.ailiens.optimusprime.domain.OrderLine;
-import com.ailiens.optimusprime.domain.Price;
-import com.ailiens.optimusprime.domain.Taxes;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import javax.annotation.Generated;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.annotation.Generated;
+
+import com.ailiens.optimusprime.autobots.utils.PricingUtils;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.domain.Discount;
+import com.ailiens.optimusprime.domain.OrderLine;
+import com.ailiens.optimusprime.domain.Price;
+import com.ailiens.optimusprime.domain.Taxes;
 
 @Generated("org.jsonschema2pojo")
 public class ItemPricingDetailsDTO {
@@ -39,10 +40,6 @@ public class ItemPricingDetailsDTO {
     private BigDecimal utgstPercentage = new BigDecimal(0.0);
     private String hsn;
 
-    public ItemPricingDetailsDTO() {
-        super();
-    }
-
 	public ItemPricingDetailsDTO(OrderLine orderLine, List<Taxes> taxes, List<Discount> discounts) {
 		Price price = orderLine.getPrice();
 		if(price != null){
@@ -57,6 +54,7 @@ public class ItemPricingDetailsDTO {
             }
             this.setHsn(price.getHsn());
 		}
+
 
     	Iterator<Taxes> taxIterator = taxes.iterator();
     	if(taxIterator.hasNext()){
@@ -87,6 +85,9 @@ public class ItemPricingDetailsDTO {
         }
 	}
 
+	public ItemPricingDetailsDTO(){
+	    super();
+    }
 
 
 	public BigDecimal getDiscount() {

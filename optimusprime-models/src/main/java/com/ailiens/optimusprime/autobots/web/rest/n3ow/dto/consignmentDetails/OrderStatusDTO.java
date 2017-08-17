@@ -1,10 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.domain.Orders;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.Orders;
 
 @Generated("org.jsonschema2pojo")
 public class OrderStatusDTO {
@@ -25,9 +25,7 @@ public class OrderStatusDTO {
     	}
 	}
 
-    public OrderStatusDTO() {
-        super();
-    }
+
 
 
 	public String getId() {
@@ -36,6 +34,9 @@ public class OrderStatusDTO {
 
 
 
+	public OrderStatusDTO(){
+        super();
+    }
 
 	public void setId(String id) {
 		this.id = id;

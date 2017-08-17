@@ -3,13 +3,13 @@ package com.ailiens.optimusprime.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A OrderLine.
@@ -63,9 +63,9 @@ public class OrderLine implements Serializable {
     @JoinColumn(name = "consignment_id")
     private Consignment consignment;
 
-    @OneToOne(mappedBy = "orderLine")
-    @JsonIgnore
-    private InvoiceLine invoiceLine;
+//    @OneToOne(mappedBy = "orderLine")
+//    @JsonIgnore
+//    private InvoiceLine invoiceLine;
 
     @OneToOne(mappedBy = "orderLine")
     @JsonIgnore
@@ -76,26 +76,26 @@ public class OrderLine implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Discount> discounts = new HashSet<>();
 
-    @OneToMany(fetch=FetchType.EAGER,mappedBy = "orderLine")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Product> products = new HashSet<>();
+    @OneToOne
+    private MBOProduct mboProducts;
 
     @OneToMany(mappedBy = "orderLine")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Taxes> taxess = new HashSet<>();
 
-    @OneToOne    private FullfilmentCenter fullfilmentCenter;
+
+    @ManyToOne
+    @JoinColumn(name = "fullfilment_center_id")
+    private FullfilmentCenter fullfilmentCenter;
 
     @ManyToOne
     @JoinColumn(name = "packaging_type_id")
     private PackagingType packagingType;
 
-    @OneToMany(mappedBy = "orderLine")
-    @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Image> images = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "invoice_id")
+    private Invoice invoice;
 
     public Long getId() {
         return id;
@@ -200,14 +200,14 @@ public class OrderLine implements Serializable {
     public void setConsignment(Consignment consignment) {
         this.consignment = consignment;
     }
-
-    public InvoiceLine getInvoiceLine() {
-        return invoiceLine;
-    }
-
-    public void setInvoiceLine(InvoiceLine invoiceLine) {
-        this.invoiceLine = invoiceLine;
-    }
+//
+//    public InvoiceLine getInvoiceLine() {
+//        return invoiceLine;
+//    }
+//
+//    public void setInvoiceLine(InvoiceLine invoiceLine) {
+//        this.invoiceLine = invoiceLine;
+//    }
 
     public Returns getReturns() {
         return returns;
@@ -225,12 +225,12 @@ public class OrderLine implements Serializable {
         this.discounts = discounts;
     }
 
-    public Set<Product> getProducts() {
-        return products;
+    public MBOProduct getMboProducts() {
+        return mboProducts;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setMboProducts(MBOProduct mboProducts) {
+        this.mboProducts = mboProducts;
     }
 
     public Set<Taxes> getTaxess() {
@@ -257,12 +257,12 @@ public class OrderLine implements Serializable {
         this.packagingType = packagingType;
     }
 
-    public Set<Image> getImages() {
-        return images;
+    public Invoice getInvoice() {
+        return invoice;
     }
 
-    public void setImages(Set<Image> images) {
-        this.images = images;
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
-import com.ailiens.optimusprime.domain.Discount;
-
 public class DiscountDTO {
 
 	private String discount;

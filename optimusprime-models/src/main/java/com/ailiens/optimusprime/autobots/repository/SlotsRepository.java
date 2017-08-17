@@ -1,6 +1,5 @@
 package com.ailiens.optimusprime.autobots.repository;
 
-import com.ailiens.optimusprime.domain.Slots;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 

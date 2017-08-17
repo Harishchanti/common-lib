@@ -1,19 +1,14 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class ReturnType {
 
     private String name;
     private Integer id;
-
-    public ReturnType() {
-        super();
-    }
 
     /**
      *
@@ -22,6 +17,11 @@ public class ReturnType {
      */
     public String getName() {
         return name;
+    }
+
+
+    public ReturnType() {
+        super();
     }
 
     /**

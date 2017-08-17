@@ -1,9 +1,8 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.createPosOrder;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class Item {
@@ -171,6 +170,10 @@ public class Item {
      */
     public String getDiscountReason() {
         return discountReason;
+    }
+
+    public Item(){
+        super();
     }
 
     /**

@@ -3,13 +3,13 @@ package com.ailiens.optimusprime.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A Invoice.
@@ -32,7 +32,7 @@ public class Invoice implements Serializable {
     @OneToMany(mappedBy = "invoice")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<InvoiceLine> invoiceLines = new HashSet<>();
+    private Set<OrderLine> orderLines = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -58,12 +58,12 @@ public class Invoice implements Serializable {
         this.invoiceId = invoiceId;
     }
 
-    public Set<InvoiceLine> getInvoiceLines() {
-        return invoiceLines;
+    public Set<OrderLine> getOrderLines() {
+        return orderLines;
     }
 
-    public void setInvoiceLines(Set<InvoiceLine> invoiceLines) {
-        this.invoiceLines = invoiceLines;
+    public void setOrderLines(Set<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 
     @Override

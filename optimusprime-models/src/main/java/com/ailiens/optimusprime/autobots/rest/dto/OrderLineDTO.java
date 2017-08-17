@@ -4,9 +4,6 @@ import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.ailiens.optimusprime.domain.Discount;
-import com.ailiens.optimusprime.domain.OrderLine;
-import com.ailiens.optimusprime.domain.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**

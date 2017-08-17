@@ -1,9 +1,8 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.Payment;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class VoucherDTO {
@@ -17,6 +16,11 @@ public class VoucherDTO {
      */
     public String getVoucherId() {
         return voucherId;
+    }
+
+
+    public VoucherDTO() {
+        super();
     }
 
     /**

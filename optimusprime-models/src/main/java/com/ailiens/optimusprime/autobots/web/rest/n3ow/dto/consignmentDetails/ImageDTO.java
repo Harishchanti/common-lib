@@ -5,10 +5,6 @@ public class ImageDTO {
     private String imageLink;
     private String fcId;
 
-    public ImageDTO() {
-        super();
-    }
-
     public String getImageLink() {
         return imageLink;
     }
@@ -20,6 +16,10 @@ public class ImageDTO {
     public String getFcId() {
         return fcId;
     }
+    public  ImageDTO(){
+        super();
+    }
+
 
     public void setFcId(String fcId) {
         this.fcId = fcId;

@@ -1,6 +1,5 @@
 package com.ailiens.optimusprime.autobots.rest.dto.n3ow.v2.search;
 
-import com.ailiens.optimusprime.domain.Consignment;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class CustomerDetailsDTO {

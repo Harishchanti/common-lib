@@ -1,10 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 
 @Generated("org.jsonschema2pojo")
 public class FfTypeDTO {
@@ -16,10 +16,6 @@ public class FfTypeDTO {
 		this.setFfType(orderLine.getFullfilmentType().getName());
 		this.setType(orderLine.getFullfilmentType().getType());
 	}
-
-	public FfTypeDTO() {
-        super();
-    }
 
 	public String getFfType() {
 		return ffType;
@@ -36,6 +32,10 @@ public class FfTypeDTO {
 	public void setType(String type) {
 		this.type = type;
 	}
+
+    public FfTypeDTO() {
+        super();
+    }
 
 	@Override
     public String toString() {

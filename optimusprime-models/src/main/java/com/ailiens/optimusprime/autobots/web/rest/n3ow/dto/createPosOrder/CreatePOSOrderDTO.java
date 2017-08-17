@@ -1,11 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.createPosOrder;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class CreatePOSOrderDTO {
@@ -25,6 +24,9 @@ public class CreatePOSOrderDTO {
      */
     public String getDate() {
         return date;
+    }
+    public CreatePOSOrderDTO(){
+        super();
     }
 
     /**

@@ -1,122 +1,126 @@
 package com.ailiens.optimusprime.autobots.web.rest;
 
+import java.time.ZonedDateTime;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.ZonedDateTime;
-
 public class OrderItemCommonViewDTO {
 
-	private final Logger log = LoggerFactory.getLogger(OrderItemCommonViewDTO.class);
+    private final Logger log = LoggerFactory.getLogger(OrderItemCommonViewDTO.class);
 
-	private long orderId;
+    private long orderId;
 
-	private ZonedDateTime orderDate;
+    private ZonedDateTime orderDate;
 
-	private String accountId;
+    private String accountId;
 
-	private long orderLineId;
+    private long orderLineId;
 
-	private String shipmentId;
+    private String shipmentId;
 
-	private String orderStatus;
+    private String orderStatus;
 
-	private String consignmentSatus;
+    private String consignmentSatus;
 
-	private String fullFilmentStore;
+    private String fullFilmentStore;
 
-	private String customerName;
+    private String customerName;
 
-	public long getOrderId() {
-		return orderId;
-	}
+    public long getOrderId() {
+        return orderId;
+    }
 
-	public void setOrderId(long orderId) {
-		this.orderId = orderId;
-	}
+    public void setOrderId(long orderId) {
+        this.orderId = orderId;
+    }
 
-	public ZonedDateTime getOrderDate() {
-		return orderDate;
-	}
+    public ZonedDateTime getOrderDate() {
+        return orderDate;
+    }
 
-	public void setOrderDate(ZonedDateTime zonedDateTime) {
-		this.orderDate = zonedDateTime;
-	}
+    public void setOrderDate(ZonedDateTime zonedDateTime) {
+        this.orderDate = zonedDateTime;
+    }
 
-	public String getAccountId() {
-		return accountId;
-	}
+    public String getAccountId() {
+        return accountId;
+    }
 
-	public void setAccountId(String accountId) {
-		this.accountId = accountId;
-	}
+    public void setAccountId(String accountId) {
+        this.accountId = accountId;
+    }
 
-	public long getOrderLineId() {
-		return orderLineId;
-	}
+    public long getOrderLineId() {
+        return orderLineId;
+    }
 
-	public void setOrderLineId(long orderLineId) {
-		this.orderLineId = orderLineId;
-	}
+    public void setOrderLineId(long orderLineId) {
+        this.orderLineId = orderLineId;
+    }
 
-	public String getShipmentId() {
-		return shipmentId;
-	}
+    public String getShipmentId() {
+        return shipmentId;
+    }
 
-	public void setShipmentId(String shipmentId) {
-		this.shipmentId = shipmentId;
-	}
+    public OrderItemCommonViewDTO() {
+        super();
+    }
 
-	public String getOrderStatus() {
-		return orderStatus;
-	}
+    public void setShipmentId(String shipmentId) {
+        this.shipmentId = shipmentId;
+    }
 
-	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
-	}
+    public String getOrderStatus() {
+        return orderStatus;
+    }
 
-	public String getConsignmentSatus() {
-		return consignmentSatus;
-	}
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
-	public void setConsignmentSatus(String consignmentSatus) {
-		this.consignmentSatus = consignmentSatus;
-	}
+    public String getConsignmentSatus() {
+        return consignmentSatus;
+    }
 
-	public String getFullFilmentStore() {
-		return fullFilmentStore;
-	}
+    public void setConsignmentSatus(String consignmentSatus) {
+        this.consignmentSatus = consignmentSatus;
+    }
 
-	public void setFullFilmentStore(String fullFilmentStore) {
-		this.fullFilmentStore = fullFilmentStore;
-	}
+    public String getFullFilmentStore() {
+        return fullFilmentStore;
+    }
 
-	public String getCustomerName() {
-		return customerName;
-	}
+    public void setFullFilmentStore(String fullFilmentStore) {
+        this.fullFilmentStore = fullFilmentStore;
+    }
 
-	public void setCustomerName(String customerName) {
-		this.customerName = customerName;
-	}
+    public String getCustomerName() {
+        return customerName;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
 		/* If the object is compared with itself then return true */
-		if(obj == this) {
-			log.debug("both objects matched.");
-			return true;
-		}
+        if(obj == this) {
+            log.debug("both objects matched.");
+            return true;
+        }
 		/* Check if obj is an instance of OrderItemViewDTO or not
         "null instanceof [type]" also returns false */
-		if (!(obj instanceof OrderItemCommonViewDTO)) {
-			log.debug("Object instance is not type of OrderItemCommonViewDTO");
-			return false;
-		}
-		OrderItemCommonViewDTO orderItemCommonViewDTO = (OrderItemCommonViewDTO) obj;
-		int compareOrderId = Long.compare(this.orderId, orderItemCommonViewDTO.orderId);
-		boolean compareStoreName = this.fullFilmentStore.equals(orderItemCommonViewDTO.getFullFilmentStore());
-		log.debug("order Id compare result : " + (compareOrderId == 0));
-		log.debug("store name compare result : " + compareStoreName);
-		return ( compareOrderId == 0) && compareStoreName ;
-	}
+        if (!(obj instanceof OrderItemCommonViewDTO)) {
+            log.debug("Object instance is not type of OrderItemCommonViewDTO");
+            return false;
+        }
+        OrderItemCommonViewDTO orderItemCommonViewDTO = (OrderItemCommonViewDTO) obj;
+        int compareOrderId = Long.compare(this.orderId, orderItemCommonViewDTO.orderId);
+        boolean compareStoreName = this.fullFilmentStore.equals(orderItemCommonViewDTO.getFullFilmentStore());
+        log.debug("order Id compare result : " + (compareOrderId == 0));
+        log.debug("store name compare result : " + compareStoreName);
+        return ( compareOrderId == 0) && compareStoreName ;
+    }
 }

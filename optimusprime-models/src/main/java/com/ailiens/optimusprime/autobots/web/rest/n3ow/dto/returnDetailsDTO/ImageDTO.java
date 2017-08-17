@@ -24,6 +24,7 @@ public class ImageDTO {
     public ImageDTO() {
         super();
     }
+
     @Override
     public String toString() {
         return "ImageDTO{" +
@@ -32,3 +33,5 @@ public class ImageDTO {
             '}';
     }
 }
+
+

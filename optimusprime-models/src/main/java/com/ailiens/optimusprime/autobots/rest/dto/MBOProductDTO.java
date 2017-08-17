@@ -1,7 +1,5 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
-import com.ailiens.optimusprime.domain.MBOProduct;
-
 /**
  * A DTO representing a MBOProduct.
  */

@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -61,8 +63,6 @@ public class MBOProduct implements Serializable {
 
     @Column(name = "sap_style_id")
     private String sapStyleId;
-
-    @OneToOne  private Product product;
 
     public Long getId() {
         return id;
@@ -183,15 +183,7 @@ public class MBOProduct implements Serializable {
     public void setSapStyleId(String sapStyleId) {
         this.sapStyleId = sapStyleId;
     }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {

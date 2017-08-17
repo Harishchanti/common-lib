@@ -1,7 +1,5 @@
 package com.ailiens.optimusprime.autobots.rest.dto.n3ow.stateChangeDTO;
 
-import com.ailiens.optimusprime.domain.Logistics;
-
 import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")

@@ -3,11 +3,6 @@ package com.ailiens.optimusprime.autobots.rest.dto;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.ailiens.optimusprime.domain.Address;
-import com.ailiens.optimusprime.domain.Consignment;
-import com.ailiens.optimusprime.domain.OrderLine;
-
-
 
 public class ConsignmentDTO {
 

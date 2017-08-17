@@ -1,16 +1,13 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import com.ailiens.optimusprime.domain.Accounts;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.Accounts;
+import com.ailiens.optimusprime.domain.Orders;
 
 @Generated("org.jsonschema2pojo")
-@AllArgsConstructor
-@NoArgsConstructor
 public class AccountsDetailsDTO {
 
     public String username;
@@ -40,7 +37,9 @@ public class AccountsDetailsDTO {
     	}
 	}
 
-
+    public AccountsDetailsDTO(){
+        super();
+    }
 
 	public String getUsername() {
 		return username;

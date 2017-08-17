@@ -1,9 +1,8 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class RefundPaymentSummary {
@@ -13,9 +12,6 @@ public class RefundPaymentSummary {
     private String NNNowCash;
     private String card;
 
-    public RefundPaymentSummary() {
-        super();
-    }
     /**
      *
      * @return
@@ -23,6 +19,10 @@ public class RefundPaymentSummary {
      */
     public String getCash() {
         return cash;
+    }
+
+    public RefundPaymentSummary() {
+        super();
     }
 
     /**

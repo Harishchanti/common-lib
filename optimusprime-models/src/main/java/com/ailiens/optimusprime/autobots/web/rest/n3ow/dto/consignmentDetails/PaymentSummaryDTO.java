@@ -1,11 +1,14 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.annotation.Generated;
-import java.math.BigDecimal;
-import com.fasterxml.jackson.annotation.JsonCreator;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.domain.Orders;
+import com.ailiens.optimusprime.domain.Payment;
 
 @Generated("org.jsonschema2pojo")
 public class PaymentSummaryDTO {
@@ -30,7 +33,6 @@ public class PaymentSummaryDTO {
         this.som_pos=som_pos;
         this.paymentMode=paymentMode;
     }
-
 
     public PaymentSummaryDTO(){
         super();

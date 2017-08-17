@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -56,9 +58,11 @@ public class FullfilmentCenter implements Serializable {
     @Column(name = "gstn_code")
     private String gstnCode;
 
-    @OneToOne(mappedBy = "fullfilmentCenter")
+    @OneToMany(mappedBy = "fullfilmentCenter")
     @JsonIgnore
-    private OrderLine orderLine;
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+   // private OrderLine orderLine;    
+    private Set<OrderLine> orderLine = new HashSet<>();
 
     @OneToOne(mappedBy = "orderingCenter")
     @JsonIgnore
@@ -193,15 +197,17 @@ public class FullfilmentCenter implements Serializable {
         this.gstnCode = gstnCode;
     }
 
-    public OrderLine getOrderLine() {
-        return orderLine;
-    }
+   
 
-    public void setOrderLine(OrderLine orderLine) {
-        this.orderLine = orderLine;
-    }
+    public Set<OrderLine> getOrderLine() {
+		return orderLine;
+	}
 
-    public Orders getOrders() {
+	public void setOrderLine(Set<OrderLine> orderLine) {
+		this.orderLine = orderLine;
+	}
+
+	public Orders getOrders() {
         return orders;
     }
 

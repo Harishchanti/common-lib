@@ -1,11 +1,12 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.domain.MBOProduct;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.math.BigDecimal;
 
 import javax.annotation.Generated;
-import java.math.BigDecimal;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.domain.MBOProduct;
 
 @Generated("org.jsonschema2pojo")
 public class ProductDTO {
@@ -41,10 +42,11 @@ public class ProductDTO {
         this.setSapStyleId(mboProduct.getSapStyleId());
 	}
 
-    public ProductDTO() {
+
+
+	public ProductDTO(){
         super();
     }
-
 
 	public String getDescription() {
 		return description;

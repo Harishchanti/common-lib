@@ -1,7 +1,5 @@
 package com.ailiens.optimusprime.autobots.rest.dto.n3ow.v2.search;
 
-import com.ailiens.optimusprime.domain.MBOProduct;
-import com.ailiens.optimusprime.domain.OrderLine;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.math.BigDecimal;

@@ -4,10 +4,6 @@ import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.ailiens.optimusprime.domain.Consignment;
-import com.ailiens.optimusprime.domain.Orders;
-import com.ailiens.optimusprime.domain.Payment;
-
 /**
  * A DTO representing an order.
  */

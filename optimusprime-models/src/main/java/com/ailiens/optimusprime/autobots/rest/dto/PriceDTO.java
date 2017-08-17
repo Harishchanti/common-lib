@@ -1,6 +1,5 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
-import com.ailiens.optimusprime.domain.Price;
 import java.math.BigDecimal;
 
 /**

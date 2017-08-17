@@ -1,10 +1,12 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import com.ailiens.optimusprime.domain.FullfilmentCenter;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.FullfilmentCenter;
+import com.ailiens.optimusprime.domain.OrderLine;
+import com.ailiens.optimusprime.domain.Orders;
 
 @Generated("org.jsonschema2pojo")
 public class FfCenterDTO {
@@ -37,6 +39,10 @@ public class FfCenterDTO {
 	public void setFcid(String fcid) {
 		this.fcid = fcid;
 	}
+
+	public FfCenterDTO(){
+        super();
+    }
 
 
 

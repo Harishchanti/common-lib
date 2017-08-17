@@ -1,10 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 
 @Generated("org.jsonschema2pojo")
 public class FfTypeDTO {
@@ -17,7 +17,7 @@ public class FfTypeDTO {
 		this.setType(orderLine.getFullfilmentType().getType());
 	}
 
-	public FfTypeDTO() {
+    public FfTypeDTO(){
         super();
     }
 

@@ -1,10 +1,11 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.domain.Accounts;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.Accounts;
+import com.ailiens.optimusprime.domain.Orders;
 
 @Generated("org.jsonschema2pojo")
 public class AccountsDetailsDTO {
@@ -23,7 +24,6 @@ public class AccountsDetailsDTO {
     public AccountsDetailsDTO() {
         super();
     }
-
     public AccountsDetailsDTO(Accounts accounts) {
 
     	if(accounts!=null){

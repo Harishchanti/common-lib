@@ -1,11 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class ReturnPricingDetails {
@@ -18,9 +17,6 @@ public class ReturnPricingDetails {
     private RefundTotalNNNowCashDetails refundTotalNNNowCashDetails;
     private List<RefundHitRule> refundHitRule = new ArrayList<RefundHitRule>();
 
-    public ReturnPricingDetails() {
-        super();
-    }
     /**
      *
      * @return
@@ -28,6 +24,11 @@ public class ReturnPricingDetails {
      */
     public String getRefundNetAmount() {
         return refundNetAmount;
+    }
+
+
+    public ReturnPricingDetails() {
+        super();
     }
 
     /**

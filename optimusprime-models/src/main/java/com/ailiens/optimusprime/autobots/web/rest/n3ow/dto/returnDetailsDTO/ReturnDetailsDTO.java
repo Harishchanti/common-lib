@@ -1,6 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.annotation.Generated;
+
 import com.ailiens.optimusprime.autobots.rest.dto.NeftDetailsDTO;
 import com.ailiens.optimusprime.autobots.rest.dto.RefundModesDTO;
 import com.ailiens.optimusprime.autobots.rest.dto.VoucherDetailsDTO;
@@ -8,9 +12,7 @@ import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.ReturnsHis
 import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails.AccountsDetailsDTO;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
-import java.util.ArrayList;
-import java.util.List;
+import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
 
 @Generated("org.jsonschema2pojo")
 public class ReturnDetailsDTO {
@@ -39,9 +41,6 @@ public class ReturnDetailsDTO {
     private VoucherDetailsDTO voucherDetails;
     public List<ReturnsHistory> returnHistory = new ArrayList<ReturnsHistory>();
 
-    public ReturnDetailsDTO() {
-        super();
-    }
 
     /**
      *
@@ -50,6 +49,10 @@ public class ReturnDetailsDTO {
      */
     public String getReturnId() {
         return returnId;
+    }
+
+    public ReturnDetailsDTO() {
+        super();
     }
 
     /**
