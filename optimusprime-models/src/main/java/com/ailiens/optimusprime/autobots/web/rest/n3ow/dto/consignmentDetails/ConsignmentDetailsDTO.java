@@ -22,7 +22,17 @@ public class ConsignmentDetailsDTO {
     public VoucherDetailsDTO voucherDetails;
     public String slaEndTime;
     public ConsignmentDTO consignment = new ConsignmentDTO();
+    public SourceMetadataDTO sourceMetadata;
 
+    public SourceMetadataDTO getSourceMetadata() {
+        return sourceMetadata;
+    }
+
+
+
+    public void setSourceMetadata(SourceMetadataDTO sourceMetadata) {
+        this.sourceMetadata = sourceMetadata;
+    }
 
     public ConsignmentDetailsDTO(){
 
