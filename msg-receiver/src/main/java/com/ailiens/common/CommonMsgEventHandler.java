@@ -1,12 +1,10 @@
 package com.ailiens.common;
 
+import java.util.List;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * Created by jayant on 23/11/16.
@@ -41,7 +39,7 @@ public  abstract class CommonMsgEventHandler implements MsgEventHandler {
     }
 
 
-    @Transactional
+
     public EventResponse invoke(MsgMessage message)
     {
         log.info("Received Message Id {}",message.getMessageId());
