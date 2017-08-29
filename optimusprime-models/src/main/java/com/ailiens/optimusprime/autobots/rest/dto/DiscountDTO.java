@@ -5,7 +5,7 @@ import com.ailiens.optimusprime.domain.Discount;
 public class DiscountDTO {
 
 	private String discount;
-
+	
 	private String couponApplied;
 
 	public DiscountDTO(Discount discount) {
@@ -17,9 +17,6 @@ public class DiscountDTO {
 
 	public String getDiscount() {
 		return discount;
-	}
-	public DiscountDTO(){
-
 	}
 
 	public void setDiscount(String discount) {
@@ -38,5 +35,5 @@ public class DiscountDTO {
 	public String toString() {
 		return "DiscountDTO [discount=" + discount + ", couponApplied=" + couponApplied + "]";
 	}
-
+	
 }

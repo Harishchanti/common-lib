@@ -1,11 +1,12 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import com.ailiens.optimusprime.domain.MBOProduct;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.math.BigDecimal;
 
 import javax.annotation.Generated;
-import java.math.BigDecimal;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.domain.MBOProduct;
 
 @Generated("org.jsonschema2pojo")
 public class ProductDTO {
@@ -23,6 +24,10 @@ public class ProductDTO {
     public String image;
     public String styleId;
     public String sapStyleId;
+
+    public ProductDTO() {
+        super();
+    }
 
     public ProductDTO(MBOProduct mboProduct) {
 

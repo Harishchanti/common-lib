@@ -2,10 +2,12 @@ package com.ailiens.optimusprime.domain;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.ZonedDateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.ZonedDateTime;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**

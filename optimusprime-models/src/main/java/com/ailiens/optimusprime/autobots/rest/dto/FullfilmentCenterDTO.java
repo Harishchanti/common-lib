@@ -9,22 +9,19 @@ public class FullfilmentCenterDTO {
 
 	private String name;
 
-	private String sapCode;
+    private String sapCode;
 
-	private String fcType;
+    private String fcType;
 
-	private String contactNumber;
+    private String contactNumber;
 
 	public FullfilmentCenterDTO(FullfilmentCenter fullfilmentCenter) {
 		if(fullfilmentCenter != null) {
 			this.name = fullfilmentCenter.getFulfilmentCenterName();
-			this.sapCode = fullfilmentCenter.getSapCode();
-			this.fcType = fullfilmentCenter.getFcType();
-			this.contactNumber = fullfilmentCenter.getContactNo();
+            this.sapCode = fullfilmentCenter.getSapCode();
+            this.fcType = fullfilmentCenter.getFcType();
+            this.contactNumber = fullfilmentCenter.getContactNo();
 		}
-	}
-	public FullfilmentCenterDTO(){
-
 	}
 
 	public String getName() {
@@ -35,37 +32,37 @@ public class FullfilmentCenterDTO {
 		this.name = name;
 	}
 
-	public String getSapCode() {
-		return sapCode;
-	}
+    public String getSapCode() {
+        return sapCode;
+    }
 
-	public void setSapCode(String sapCode) {
-		this.sapCode = sapCode;
-	}
+    public void setSapCode(String sapCode) {
+        this.sapCode = sapCode;
+    }
 
-	public String getFcType() {
-		return fcType;
-	}
+    public String getFcType() {
+        return fcType;
+    }
 
-	public void setFcType(String fcType) {
-		this.fcType = fcType;
-	}
+    public void setFcType(String fcType) {
+        this.fcType = fcType;
+    }
 
-	public String getContactNumber() {
-		return contactNumber;
-	}
+    public String getContactNumber() {
+        return contactNumber;
+    }
 
-	public void setContactNumber(String contactNumber) {
-		this.contactNumber = contactNumber;
-	}
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
 
-	@Override
-	public String toString() {
-		return "FullfilmentCenterDTO{" +
-				"name='" + name + '\'' +
-				", sapCode='" + sapCode + '\'' +
-				", fcType='" + fcType + '\'' +
-				", contactNumber='" + contactNumber + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "FullfilmentCenterDTO{" +
+            "name='" + name + '\'' +
+            ", sapCode='" + sapCode + '\'' +
+            ", fcType='" + fcType + '\'' +
+            ", contactNumber='" + contactNumber + '\'' +
+            '}';
+    }
 }

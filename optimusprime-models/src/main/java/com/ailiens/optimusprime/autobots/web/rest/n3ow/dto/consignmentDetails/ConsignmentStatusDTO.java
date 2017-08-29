@@ -1,10 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.domain.Consignment;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.Consignment;
 
 @Generated("org.jsonschema2pojo")
 public class ConsignmentStatusDTO {
@@ -14,10 +14,6 @@ public class ConsignmentStatusDTO {
     public String consignmentStatusType;
     public String consignmentStatusToCustomer;
     public String consignmentStatusToOms;
-
-    public ConsignmentStatusDTO() {
-        super();
-    }
 
     public ConsignmentStatusDTO(Consignment consignment) {
     	if(consignment.getConsignmentStates()!=null){
@@ -33,7 +29,9 @@ public class ConsignmentStatusDTO {
 		return id;
 	}
 
-
+  public ConsignmentStatusDTO(){
+        super();
+  }
 
 	public void setId(Long id) {
 		this.id = id;

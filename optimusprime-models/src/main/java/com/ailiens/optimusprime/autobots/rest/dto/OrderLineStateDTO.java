@@ -17,9 +17,6 @@ public class OrderLineStateDTO {
 	public String getName() {
 		return name;
 	}
-	public OrderLineStateDTO(){
-
-	}
 
 	public void setName(String name) {
 		this.name = name;

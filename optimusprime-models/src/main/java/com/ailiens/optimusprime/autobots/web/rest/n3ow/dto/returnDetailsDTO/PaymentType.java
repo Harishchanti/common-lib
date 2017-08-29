@@ -1,19 +1,14 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class PaymentType {
 
     private String id;
     private String typeCode;
-
-    public PaymentType() {
-        super();
-    }
 
     /**
      *
@@ -22,6 +17,10 @@ public class PaymentType {
      */
     public String getId() {
         return id;
+    }
+
+    public PaymentType() {
+        super();
     }
 
     /**

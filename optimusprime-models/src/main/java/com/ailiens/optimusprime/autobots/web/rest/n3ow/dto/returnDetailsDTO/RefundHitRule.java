@@ -1,19 +1,14 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class RefundHitRule {
 
     private String id;
     private String name;
-
-    public RefundHitRule() {
-        super();
-    }
 
     /**
      *
@@ -22,6 +17,11 @@ public class RefundHitRule {
      */
     public String getId() {
         return id;
+    }
+
+
+    public RefundHitRule() {
+        super();
     }
 
     /**

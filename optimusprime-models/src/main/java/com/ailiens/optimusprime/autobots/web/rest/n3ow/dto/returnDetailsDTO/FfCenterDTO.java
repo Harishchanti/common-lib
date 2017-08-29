@@ -20,16 +20,16 @@ public class FfCenterDTO {
     public String stateCode;
     public String gstnCode;
 
-    public FfCenterDTO() {super();}
+    public FfCenterDTO() {}
 
     public FfCenterDTO(FullfilmentCenter fullfilmentCenter) {
-        if(fullfilmentCenter != null){
-            this.setFcid(fullfilmentCenter.getFullfilmentCenterId());
-            this.setBrand(fullfilmentCenter.getBrandName());
-            this.setFcName(fullfilmentCenter.getFulfilmentCenterName());
-            this.setFcType(fullfilmentCenter.getFcType());
-            this.setPostCode(fullfilmentCenter.getPostCode());
-            this.setSapCode(fullfilmentCenter.getSapCode());
+    	if(fullfilmentCenter != null){
+    		this.setFcid(fullfilmentCenter.getFullfilmentCenterId());
+    		this.setBrand(fullfilmentCenter.getBrandName());
+    		this.setFcName(fullfilmentCenter.getFulfilmentCenterName());
+    		this.setFcType(fullfilmentCenter.getFcType());
+    		this.setPostCode(fullfilmentCenter.getPostCode());
+    		this.setSapCode(fullfilmentCenter.getSapCode());
             if(fullfilmentCenter.getStateCode()!=null && !(fullfilmentCenter.getStateCode().equalsIgnoreCase(null) || fullfilmentCenter.getStateCode().equalsIgnoreCase("null")))
                 this.setStateCode(fullfilmentCenter.getStateCode());
             else
@@ -38,79 +38,84 @@ public class FfCenterDTO {
                 this.setGstnCode(fullfilmentCenter.getGstnCode());
             else
                 this.setGstnCode(null);
-        }
-    }
-
-
-    public String getFcid() {
-        return fcid;
+    	}
     }
 
 
 
-    public void setFcid(String fcid) {
-        this.fcid = fcid;
-    }
+
+	public String getFcid() {
+		return fcid;
+	}
 
 
 
-    public String getSapCode() {
-        return sapCode;
-    }
 
 
 
-    public void setSapCode(String sapCode) {
-        this.sapCode = sapCode;
-    }
+	public void setFcid(String fcid) {
+		this.fcid = fcid;
+	}
 
 
 
-    public String getFcName() {
-        return fcName;
-    }
+	public String getSapCode() {
+		return sapCode;
+	}
 
 
 
-    public void setFcName(String fcName) {
-        this.fcName = fcName;
-    }
+	public void setSapCode(String sapCode) {
+		this.sapCode = sapCode;
+	}
 
 
 
-    public String getBrand() {
-        return brand;
-    }
+	public String getFcName() {
+		return fcName;
+	}
 
 
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
+	public void setFcName(String fcName) {
+		this.fcName = fcName;
+	}
 
 
 
-    public String getFcType() {
-        return fcType;
-    }
+	public String getBrand() {
+		return brand;
+	}
 
 
 
-    public void setFcType(String fcType) {
-        this.fcType = fcType;
-    }
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 
 
 
-    public String getPostCode() {
-        return postCode;
-    }
+	public String getFcType() {
+		return fcType;
+	}
 
 
 
-    public void setPostCode(String postCode) {
-        this.postCode = postCode;
-    }
+	public void setFcType(String fcType) {
+		this.fcType = fcType;
+	}
+
+
+
+	public String getPostCode() {
+		return postCode;
+	}
+
+
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
 
     public String getStateCode() {
         return stateCode;

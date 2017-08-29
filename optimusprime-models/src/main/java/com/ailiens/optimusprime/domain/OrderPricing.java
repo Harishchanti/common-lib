@@ -6,6 +6,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**
@@ -69,9 +71,9 @@ public class OrderPricing implements Serializable {
     private BigDecimal totalUtgstAmount;
 
 
-    @ManyToOne
-    @JoinColumn(name = "orders_id")
-    private Orders orders;
+//    @ManyToOne
+//    @JoinColumn(name = "orders_id")
+//    private Orders orders;
 
     public Long getId() {
         return id;
@@ -209,13 +211,13 @@ public class OrderPricing implements Serializable {
         this.totalIgstAmount = totalIgstAmount;
     }
 
-    public Orders getOrders() {
-        return orders;
-    }
-
-    public void setOrders(Orders orders) {
-        this.orders = orders;
-    }
+//    public Orders getOrders() {
+//        return orders;
+//    }
+//
+//    public void setOrders(Orders orders) {
+//        this.orders = orders;
+//    }
 
     @Override
     public boolean equals(Object o) {

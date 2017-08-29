@@ -1,13 +1,18 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import javax.annotation.Generated;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Generated;
+
+import com.ailiens.optimusprime.domain.ConsignmentParams;
+import com.ailiens.optimusprime.domain.Orders;
+import com.ailiens.optimusprime.domain.SourceMetadata;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
 
 @Generated("org.jsonschema2pojo")
 public class ConsignmentDTO {
@@ -28,10 +33,9 @@ public class ConsignmentDTO {
     public List<ItemDTO> items = new ArrayList<ItemDTO>();
     public List<History> consignmentHistory = new ArrayList<History>();
     public List<ConsignmentParamsDTO> consignmentParams = new ArrayList<>();
-
-    public ConsignmentDTO() {
-        super();
-    }
+    public String source;
+    public Orders orders;
+public SourceMetadata sourceMetadata;
 
     public String getConsignmentId() {
 		return consignmentId;
@@ -43,6 +47,9 @@ public class ConsignmentDTO {
 		this.consignmentId = consignmentId;
 	}
 
+	public ConsignmentDTO(){
+        super();
+    }
 
 
 	public String getInvoiceId() {
@@ -212,9 +219,40 @@ public class ConsignmentDTO {
         this.consignmentNetAmount = consignmentNetAmount;
     }
 
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+
+
+	public Orders getOrders() {
+		return orders;
+	}
+
+
+
+	public void setOrders(Orders orders) {
+		this.orders = orders;
+	}
+
+
+
+	public SourceMetadata getSourceMetadata() {
+		return sourceMetadata;
+	}
+
+
+
+	public void setSourceMetadata(SourceMetadata sourceMetadata) {
+		this.sourceMetadata = sourceMetadata;
+	}
 
 }

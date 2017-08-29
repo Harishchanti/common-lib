@@ -8,97 +8,94 @@ import javax.validation.constraints.NotNull;
 
 @Generated("org.jsonschema2pojo")
 public class OrderLineStateChangeDTO {
-	private String comment;
-	private Long reasonId;
-	private String neftId;
+    private String comment;
+    private Long reasonId;
+    private String neftId;
 
-	@NotNull
-	private String status;
+    @NotNull
+    private String status;
 
-	private String voucherId;
+    private String voucherId;
 
-	private RefundModesDTO refundModes;
+    private RefundModesDTO refundModes;
 
-	public OrderLineStateChangeDTO(){
+    /**
+     *
+     * @return
+     * The comment
+     */
+    public String getComment() {
+        return comment;
+    }
 
-	}
-	/**
-	 *
-	 * @return
-	 * The comment
-	 */
-	public String getComment() {
-		return comment;
-	}
+    /**
+     *
+     * @param comment
+     * The comment
+     */
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
 
-	/**
-	 *
-	 * @param comment
-	 * The comment
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
+    /**
+     *
+     * @return
+     * The reasonId
+     */
+    public Long getReasonId() {
+        return reasonId;
+    }
 
-	/**
-	 *
-	 * @return
-	 * The reasonId
-	 */
-	public Long getReasonId() {
-		return reasonId;
-	}
+    /**
+     *
+     * @param reasonId
+     * The reasonId
+     */
+    public void setReasonId(Long reasonId) {
+        this.reasonId = reasonId;
+    }
 
-	/**
-	 *
-	 * @param reasonId
-	 * The reasonId
-	 */
-	public void setReasonId(Long reasonId) {
-		this.reasonId = reasonId;
-	}
+    /**
+     *
+     * @return
+     * The status
+     */
+    public String getStatus() {
+        return status;
+    }
 
-	/**
-	 *
-	 * @return
-	 * The status
-	 */
-	public String getStatus() {
-		return status;
-	}
+    /**
+     *
+     * @param status
+     * The status
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	/**
-	 *
-	 * @param status
-	 * The status
-	 */
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public String getNeftId() {
+        return neftId;
+    }
 
-	public String getNeftId() {
-		return neftId;
-	}
-
-	public void setNeftId(String neftId) {
-		this.neftId = neftId;
-	}
+    public void setNeftId(String neftId) {
+        this.neftId = neftId;
+    }
 
 
-	public void setVoucherId(String voucherId) {
-		this.voucherId = voucherId;
-	}
+    public void setVoucherId(String voucherId) {
+        this.voucherId = voucherId;
+    }
 
-	public RefundModesDTO getRefundModes() {
-		return refundModes;
-	}
+    public RefundModesDTO getRefundModes() {
+        return refundModes;
+    }
 
-	public void setRefundModes(RefundModesDTO refundModes) {
-		this.refundModes = refundModes;
-	}
+    public void setRefundModes(RefundModesDTO refundModes) {
+        this.refundModes = refundModes;
+    }
 
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

@@ -1,9 +1,8 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class RefundTotalDiscountDetails {
@@ -12,9 +11,6 @@ public class RefundTotalDiscountDetails {
     private String refundCartDiscount;
     private String refundTotalDiscount;
 
-    public RefundTotalDiscountDetails() {
-        super();
-    }
     /**
      *
      * @return
@@ -67,6 +63,12 @@ public class RefundTotalDiscountDetails {
      */
     public void setRefundTotalDiscount(String refundTotalDiscount) {
         this.refundTotalDiscount = refundTotalDiscount;
+    }
+
+
+
+    public RefundTotalDiscountDetails() {
+        super();
     }
 
     @Override

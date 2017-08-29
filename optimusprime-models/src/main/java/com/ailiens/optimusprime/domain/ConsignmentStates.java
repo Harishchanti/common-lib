@@ -31,6 +31,9 @@ public class ConsignmentStates implements Serializable {
     @Column(name = "status_to_oms")
     private String statusToOms;
 
+    @Column(name = "processing_sequence")
+    private Float processingSequence;
+
     public Long getId() {
         return id;
     }
@@ -71,6 +74,14 @@ public class ConsignmentStates implements Serializable {
         this.statusToOms = statusToOms;
     }
 
+    public Float getProcessingSequence() {
+        return processingSequence;
+    }
+
+    public void setProcessingSequence(Float processingSequence) {
+        this.processingSequence = processingSequence;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -96,6 +107,7 @@ public class ConsignmentStates implements Serializable {
             ", type='" + type + "'" +
             ", statusToCustomer='" + statusToCustomer + "'" +
             ", statusToOms='" + statusToOms + "'" +
+            ", processingSequence='" + processingSequence + "'" +
             '}';
     }
 }

@@ -1,9 +1,8 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class History {
@@ -52,6 +51,10 @@ public class History {
     public String getFromState() {
         return fromState;
     }
+    public History(){
+        super();
+    }
+
 
     /**
      *

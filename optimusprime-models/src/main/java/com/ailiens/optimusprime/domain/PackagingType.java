@@ -7,8 +7,8 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A PackagingType.
@@ -41,6 +41,11 @@ public class PackagingType implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<OrderLine> orderLines = new HashSet<>();
+    
+    @ManyToOne
+    @JoinColumn(name = "source_id")
+    private SourceMetadata source;
+    
 
     public Long getId() {
         return id;
@@ -97,8 +102,17 @@ public class PackagingType implements Serializable {
     public void setOrderLines(Set<OrderLine> orderLines) {
         this.orderLines = orderLines;
     }
+    
+    
+    public SourceMetadata getSource() {
+		return source;
+	}
 
-    @Override
+	public void setSource(SourceMetadata source) {
+		this.source = source;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

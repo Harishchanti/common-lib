@@ -10,13 +10,13 @@ import com.ailiens.optimusprime.domain.Logistics;
 public class LogisticsDTO {
 
 	private String shipmentId;
-
+	
 	private ZonedDateTime deliveryDate;
-
+	
 	private String deliveryType;
-
+	
 	private String logisticsPartner;
-
+	
 	private String logisticsLink;
 
 	public LogisticsDTO(Logistics logistics) {
@@ -27,9 +27,6 @@ public class LogisticsDTO {
 			this.logisticsPartner = logistics.getLogisticsPartner();
 			this.logisticsLink = logistics.getLogisticsLink();
 		}
-	}
-	public LogisticsDTO(){
-
 	}
 
 	public String getShipmentId() {

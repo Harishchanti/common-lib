@@ -17,13 +17,9 @@ OrderStatesDTO {
 	}
 
 	public String getOrderStatus() {
-
 		return name;
 	}
 
-	public OrderStatesDTO(){
-
-	}
 	public void setOrderStatus(String orderStatus) {
 		this.name = orderStatus;
 	}

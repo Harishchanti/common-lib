@@ -4,14 +4,11 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class ResponseConsignmentStatusChangeForLogisticDTO {
 	private String consignmentId;
-
+	
 	private String message;
-
+	
 	public String getConsignmentId() {
 		return consignmentId;
-	}
-	public ResponseConsignmentStatusChangeForLogisticDTO(){
-
 	}
 
 	public void setConsignmentId(String consignmentId) {
@@ -28,7 +25,7 @@ public class ResponseConsignmentStatusChangeForLogisticDTO {
 
 
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

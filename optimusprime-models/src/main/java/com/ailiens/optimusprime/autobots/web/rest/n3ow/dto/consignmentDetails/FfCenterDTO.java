@@ -1,10 +1,12 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.domain.FullfilmentCenter;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.FullfilmentCenter;
+import com.ailiens.optimusprime.domain.OrderLine;
+import com.ailiens.optimusprime.domain.Orders;
 
 @Generated("org.jsonschema2pojo")
 public class FfCenterDTO {
@@ -18,9 +20,6 @@ public class FfCenterDTO {
     public String stateCode;
     public String gstnCode;
 
-    public FfCenterDTO() {
-        super();
-    }
 
     public FfCenterDTO(FullfilmentCenter fullfilmentCenter) {
     	if(fullfilmentCenter != null){
@@ -30,8 +29,14 @@ public class FfCenterDTO {
     		this.setFcType(fullfilmentCenter.getFcType());
     		this.setPostCode(fullfilmentCenter.getPostCode());
     		this.setSapCode(fullfilmentCenter.getSapCode());
-            this.setStateCode(fullfilmentCenter.getStateCode());
-            this.setGstnCode(fullfilmentCenter.getGstnCode());
+    		if(fullfilmentCenter.getStateCode()!=null && !(fullfilmentCenter.getStateCode().equalsIgnoreCase(null) || fullfilmentCenter.getStateCode().equalsIgnoreCase("null")))
+                this.setStateCode(fullfilmentCenter.getStateCode());
+    		else
+    		    this.setStateCode(null);
+            if(fullfilmentCenter.getGstnCode()!=null && !(fullfilmentCenter.getGstnCode().equalsIgnoreCase(null) || fullfilmentCenter.getGstnCode().equalsIgnoreCase("null")))
+                this.setGstnCode(fullfilmentCenter.getGstnCode());
+            else
+                this.setGstnCode(null);
     	}
     }
 
@@ -40,6 +45,9 @@ public class FfCenterDTO {
 		return fcid;
 	}
 
+ public FfCenterDTO(){
+        super();
+ }
 
 
 	public void setFcid(String fcid) {

@@ -1,10 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 
 @Generated("org.jsonschema2pojo")
 public class FfTypeDTO {
@@ -28,6 +28,10 @@ public class FfTypeDTO {
 	public void setFfType(String ffType) {
 		this.ffType = ffType;
 	}
+
+	public FfTypeDTO(){
+        super();
+    }
 
 
 

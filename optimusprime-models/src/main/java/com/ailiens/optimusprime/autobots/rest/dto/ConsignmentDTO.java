@@ -6,10 +6,17 @@ import java.util.Set;
 import com.ailiens.optimusprime.domain.Address;
 import com.ailiens.optimusprime.domain.Consignment;
 import com.ailiens.optimusprime.domain.OrderLine;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 
-
+/**
+ * A DTO representing a consignment.
+ */
 public class ConsignmentDTO {
+
+    private final Logger log = LoggerFactory.getLogger(ConsignmentDTO.class);
 
 	private String consignmentId;
 
@@ -19,34 +26,40 @@ public class ConsignmentDTO {
 
 	private FullfilmentTypeDTO fullfilmentType;
 
-	private String deliveryType;
+    private String deliveryType;
 
 	private Set<OrderLineDTO> items;
 
-	private Address address;
+    private Address address;
 
-	public Address getAddress() {
-		return address;
+    private String source;
+
+	public String getSource() {
+		return source;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setSource(String source) {
+		this.source = source;
 	}
+    public Address getAddress() {
+        return address;
+    }
 
-	public ConsignmentDTO(Consignment consignment) {
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public ConsignmentDTO(Consignment consignment) {
 		if(consignment != null) {
 			this.consignmentId = String.valueOf(consignment.getId());
 			this.workflowId = consignment.getWorkflowId();
-			this.deliveryType = consignment.getDeliveryType();
+            this.deliveryType = consignment.getDeliveryType();
 			if(consignment.getFullfilmentType() != null)
 				this.fullfilmentType = new FullfilmentTypeDTO(consignment.getFullfilmentType());
-			//setItemsFromConsignment(consignment);
+            //setItemsFromConsignment(consignment);
 		}
 	}
 
-	public ConsignmentDTO(){
-
-	}
 	public void setItemsFromConsignment(Consignment consignment) {
 		if(consignment != null) {
 			Set<OrderLineDTO> orderLineDTOs = new HashSet<>();
@@ -61,11 +74,11 @@ public class ConsignmentDTO {
 		}
 	}
 
-	public void setAddressOfConsignment(OrderLine orderLine)
-	{
-		if(orderLine != null)
-			this.address = orderLine.getAddress();
-	}
+    public void setAddressOfConsignment(OrderLine orderLine)
+    {
+        if(orderLine != null)
+            this.address = orderLine.getAddress();
+    }
 
 	public String getConsignmentId() {
 		return consignmentId;
@@ -107,15 +120,15 @@ public class ConsignmentDTO {
 		this.fullfilmentType = fullfilmentType;
 	}
 
-	public String getDeliveryType() {
-		return deliveryType;
-	}
+    public String getDeliveryType() {
+        return deliveryType;
+    }
 
-	public void setDeliveryType(String deliveryType) {
-		this.deliveryType = deliveryType;
-	}
+    public void setDeliveryType(String deliveryType) {
+        this.deliveryType = deliveryType;
+    }
 
-	@Override
+    @Override
 	public String toString() {
 		return "ConsignmentDTO [consignmentId=" + consignmentId + ", count=" + count + ", workflowId=" + workflowId
 				+ ", fullfilmentType=" + fullfilmentType + ", items=" + items + "]";

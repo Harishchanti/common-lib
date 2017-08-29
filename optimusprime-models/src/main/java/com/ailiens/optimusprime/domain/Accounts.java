@@ -3,11 +3,13 @@ package com.ailiens.optimusprime.domain;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import java.time.LocalDate;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Objects;
 
 /**

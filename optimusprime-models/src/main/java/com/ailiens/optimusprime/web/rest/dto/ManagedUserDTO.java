@@ -1,7 +1,8 @@
 package com.ailiens.optimusprime.web.rest.dto;
 
-import com.ailiens.optimusprime.domain.User;
 import java.time.ZonedDateTime;
+
+import com.ailiens.optimusprime.domain.User;
 
 /**
  * A DTO extending the UserDTO, which is meant to be used in the user management UI.

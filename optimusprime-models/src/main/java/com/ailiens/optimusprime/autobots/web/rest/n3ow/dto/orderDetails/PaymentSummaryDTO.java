@@ -1,11 +1,14 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.math.BigDecimal;
+import java.util.Set;
 
 import javax.annotation.Generated;
-import java.math.BigDecimal;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.domain.Orders;
+import com.ailiens.optimusprime.domain.Payment;
 
 @Generated("org.jsonschema2pojo")
 public class PaymentSummaryDTO {
@@ -29,6 +32,10 @@ public class PaymentSummaryDTO {
         this.som_pos=som_pos;
     }
 
+    public PaymentSummaryDTO() {
+        super();
+    }
+
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,
                              BigDecimal card) {
         this.voucher = voucher;
@@ -36,11 +43,6 @@ public class PaymentSummaryDTO {
         this.NNNowCash = nNNowCash;
         this.online = online;
         this.cod=cod;
-    }
-
-    @JsonCreator
-    public PaymentSummaryDTO(){
-
     }
 
     public BigDecimal getVoucher() {

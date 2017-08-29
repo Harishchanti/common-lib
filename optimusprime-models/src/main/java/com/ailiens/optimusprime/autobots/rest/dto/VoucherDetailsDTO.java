@@ -6,33 +6,30 @@ import java.util.Map;
 
 public class VoucherDetailsDTO {
 
-	private List<Map<String, BigDecimal>> voucherIDs;
-	private BigDecimal voucherAmount;
+    private List<Map<String, BigDecimal>> voucherIDs;
+    private BigDecimal voucherAmount;
 
-	public List<Map<String, BigDecimal>> getVoucherIDs() {
-		return voucherIDs;
-	}
+    public List<Map<String, BigDecimal>> getVoucherIDs() {
+        return voucherIDs;
+    }
 
-	public void setVoucherIDs(List<Map<String, BigDecimal>> voucherIDs) {
-		this.voucherIDs = voucherIDs;
-	}
+    public void setVoucherIDs(List<Map<String, BigDecimal>> voucherIDs) {
+        this.voucherIDs = voucherIDs;
+    }
 
-	public BigDecimal getVoucherAmount() {
-		return voucherAmount;
-	}
+    public BigDecimal getVoucherAmount() {
+        return voucherAmount;
+    }
 
-	public void setVoucherAmount(BigDecimal voucherAmount) {
-		this.voucherAmount = voucherAmount;
-	}
-	public VoucherDetailsDTO(){
+    public void setVoucherAmount(BigDecimal voucherAmount) {
+        this.voucherAmount = voucherAmount;
+    }
 
-	}
-
-	@Override
-	public String toString() {
-		return "VoucherDetailsDTO{" +
-				"voucherIDs=" + voucherIDs +
-				", voucherAmount=" + voucherAmount +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "VoucherDetailsDTO{" +
+            "voucherIDs=" + voucherIDs +
+            ", voucherAmount=" + voucherAmount +
+            '}';
+    }
 }

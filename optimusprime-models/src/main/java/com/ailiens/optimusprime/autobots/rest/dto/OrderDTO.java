@@ -24,7 +24,7 @@ public class OrderDTO {
 	private Set<PaymentDTO> paymentDetails;
 
 	private Set<ConsignmentDTO> consignments;
-
+	
 	public OrderDTO(Orders order) {
 		if(order != null) {
 			this.orderId = String.valueOf(order.getId());
@@ -38,9 +38,6 @@ public class OrderDTO {
 		}
 	}
 
-	public OrderDTO(){
-
-	}
 
 	public void setConsignmentsFromOrder(Orders order) {
 		if(order != null) {

@@ -8,13 +8,10 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class ConsignmentStatusChangeForLogisticDTO {
 	private List<String> consignmentList;
-
+	
 	@NotNull
 	private String status;
 
-	public ConsignmentStatusChangeForLogisticDTO(){
-
-	}
 	public List<String> getConsignmentList() {
 		return consignmentList;
 	}
@@ -30,9 +27,9 @@ public class ConsignmentStatusChangeForLogisticDTO {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
+	
 	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

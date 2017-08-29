@@ -1,10 +1,11 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
+import com.ailiens.optimusprime.domain.SourceMetadata;
 
 @Generated("org.jsonschema2pojo")
 public class PackagingTypeDTO {
@@ -14,10 +15,7 @@ public class PackagingTypeDTO {
     public String breadth;
     public String height;
     public String description;
-
-    public  PackagingTypeDTO() {
-        super();
-    }
+    public SourceMetadata sourceMetadata;
 
 
     public PackagingTypeDTO(OrderLine orderLine) {
@@ -27,6 +25,7 @@ public class PackagingTypeDTO {
 			this.setBreadth(String.valueOf(orderLine.getPackagingType().getPackagingBreadth()));
 			this.setHeight(String.valueOf(orderLine.getPackagingType().getPackagingHeight()));
 			this.setDescription(orderLine.getPackagingType().getPackagingDescription());
+			this.setSourceMetadata(orderLine.getConsignment().getOrders().getSourceMetadataId());
     	}
 	}
 
@@ -42,7 +41,9 @@ public class PackagingTypeDTO {
 		this.name = name;
 	}
 
-
+ public PackagingTypeDTO(){
+        super();
+ }
 
 	public String getLength() {
 		return length;
@@ -88,6 +89,18 @@ public class PackagingTypeDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+
+
+	public SourceMetadata getSourceMetadata() {
+		return sourceMetadata;
+	}
+
+
+
+	public void setSourceMetadata(SourceMetadata sourceMetadata) {
+		this.sourceMetadata = sourceMetadata;
 	}
 
 

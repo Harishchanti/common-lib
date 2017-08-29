@@ -1,9 +1,8 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
 public class RefundPaymentDetail {
@@ -16,9 +15,6 @@ public class RefundPaymentDetail {
     private String paymentMode;
     private String transactionCreatedDate;
 
-    public RefundPaymentDetail() {
-        super();
-    }
     /**
      *
      * @return
@@ -26,6 +22,11 @@ public class RefundPaymentDetail {
      */
     public String getDirection() {
         return direction;
+    }
+
+
+    public RefundPaymentDetail() {
+        super();
     }
 
     /**

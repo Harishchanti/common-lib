@@ -1,10 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
-import com.ailiens.optimusprime.domain.OrderLine;
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 
 @Generated("org.jsonschema2pojo")
 public class ItemStatusDTO {
@@ -14,9 +14,6 @@ public class ItemStatusDTO {
     public String itemStatusType;
     public String itemStatusToCustomer;
 
-    public ItemStatusDTO() {
-        super();
-    }
     public ItemStatusDTO(OrderLine orderLine) {
     	if(orderLine.getOrderLineStates() != null){
 	    	this.setId(String.valueOf(orderLine.getOrderLineStates().getId()));
@@ -31,6 +28,11 @@ public class ItemStatusDTO {
 	public String getId() {
 		return id;
 	}
+
+
+    public ItemStatusDTO() {
+        super();
+    }
 
 
 

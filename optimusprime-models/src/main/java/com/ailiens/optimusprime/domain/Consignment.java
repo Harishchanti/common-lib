@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 
 /**
  * A Consignment.
@@ -101,6 +102,10 @@ public class Consignment implements Serializable {
     @Column(name="consignment_stamp")
     private ZonedDateTime consignmentStamp;
 
+    
+    @Column(name = "source")
+    private String source;
+    
     public Long getId() {
         return id;
     }
@@ -322,4 +327,12 @@ public class Consignment implements Serializable {
             ", workflowId='" + workflowId + "'" +
             '}';
     }
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
 }

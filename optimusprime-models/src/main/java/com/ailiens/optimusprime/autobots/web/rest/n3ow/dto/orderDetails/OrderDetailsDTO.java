@@ -1,12 +1,12 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
 
 @Generated("org.jsonschema2pojo")
 public class OrderDetailsDTO {
@@ -23,7 +23,9 @@ public class OrderDetailsDTO {
     public List<ConsignmentDTO> consignments = new ArrayList<ConsignmentDTO>();
     public List<History> orderHistory = new ArrayList<History>();
 
-
+    public OrderDetailsDTO() {
+        super();
+    }
 
 
     public TotalPricingDetails getTotalPricingDetails() {

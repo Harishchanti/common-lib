@@ -1,10 +1,13 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import com.ailiens.optimusprime.domain.Discount;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.annotation.Generated;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.domain.Discount;
 
 @Generated("org.jsonschema2pojo")
 public class ActualHitRuleDTO {
@@ -24,6 +27,10 @@ public class ActualHitRuleDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	public ActualHitRuleDTO(){
+        super();
+    }
 
 	public String getName() {
 		return name;

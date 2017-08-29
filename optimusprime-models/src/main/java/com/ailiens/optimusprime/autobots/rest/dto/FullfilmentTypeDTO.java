@@ -18,9 +18,6 @@ public class FullfilmentTypeDTO {
 	public String getName() {
 		return name;
 	}
-	public FullfilmentTypeDTO(){
-
-	}
 
 	public void setName(String name) {
 		this.name = name;
@@ -30,5 +27,5 @@ public class FullfilmentTypeDTO {
 	public String toString() {
 		return "FulfillmentTypeDTO [name=" + name + "]";
 	}
-
+	
 }

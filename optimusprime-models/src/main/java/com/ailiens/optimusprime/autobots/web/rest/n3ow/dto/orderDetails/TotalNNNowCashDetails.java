@@ -1,8 +1,9 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import javax.annotation.Generated;
 import java.math.BigDecimal;
+
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class TotalNNNowCashDetails {
@@ -36,6 +37,11 @@ public class TotalNNNowCashDetails {
      */
     public BigDecimal getCartNNNowCash() {
         return cartNNNowCash;
+    }
+
+
+    public TotalNNNowCashDetails() {
+        super();
     }
 
     /**

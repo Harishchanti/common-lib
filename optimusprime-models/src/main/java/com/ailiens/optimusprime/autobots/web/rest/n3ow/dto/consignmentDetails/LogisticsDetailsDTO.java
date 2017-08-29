@@ -1,11 +1,12 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import com.ailiens.optimusprime.domain.OrderLine;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.math.BigDecimal;
 
 import javax.annotation.Generated;
-import java.math.BigDecimal;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import com.ailiens.optimusprime.domain.OrderLine;
 
 @Generated("org.jsonschema2pojo")
 public class LogisticsDetailsDTO {
@@ -36,10 +37,6 @@ public class LogisticsDetailsDTO {
     public String fedexBillTc;
     public String fedexBillDt;
 
-    public LogisticsDetailsDTO() {
-        super();
-    }
-
     public LogisticsDetailsDTO(OrderLine orderLine) {
 		if(orderLine.getLogistics() !=null ){
 			this.setAirwayBillNumber(orderLine.getLogistics().getAwbNumber());
@@ -69,6 +66,10 @@ public class LogisticsDetailsDTO {
 	public String getServiceType() {
 		return serviceType;
 	}
+
+	public LogisticsDetailsDTO(){
+        super();
+    }
 
 
 

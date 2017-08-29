@@ -1,4 +1,10 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.ailiens.optimusprime.domain.SourceMetadata;
+
 import java.math.BigDecimal;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -8,7 +14,7 @@ import java.time.ZonedDateTime;
  */
 public class ConsignmentSearchDTO {
 
-   
+    private final Logger log = LoggerFactory.getLogger(ConsignmentSearchDTO.class);
 
     private String orderId;
     private ZonedDateTime orderDate;
@@ -30,6 +36,8 @@ public class ConsignmentSearchDTO {
     private String fulfillmentCenterName;
     private String consignmentStatus;
     private String orderStatus;
+    private SourceMetadata source;
+    private String sourceOrderId;  //ADDED  source id  for BT search  @adi
 
 
 //    public ConsignmentSearchDTO(Object ...objects)
@@ -57,10 +65,8 @@ public class ConsignmentSearchDTO {
 //
 //    }
 
+
     public ConsignmentSearchDTO(ConsignmentSearchDTO consignmentSearchDTO) {
-    }
-    public ConsignmentSearchDTO(){
-    	
     }
 
     public ConsignmentSearchDTO(String orderId, ZonedDateTime orderDate,
@@ -71,7 +77,8 @@ public class ConsignmentSearchDTO {
                                 String customerName, String awbNumber, ZonedDateTime deliveryDate,
                                 ZonedDateTime consignmentStamp, String orderingCenterId,
                                 String orderingCenterName, String fulfillmentCenterId,
-                                String fulfillmentCenterName, String consignmentStatus, String orderStatus) {
+                                String fulfillmentCenterName, String consignmentStatus, String orderStatus, 
+                                SourceMetadata source, String sourceId ) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.consignmentId = consignmentId;
@@ -92,6 +99,8 @@ public class ConsignmentSearchDTO {
         this.fulfillmentCenterName = fulfillmentCenterName;
         this.consignmentStatus = consignmentStatus;
         this.orderStatus = orderStatus;
+        this.source = source;
+        this.sourceOrderId = sourceId;
     }
 
     public String getOrderId() {
@@ -253,8 +262,27 @@ public class ConsignmentSearchDTO {
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
+  
+    
+    
+    public SourceMetadata getSourceMetadata() {
+		return source;
+	}
 
-    @Override
+	public void setSourceMetadata(SourceMetadata sourceMetadata) {
+		this.source = sourceMetadata;
+	}
+	
+	
+	public String getSourceOrderId() {
+		return sourceOrderId;
+	}
+
+	public void setSourceOrderId(String sourceOrderId) {
+		this.sourceOrderId = sourceOrderId;
+	}
+
+	@Override
     public String toString() {
         return "ConsignmentSearchDTO{" +
             "orderId='" + orderId + '\'' +
@@ -277,6 +305,8 @@ public class ConsignmentSearchDTO {
             ", fulfillmentCenterName='" + fulfillmentCenterName + '\'' +
             ", consignmentStatus='" + consignmentStatus + '\'' +
             ", orderStatus='" + orderStatus + '\'' +
+            ", source'" + source.toString() + '\'' +
+            ", sourceOrderId'" + sourceOrderId + '\'' +
             '}';
     }
 }

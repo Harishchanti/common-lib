@@ -7,56 +7,53 @@ import javax.validation.constraints.NotNull;
 
 public class POSStatusUpdateDTO {
 
-	@NotNull
-	private String orderId;
+    @NotNull
+    private String orderId;
 
-	@NotNull
-	private String consignmentId;
+    @NotNull
+    private String consignmentId;
 
-	@NotNull
-	private String fcId;
+    @NotNull
+    private String fcId;
 
-	@NotNull
-	private POSStatus status;
+    @NotNull
+    private POSStatus status;
 
-	public POSStatusUpdateDTO(){
+    public String getOrderId() {
+        return orderId;
+    }
 
-	}
-	public String getOrderId() {
-		return orderId;
-	}
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
+    public String getConsignmentId() {
+        return consignmentId;
+    }
 
-	public String getConsignmentId() {
-		return consignmentId;
-	}
+    public void setConsignmentId(String consignmentId) {
+        this.consignmentId = consignmentId;
+    }
 
-	public void setConsignmentId(String consignmentId) {
-		this.consignmentId = consignmentId;
-	}
+    public String getFcId() {
+        return fcId;
+    }
 
-	public String getFcId() {
-		return fcId;
-	}
+    public void setFcId(String fcId) {
+        this.fcId = fcId;
+    }
 
-	public void setFcId(String fcId) {
-		this.fcId = fcId;
-	}
+    public POSStatus getStatus() {
+        return status;
+    }
 
-	public POSStatus getStatus() {
-		return status;
-	}
+    public void setStatus(POSStatus status) {
+        this.status = status;
+    }
 
-	public void setStatus(POSStatus status) {
-		this.status = status;
-	}
-
-	@Override
-	public String toString() {
-		return ToStringBuilder.reflectionToString(this);
-	}
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 
 }

@@ -1,9 +1,9 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.Payment;
 
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +25,10 @@ public class PaymentUpdate {
      */
     public String getPaymentId() {
         return paymentId;
+    }
+
+    public PaymentUpdate() {
+        super();
     }
 
     /**

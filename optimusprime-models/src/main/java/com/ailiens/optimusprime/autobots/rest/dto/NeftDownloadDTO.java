@@ -1,10 +1,14 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
-public class NeftDownloadDTO {
+public class NeftDownloadDTO implements Serializable{
 
     private String returnId;
+
+    private ZonedDateTime returnInitiatedDate;
 
     private BigDecimal returnAmount;
 
@@ -34,9 +38,14 @@ public class NeftDownloadDTO {
         this.returnId = returnId;
     }
 
-    public NeftDownloadDTO(){
-    	
+    public ZonedDateTime getReturnInitiatedDate() {
+        return returnInitiatedDate;
     }
+
+    public void setReturnInitiatedDate(ZonedDateTime returnInitiatedDate) {
+        this.returnInitiatedDate = returnInitiatedDate;
+    }
+
     public BigDecimal getReturnAmount() {
         return returnAmount;
     }

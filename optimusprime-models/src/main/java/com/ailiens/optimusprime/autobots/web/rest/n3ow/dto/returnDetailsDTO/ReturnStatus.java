@@ -1,9 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
+import javax.annotation.Generated;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import javax.annotation.Generated;
+import java.math.BigDecimal;
 
 @Generated("org.jsonschema2pojo")
 public class ReturnStatus {
@@ -17,9 +18,6 @@ public class ReturnStatus {
     private String refundStatus;
     private Long returnStateReasonId;
 
-    public ReturnStatus() {
-        super();
-    }
     /**
      *
      * @return
@@ -27,6 +25,10 @@ public class ReturnStatus {
      */
     public String getId() {
         return id;
+    }
+
+    public ReturnStatus() {
+        super();
     }
 
     /**
