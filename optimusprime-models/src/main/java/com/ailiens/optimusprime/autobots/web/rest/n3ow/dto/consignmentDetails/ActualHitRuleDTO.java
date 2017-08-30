@@ -24,9 +24,10 @@ public class ActualHitRuleDTO {
     	}
 	}
 
-	public ActualHitRuleDTO(){
-        super();
+	public ActualHitRuleDTO() {
+
     }
+
 	public String getId() {
 		return id;
 	}

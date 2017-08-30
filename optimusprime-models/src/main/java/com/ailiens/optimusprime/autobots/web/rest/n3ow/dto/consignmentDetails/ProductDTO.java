@@ -25,6 +25,9 @@ public class ProductDTO {
     public String styleId;
     public String sapStyleId;
 
+    public ProductDTO() {
+
+    }
     public ProductDTO(MBOProduct mboProduct) {
 
     	this.setBrand(mboProduct.getBrand());
@@ -44,9 +47,6 @@ public class ProductDTO {
 
 
 
-	public ProductDTO(){
-        super();
-    }
 
 	public String getDescription() {
 		return description;

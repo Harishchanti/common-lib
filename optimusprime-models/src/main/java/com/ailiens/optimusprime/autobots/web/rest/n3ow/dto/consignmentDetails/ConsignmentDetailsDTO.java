@@ -4,8 +4,11 @@ package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
+import javax.persistence.Column;
 
 import com.ailiens.optimusprime.autobots.rest.dto.VoucherDetailsDTO;
+import com.ailiens.optimusprime.domain.SourceMetadata;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 @Generated("org.jsonschema2pojo")
@@ -13,6 +16,10 @@ public class ConsignmentDetailsDTO {
 
     public String orderId;
     public String orderDate;
+    public String service;
+    private String orderReference;
+    private String orderReference2;
+    private String serviceOrderId;
     public FfCenterDTO orderingCenter;
     public AccountsDetailsDTO customerDetails;
     public AccountsDetailsDTO storeStaffDetails;
@@ -22,28 +29,15 @@ public class ConsignmentDetailsDTO {
     public VoucherDetailsDTO voucherDetails;
     public String slaEndTime;
     public ConsignmentDTO consignment = new ConsignmentDTO();
+    //public SourceMetadata sourceMetadata;
     public SourceMetadataDTO sourceMetadata;
-
-    public SourceMetadataDTO getSourceMetadata() {
-        return sourceMetadata;
-    }
-
-
-
-    public void setSourceMetadata(SourceMetadataDTO sourceMetadata) {
-        this.sourceMetadata = sourceMetadata;
-    }
-
-    public ConsignmentDetailsDTO(){
-
-        super();}
-
-
     public String getOrderId() {
 		return orderId;
 	}
 
+    public ConsignmentDetailsDTO() {
 
+    }
 
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
@@ -167,5 +161,86 @@ public class ConsignmentDetailsDTO {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
+
+
+/*
+	public SourceMetadata getSourceMetadata() {
+		return sourceMetadata;
+	}
+
+
+
+	public void setSourceMetadata(SourceMetadata sourceMetadata) {
+		this.sourceMetadata = sourceMetadata;
+	}*/
+
+
+
+	public String getService() {
+		return service;
+	}
+
+
+
+	public void setService(String service) {
+		this.service = service;
+	}
+
+
+
+	public String getOrderReference() {
+		return orderReference;
+	}
+
+
+
+	public void setOrderReference(String orderReference) {
+		this.orderReference = orderReference;
+	}
+
+
+
+	public String getOrderReference2() {
+		return orderReference2;
+	}
+
+
+
+	public void setOrderReference2(String orderReference2) {
+		this.orderReference2 = orderReference2;
+	}
+
+
+
+	public void setVoucherDetails(VoucherDetailsDTO voucherDetails) {
+		this.voucherDetails = voucherDetails;
+	}
+
+
+
+	public String getServiceOrderId() {
+		return serviceOrderId;
+	}
+
+
+
+	public void setServiceOrderId(String serviceOrderId) {
+		this.serviceOrderId = serviceOrderId;
+	}
+
+
+
+	public SourceMetadataDTO getSourceMetadata() {
+		return sourceMetadata;
+	}
+
+
+
+	public void setSourceMetadata(SourceMetadataDTO sourceMetadata) {
+		this.sourceMetadata = sourceMetadata;
+	}
+
+
+
 
 }

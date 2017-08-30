@@ -26,10 +26,9 @@ public class ItemStatusDTO {
     	}
 	}
 
-	public ItemStatusDTO(){
-        super();
-    }
+    public ItemStatusDTO() {
 
+    }
 
 	public String getId() {
 		return id;

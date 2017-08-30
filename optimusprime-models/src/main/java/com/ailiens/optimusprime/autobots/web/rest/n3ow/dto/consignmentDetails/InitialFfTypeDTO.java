@@ -20,10 +20,9 @@ public class InitialFfTypeDTO {
         this.setType(orderLine.getInitialFullfilmentType().getType());
     }
 
-    public InitialFfTypeDTO(){
-        super();
-    }
+    public InitialFfTypeDTO() {
 
+    }
 
     public String getFfType() {
         return ffType;

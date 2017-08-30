@@ -35,7 +35,9 @@ public class ItemDTO {
 		this.setSlaEndTime(String.valueOf(orderLine.getSlaEndTime()));
 	}
 
+    public ItemDTO() {
 
+    }
 
 	public String getItemId() {
 		return itemId;

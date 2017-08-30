@@ -22,6 +22,9 @@ public class PaymentSummaryDTO {
     public BigDecimal som_cod;
     public String paymentMode;
 
+    public PaymentSummaryDTO() {
+
+    }
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,
                              BigDecimal card, BigDecimal som_cod, BigDecimal som_pos, String paymentMode) {
         this.voucher = voucher;
@@ -32,10 +35,6 @@ public class PaymentSummaryDTO {
         this.som_cod=som_cod;
         this.som_pos=som_pos;
         this.paymentMode=paymentMode;
-    }
-
-    public PaymentSummaryDTO(){
-        super();
     }
 
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,

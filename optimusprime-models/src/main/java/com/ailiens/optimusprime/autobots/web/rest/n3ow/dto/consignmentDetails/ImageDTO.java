@@ -16,15 +16,14 @@ public class ImageDTO {
     public String getFcId() {
         return fcId;
     }
-    public  ImageDTO(){
-        super();
-    }
-
 
     public void setFcId(String fcId) {
         this.fcId = fcId;
     }
 
+    public ImageDTO() {
+
+    }
     @Override
     public String toString() {
         return "ImageDTO{" +

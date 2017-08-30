@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+
 import javax.annotation.Generated;
 
 import com.ailiens.optimusprime.autobots.utils.PricingUtils;
@@ -18,15 +20,15 @@ import com.ailiens.optimusprime.domain.Taxes;
 @Generated("org.jsonschema2pojo")
 public class ItemPricingDetailsDTO {
 
-    public BigDecimal discount;
-    public BigDecimal nnnowCash;
-    public BigDecimal netAmount;
-    public BigDecimal value;
-    public BigDecimal sp;
-    public BigDecimal tradeSp;
-    public BigDecimal tax;
-    public BigDecimal taxPercentage;
-    public BigDecimal discountPercentage;
+    public BigDecimal discount = new BigDecimal(0.0);
+    public BigDecimal nnnowCash = new BigDecimal(0.0);
+    public BigDecimal netAmount = new BigDecimal(0.0);
+    public BigDecimal value = new BigDecimal(0.0);
+    public BigDecimal sp = new BigDecimal(0.0);
+    public BigDecimal tradeSp = new BigDecimal(0.0);
+    public BigDecimal tax = new BigDecimal(0.0);
+    public BigDecimal taxPercentage = new BigDecimal(0.0);
+    public BigDecimal discountPercentage = new BigDecimal(0.0);
     public Boolean taxInclusive;
     public String taxClass;
     public List<ActualHitRuleDTO> actualHitRule = new ArrayList<ActualHitRuleDTO>();
@@ -40,6 +42,9 @@ public class ItemPricingDetailsDTO {
     private BigDecimal utgstPercentage = new BigDecimal(0.0);
     private String hsn;
 
+    public ItemPricingDetailsDTO() {
+
+    }
 	public ItemPricingDetailsDTO(OrderLine orderLine, List<Taxes> taxes, List<Discount> discounts) {
 		Price price = orderLine.getPrice();
 		if(price != null){
@@ -55,7 +60,6 @@ public class ItemPricingDetailsDTO {
             this.setHsn(price.getHsn());
 		}
 
-
     	Iterator<Taxes> taxIterator = taxes.iterator();
     	if(taxIterator.hasNext()){
     		Taxes tax = taxIterator.next();
@@ -65,14 +69,14 @@ public class ItemPricingDetailsDTO {
             } else {
                 this.setTaxPercentage(new BigDecimal(0.0));
             }
-            this.setCgstAmount(tax.getCgstAmount());
-            this.setSgstAmount(tax.getSgstAmount());
-            this.setIgstAmount(tax.getIgstAmount());
-            this.setUtgstAmount(tax.getUtgstAmount());
-            this.setCgstPercentage(tax.getCgstPercentage());
-            this.setSgstPercentage(tax.getSgstPercentage());
-            this.setIgstPercentage(tax.getIgstPercentage());
-            this.setUtgstPercentage(tax.getUtgstPercentage());
+            this.setCgstAmount(returnDefault(tax.getCgstAmount()));
+            this.setSgstAmount(returnDefault(tax.getSgstAmount()));
+            this.setIgstAmount(returnDefault(tax.getIgstAmount()));
+            this.setUtgstAmount(returnDefault(tax.getUtgstAmount()));
+            this.setCgstPercentage(returnDefault(tax.getCgstPercentage()));
+            this.setSgstPercentage(returnDefault(tax.getSgstPercentage()));
+            this.setIgstPercentage(returnDefault(tax.getIgstPercentage()));
+            this.setUtgstPercentage(returnDefault(tax.getUtgstPercentage()));
     	} else {
             this.setTax(new BigDecimal(0.0));
         }
@@ -85,9 +89,6 @@ public class ItemPricingDetailsDTO {
         }
 	}
 
-	public ItemPricingDetailsDTO(){
-	    super();
-    }
 
 
 	public BigDecimal getDiscount() {
@@ -287,6 +288,11 @@ public class ItemPricingDetailsDTO {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+
+    public BigDecimal returnDefault(BigDecimal value) {
+	Optional<BigDecimal> optionalValue = Optional.ofNullable(value);
+	return optionalValue.orElse(new BigDecimal(0.0));
     }
 
 }

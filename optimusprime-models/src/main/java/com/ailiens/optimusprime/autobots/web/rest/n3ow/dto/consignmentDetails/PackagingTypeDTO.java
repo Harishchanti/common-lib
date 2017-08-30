@@ -17,6 +17,9 @@ public class PackagingTypeDTO {
     public String description;
     public SourceMetadata sourceMetadata;
 
+    public PackagingTypeDTO() {
+
+    }
 
     public PackagingTypeDTO(OrderLine orderLine) {
     	if(orderLine.getPackagingType()!=null){
@@ -41,9 +44,7 @@ public class PackagingTypeDTO {
 		this.name = name;
 	}
 
- public PackagingTypeDTO(){
-        super();
- }
+
 
 	public String getLength() {
 		return length;

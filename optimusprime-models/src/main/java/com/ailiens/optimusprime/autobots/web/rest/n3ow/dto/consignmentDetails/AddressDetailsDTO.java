@@ -20,6 +20,9 @@ public class AddressDetailsDTO {
     private String state;
     private String country;
 
+    public AddressDetailsDTO () {
+
+    }
     public AddressDetailsDTO(OrderLine orderLine) {
     	if(orderLine.getAddress() != null ){
     		this.setAddressId(orderLine.getAddress().getAddressId());
@@ -33,9 +36,6 @@ public class AddressDetailsDTO {
         }
 	}
 
-public AddressDetailsDTO(){
-        super();
-}
 
 
 	public String getAddressId() {

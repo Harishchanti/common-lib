@@ -15,6 +15,9 @@ public class OrderStatusDTO {
     public String orderStatusToCustomer;
     public String orderStatusToOms;
 
+    public OrderStatusDTO() {
+
+    }
     public OrderStatusDTO(Orders order) {
     	if(order.getOrderStates() !=null){
 	    	this.setId(String.valueOf(order.getOrderStates().getId()));
@@ -34,9 +37,6 @@ public class OrderStatusDTO {
 
 
 
-	public OrderStatusDTO(){
-        super();
-    }
 
 	public void setId(String id) {
 		this.id = id;

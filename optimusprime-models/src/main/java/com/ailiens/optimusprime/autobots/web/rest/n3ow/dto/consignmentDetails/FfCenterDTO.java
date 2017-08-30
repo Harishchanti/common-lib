@@ -17,9 +17,12 @@ public class FfCenterDTO {
     public String brand;
     public String fcType;
     public String postCode;
-    public String stateCode;
-    public String gstnCode;
+    public String stateCode = "";
+    public String gstnCode = "";
 
+    public FfCenterDTO() {
+
+    }
 
     public FfCenterDTO(FullfilmentCenter fullfilmentCenter) {
     	if(fullfilmentCenter != null){
@@ -31,12 +34,8 @@ public class FfCenterDTO {
     		this.setSapCode(fullfilmentCenter.getSapCode());
     		if(fullfilmentCenter.getStateCode()!=null && !(fullfilmentCenter.getStateCode().equalsIgnoreCase(null) || fullfilmentCenter.getStateCode().equalsIgnoreCase("null")))
                 this.setStateCode(fullfilmentCenter.getStateCode());
-    		else
-    		    this.setStateCode(null);
             if(fullfilmentCenter.getGstnCode()!=null && !(fullfilmentCenter.getGstnCode().equalsIgnoreCase(null) || fullfilmentCenter.getGstnCode().equalsIgnoreCase("null")))
                 this.setGstnCode(fullfilmentCenter.getGstnCode());
-            else
-                this.setGstnCode(null);
     	}
     }
 
@@ -45,9 +44,6 @@ public class FfCenterDTO {
 		return fcid;
 	}
 
- public FfCenterDTO(){
-        super();
- }
 
 
 	public void setFcid(String fcid) {

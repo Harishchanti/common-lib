@@ -21,8 +21,8 @@ public class AccountsDetailsDTO {
     public String phonenumber;
     public String email;
 
-    public AccountsDetailsDTO() {
-        super();
+    public  AccountsDetailsDTO () {
+
     }
     public AccountsDetailsDTO(Accounts accounts) {
 

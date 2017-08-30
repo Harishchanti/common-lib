@@ -36,9 +36,7 @@ public class SourceMetadataDTO {
 		this.banner = banner;
 	}
 
-	public SourceMetadataDTO() {
+	  public SourceMetadataDTO() {
 
-    }
-
-
+      }
 }
