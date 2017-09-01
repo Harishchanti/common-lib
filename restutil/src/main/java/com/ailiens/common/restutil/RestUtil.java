@@ -10,6 +10,12 @@ import com.google.common.collect.Lists;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import com.mashape.unirest.request.HttpRequestWithBody;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +25,7 @@ import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.EnableRetry;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Component;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import org.thymeleaf.util.MapUtils;
 
 /**
  * Created by jayant on 13/9/16.
@@ -72,6 +75,30 @@ public class RestUtil  extends RestUtilHelper  {
         HttpResponse<T> response = Unirest.post(url)
             .headers(headers)
             .body(payload)
+            .asObject(responseClass);
+
+
+        checkStatus(response);
+
+        return response;
+    }
+
+
+    @Retryable(maxAttempts = 2, backoff = @Backoff(delay = 4000),include = {UnauthorizedAccessException.class})
+    public  <T> HttpResponse<T> post(String url, HashMap<String,Object> map,Class <? extends T> responseClass) throws  UnirestException,GenericServiceException {
+
+
+        preProcess(url,"");
+        HttpRequestWithBody requestWithBody=  Unirest.post(url)
+            .headers(headers);
+
+        if(!MapUtils.isEmpty(map)) {
+            for (Entry<String, Object> entry : map.entrySet()) {
+                requestWithBody.field(entry.getKey(), entry.getValue());
+            }
+        }
+
+        HttpResponse<T> response = requestWithBody
             .asObject(responseClass);
 
 
