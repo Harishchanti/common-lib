@@ -1,8 +1,16 @@
 package com.ailiens.common;
 
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * Created by jayant on 8/9/17.
  */
-public @interface Distributed {
 
+@Target(ElementType.METHOD)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface Distributed {
+    String name() default "";
 }
