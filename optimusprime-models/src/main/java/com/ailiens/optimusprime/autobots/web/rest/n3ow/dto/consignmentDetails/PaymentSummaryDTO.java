@@ -122,6 +122,13 @@ public class PaymentSummaryDTO {
         this.paymentMode = paymentMode;
     }
 
+    public List<PaymentTransactionalDetails> getPaymentTransactionalDetails() {
+        return paymentTransactionalDetails;
+    }
+    public void setPaymentTransactionalDetails(List<PaymentTransactionalDetails> paymentTransactionalDetails) {
+        this.paymentTransactionalDetails = paymentTransactionalDetails;
+    }
+
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
