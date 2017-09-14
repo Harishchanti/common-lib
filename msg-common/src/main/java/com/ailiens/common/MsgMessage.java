@@ -38,6 +38,8 @@ public class MsgMessage implements Serializable {
 
     String eventType;
 
+    int retry=0;
+
     Map<String,UriInfo> uriMap = new HashMap<>();
 
     Map<String,String> headers = new HashMap<>();
