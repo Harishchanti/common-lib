@@ -55,12 +55,7 @@ public class ConnectionFactoryProxy   {
         if(ptr> pool.size()-1)addConnectionToPool();
 
         Connection connection= pool.get(ptr);
-        if(!connection.isOpen())
-        {
-            pool.remove(ptr);
-            connection=factory.newConnection();
-            pool.add(connection);
-        }
+
         ptr=(ptr+1)%poolSize;
         return connection;
     }

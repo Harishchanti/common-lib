@@ -50,6 +50,12 @@ public class MsgConnectionManager {
             .userName("guest")
             .password("guest")
             .build());
+
+        configHashMap.put("prod-cluster2",RabbitmqConfig.builder()
+            .host("172.31.17.170")
+            .userName("pcm")
+            .password("pcm@admin_AKDDH")
+            .build());
     }
 
 
