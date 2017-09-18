@@ -30,7 +30,7 @@ public class PaymentTransactionalDetails {
 
     }
 
-
+    public PaymentTransactionalDetails(){}
 
     public String getPaymentId() {
         return paymentId;
