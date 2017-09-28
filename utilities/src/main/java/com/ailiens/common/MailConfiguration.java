@@ -18,4 +18,5 @@ public class MailConfiguration {
     private String from="exceptions@arvindinternet.com";
     private String username="exceptions@arvindinternet.com";
     private String password="a@12345678";
+
 }

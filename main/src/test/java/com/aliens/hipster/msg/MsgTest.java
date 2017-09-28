@@ -28,7 +28,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 public class MsgTest {
 
-    @Autowired
+   /* @Autowired
     MsgPublisher msgPublisher;
 
     @Autowired
@@ -93,5 +93,5 @@ public class MsgTest {
     public void retryTest()
     {
         retryMessages.retry();
-    }
+    }*/
 }

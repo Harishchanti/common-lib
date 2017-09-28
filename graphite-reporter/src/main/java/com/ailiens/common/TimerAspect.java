@@ -26,9 +26,7 @@ public class TimerAspect {
 
 	    String methodName = pjp.getSignature().getName();
 
-        em.lock(client, LockModeType.PESSIMISTIC_WRITE);
-
-		Timer.Context context = CustomMetricsReporter.startTimer(methodName);
+        Timer.Context context = CustomMetricsReporter.startTimer(methodName);
 
 		if(timerTask!=null) {
 			timerTask.proceed(context,pjp);

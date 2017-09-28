@@ -1,5 +1,6 @@
 package com.ailiens.common;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/admin")
+@Slf4j
 public class ThreadController {
 
     @Autowired
@@ -21,5 +23,10 @@ public class ThreadController {
     public ThreadAnalysisReport threadDump() throws Exception {
 
         return threadDumpAnalyzer.invoke();
+    }
+
+
+    public void call() {
+        log.info("Finally!");
     }
 }

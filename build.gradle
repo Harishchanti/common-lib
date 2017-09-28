@@ -349,6 +349,9 @@ configure (subprojects
 dependencies
     {
         compile project(':main')
+
+        compile 'com.mashape.unirest:unirest-java:1.4.9'
+        testCompile 'com.mashape.unirest:unirest-java:1.4.9'
     }
 
 project(':main')
@@ -362,6 +365,12 @@ project(':main')
                 compile project(':common')
                 compile project(':rabbitmq-publisher')
                 compile project(':healthcheck')
+                compile project(':restutil')
+                compile project(':utilities')
+
+                compile 'com.mashape.unirest:unirest-java:1.4.9'
+                testCompile 'com.mashape.unirest:unirest-java:1.4.9'
+
             }
     }
 
@@ -593,7 +602,7 @@ project(':lms-models')
 
 
 
-project(':utilities')
+            project(':utilities')
     {
         dependencies{
             compile 'com.mashape.unirest:unirest-java:1.4.9'

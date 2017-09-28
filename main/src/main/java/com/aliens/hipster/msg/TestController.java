@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/msgtest")
 public class TestController {
 
+
     @Autowired
     TestMessageSender testMessageSender;
 
@@ -25,7 +26,9 @@ public class TestController {
     @Timed
     public ResponseEntity<?> processMsgEvent() throws Exception {
 
-         testMessageSender.invoke();
-         return ResponseEntity.status(200).body("sent test message");
+        testMessageSender.invoke();
+        return ResponseEntity.status(200).body("sent test message");
     }
+
+
 }
