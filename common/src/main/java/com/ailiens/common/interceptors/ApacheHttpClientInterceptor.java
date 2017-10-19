@@ -1,8 +1,9 @@
-package com.ailiens.common;
+package com.ailiens.common.interceptors;
 
 import static com.ailiens.common.LoggingFilter.REQ_ID_HEADER;
 import static com.ailiens.common.LoggingFilter.TRACE_ID_HEADER;
 
+import com.ailiens.common.RequestContext;
 import java.io.IOException;
 
 import org.apache.http.Header;
@@ -19,10 +20,10 @@ public class ApacheHttpClientInterceptor implements HttpRequestInterceptor {
 		Header[] traceIds = request.getHeaders(TRACE_ID_HEADER);
 		Header[] requestIds = request.getHeaders(REQ_ID_HEADER);
 		if (traceIds.length == 0) {
-			request.addHeader(TRACE_ID_HEADER, LoggingFilter.getTraceId());
+			request.addHeader(TRACE_ID_HEADER, RequestContext.getTraceId());
 		}
 		if (requestIds.length == 0) {
-			request.addHeader(REQ_ID_HEADER, LoggingFilter.getRequestId());
+			request.addHeader(REQ_ID_HEADER, RequestContext.getRequestId());
 		}
 		System.out.println(request.getAllHeaders());
 	}

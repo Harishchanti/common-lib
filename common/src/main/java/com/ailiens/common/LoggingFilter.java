@@ -1,8 +1,9 @@
 package com.ailiens.common;
 
-import java.io.IOException;
-import java.util.UUID;
+import static com.ailiens.common.RequestContext.generateRandom;
 
+import com.google.common.base.Strings;
+import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -10,12 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
-
-import com.google.common.base.Strings;
 
 /**
  * Created by jayant on 26/11/16.
@@ -35,6 +32,8 @@ public class LoggingFilter implements Filter {
 
 	}
 
+
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -42,18 +41,16 @@ public class LoggingFilter implements Filter {
 		if (!Strings.isNullOrEmpty(reqId)) {
 			MDC.put(REQ_ID_MDC, reqId);
 		} else
-			MDC.put(REQ_ID_MDC, UUID.randomUUID().toString());
+			MDC.put(REQ_ID_MDC, generateRandom());
 
 		String traceId = ((HttpServletRequest) request).getHeader(TRACE_ID_HEADER);
 		if (!Strings.isNullOrEmpty(traceId)) {
 			MDC.put(TRACE_ID_MDC, traceId);
 		} else
-			MDC.put(TRACE_ID_MDC, UUID.randomUUID().toString());
+			MDC.put(TRACE_ID_MDC, generateRandom());
 
 		chain.doFilter(request, response);
-		HttpServletResponse httpServletResponse = (HttpServletResponse) response;
-		int status = httpServletResponse.getStatus();
-		MDC.clear();
+        MDC.clear();
 	}
 
 	@Override
@@ -61,27 +58,5 @@ public class LoggingFilter implements Filter {
 		MDC.clear();
 	}
 
-	public static String getRequestId() {
-		Object obj = MDC.get(REQ_ID_MDC);
-		String reqId = null;
-		if (obj != null) {
-			reqId = obj.toString();
-		}
-		if (Strings.isNullOrEmpty(reqId)) {
-			reqId = UUID.randomUUID().toString();
-		}
 
-		return reqId;
-	}
-
-	public static String getTraceId() {
-		Object obj = MDC.get(TRACE_ID_MDC);
-
-		if (obj != null) {
-			return obj.toString();
-		}
-
-		else
-			return UUID.randomUUID().toString();
-	}
 }
