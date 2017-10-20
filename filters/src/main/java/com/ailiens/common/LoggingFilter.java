@@ -1,6 +1,7 @@
 package com.ailiens.common;
 
 import static com.ailiens.common.RequestContext.generateRandom;
+import static com.ailiens.common.RequestContext.generateRequestId;
 
 import com.google.common.base.Strings;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class LoggingFilter implements Filter {
 		if (!Strings.isNullOrEmpty(reqId)) {
 			MDC.put(REQ_ID_MDC, reqId);
 		} else
-			MDC.put(REQ_ID_MDC, generateRandom());
+			MDC.put(REQ_ID_MDC, generateRequestId());
 
 		String traceId = ((HttpServletRequest) request).getHeader(TRACE_ID_HEADER);
 		if (!Strings.isNullOrEmpty(traceId)) {

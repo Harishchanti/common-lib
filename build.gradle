@@ -236,7 +236,7 @@ configure (subprojects
     -project(':msg-receiver')
     -project(':ando-models')
     -project(':custom-logging')
-    -project(':common')
+    -project(':filters')
     -project(':restutil')
     -project(':galactus-models')
     -project(':msg-adapter-spring-jpa')
@@ -337,11 +337,9 @@ configure (subprojects
 
         //commons
 
-
-
         compile 'com.google.code.gson:gson:2.8.0'
         compile 'com.rabbitmq:amqp-client:3.6.5'
-
+        compile 'io.reactivex:rxjava:1.3.0'
     }
 
 }
@@ -349,6 +347,7 @@ configure (subprojects
 dependencies
     {
         compile project(':main')
+        compile project(':filters')
 
         compile 'com.mashape.unirest:unirest-java:1.4.9'
         testCompile 'com.mashape.unirest:unirest-java:1.4.9'
@@ -362,7 +361,6 @@ project(':main')
                 compile project(':msg-receiver')
                 compile project(':msg-common')
                 compile project(':message-sender')
-                compile project(':common')
                 compile project(':rabbitmq-publisher')
                 compile project(':healthcheck')
                 compile project(':restutil')
@@ -442,6 +440,16 @@ project('msg-common')
         dependencies
             {
                 compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
+                compile project(':filters')
+            }
+    }
+
+
+project('filters')
+    {
+        dependencies
+            {
+                compile('com.squareup.okhttp3:okhttp:3.3.1')
             }
     }
 
@@ -449,7 +457,7 @@ project(':restutil')
     {
         dependencies
             {
-                compile project(':common')
+                compile project(':filters')
                 compile 'com.mashape.unirest:unirest-java:1.4.9'
                 compile 'org.springframework.retry:spring-retry:1.1.4.RELEASE'
             }
@@ -478,6 +486,7 @@ project(':msg-publisher')
             {
                 compile project(':msg-common')
                 compile project(':msg-adapter-spring-jpa')
+
 
                 compile 'com.rabbitmq:amqp-client:3.6.5'
                 compile 'org.apache.commons:commons-lang3:3.3.2'

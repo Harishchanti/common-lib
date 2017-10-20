@@ -1,6 +1,9 @@
 package com.ailiens.common.restutil;
 
-import com.ailiens.common.LoggingFilter;
+import static com.ailiens.common.LoggingFilter.REQ_ID_HEADER;
+import static com.ailiens.common.LoggingFilter.REQ_ID_MDC;
+
+import com.ailiens.common.RequestContext;
 import com.ailiens.common.restutil.exceptions.GenericServiceException;
 import com.ailiens.common.restutil.keycloak.Credentials;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -9,19 +12,15 @@ import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.ailiens.common.LoggingFilter.REQ_ID_HEADER;
-import static com.ailiens.common.LoggingFilter.REQ_ID_MDC;
 
 
 /**
@@ -75,7 +74,7 @@ public class RestUtilHelper implements CheckResponse {
     {
         if(headers.containsKey(REQ_ID_HEADER)) return;
 
-        String reqId= LoggingFilter.getRequestId();
+        String reqId= RequestContext.getRequestId();
 
         MDC.put(REQ_ID_MDC,reqId);
         headers.put(REQ_ID_HEADER,reqId);
