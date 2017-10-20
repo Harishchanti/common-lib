@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <configuration scan="true">
-    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!--<include resource="org/springframework/boot/logging/logback/base.xml"/>-->
+
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+    </root>
 
 <!-- The FILE and ASYNC appenders are here as examples for a production configuration -->
 <!--
@@ -22,7 +31,7 @@
     </appender>
 -->
 
-    <logger name="com.aliens.hipster" level="#logback.loglevel#"/>
+    <logger name="com.aliens.hipster" level="INFO"/>
 
     <logger name="javax.activation" level="WARN"/>
     <logger name="javax.mail" level="WARN"/>
@@ -54,7 +63,14 @@
         <resetJUL>true</resetJUL>
     </contextListener>
 
-    <root level="#logback.loglevel#">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>utf-8</charset>
+            <Pattern>[%p] [%X{TRACE-ID}] [%X{REQ-ID}]  %d{yyyy-MM-dd_HH:mm:ss.SSS} %c %m%n</Pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
     </root>
 

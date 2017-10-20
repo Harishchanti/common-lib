@@ -22,7 +22,7 @@ public class OkHttpInterceptor implements Interceptor,LoggingInterceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
-        String requestId=RequestContext.generateRandom();
+        String requestId=RequestContext.generateRequestId();
 
         Request newRequest= request.newBuilder()
                                   .header(TRACE_ID_HEADER, RequestContext.getTraceId())

@@ -2,7 +2,7 @@ package com.ailiens.common.interceptors;
 
 import static com.ailiens.common.LoggingFilter.REQ_ID_HEADER;
 import static com.ailiens.common.LoggingFilter.TRACE_ID_HEADER;
-import static com.ailiens.common.RequestContext.generateRandom;
+import static com.ailiens.common.RequestContext.generateRequestId;
 
 import com.ailiens.common.RequestContext;
 import java.io.BufferedReader;
@@ -30,7 +30,7 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor
 			String traceId = RequestContext.getTraceId();
 			headers.add(TRACE_ID_HEADER, traceId);
 		}
-		headers.add(REQ_ID_HEADER,generateRandom());
+		headers.add(REQ_ID_HEADER,generateRequestId());
 		traceRequest(request,body);
         ClientHttpResponse response= execution.execute(request, body);
         traceResponse(response);

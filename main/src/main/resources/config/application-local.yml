@@ -147,4 +147,14 @@ jhipster:
 
 basePath: /api
 
+serviceName: common
+
+
+threadAnalysis:
+  serviceName: Msg
+  cronPattern: "0 0 */24  * * ?"
+  recipients:
+    - jayant.mukherji@arvindinternet.com
+    - kavya.ramaiah@arvindinternet.com
+
 
