@@ -1,7 +1,7 @@
 package com.ailiens.common.restutil;
 
 import static com.ailiens.common.LoggingFilter.REQ_ID_HEADER;
-import static com.ailiens.common.LoggingFilter.REQ_ID_MDC;
+import static com.ailiens.common.LoggingFilter.TRACE_ID_HEADER;
 
 import com.ailiens.common.RequestContext;
 import com.ailiens.common.restutil.exceptions.GenericServiceException;
@@ -18,7 +18,6 @@ import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.log4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -55,29 +54,27 @@ public class RestUtilHelper implements CheckResponse {
         if(MediaType.APPLICATION_JSON_VALUE.equals(contentType))
         {
             try {
-                log.info(gson.toJson(payload));
+                log.info("Request :{}", gson.toJson(payload));
             } catch (Exception e) {
-                log.info(payload.toString());
+                log.info("Request :{}",payload.toString());
             }
         }
 
     }
 
     protected void preProcess(String url,Object payload)  {
-        addReqIdHeader();
+        addLoggingHeaders();
         checkKeyCloak();
         log.info(url);
         logPayload(payload);
     }
 
-    protected void addReqIdHeader()
+    protected void addLoggingHeaders()
     {
-        if(headers.containsKey(REQ_ID_HEADER)) return;
-
-        String reqId= RequestContext.getRequestId();
-
-        MDC.put(REQ_ID_MDC,reqId);
-        headers.put(REQ_ID_HEADER,reqId);
+        String requestId= RequestContext.generateRequestId();
+        log.info("RequestId {}",requestId);
+        headers.put(REQ_ID_HEADER,requestId);
+        headers.put(TRACE_ID_HEADER,RequestContext.getTraceId());
     }
 
     protected String getKeycloakKey()
@@ -106,7 +103,7 @@ public class RestUtilHelper implements CheckResponse {
         if(logResponse)
         {
 
-            log.info(responseBody);
+            log.info("Response {}, {} " , response.getStatus(),responseBody);
         }
         String key= getKeycloakKey();
 
