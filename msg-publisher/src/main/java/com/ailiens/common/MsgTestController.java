@@ -70,8 +70,16 @@ public class MsgTestController {
         return  "done";
     }
 
+    @RequestMapping(value = "/dummy2", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
+    public String dummy2(HttpServletRequest httpServletRequest) throws Exception {
+
+        log.info("doing processing");
+        return  "done";
+    }
+
     @RequestMapping(value = "/rest", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String restCall() throws Exception {
+
 
         RestTemplate restTemplate = new CustomRestTemplate();
 
