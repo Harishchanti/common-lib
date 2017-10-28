@@ -1,7 +1,5 @@
 package com.ailiens.common;
 
-import static com.ailiens.common.LoggingFilter.TRACE_ID_HEADER;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.io.Serializable;
@@ -50,7 +48,7 @@ public class MsgMessage implements Serializable {
         this.retry = 0;
         this.uriMap = new HashMap();
         this.headers = new HashMap();
-        headers.put(TRACE_ID_HEADER,RequestContext.getTraceId());
+        //headers.put(TRACE_ID_HEADER,RequestContext.getTraceId());
     }
 
 

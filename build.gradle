@@ -440,7 +440,7 @@ project('msg-common')
         dependencies
             {
                 compile group: 'joda-time', name: 'joda-time', version: '2.9.4'
-                compile project(':filters')
+               // compile project(':filters')
             }
     }
 
