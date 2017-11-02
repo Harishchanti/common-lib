@@ -56,6 +56,18 @@ public class MsgConnectionManager {
             .userName("pcm")
             .password("pcm@admin_AKDDH")
             .build());
+
+        configHashMap.put("prod-mumbai1",RabbitmqConfig.builder()
+            .host("13.126.167.18")
+            .userName("guest")
+            .password("guest")
+            .build());
+
+        configHashMap.put("prod-mumbai2",RabbitmqConfig.builder()
+            .host("10.60.9.164")
+            .userName("guest")
+            .password("guest")
+            .build());
     }
 
 
