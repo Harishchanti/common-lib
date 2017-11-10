@@ -19,6 +19,7 @@ public class SAPStatusChangeDTO {
 
     private String sapInvoiceId;  // added sap/erp invoice id for B2b @adi
 
+    private String orderItemId;
     public String getWarehouse_no() {
         return warehouse_no;
     }
@@ -79,8 +80,25 @@ public class SAPStatusChangeDTO {
 
     @Override
     public String toString() {
-        return "SAPStatusChangeDTO [fullfilment_cat=" + fullfilment_cat + ", status=" + status + ", hu_code=" + hu_code
-            + ", sales_order_no=" + sales_order_no + ", entity=" + entity + ", warehouse_no=" + warehouse_no
-            + ", sapInvoiceId=" + sapInvoiceId + "]";
+        return "SAPStatusChangeDTO{" +
+            "fullfilment_cat='" + fullfilment_cat + '\'' +
+            ", status='" + status + '\'' +
+            ", hu_code='" + hu_code + '\'' +
+            ", sales_order_no='" + sales_order_no + '\'' +
+            ", entity='" + entity + '\'' +
+            ", warehouse_no='" + warehouse_no + '\'' +
+            ", sapInvoiceId='" + sapInvoiceId + '\'' +
+            ", orderItemId='" + orderItemId + '\'' +
+            '}';
     }
+
+    public String getOrderItemId() {
+        return orderItemId;
+    }
+
+    public void setOrderItemId(String orderItemId) {
+        this.orderItemId = orderItemId;
+    }
+
+
 }
