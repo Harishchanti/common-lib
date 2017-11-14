@@ -21,6 +21,7 @@ public class MsgConfig {
     String baseUrl;
     String userName;
     String password;
+    String host;
     int poolSize;
     String poolType;
     boolean logging = true;

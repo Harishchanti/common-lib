@@ -1,5 +1,6 @@
 package com.ailiens.common;
 
+import com.google.common.base.MoreObjects;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import lombok.extern.slf4j.Slf4j;
@@ -109,12 +110,13 @@ public class MsgConnectionManager {
 
             RabbitmqConfig rabbitmqConfig = configHashMap.get(key);
 
-               rabbitMqHost= rabbitmqConfig.getHost();
-               userName=rabbitmqConfig.getUserName();
-               password =rabbitmqConfig.getPassword();
+               rabbitMqHost= MoreObjects.firstNonNull(msgConfig.getHost(),rabbitmqConfig.getHost());
+               userName=MoreObjects.firstNonNull(msgConfig.getUserName(),rabbitmqConfig.getUserName());
+               password =MoreObjects.firstNonNull(msgConfig.getPassword(),rabbitmqConfig.getPassword());
+
         }
 
-
+        log.info(" {} {} {}",rabbitMqHost,userName,password);
 
         String CLUSTER_NAME="MSG";
         if(Strings.isNullOrEmpty(poolType))
