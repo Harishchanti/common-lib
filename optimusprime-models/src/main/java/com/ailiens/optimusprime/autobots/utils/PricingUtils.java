@@ -1,5 +1,6 @@
 package com.ailiens.optimusprime.autobots.utils;
 
+import com.ailiens.optimusprime.domain.Taxes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,5 +34,11 @@ public class PricingUtils {
         log.info("Discount %age: " + discountPercentage);
 
         return discountPercentage;
+    }
+
+    // @adi  calucating the tax percentage by adding all taxe %'s
+    public static BigDecimal getTaxPercentageForBTOrder(Taxes taxes) {
+
+        return  taxes.getCgstPercentage().add(taxes.getUtgstPercentage().add(taxes.getSgstPercentage().add(taxes.getIgstPercentage())));
     }
 }
