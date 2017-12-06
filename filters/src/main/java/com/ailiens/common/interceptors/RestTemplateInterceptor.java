@@ -23,20 +23,19 @@ public class RestTemplateInterceptor implements ClientHttpRequestInterceptor
 	@Override
 	public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
 			throws IOException {
-        HttpHeaders headers = request.getHeaders();
-        if (headers.containsKey(TRACE_ID_HEADER)) {
-            // do nothing
-        } else {
-            String traceId = RequestContext.getTraceId();
-            headers.add(TRACE_ID_HEADER, traceId);
-        }
-        headers.add(REQ_ID_HEADER, generateRequestId());
-        traceRequest(request, body);
-        ClientHttpResponse response = execution.execute(request, body);
+		HttpHeaders headers = request.getHeaders();
+		if (headers.containsKey(TRACE_ID_HEADER)) {
+			// do nothing
+		} else {
+			String traceId = RequestContext.getTraceId();
+			headers.add(TRACE_ID_HEADER, traceId);
+		}
+		headers.add(REQ_ID_HEADER,generateRequestId());
+		traceRequest(request,body);
+        ClientHttpResponse response= execution.execute(request, body);
         traceResponse(response);
         return response;
-    }
-
+	}
 
 
 

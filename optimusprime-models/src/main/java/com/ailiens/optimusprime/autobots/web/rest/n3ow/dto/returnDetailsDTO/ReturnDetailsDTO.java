@@ -8,6 +8,7 @@ import javax.annotation.Generated;
 import com.ailiens.optimusprime.autobots.rest.dto.NeftDetailsDTO;
 import com.ailiens.optimusprime.autobots.rest.dto.RefundModesDTO;
 import com.ailiens.optimusprime.autobots.rest.dto.VoucherDetailsDTO;
+import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails.SourceMetadataDTO;
 import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.ReturnsHistory;
 import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails.AccountsDetailsDTO;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -20,6 +21,7 @@ public class ReturnDetailsDTO {
     private String returnId;
     private String orderId;
     private String consignmentId;
+    private String erpInvoiceId;
     private String returnInitiatedDate;
     private String returnCancellationSLA;
     private String qualityBucket;
@@ -40,7 +42,7 @@ public class ReturnDetailsDTO {
     private NeftDetailsDTO neftDetails;
     private VoucherDetailsDTO voucherDetails;
     public List<ReturnsHistory> returnHistory = new ArrayList<ReturnsHistory>();
-
+    public SourceMetadataDTO sourceMetadata;
 
     /**
      *
@@ -49,10 +51,6 @@ public class ReturnDetailsDTO {
      */
     public String getReturnId() {
         return returnId;
-    }
-
-    public ReturnDetailsDTO() {
-        super();
     }
 
     /**
@@ -80,6 +78,14 @@ public class ReturnDetailsDTO {
      */
     public void setOrderId(String orderId) {
         this.orderId = orderId;
+    }
+
+    public String getErpInvoiceId() {
+        return erpInvoiceId;
+    }
+
+    public void setErpInvoiceId(String erpInvoiceId) {
+        this.erpInvoiceId = erpInvoiceId;
     }
 
     /**
@@ -121,14 +127,14 @@ public class ReturnDetailsDTO {
 
 
     public String getQualityBucket() {
-		return qualityBucket;
-	}
+        return qualityBucket;
+    }
 
-	public void setQualityBucket(String qualityBucket) {
-		this.qualityBucket = qualityBucket;
-	}
+    public void setQualityBucket(String qualityBucket) {
+        this.qualityBucket = qualityBucket;
+    }
 
-	/**
+    /**
      *
      * @return
      *     The returnPricingDetails
@@ -317,12 +323,12 @@ public class ReturnDetailsDTO {
     }
 
     public ItemDTO getItem() {
-		return item;
-	}
+        return item;
+    }
 
-	public void setItem(ItemDTO item) {
-		this.item = item;
-	}
+    public void setItem(ItemDTO item) {
+        this.item = item;
+    }
 
     public AccountsDetailsDTO getCustomerDetails() {
         return CustomerDetails;
@@ -333,12 +339,12 @@ public class ReturnDetailsDTO {
     }
 
     public List<ReturnsHistory> getReturnHistory() {
-		return returnHistory;
-	}
+        return returnHistory;
+    }
 
-	public void setReturnHistory(List<ReturnsHistory> returnHistory) {
-		this.returnHistory = returnHistory;
-	}
+    public void setReturnHistory(List<ReturnsHistory> returnHistory) {
+        this.returnHistory = returnHistory;
+    }
 
     public String getReturnConsignmentStatus() {
         return returnConsignmentStatus;
@@ -370,6 +376,14 @@ public class ReturnDetailsDTO {
 
     public void setConsignmentId(String consignmentId) {
         this.consignmentId = consignmentId;
+    }
+
+    public SourceMetadataDTO getSourceMetadata() {
+        return sourceMetadata;
+    }
+
+    public void setSourceMetadata(SourceMetadataDTO sourceMetadata) {
+        this.sourceMetadata = sourceMetadata;
     }
 
     @Override
