@@ -64,6 +64,9 @@ public class MBOProduct implements Serializable {
     @Column(name = "sap_style_id")
     private String sapStyleId;
 
+    @Column(name = "sap_sku_id")
+    private String sapSkuId;
+
     public Long getId() {
         return id;
     }
@@ -183,7 +186,7 @@ public class MBOProduct implements Serializable {
     public void setSapStyleId(String sapStyleId) {
         this.sapStyleId = sapStyleId;
     }
-    
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -220,5 +223,13 @@ public class MBOProduct implements Serializable {
             ", description='" + description + "'" +
             ", sapStyleId='" + sapStyleId + "'" +
             '}';
+    }
+
+    public String getSapSkuId() {
+        return sapSkuId;
+    }
+
+    public void setSapSkuId(String sapSkuId) {
+        this.sapSkuId = sapSkuId;
     }
 }

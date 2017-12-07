@@ -24,7 +24,7 @@ public class ProductDTO {
     public String image = "";
     public String styleId = "";
     public String sapStyleId = "";
-
+    public String sapSkuId = "";
     public ProductDTO() {
 
     }
@@ -43,6 +43,7 @@ public class ProductDTO {
         this.setSkuId(mboProduct.getSku());
         this.setStyleId(mboProduct.getStyleId());
         this.setSapStyleId(mboProduct.getSapStyleId());
+        this.setSapSkuId(mboProduct.getSapSkuId());
     }
 
 
@@ -219,6 +220,12 @@ public class ProductDTO {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+    public String getSapSkuId() {
+        return sapSkuId;
+    }
+    public void setSapSkuId(String sapSkuId) {
+        this.sapSkuId = sapSkuId;
     }
 
 }
