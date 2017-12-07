@@ -1,5 +1,6 @@
 package com.aliens.hipster.msg;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,4 +18,5 @@ public class DummyMessage {
     String name;
     String gender;
     int age;
+    List<DummyMessage> dummyMessageList;
 }

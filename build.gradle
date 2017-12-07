@@ -450,6 +450,16 @@ project('filters')
         dependencies
             {
                 compile('com.squareup.okhttp3:okhttp:3.3.1')
+               // compile project(':filters')
+            }
+    }
+
+
+project('filters')
+    {
+        dependencies
+            {
+                compile('com.squareup.okhttp3:okhttp:3.3.1')
             }
     }
 
