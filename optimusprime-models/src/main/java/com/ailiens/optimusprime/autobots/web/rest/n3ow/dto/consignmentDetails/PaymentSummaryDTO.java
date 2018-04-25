@@ -24,14 +24,15 @@ public class PaymentSummaryDTO {
     public BigDecimal cod = new BigDecimal(0.0);
     public BigDecimal som_pos = new BigDecimal(0.0);
     public BigDecimal som_cod = new BigDecimal(0.0);
+    public BigDecimal ezetap = new BigDecimal(0.0);
     public String paymentMode = "";
-    public List<PaymentTransactionalDetails> paymentTransactionalDetails  = new ArrayList<>();
+    public List<PaymentTransactionalDetails> paymentTransactionalDetails  = new ArrayList<>(); //Payment transactional details for SAP
 
     public PaymentSummaryDTO() {
 
     }
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,
-                             BigDecimal card, BigDecimal som_cod, BigDecimal som_pos, String paymentMode, Set<Payment>  payments) {
+                             BigDecimal card, BigDecimal som_cod, BigDecimal som_pos, BigDecimal ezetap, String paymentMode, Set<Payment>  payments) {
         this.voucher = returnDefault(voucher);
         this.card = returnDefault(card);
         this.NNNowCash = returnDefault(nNNowCash);
@@ -39,6 +40,7 @@ public class PaymentSummaryDTO {
         this.cod=returnDefault(cod);
         this.som_cod=returnDefault(som_cod);
         this.som_pos=returnDefault(som_pos);
+        this.ezetap=returnDefault(ezetap);
         this.paymentMode= StringUtils.trimToNull(paymentMode) == null ? "" : paymentMode;
         if(payments != null && payments.size() > 0) {
             payments.forEach(pay -> this.paymentTransactionalDetails.add(new PaymentTransactionalDetails(pay)));
@@ -47,7 +49,7 @@ public class PaymentSummaryDTO {
     }
 
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,
-                             BigDecimal card) {
+                             BigDecimal card, BigDecimal ezetap) {
 
 
         this.voucher = returnDefault(voucher);
@@ -55,7 +57,7 @@ public class PaymentSummaryDTO {
         this.NNNowCash = returnDefault(nNNowCash);
         this.online = returnDefault(online);
         this.cod=returnDefault(cod);
-
+        this.ezetap=returnDefault(ezetap);
     }
 
     public BigDecimal getVoucher() {
@@ -120,6 +122,15 @@ public class PaymentSummaryDTO {
 
     public void setPaymentMode(String paymentMode) {
         this.paymentMode = paymentMode;
+    }
+
+
+    public BigDecimal getEzetap() {
+        return ezetap;
+    }
+
+    public void setEzetap(BigDecimal ezetap) {
+        this.ezetap = ezetap;
     }
 
     public List<PaymentTransactionalDetails> getPaymentTransactionalDetails() {

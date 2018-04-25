@@ -20,9 +20,10 @@ public class PaymentSummaryDTO {
     public BigDecimal cod;
     public BigDecimal som_pos;
     public BigDecimal som_cod;
+    public BigDecimal ezetap;
 
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,
-                             BigDecimal card, BigDecimal som_cod, BigDecimal som_pos) {
+                             BigDecimal card, BigDecimal som_cod, BigDecimal som_pos, BigDecimal ezetap) {
         this.voucher = voucher;
         this.card = card;
         this.NNNowCash = nNNowCash;
@@ -30,19 +31,17 @@ public class PaymentSummaryDTO {
         this.cod=cod;
         this.som_cod=som_cod;
         this.som_pos=som_pos;
-    }
-
-    public PaymentSummaryDTO() {
-        super();
+        this.ezetap=ezetap;
     }
 
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,
-                             BigDecimal card) {
+                             BigDecimal card, BigDecimal ezetap) {
         this.voucher = voucher;
         this.card = card;
         this.NNNowCash = nNNowCash;
         this.online = online;
         this.cod=cod;
+        this.ezetap=ezetap;
     }
 
     public BigDecimal getVoucher() {
@@ -99,6 +98,14 @@ public class PaymentSummaryDTO {
 
     public void setSom_cod(BigDecimal som_cod) {
         this.som_cod = som_cod;
+    }
+
+    public BigDecimal getEzetap() {
+        return ezetap;
+    }
+
+    public void setEzetap(BigDecimal ezetap) {
+        this.ezetap = ezetap;
     }
 
     @Override

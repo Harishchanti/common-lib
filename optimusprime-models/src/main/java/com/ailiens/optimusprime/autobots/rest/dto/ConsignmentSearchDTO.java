@@ -38,7 +38,7 @@ public class ConsignmentSearchDTO {
     private String orderStatus;
     private SourceMetadata source;
     private String sourceOrderId;  //ADDED  source id  for BT search  @adi
-
+    private String sourceSubOrderId;
 
 //    public ConsignmentSearchDTO(Object ...objects)
 //    {
@@ -66,6 +66,17 @@ public class ConsignmentSearchDTO {
 //    }
 
 
+    public ConsignmentSearchDTO() {
+    }
+
+    public String getSourceSubOrderId() {
+        return sourceSubOrderId;
+    }
+
+    public void setSourceSubOrderId(String sourceSubOrderId) {
+        this.sourceSubOrderId = sourceSubOrderId;
+    }
+
     public ConsignmentSearchDTO(ConsignmentSearchDTO consignmentSearchDTO) {
     }
 
@@ -77,8 +88,8 @@ public class ConsignmentSearchDTO {
                                 String customerName, String awbNumber, ZonedDateTime deliveryDate,
                                 ZonedDateTime consignmentStamp, String orderingCenterId,
                                 String orderingCenterName, String fulfillmentCenterId,
-                                String fulfillmentCenterName, String consignmentStatus, String orderStatus, 
-                                SourceMetadata source, String sourceId ) {
+                                String fulfillmentCenterName, String consignmentStatus, String orderStatus,
+                                SourceMetadata source, String sourceId ,String sourceSubOrderId) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.consignmentId = consignmentId;
@@ -101,6 +112,7 @@ public class ConsignmentSearchDTO {
         this.orderStatus = orderStatus;
         this.source = source;
         this.sourceOrderId = sourceId;
+        this.sourceSubOrderId=sourceSubOrderId;
     }
 
     public String getOrderId() {
@@ -262,27 +274,27 @@ public class ConsignmentSearchDTO {
     public void setOrderStatus(String orderStatus) {
         this.orderStatus = orderStatus;
     }
-  
-    
-    
+
+
+
     public SourceMetadata getSourceMetadata() {
-		return source;
-	}
+        return source;
+    }
 
-	public void setSourceMetadata(SourceMetadata sourceMetadata) {
-		this.source = sourceMetadata;
-	}
-	
-	
-	public String getSourceOrderId() {
-		return sourceOrderId;
-	}
+    public void setSourceMetadata(SourceMetadata sourceMetadata) {
+        this.source = sourceMetadata;
+    }
 
-	public void setSourceOrderId(String sourceOrderId) {
-		this.sourceOrderId = sourceOrderId;
-	}
 
-	@Override
+    public String getSourceOrderId() {
+        return sourceOrderId;
+    }
+
+    public void setSourceOrderId(String sourceOrderId) {
+        this.sourceOrderId = sourceOrderId;
+    }
+
+    @Override
     public String toString() {
         return "ConsignmentSearchDTO{" +
             "orderId='" + orderId + '\'' +
@@ -307,6 +319,8 @@ public class ConsignmentSearchDTO {
             ", orderStatus='" + orderStatus + '\'' +
             ", source'" + source.toString() + '\'' +
             ", sourceOrderId'" + sourceOrderId + '\'' +
+            ", sourceSubOrderId'" + sourceSubOrderId + '\'' +
+
             '}';
     }
 }

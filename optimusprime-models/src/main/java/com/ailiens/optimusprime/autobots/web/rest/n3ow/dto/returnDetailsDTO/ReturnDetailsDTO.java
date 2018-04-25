@@ -1,6 +1,7 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.returnDetailsDTO;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Generated;
@@ -25,6 +26,7 @@ public class ReturnDetailsDTO {
     private String returnInitiatedDate;
     private String returnCancellationSLA;
     private String qualityBucket;
+    private BigDecimal refundAmount;
     private ReturnPricingDetails returnPricingDetails;
     private ReturnType returnType;
     private String neft;
@@ -86,6 +88,14 @@ public class ReturnDetailsDTO {
 
     public void setErpInvoiceId(String erpInvoiceId) {
         this.erpInvoiceId = erpInvoiceId;
+    }
+
+    public BigDecimal getRefundAmount() {
+        return refundAmount;
+    }
+
+    public void setRefundAmount(BigDecimal refundAmount) {
+        this.refundAmount = refundAmount;
     }
 
     /**
@@ -391,3 +401,4 @@ public class ReturnDetailsDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 }
+
