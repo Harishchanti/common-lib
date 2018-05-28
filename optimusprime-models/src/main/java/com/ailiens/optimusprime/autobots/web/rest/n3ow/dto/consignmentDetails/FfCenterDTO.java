@@ -16,12 +16,12 @@ public class FfCenterDTO {
     public String fcName;
     public String brand;
     public String fcType;
-    public String postCode;
+    public String postCode = "";
     public String stateCode = "";
     public String gstnCode = "";
 
     public FfCenterDTO() {
-
+    	
     }
 
     public FfCenterDTO(FullfilmentCenter fullfilmentCenter) {

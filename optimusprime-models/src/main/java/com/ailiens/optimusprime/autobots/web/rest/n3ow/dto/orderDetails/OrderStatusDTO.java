@@ -25,9 +25,6 @@ public class OrderStatusDTO {
     	}
 	}
 
-    public OrderStatusDTO() {
-        super();
-    }
 
 
 

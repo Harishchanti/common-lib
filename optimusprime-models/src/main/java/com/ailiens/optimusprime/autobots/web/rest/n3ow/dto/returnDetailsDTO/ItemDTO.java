@@ -36,10 +36,6 @@ public class ItemDTO {
 	}
 
 
-    public ItemDTO() {
-        super();
-    }
-
 
 	public String getItemId() {
 		return itemId;

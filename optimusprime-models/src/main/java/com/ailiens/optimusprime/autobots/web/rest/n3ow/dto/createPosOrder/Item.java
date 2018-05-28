@@ -20,7 +20,7 @@ public class Item {
     private Integer schemeSlNumber;
 
     /**
-     *
+     * 
      * @return
      *     The discountPercentage
      */
@@ -29,7 +29,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param discountPercentage
      *     The discountPercentage
      */
@@ -38,7 +38,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The schemeCode
      */
@@ -47,7 +47,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param schemeCode
      *     The schemeCode
      */
@@ -56,7 +56,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The quantity
      */
@@ -65,7 +65,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param quantity
      *     The quantity
      */
@@ -74,7 +74,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The tax1Rate
      */
@@ -83,7 +83,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param tax1Rate
      *     The tax1Rate
      */
@@ -92,7 +92,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The price
      */
@@ -101,7 +101,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param price
      *     The price
      */
@@ -110,7 +110,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The basicAmount
      */
@@ -119,7 +119,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param basicAmount
      *     The basicAmount
      */
@@ -128,7 +128,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The eancode
      */
@@ -137,7 +137,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param eancode
      *     The eancode
      */
@@ -146,7 +146,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The discountAmount
      */
@@ -155,7 +155,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param discountAmount
      *     The discountAmount
      */
@@ -164,7 +164,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The discountReason
      */
@@ -172,12 +172,8 @@ public class Item {
         return discountReason;
     }
 
-    public Item(){
-        super();
-    }
-
     /**
-     *
+     * 
      * @param discountReason
      *     The discountReason
      */
@@ -186,7 +182,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The tax1Amount
      */
@@ -195,7 +191,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param tax1Amount
      *     The tax1Amount
      */
@@ -204,7 +200,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @return
      *     The schemeSlNumber
      */
@@ -213,7 +209,7 @@ public class Item {
     }
 
     /**
-     *
+     * 
      * @param schemeSlNumber
      *     The schemeSlNumber
      */

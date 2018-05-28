@@ -10,22 +10,22 @@ import com.ailiens.optimusprime.domain.Orders;
 @Generated("org.jsonschema2pojo")
 public class AccountsDetailsDTO {
 
-    public String username;
-    public String userId;
-    public String title;
-    public String firstName;
-    public String middleName;
-    public String lastName;
-    public String gender;
-    public String dateOfBirth;
-    public String phonenumber;
-    public String email;
+    public String username = "";
+    public String userId = "";
+    public String title = "";
+    public String firstName = "";
+    public String middleName = "";
+    public String lastName = "";
+    public String gender = "";
+    public String dateOfBirth = "";
+    public String phonenumber = "";
+    public String email = "";
 
-    public  AccountsDetailsDTO () {
-
+    public AccountsDetailsDTO () {
+    	
     }
     public AccountsDetailsDTO(Accounts accounts) {
-
+	
     	if(accounts!=null){
     		this.setUserId(accounts.getAccountId());
     		this.setDateOfBirth(String.valueOf(accounts.getDateOfBirth()));
@@ -40,8 +40,8 @@ public class AccountsDetailsDTO {
     	}
 	}
 
-
-
+    
+    
 	public String getUsername() {
 		return username;
 	}

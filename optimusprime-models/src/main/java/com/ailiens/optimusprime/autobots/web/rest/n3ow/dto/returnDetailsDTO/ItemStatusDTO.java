@@ -23,16 +23,11 @@ public class ItemStatusDTO {
     	}
 	}
 
-
-
+    
+    
 	public String getId() {
 		return id;
 	}
-
-
-    public ItemStatusDTO() {
-        super();
-    }
 
 
 

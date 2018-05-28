@@ -18,8 +18,8 @@ import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.historyDTO.History;
 public class ConsignmentDTO {
 
     public String consignmentId;
-    public String invoiceId;
-    public String invoiceDate;
+    public String invoiceId = "";
+    public String invoiceDate = "";
     public Integer itemCount;
     public String slaEndTime;
     public BigDecimal consignmentNetAmount = new BigDecimal(0);
@@ -33,6 +33,15 @@ public class ConsignmentDTO {
     public List<ItemDTO> items = new ArrayList<ItemDTO>();
     public List<History> consignmentHistory = new ArrayList<History>();
     public List<ConsignmentParamsDTO> consignmentParams = new ArrayList<>();
+
+    public String tenantId;
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
     //public String source;
     /*public Orders orders;*/
 /*public SourceMetadata sourceMetadata;*/
@@ -41,7 +50,7 @@ public class ConsignmentDTO {
 		return consignmentId;
 	}
 
-	public ConsignmentDTO() {
+    public ConsignmentDTO() {
 
     }
 

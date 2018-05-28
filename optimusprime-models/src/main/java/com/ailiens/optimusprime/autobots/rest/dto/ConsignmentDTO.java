@@ -1,15 +1,13 @@
 package com.ailiens.optimusprime.autobots.rest.dto;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import com.ailiens.optimusprime.domain.Address;
 import com.ailiens.optimusprime.domain.Consignment;
 import com.ailiens.optimusprime.domain.OrderLine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Inject;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A DTO representing a consignment.

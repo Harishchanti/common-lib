@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
 @Configuration
-public class ServicesConfiguration implements EnvironmentAware {
+public class ServicesConfiguration implements EnvironmentAware{
 	private final static Logger log = LoggerFactory.getLogger(ServicesConfiguration.class);
 
     private static RelaxedPropertyResolver propertyResolver;
@@ -23,7 +23,7 @@ public class ServicesConfiguration implements EnvironmentAware {
 	}
 
 	public String getFcmURL() {
-		return propertyResolver.getProperty("fcm",String.class,"");
+		return propertyResolver.getProperty("fcm.base",String.class,"");
 	}
 
     public String getPricingEngineURL() {
@@ -37,7 +37,18 @@ public class ServicesConfiguration implements EnvironmentAware {
 
     public String getIms2URL() { return propertyResolver.getProperty("ims2",String.class,""); }
 
-    public String getGatewayURL() { return propertyResolver.getProperty("gateway",String.class,""); }
+    public String getImsEanDataURL() { return propertyResolver.getProperty("imsEan",String.class,""); }
+
+    public String getIms2ReserveGlobalQuantityURL() { return propertyResolver.getProperty("imsReserveGlobalQuantity",String.class,""); }
+
+
+    @Deprecated
+    public String getImsFclistFilterURL() { return propertyResolver.getProperty("ims2FclistFilter",String.class,""); }
+
+    public String getIms2UpdateStockToReserve() { return propertyResolver.getProperty("ims2UpdateStockToReserve",String.class,""); }
+
+
+    public String getGatewayURL() { return propertyResolver.getProperty("gateway.base",String.class,""); }
 
     public String getPaymentsURL() { return propertyResolver.getProperty("kuber",String.class,""); }
 
@@ -89,4 +100,43 @@ public class ServicesConfiguration implements EnvironmentAware {
     public String getRedisURL(){
         return propertyResolver.getProperty("redisUrl",String.class,"");
     }
+
+    public String getSambhaUrl() { return propertyResolver.getProperty("sambha.url",String.class,"");  } ///
+    
+    public String getRoadbusterURL(){
+        return propertyResolver.getProperty("roadbuster",String.class,"");
+    }
+
+    public String getGatewayBookingOrderURL() { return propertyResolver.getProperty("gateway.booking",String.class,""); }
+
+    public String getGatewaySellOrderURL() { return propertyResolver.getProperty("gateway.sell",String.class,""); }
+
+    public String getFCMUpdateOrderQuantityAPI() {return propertyResolver.getProperty("fcm.updateOrderQuantity",String.class,""); }
+
+    public String getChandlerURL() { return propertyResolver.getProperty("chandler", String.class,"");}
+    public String getChandlerSellOrderURL() { return propertyResolver.getProperty("chandler.sell", String.class,"");}
+
+    public String getOmsURL() { return propertyResolver.getProperty("oms.base", String.class, ""); }
+    public String getOmsBTCreateOrder() { return propertyResolver.getProperty("oms.btCreateOrder", String.class,""); }
+    public String getOmsBTOrderChangeStatus() { return propertyResolver.getProperty("oms.btOrderChangeStatus", String.class,""); }
+
+
+    public String getTransporterBaseUrl() { return propertyResolver.getProperty("transporter.base", String.class, ""); }
+    public String getTransporterSendMailUrl() { return  getTransporterBaseUrl() + propertyResolver.getProperty("transporter.sendMail", String.class, ""); }
+    public String getIVRUrl() { return  propertyResolver.getProperty("transporter.sendIVR", String.class, ""); }
+    public String isThirdPartyEnable() { return propertyResolver.getProperty("transporter.callThirdParty", String.class, ""); }
+
+
+    public String getNickFuryCreateOrderURL() { return propertyResolver.getProperty("nickfuryCreateOrder", String.class,"");}
+
+    public String getMyAccountCartURL(){ return propertyResolver.getProperty("cartUrl", String.class, "");}
+
+    public String getMyAccountClearCartURL(){return propertyResolver.getProperty("clearCartUrl", String.class, "") ;}
+    
+    public String getSambhaBucketBasetUrl(){return propertyResolver.getProperty("sambhaBucket.baseUrl", String.class, "") ;}
+    
+    public String getServiceName(){return propertyResolver.getProperty("sambhaBucket.serviceName", String.class, "") ;}
+    
+    public String getDefaultInvoiceUrl(){return propertyResolver.getProperty("sambhaBucket.defaultInvoiceUrl", String.class, "") ;}
+    
 }

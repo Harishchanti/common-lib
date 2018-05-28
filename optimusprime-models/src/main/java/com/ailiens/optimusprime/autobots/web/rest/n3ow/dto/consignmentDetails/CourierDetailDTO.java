@@ -8,26 +8,26 @@ import com.ailiens.optimusprime.domain.Courier;
  */
 
 public class CourierDetailDTO {
-
+    
     private Integer courierId;
-
+    
     private String courierName = "";
 
     private String courierReferenceId = "";
-
-
+    
+    
     public CourierDetailDTO(Courier courier) {
-        if(courier != null) {
-            this.courierId = courier.getId();
-            this.courierName = courier.getCourierName();
-            this.courierReferenceId = courier.getCourierReferenceId();
-        }
+		if(courier != null) {
+		   this.courierId = courier.getId();
+		   this.courierName = courier.getCourierName();
+		   this.courierReferenceId = courier.getCourierReferenceId();
+		}
     }
 
-    public CourierDetailDTO() {
-
-    }
-
+   public CourierDetailDTO() {
+       
+   }
+    
     public Integer getCourierId() {
         return courierId;
     }
@@ -52,5 +52,5 @@ public class CourierDetailDTO {
         this.courierReferenceId = courierReferenceId;
     }
 
-
+    
 }

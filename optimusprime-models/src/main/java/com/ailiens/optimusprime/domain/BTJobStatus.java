@@ -30,7 +30,9 @@ public class BTJobStatus implements Serializable {
     @Column(name = "token")
     private String token;
 
-    public BTJobStatusPk(Long orderId, String token) {
+   
+
+	public BTJobStatusPk(Long orderId, String token) {
       this.orderId = orderId;
       this.token = token;
     }
@@ -68,6 +70,12 @@ public class BTJobStatus implements Serializable {
   
   @Column(name ="lastmodified_on")
   private Date lastModifiedOn;
+  
+  @Column(name ="notify")
+  private byte notify;
+  
+  @Column(name = "tenant_id")
+  private String tenantId;
   
   
   public BTJobStatus() {
@@ -113,6 +121,24 @@ public class BTJobStatus implements Serializable {
   public void setLastModifiedOn(Date lastModifiedOn) {
     this.lastModifiedOn = lastModifiedOn;
   }
+  
+  public byte getNotify() {
+    return notify;
+  }
+
+  public void setNotify(byte notify) {
+    this.notify = notify;
+  }
+  
+
+  
+  public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
 
 
   @Override

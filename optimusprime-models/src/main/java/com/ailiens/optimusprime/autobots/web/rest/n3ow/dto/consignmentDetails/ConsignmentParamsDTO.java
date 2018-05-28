@@ -12,9 +12,9 @@ public class ConsignmentParamsDTO {
     private String paramValue;
 
     private Boolean paramRequired;
-
+    
     public ConsignmentParamsDTO() {
-
+    	
     }
 
     public ConsignmentParamsDTO(ConsignmentParams consignmentParams) {

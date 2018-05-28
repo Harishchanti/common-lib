@@ -17,15 +17,11 @@ public class AddressDetailsDTO {
     	}
 	}
 
-
-
+    
+    
 	public String getAddressId() {
 		return addressId;
 	}
-
-	public AddressDetailsDTO(){
-        super();
-    }
 
 
 

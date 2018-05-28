@@ -21,12 +21,12 @@ public class PaymentTransactionalDetails {
 
     public PaymentTransactionalDetails(Payment payment) {
 
-        if(payment != null) {
-            this.paymentId = payment.getPaymentId();
-            this.paymentStatus = payment.getPaymentStatus();
-            this.paymentAmount = payment.getPaymentAmount();
-            this.direction = payment.getDirection();
-        }
+	if(payment != null) {
+	    this.paymentId = payment.getPaymentId();
+	    this.paymentStatus = payment.getPaymentStatus();
+	    this.paymentAmount = payment.getPaymentAmount();
+	    this.direction = payment.getDirection();
+	}
 
     }
 

@@ -12,7 +12,7 @@ public class RefundTotalDiscountDetails {
     private String refundTotalDiscount;
 
     /**
-     *
+     * 
      * @return
      *     The refundProductDiscount
      */
@@ -21,7 +21,7 @@ public class RefundTotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @param refundProductDiscount
      *     The refundProductDiscount
      */
@@ -30,7 +30,7 @@ public class RefundTotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @return
      *     The refundCartDiscount
      */
@@ -39,7 +39,7 @@ public class RefundTotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @param refundCartDiscount
      *     The refundCartDiscount
      */
@@ -48,7 +48,7 @@ public class RefundTotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @return
      *     The refundTotalDiscount
      */
@@ -57,18 +57,12 @@ public class RefundTotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @param refundTotalDiscount
      *     The refundTotalDiscount
      */
     public void setRefundTotalDiscount(String refundTotalDiscount) {
         this.refundTotalDiscount = refundTotalDiscount;
-    }
-
-
-
-    public RefundTotalDiscountDetails() {
-        super();
     }
 
     @Override

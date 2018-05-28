@@ -17,8 +17,8 @@ public class FfTypeDTO {
 		this.setType(orderLine.getFullfilmentType().getType());
 	}
 
-
-
+    
+    
 	public String getFfType() {
 		return ffType;
 	}
@@ -28,10 +28,6 @@ public class FfTypeDTO {
 	public void setFfType(String ffType) {
 		this.ffType = ffType;
 	}
-
-	public FfTypeDTO(){
-        super();
-    }
 
 
 

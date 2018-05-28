@@ -16,7 +16,7 @@ public class OrderStatusDTO {
     public String orderStatusToOms;
 
     public OrderStatusDTO() {
-
+    	
     }
     public OrderStatusDTO(Orders order) {
     	if(order.getOrderStates() !=null){

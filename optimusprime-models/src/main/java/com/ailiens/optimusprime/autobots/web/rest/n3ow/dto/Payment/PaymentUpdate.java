@@ -27,10 +27,6 @@ public class PaymentUpdate {
         return paymentId;
     }
 
-    public PaymentUpdate() {
-        super();
-    }
-
     /**
      *
      * @param paymentId

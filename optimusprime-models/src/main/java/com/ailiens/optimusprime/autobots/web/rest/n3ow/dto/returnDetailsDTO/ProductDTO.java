@@ -11,19 +11,19 @@ import com.ailiens.optimusprime.domain.MBOProduct;
 @Generated("org.jsonschema2pojo")
 public class ProductDTO {
 
-    public String description;
-    public String skuId;
-    public String color;
-    public String size;
-    public String brand;
-    public BigDecimal mrp;
-    public String eanCode;
-    public String category1;
-    public String category2;
-    public String category3;
-    public String image;
-    public String styleId;
-    public String sapStyleId;
+    public String description = "";
+    public String skuId = "";
+    public String color = "";
+    public String size = "";
+    public String brand = "";
+    public BigDecimal mrp = new BigDecimal(0.0);
+    public String eanCode = "";
+    public String category1 = "";
+    public String category2 = "";
+    public String category3 = "";
+    public String image = "";
+    public String styleId = "";
+    public String sapStyleId = "";
 
     public ProductDTO(MBOProduct mboProduct) {
 
@@ -48,11 +48,6 @@ public class ProductDTO {
 	public String getDescription() {
 		return description;
 	}
-
-
-    public ProductDTO() {
-        super();
-    }
 
 
 

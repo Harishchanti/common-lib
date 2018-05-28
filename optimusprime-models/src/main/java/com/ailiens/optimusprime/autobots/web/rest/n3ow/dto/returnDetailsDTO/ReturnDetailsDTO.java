@@ -137,14 +137,14 @@ public class ReturnDetailsDTO {
 
 
     public String getQualityBucket() {
-        return qualityBucket;
-    }
+		return qualityBucket;
+	}
 
-    public void setQualityBucket(String qualityBucket) {
-        this.qualityBucket = qualityBucket;
-    }
+	public void setQualityBucket(String qualityBucket) {
+		this.qualityBucket = qualityBucket;
+	}
 
-    /**
+	/**
      *
      * @return
      *     The returnPricingDetails
@@ -333,12 +333,12 @@ public class ReturnDetailsDTO {
     }
 
     public ItemDTO getItem() {
-        return item;
-    }
+		return item;
+	}
 
-    public void setItem(ItemDTO item) {
-        this.item = item;
-    }
+	public void setItem(ItemDTO item) {
+		this.item = item;
+	}
 
     public AccountsDetailsDTO getCustomerDetails() {
         return CustomerDetails;
@@ -349,12 +349,12 @@ public class ReturnDetailsDTO {
     }
 
     public List<ReturnsHistory> getReturnHistory() {
-        return returnHistory;
-    }
+		return returnHistory;
+	}
 
-    public void setReturnHistory(List<ReturnsHistory> returnHistory) {
-        this.returnHistory = returnHistory;
-    }
+	public void setReturnHistory(List<ReturnsHistory> returnHistory) {
+		this.returnHistory = returnHistory;
+	}
 
     public String getReturnConsignmentStatus() {
         return returnConsignmentStatus;
@@ -401,4 +401,3 @@ public class ReturnDetailsDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 }
-

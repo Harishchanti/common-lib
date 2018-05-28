@@ -17,6 +17,9 @@ public class ItemStatusDTO {
     public String itemStatusComment;
     public Long itemStatusReasonId;
 
+    public ItemStatusDTO() {
+    	
+    }
     public ItemStatusDTO(OrderLine orderLine) {
     	if(orderLine.getOrderLineStates() != null){
 	    	this.setId(String.valueOf(orderLine.getOrderLineStates().getId()));
@@ -26,9 +29,7 @@ public class ItemStatusDTO {
     	}
 	}
 
-    public ItemStatusDTO() {
 
-    }
 
 	public String getId() {
 		return id;

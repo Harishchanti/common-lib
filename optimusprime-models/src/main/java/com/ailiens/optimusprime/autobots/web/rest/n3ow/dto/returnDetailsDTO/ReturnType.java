@@ -11,7 +11,7 @@ public class ReturnType {
     private Integer id;
 
     /**
-     *
+     * 
      * @return
      *     The name
      */
@@ -19,13 +19,8 @@ public class ReturnType {
         return name;
     }
 
-
-    public ReturnType() {
-        super();
-    }
-
     /**
-     *
+     * 
      * @param name
      *     The name
      */
@@ -34,7 +29,7 @@ public class ReturnType {
     }
 
     /**
-     *
+     * 
      * @return
      *     The id
      */
@@ -43,7 +38,7 @@ public class ReturnType {
     }
 
     /**
-     *
+     * 
      * @param id
      *     The id
      */

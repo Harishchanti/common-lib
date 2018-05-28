@@ -10,7 +10,7 @@ public class TotalActualHitRule {
     private String name;
 
     /**
-     *
+     * 
      * @return
      *     The id
      */
@@ -19,7 +19,7 @@ public class TotalActualHitRule {
     }
 
     /**
-     *
+     * 
      * @param id
      *     The id
      */
@@ -27,12 +27,8 @@ public class TotalActualHitRule {
         this.id = id;
     }
 
-    public TotalActualHitRule() {
-        super();
-    }
-
     /**
-     *
+     * 
      * @return
      *     The name
      */
@@ -41,7 +37,7 @@ public class TotalActualHitRule {
     }
 
     /**
-     *
+     * 
      * @param name
      *     The name
      */

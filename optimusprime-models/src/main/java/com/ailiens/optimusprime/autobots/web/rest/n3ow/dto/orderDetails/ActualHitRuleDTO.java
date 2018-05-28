@@ -28,10 +28,6 @@ public class ActualHitRuleDTO {
 		this.id = id;
 	}
 
-	public ActualHitRuleDTO(){
-        super();
-    }
-
 	public String getName() {
 		return name;
 	}

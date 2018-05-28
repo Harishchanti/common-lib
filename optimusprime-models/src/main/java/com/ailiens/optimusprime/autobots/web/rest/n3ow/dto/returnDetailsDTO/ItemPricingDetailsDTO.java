@@ -18,17 +18,17 @@ import com.ailiens.optimusprime.domain.Taxes;
 @Generated("org.jsonschema2pojo")
 public class ItemPricingDetailsDTO {
 
-    public BigDecimal discount;
-    public BigDecimal nnnowCash;
-    public BigDecimal netAmount;
-    public BigDecimal value;
-    public BigDecimal sp;
-    public BigDecimal tradeSp;
-    public BigDecimal tax;
-    public BigDecimal taxPercentage;
-    public BigDecimal discountPercentage;
+    public BigDecimal discount = new BigDecimal(0.0);
+    public BigDecimal nnnowCash = new BigDecimal(0.0);
+    public BigDecimal netAmount = new BigDecimal(0.0);
+    public BigDecimal value = new BigDecimal(0.0);
+    public BigDecimal sp = new BigDecimal(0.0);
+    public BigDecimal tradeSp = new BigDecimal(0.0);
+    public BigDecimal tax = new BigDecimal(0.0);
+    public BigDecimal taxPercentage = new BigDecimal(0.0);
+    public BigDecimal discountPercentage = new BigDecimal(0.0);
     public String taxClass;
-    public Boolean taxInclusive;
+    public Boolean taxInclusive=false;
     public List<ActualHitRuleDTO> actualHitRule = new ArrayList<ActualHitRuleDTO>();
     private BigDecimal cgstAmount = new BigDecimal(0.0);
     private BigDecimal sgstAmount = new BigDecimal(0.0);
@@ -85,10 +85,6 @@ public class ItemPricingDetailsDTO {
         }
 	}
 
-
-    public ItemPricingDetailsDTO() {
-        super();
-    }
 
 
 	public BigDecimal getDiscount() {

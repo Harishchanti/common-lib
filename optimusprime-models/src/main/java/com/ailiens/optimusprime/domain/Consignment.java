@@ -4,14 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
-import java.math.BigDecimal;
-import java.time.ZonedDateTime;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * A Consignment.
@@ -43,6 +42,11 @@ public class Consignment implements Serializable {
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<OrderLine> orderLines = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "consignment")
+    @JsonIgnore
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    private Set<ConsignmentStatesChange> ConsignmentStatesChange = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "consignment_states_id")
@@ -102,10 +106,13 @@ public class Consignment implements Serializable {
     @Column(name="consignment_stamp")
     private ZonedDateTime consignmentStamp;
 
-    
-    @Column(name = "source")
-    private String source;
-    
+    @Column(name="tenantId")
+    private String tenantId;
+
+
+ /*   @Column(name = "source")
+    private String source;*/
+
     public Long getId() {
         return id;
     }
@@ -300,7 +307,25 @@ public class Consignment implements Serializable {
         this.consignmentStamp = consignmentStamp;
     }
 
-    @Override
+
+//
+//    public Set<ConsignmentStatesChange> getConsignmentStatesChange() {
+//		return ConsignmentStatesChange;
+//	}
+//
+//	public void setConsignmentStatesChange(Set<ConsignmentStatesChange> consignmentStatesChange) {
+//		ConsignmentStatesChange = consignmentStatesChange;
+//	}
+
+	public String getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
@@ -328,11 +353,4 @@ public class Consignment implements Serializable {
             '}';
     }
 
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
 }

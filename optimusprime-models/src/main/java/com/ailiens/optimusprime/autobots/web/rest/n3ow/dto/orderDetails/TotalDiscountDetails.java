@@ -13,7 +13,7 @@ public class TotalDiscountDetails {
     private BigDecimal totalDiscount;
 
     /**
-     *
+     * 
      * @return
      *     The productDiscount
      */
@@ -21,13 +21,8 @@ public class TotalDiscountDetails {
         return productDiscount;
     }
 
-
-    public TotalDiscountDetails() {
-        super();
-    }
-
     /**
-     *
+     * 
      * @param productDiscount
      *     The productDiscount
      */
@@ -36,7 +31,7 @@ public class TotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @return
      *     The cartDiscount
      */
@@ -45,7 +40,7 @@ public class TotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @param cartDiscount
      *     The cartDiscount
      */
@@ -54,7 +49,7 @@ public class TotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @return
      *     The totalDiscount
      */
@@ -63,7 +58,7 @@ public class TotalDiscountDetails {
     }
 
     /**
-     *
+     * 
      * @param totalDiscount
      *     The totalDiscount
      */

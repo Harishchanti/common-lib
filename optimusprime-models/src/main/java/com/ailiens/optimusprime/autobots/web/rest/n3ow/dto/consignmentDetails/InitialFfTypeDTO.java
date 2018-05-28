@@ -15,14 +15,15 @@ public class InitialFfTypeDTO {
     public String ffType;
     public String type;
 
+    public InitialFfTypeDTO() {
+    	
+    }
     public InitialFfTypeDTO(OrderLine orderLine) {
         this.setFfType(orderLine.getInitialFullfilmentType().getName());
         this.setType(orderLine.getInitialFullfilmentType().getType());
     }
 
-    public InitialFfTypeDTO() {
 
-    }
 
     public String getFfType() {
         return ffType;

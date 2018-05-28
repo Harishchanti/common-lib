@@ -24,7 +24,7 @@ public class ItemPricingDetailsDTO {
     public BigDecimal tradeSp;
     public BigDecimal tax;
     public String taxClass;
-    public Boolean taxInclusive;
+    public Boolean taxInclusive=false;
     public List<ActualHitRuleDTO> actualHitRule = new ArrayList<ActualHitRuleDTO>();
     public String hsn;
     private BigDecimal cgstAmount = new BigDecimal(0.0);
@@ -84,10 +84,6 @@ public class ItemPricingDetailsDTO {
 	public BigDecimal getDiscount() {
 		return discount;
 	}
-
-	public ItemPricingDetailsDTO(){
-        super();
-    }
 
 
 

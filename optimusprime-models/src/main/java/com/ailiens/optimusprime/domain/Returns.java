@@ -62,7 +62,8 @@ public class Returns implements Serializable {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "return_location_id")
     private FullfilmentCenter returnLocation;
 
     @ManyToOne

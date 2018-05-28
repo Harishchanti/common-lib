@@ -11,7 +11,7 @@ public class ReturnMode {
     private String name;
 
     /**
-     *
+     * 
      * @return
      *     The id
      */
@@ -19,12 +19,8 @@ public class ReturnMode {
         return id;
     }
 
-    public ReturnMode() {
-        super();
-    }
-
     /**
-     *
+     * 
      * @param id
      *     The id
      */
@@ -33,7 +29,7 @@ public class ReturnMode {
     }
 
     /**
-     *
+     * 
      * @return
      *     The name
      */
@@ -42,7 +38,7 @@ public class ReturnMode {
     }
 
     /**
-     *
+     * 
      * @param name
      *     The name
      */

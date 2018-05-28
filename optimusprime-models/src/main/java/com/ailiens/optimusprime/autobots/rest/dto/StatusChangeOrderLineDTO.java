@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 public class StatusChangeOrderLineDTO {
 
-    StatusChangeOrderLineDTO()
+    public StatusChangeOrderLineDTO()
     {
 
     }
@@ -48,5 +48,16 @@ public class StatusChangeOrderLineDTO {
 
     public void setReasonId(Long reasonId) {
         this.reasonId = reasonId;
+    }
+
+
+    @Override
+    public String toString() {
+        return "StatusChangeOrderLineDTO{" +
+            "orderLineId='" + orderLineId + '\'' +
+            ", status='" + status + '\'' +
+            ", reasonId=" + reasonId +
+            ", comment='" + comment + '\'' +
+            '}';
     }
 }

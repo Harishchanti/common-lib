@@ -129,12 +129,6 @@ public class LogisticsDetailsDTO {
 
 
 
-    public LogisticsDetailsDTO() {
-        super();
-    }
-
-
-
 	public void setCourierName(String courierName) {
 		this.courierName = courierName;
 	}

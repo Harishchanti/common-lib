@@ -27,10 +27,6 @@ public class ConsignmentStatusDTO {
 		return id;
 	}
 
-	public ConsignmentStatusDTO(){
-        super();
-    }
-
 
 
 	public void setId(Long id) {

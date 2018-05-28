@@ -11,17 +11,17 @@ import com.ailiens.optimusprime.domain.OrderLine;
 @Generated("org.jsonschema2pojo")
 public class AddressDetailsDTO {
 
-    public String addressId;
-    public String pincode;
-    private String line1;
-    private String line2;
-    private String line3;
-    private String city;
-    private String state;
-    private String country;
+    public String addressId = "";
+    public String pincode = "";
+    private String line1 = "";
+    private String line2 = "";
+    private String line3 = "";
+    private String city = "";
+    private String state = "";
+    private String country = "";
 
-    public AddressDetailsDTO () {
-
+    public AddressDetailsDTO() {
+    	
     }
     public AddressDetailsDTO(OrderLine orderLine) {
     	if(orderLine.getAddress() != null ){

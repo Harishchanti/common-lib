@@ -18,11 +18,6 @@ public class VoucherDTO {
         return voucherId;
     }
 
-
-    public VoucherDTO() {
-        super();
-    }
-
     /**
      *
      * @param voucherId

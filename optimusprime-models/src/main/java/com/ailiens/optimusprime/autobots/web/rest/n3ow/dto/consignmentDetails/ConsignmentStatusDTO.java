@@ -10,10 +10,14 @@ import com.ailiens.optimusprime.domain.Consignment;
 public class ConsignmentStatusDTO {
 
     public Long id;
-    public String consignmentStatus;
-    public String consignmentStatusType;
-    public String consignmentStatusToCustomer;
-    public String consignmentStatusToOms;
+    public String consignmentStatus = "";
+    public String consignmentStatusType = "";
+    public String consignmentStatusToCustomer = "";
+    public String consignmentStatusToOms = "";
+    
+    public ConsignmentStatusDTO() {
+    	
+    }
 
     public ConsignmentStatusDTO(Consignment consignment) {
     	if(consignment.getConsignmentStates()!=null){
@@ -24,10 +28,6 @@ public class ConsignmentStatusDTO {
             this.setConsignmentStatusToOms(consignment.getConsignmentStates().getStatusToOms());
     	}
 	}
-
-	public ConsignmentStatusDTO() {
-
-    }
 
 	public Long getId() {
 		return id;

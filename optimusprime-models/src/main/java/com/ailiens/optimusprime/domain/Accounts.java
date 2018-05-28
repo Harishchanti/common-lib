@@ -24,8 +24,8 @@ public class Accounts implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotNull
-    @Column(name = "account_id", nullable = false)
+    //@NotNull
+    @Column(name = "account_id")
     private String accountId;
 
     @Column(name = "first_name")

@@ -10,21 +10,25 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "source_metadata")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class SourceMetadata {
-  
-  @Id
+public class SourceMetadata implements Serializable{
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
-  
+
   @Column(name = "name")
   private String name;
-  
+
   @Column(name = "source_reference_id")
   private String sourceReferenceId;
-  
+
   @Column (name = "banner")
   private String banner;
 

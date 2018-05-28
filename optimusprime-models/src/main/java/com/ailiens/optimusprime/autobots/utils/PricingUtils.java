@@ -1,10 +1,13 @@
 package com.ailiens.optimusprime.autobots.utils;
 
-import com.ailiens.optimusprime.domain.Taxes;
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
+
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
+import com.ailiens.optimusprime.domain.Taxes;
 
 public class PricingUtils {
 
@@ -40,5 +43,32 @@ public class PricingUtils {
     public static BigDecimal getTaxPercentageForBTOrder(Taxes taxes) {
 
         return  taxes.getCgstPercentage().add(taxes.getUtgstPercentage().add(taxes.getSgstPercentage().add(taxes.getIgstPercentage())));
+    }
+
+    public static BigDecimal convertStringToBigdecimal(String value, String formatPattern) {
+        if(StringUtils.isEmpty(value)) {
+            return  new BigDecimal("0");
+        }
+        try {
+	    Float tempFloat = Float.valueOf(value);
+	    DecimalFormat fd =  new DecimalFormat(formatPattern);
+	    value = fd.format(tempFloat);
+	} catch (Exception e) {
+            return  new BigDecimal("0");
+	}
+        return new BigDecimal(value);
+
+
+    }
+
+    public static BigDecimal convertFloatToBigdecimal(Float value, String formatPattern) {
+
+        try {
+            DecimalFormat fd =  new DecimalFormat(formatPattern);
+            return new BigDecimal(fd.format(value));
+        } catch (Exception e) {
+
+        }
+        return  new BigDecimal("0");
     }
 }

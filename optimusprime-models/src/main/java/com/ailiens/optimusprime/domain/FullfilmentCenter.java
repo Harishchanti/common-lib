@@ -61,16 +61,16 @@ public class FullfilmentCenter implements Serializable {
     @OneToMany(mappedBy = "fullfilmentCenter")
     @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-   // private OrderLine orderLine;    
+   // private OrderLine orderLine;
     private Set<OrderLine> orderLine = new HashSet<>();
 
     @OneToOne(mappedBy = "orderingCenter")
     @JsonIgnore
     private Orders orders;
 
-    @OneToOne(mappedBy = "returnLocation")
+    @OneToMany(mappedBy = "returnLocation")
     @JsonIgnore
-    private Returns returns;
+    private Set<Returns> returns = new HashSet<>();
 
 
     public FullfilmentCenter(FullfilmentCenter fullfilmentCenter) {
@@ -197,7 +197,7 @@ public class FullfilmentCenter implements Serializable {
         this.gstnCode = gstnCode;
     }
 
-   
+
 
     public Set<OrderLine> getOrderLine() {
 		return orderLine;
@@ -215,11 +215,11 @@ public class FullfilmentCenter implements Serializable {
         this.orders = orders;
     }
 
-    public Returns getReturns() {
+    public Set<Returns> getReturns() {
         return returns;
     }
 
-    public void setReturns(Returns returns) {
+    public void setReturns(Set<Returns> returns) {
         this.returns = returns;
     }
 

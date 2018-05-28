@@ -22,7 +22,7 @@ public class AccountsDetailsDTO {
     public String email;
 
     public AccountsDetailsDTO(Accounts accounts) {
-
+	
     	if(accounts!=null){
     		this.setUserId(accounts.getAccountId());
     		this.setDateOfBirth(String.valueOf(accounts.getDateOfBirth()));
@@ -37,16 +37,11 @@ public class AccountsDetailsDTO {
     	}
 	}
 
-
-
+    
+    
 	public String getUsername() {
 		return username;
 	}
-
-
-    public AccountsDetailsDTO() {
-        super();
-    }
 
 
 

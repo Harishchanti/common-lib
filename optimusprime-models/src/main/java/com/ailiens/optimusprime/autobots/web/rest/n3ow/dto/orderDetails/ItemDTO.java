@@ -26,6 +26,8 @@ public class ItemDTO {
     public List<ImageDTO> images;
     public List<String> relatedItems = new ArrayList<String>();
     public List<History> orderItemHistory = new ArrayList<History>();
+    public String clusterId;
+
 
 
     public ItemDTO(OrderLine orderLine) {
@@ -33,13 +35,11 @@ public class ItemDTO {
 		this.setWarehouseItemId(orderLine.getWarehoueItemId());
         this.setSapOrderNo(orderLine.getSapOrderNo());
 		this.setSlaEndTime(String.valueOf(orderLine.getSlaEndTime()));
-	}
+        this.setClusterId(orderLine.getClusterId());
 
-
-
-	public ItemDTO(){
-        super();
     }
+
+
 
 	public String getItemId() {
 		return itemId;
@@ -203,6 +203,14 @@ public class ItemDTO {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+
+    public String getClusterId() {
+        return clusterId;
+    }
+
+    public void setClusterId(String clusterId) {
+        this.clusterId = clusterId;
     }
 
 }

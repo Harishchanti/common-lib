@@ -24,11 +24,6 @@ public class RefundPaymentDetail {
         return direction;
     }
 
-
-    public RefundPaymentDetail() {
-        super();
-    }
-
     /**
      *
      * @param direction

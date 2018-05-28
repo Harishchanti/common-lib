@@ -32,96 +32,96 @@ public class PaymentSummaryDTO {
 
     }
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,
-                             BigDecimal card, BigDecimal som_cod, BigDecimal som_pos, BigDecimal ezetap, String paymentMode, Set<Payment>  payments) {
-        this.voucher = returnDefault(voucher);
-        this.card = returnDefault(card);
-        this.NNNowCash = returnDefault(nNNowCash);
-        this.online = returnDefault(online);
-        this.cod=returnDefault(cod);
-        this.som_cod=returnDefault(som_cod);
-        this.som_pos=returnDefault(som_pos);
-        this.ezetap=returnDefault(ezetap);
-        this.paymentMode= StringUtils.trimToNull(paymentMode) == null ? "" : paymentMode;
-        if(payments != null && payments.size() > 0) {
-            payments.forEach(pay -> this.paymentTransactionalDetails.add(new PaymentTransactionalDetails(pay)));
-        }
+	    BigDecimal card, BigDecimal som_cod, BigDecimal som_pos, BigDecimal ezetap, String paymentMode, Set<Payment>  payments) {
+	this.voucher = returnDefault(voucher);
+	this.card = returnDefault(card);
+	this.NNNowCash = returnDefault(nNNowCash);
+	this.online = returnDefault(online);
+	this.cod=returnDefault(cod);
+	this.som_cod=returnDefault(som_cod);
+	this.som_pos=returnDefault(som_pos);
+	this.ezetap=returnDefault(ezetap);
+	this.paymentMode= StringUtils.trimToNull(paymentMode) == null ? "" : paymentMode;
+	if(payments != null && payments.size() > 0) {
+	   payments.forEach(pay -> this.paymentTransactionalDetails.add(new PaymentTransactionalDetails(pay)));
+	}
 
     }
 
     public PaymentSummaryDTO(BigDecimal voucher, BigDecimal cod, BigDecimal nNNowCash, BigDecimal online,
-                             BigDecimal card, BigDecimal ezetap) {
+	    BigDecimal card, BigDecimal ezetap) {
 
 
-        this.voucher = returnDefault(voucher);
-        this.card = returnDefault(card);
-        this.NNNowCash = returnDefault(nNNowCash);
-        this.online = returnDefault(online);
-        this.cod=returnDefault(cod);
-        this.ezetap=returnDefault(ezetap);
+	this.voucher = returnDefault(voucher);
+	this.card = returnDefault(card);
+	this.NNNowCash = returnDefault(nNNowCash);
+	this.online = returnDefault(online);
+	this.cod=returnDefault(cod);
+    this.ezetap=returnDefault(ezetap);
     }
 
     public BigDecimal getVoucher() {
-        return voucher;
+	return voucher;
     }
 
     public void setVoucher(BigDecimal cash) {
-        this.voucher = cash;
+	this.voucher = cash;
     }
 
     public BigDecimal getOnline() {
-        return online;
+	return online;
     }
 
     public void setOnline(BigDecimal online) {
-        this.online = online;
+	this.online = online;
     }
 
     public BigDecimal getNNNowCash() {
-        return NNNowCash;
+	return NNNowCash;
     }
 
     public void setNNNowCash(BigDecimal NNNowCash) {
-        this.NNNowCash = NNNowCash;
+	this.NNNowCash = NNNowCash;
     }
 
     public BigDecimal getCard() {
-        return card;
+	return card;
     }
 
     public void setCard(BigDecimal card) {
-        this.card = card;
+	this.card = card;
     }
 
     public BigDecimal getCod() {
-        return cod;
+	return cod;
     }
 
     public void setCod(BigDecimal cod) {
-        this.cod = cod;
+	this.cod = cod;
     }
 
     public BigDecimal getSom_pos() {
-        return som_pos;
+	return som_pos;
     }
 
     public void setSom_pos(BigDecimal som_pos) {
-        this.som_pos = som_pos;
+	this.som_pos = som_pos;
     }
 
     public BigDecimal getSom_cod() {
-        return som_cod;
+	return som_cod;
     }
 
     public void setSom_cod(BigDecimal som_cod) {
-        this.som_cod = som_cod;
+	this.som_cod = som_cod;
     }
 
     public String getPaymentMode() {
-        return paymentMode;
+	return paymentMode;
     }
 
     public void setPaymentMode(String paymentMode) {
-        this.paymentMode = paymentMode;
+	this.paymentMode = paymentMode;
     }
 
 
@@ -142,11 +142,11 @@ public class PaymentSummaryDTO {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+	return ToStringBuilder.reflectionToString(this);
     }
 
     public BigDecimal returnDefault(BigDecimal value) {
-        Optional<BigDecimal> optionalValue = Optional.ofNullable(value);
-        return optionalValue.orElse(new BigDecimal(0.0));
+	Optional<BigDecimal> optionalValue = Optional.ofNullable(value);
+	return optionalValue.orElse(new BigDecimal(0.0));
     }
 }

@@ -12,16 +12,16 @@ public class FfTypeDTO {
     public String ffType;
     public String type;
 
+    public FfTypeDTO() {
+    	
+    }
     public FfTypeDTO(OrderLine orderLine) {
 		this.setFfType(orderLine.getFullfilmentType().getName());
 		this.setType(orderLine.getFullfilmentType().getType());
 	}
 
-	public FfTypeDTO() {
-
-    }
-
-
+    
+    
 	public String getFfType() {
 		return ffType;
 	}

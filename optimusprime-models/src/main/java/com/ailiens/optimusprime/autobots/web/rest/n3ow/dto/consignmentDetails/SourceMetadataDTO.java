@@ -12,6 +12,9 @@ public class SourceMetadataDTO {
 
 	private String banner;
 
+	public SourceMetadataDTO() {
+		
+	}
 	public String getName() {
 		return name;
 	}
@@ -35,8 +38,6 @@ public class SourceMetadataDTO {
 	public void setBanner(String banner) {
 		this.banner = banner;
 	}
-
-	  public SourceMetadataDTO() {
-
-      }
+	  
+	  
 }

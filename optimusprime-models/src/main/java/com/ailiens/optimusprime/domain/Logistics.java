@@ -304,14 +304,6 @@ public class Logistics implements Serializable {
         this.fedexBillDt = fedexBillDt;
     }
 
-    public Long getMaster_bag_id() {
-        return masterBagId;
-    }
-
-    public void setMaster_bag_id(Long master_bag_id) {
-        this.masterBagId = master_bag_id;
-    }
-
     public Set<OrderLine> getOrderLines() {
         return orderLines;
     }

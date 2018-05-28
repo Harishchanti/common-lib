@@ -27,10 +27,6 @@ public class ReturnStatus {
         return id;
     }
 
-    public ReturnStatus() {
-        super();
-    }
-
     /**
      *
      * @param id

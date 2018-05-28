@@ -59,9 +59,6 @@ public class ReturnsHistory {
      * @param fromState
      *     The fromState
      */
-    public ReturnsHistory(){
-        super();
-    }
     public void setFromState(String fromState) {
         this.fromState = fromState;
     }

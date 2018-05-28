@@ -1,11 +1,10 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.orderDetails;
 
-import javax.annotation.Generated;
+import com.ailiens.optimusprime.domain.OrderLine;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import com.ailiens.optimusprime.domain.OrderLine;
-
+import javax.annotation.Generated;
 
 @Generated("org.jsonschema2pojo")
 public class PackagingTypeDTO {
@@ -28,9 +27,6 @@ public class PackagingTypeDTO {
     	}
 	}
 
-    public PackagingTypeDTO() {
-        super();
-    }
 
 
 	public String getName() {

@@ -11,7 +11,7 @@ public class RefundStatus {
     private String status;
 
     /**
-     *
+     * 
      * @return
      *     The transactionId
      */
@@ -19,13 +19,8 @@ public class RefundStatus {
         return transactionId;
     }
 
-
-    public RefundStatus() {
-        super();
-    }
-
     /**
-     *
+     * 
      * @param transactionId
      *     The transactionId
      */
@@ -34,7 +29,7 @@ public class RefundStatus {
     }
 
     /**
-     *
+     * 
      * @return
      *     The status
      */
@@ -43,7 +38,7 @@ public class RefundStatus {
     }
 
     /**
-     *
+     * 
      * @param status
      *     The status
      */

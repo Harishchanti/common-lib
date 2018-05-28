@@ -16,4 +16,11 @@ public class StatusChangeDTO {
     public void setOrderLines(List<StatusChangeOrderLineDTO> orderLines) {
         this.orderLines = orderLines;
     }
+
+    @Override
+    public String toString() {
+        return "StatusChangeDTO{" +
+            "orderLines=" + orderLines +
+            '}';
+    }
 }

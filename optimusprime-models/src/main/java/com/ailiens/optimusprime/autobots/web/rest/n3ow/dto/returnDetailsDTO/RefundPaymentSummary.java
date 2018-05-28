@@ -13,7 +13,7 @@ public class RefundPaymentSummary {
     private String card;
 
     /**
-     *
+     * 
      * @return
      *     The cash
      */
@@ -21,12 +21,8 @@ public class RefundPaymentSummary {
         return cash;
     }
 
-    public RefundPaymentSummary() {
-        super();
-    }
-
     /**
-     *
+     * 
      * @param cash
      *     The cash
      */
@@ -35,7 +31,7 @@ public class RefundPaymentSummary {
     }
 
     /**
-     *
+     * 
      * @return
      *     The online
      */
@@ -44,7 +40,7 @@ public class RefundPaymentSummary {
     }
 
     /**
-     *
+     * 
      * @param online
      *     The online
      */
@@ -53,7 +49,7 @@ public class RefundPaymentSummary {
     }
 
     /**
-     *
+     * 
      * @return
      *     The NNNowCash
      */
@@ -62,7 +58,7 @@ public class RefundPaymentSummary {
     }
 
     /**
-     *
+     * 
      * @param NNNowCash
      *     The NNNowCash
      */
@@ -71,7 +67,7 @@ public class RefundPaymentSummary {
     }
 
     /**
-     *
+     * 
      * @return
      *     The card
      */
@@ -80,7 +76,7 @@ public class RefundPaymentSummary {
     }
 
     /**
-     *
+     * 
      * @param card
      *     The card
      */

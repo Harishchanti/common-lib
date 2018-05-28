@@ -21,10 +21,6 @@ public class ImageDTO {
         this.fcId = fcId;
     }
 
-    public ImageDTO() {
-        super();
-    }
-
     @Override
     public String toString() {
         return "ImageDTO{" +
@@ -33,5 +29,3 @@ public class ImageDTO {
             '}';
     }
 }
-
-

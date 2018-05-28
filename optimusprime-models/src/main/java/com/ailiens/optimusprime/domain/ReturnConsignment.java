@@ -26,9 +26,9 @@ public class ReturnConsignment implements Serializable {
 
     @OneToOne    private Logistics logistics;
 
-    @OneToOne    private FullfilmentCenter returnLocation;
+    @ManyToOne    private FullfilmentCenter returnLocation;
 
-    @OneToOne    private FullfilmentCenter warehouse;
+    @ManyToOne    private FullfilmentCenter warehouse;
 
     @ManyToOne
     @JoinColumn(name = "return_consignment_states_id")

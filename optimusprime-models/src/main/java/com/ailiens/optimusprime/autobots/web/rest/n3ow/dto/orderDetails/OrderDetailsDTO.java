@@ -22,13 +22,24 @@ public class OrderDetailsDTO {
     public PaymentSummaryDTO refundSummary;
     public List<ConsignmentDTO> consignments = new ArrayList<ConsignmentDTO>();
     public List<History> orderHistory = new ArrayList<History>();
-
-    public OrderDetailsDTO() {
-        super();
-    }
+    public String orderingChannel;
+    public String tenantId;
 
 
-    public TotalPricingDetails getTotalPricingDetails() {
+
+    public String getTenantId() {
+		return tenantId;
+	}
+
+
+
+	public void setTenantId(String tenantId) {
+		this.tenantId = tenantId;
+	}
+
+
+
+	public TotalPricingDetails getTotalPricingDetails() {
 		return totalPricingDetails;
 	}
 
@@ -158,9 +169,15 @@ public class OrderDetailsDTO {
 		this.orderHistory = orderHistory;
 	}
 
+    public String getOrderingChannel() {
+        return orderingChannel;
+    }
 
+    public void setOrderingChannel(String orderingChannel) {
+        this.orderingChannel = orderingChannel;
+    }
 
-	@Override
+    @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }

@@ -11,7 +11,7 @@ public class PaymentType {
     private String typeCode;
 
     /**
-     *
+     * 
      * @return
      *     The id
      */
@@ -19,12 +19,8 @@ public class PaymentType {
         return id;
     }
 
-    public PaymentType() {
-        super();
-    }
-
     /**
-     *
+     * 
      * @param id
      *     The id
      */
@@ -33,7 +29,7 @@ public class PaymentType {
     }
 
     /**
-     *
+     * 
      * @return
      *     The typeCode
      */
@@ -42,7 +38,7 @@ public class PaymentType {
     }
 
     /**
-     *
+     * 
      * @param typeCode
      *     The typeCode
      */

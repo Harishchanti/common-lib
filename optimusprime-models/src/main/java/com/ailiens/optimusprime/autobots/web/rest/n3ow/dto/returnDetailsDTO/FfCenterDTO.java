@@ -14,11 +14,11 @@ public class FfCenterDTO {
     public String fcid;
     public String sapCode;
     public String fcName;
-    public String brand;
+    public String brand = "";
     public String fcType;
-    public String postCode;
-    public String stateCode;
-    public String gstnCode;
+    public String postCode = "";
+    public String stateCode = "";
+    public String gstnCode = "";
 
     public FfCenterDTO() {}
 
@@ -42,14 +42,9 @@ public class FfCenterDTO {
     }
 
 
-
-
 	public String getFcid() {
 		return fcid;
 	}
-
-
-
 
 
 

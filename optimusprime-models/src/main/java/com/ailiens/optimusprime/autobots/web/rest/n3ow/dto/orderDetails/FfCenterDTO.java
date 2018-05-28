@@ -40,10 +40,6 @@ public class FfCenterDTO {
 		this.fcid = fcid;
 	}
 
-	public FfCenterDTO(){
-        super();
-    }
-
 
 
 	public String getSapCode() {

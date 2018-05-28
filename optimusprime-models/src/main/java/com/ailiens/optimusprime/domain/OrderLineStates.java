@@ -31,6 +31,9 @@ public class OrderLineStates implements Serializable {
     @Column(name = "status_to_oms")
     private String statusToOms;
 
+    @Column(name = "processing_sequence")
+    private Float processingSequence;
+
     public Long getId() {
         return id;
     }
@@ -69,6 +72,14 @@ public class OrderLineStates implements Serializable {
 
     public void setStatusToOms(String statusToOms) {
         this.statusToOms = statusToOms;
+    }
+
+    public Float getProcessingSequence() {
+        return processingSequence;
+    }
+
+    public void setProcessingSequence(Float processingSequence) {
+        this.processingSequence = processingSequence;
     }
 
     @Override

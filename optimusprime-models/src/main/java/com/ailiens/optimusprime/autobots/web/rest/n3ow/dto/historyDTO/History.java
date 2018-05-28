@@ -15,8 +15,8 @@ public class History {
     private String reason;
     private String time;
 
-
-
+    
+    
     public String getFfCenterId() {
 		return ffCenterId;
 	}
@@ -26,7 +26,7 @@ public class History {
 	}
 
 	/**
-     *
+     * 
      * @return
      *     The ffCenter
      */
@@ -35,7 +35,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @param ffCenter
      *     The ffCenter
      */
@@ -44,20 +44,16 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @return
      *     The fromState
      */
     public String getFromState() {
         return fromState;
     }
-    public History(){
-        super();
-    }
-
 
     /**
-     *
+     * 
      * @param fromState
      *     The fromState
      */
@@ -66,7 +62,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @return
      *     The toState
      */
@@ -75,7 +71,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @param toState
      *     The toState
      */
@@ -84,7 +80,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @return
      *     The comment
      */
@@ -93,7 +89,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @param comment
      *     The comment
      */
@@ -102,7 +98,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @return
      *     The reason
      */
@@ -111,7 +107,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @param reason
      *     The reason
      */
@@ -120,7 +116,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @return
      *     The time
      */
@@ -129,7 +125,7 @@ public class History {
     }
 
     /**
-     *
+     * 
      * @param time
      *     The time
      */

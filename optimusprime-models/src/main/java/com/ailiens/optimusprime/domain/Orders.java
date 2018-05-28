@@ -22,6 +22,8 @@ import com.ailiens.optimusprime.domain.enumeration.service;
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Orders implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -65,10 +67,10 @@ public class Orders implements Serializable {
 
 
     @Column(name = "order_reference")
-    private String order_reference;
+    private String orderReference;
 
     @Column(name = "order_reference2")
-    private String order_reference2;
+    private String orderReference2;
 
     @Column(name = "source")
     private String source;
@@ -85,6 +87,14 @@ public class Orders implements Serializable {
 
     @Column(name = "images")
     private String images;
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	@Column(name = "tenant_id")
+    private String tenantId;
+
 
 
 
@@ -218,36 +228,24 @@ public class Orders implements Serializable {
         return Objects.hashCode(id);
     }
 
-    @Override
-    public String toString() {
-        return "Orders{" +
-            "id=" + id +
-            ", orderId='" + orderId + "'" +
-            ", orderDate='" + orderDate + "'" +
-            ", service='" + service + "'" +
-            ", workflowId='" + workflowId + "'" +
-            '}';
+
+    public String getOrderReference() {
+        return orderReference;
     }
 
+    public void setOrderReference(String orderReference) {
+        this.orderReference = orderReference;
+    }
 
+    public String getOrderReference2() {
+        return orderReference2;
+    }
 
-	public String getOrder_reference() {
-		return order_reference;
-	}
+    public void setOrderReference2(String orderReference2) {
+        this.orderReference2 = orderReference2;
+    }
 
-	public void setOrder_reference(String order_reference) {
-		this.order_reference = order_reference;
-	}
-
-	public String getOrder_reference2() {
-		return order_reference2;
-	}
-
-	public void setOrder_reference2(String order_reference2) {
-		this.order_reference2 = order_reference2;
-	}
-
-	public String getSource() {
+    public String getSource() {
 		return source;
 	}
 
@@ -271,6 +269,38 @@ public class Orders implements Serializable {
 		this.sourceMetadataId = sourceMetadataId;
 	}
 
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
 
 
+    @Override
+    public String toString() {
+        return "Orders{" +
+            "id=" + id +
+            ", orderId='" + orderId + '\'' +
+            ", orderDate=" + orderDate +
+            ", service=" + service +
+            ", orderingChannel='" + orderingChannel + '\'' +
+            ", workflowId='" + workflowId + '\'' +
+            ", orderStates=" + orderStates +
+            ", accounts=" + accounts +
+            ", payments=" + payments +
+            ", consignments=" + consignments +
+            ", orderingCenter=" + orderingCenter +
+            ", storeStaffDetails=" + storeStaffDetails +
+            ", orderReference='" + orderReference + '\'' +
+            ", orderReference2='" + orderReference2 + '\'' +
+            ", source='" + source + '\'' +
+            ", serviceOrderId='" + serviceOrderId + '\'' +
+            ", sourceMetadataId=" + sourceMetadataId +
+            ", orderPricing=" + orderPricing +
+            ", images='" + images + '\'' +
+            ", tenantId='" + tenantId + '\'' +
+            '}';
+    }
 }

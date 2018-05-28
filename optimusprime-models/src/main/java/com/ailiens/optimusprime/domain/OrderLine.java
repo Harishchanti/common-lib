@@ -97,6 +97,12 @@ public class OrderLine implements Serializable {
     @JoinColumn(name = "invoice_id")
     private Invoice invoice;
 
+    @Column(name = "erp_invoice_id")  // added new column  sap/erp invoice id for B2b @adi
+    private String erpInvoiceId;
+
+    @Column(name = "cluster_id")
+    private String clusterId;  //Clustering for BT and Market place
+
     public Long getId() {
         return id;
     }
@@ -263,6 +269,23 @@ public class OrderLine implements Serializable {
 
     public void setInvoice(Invoice invoice) {
         this.invoice = invoice;
+    }
+
+
+    public String getErpInvoiceId() {
+        return erpInvoiceId;
+    }
+
+    public void setErpInvoiceId(String erpInvoiceId) {
+        this.erpInvoiceId = erpInvoiceId;
+    }
+
+    public String getClusterId() {
+        return clusterId;
+    }
+
+    public void setClusterId(String clusterId) {
+        this.clusterId = clusterId;
     }
 
     @Override

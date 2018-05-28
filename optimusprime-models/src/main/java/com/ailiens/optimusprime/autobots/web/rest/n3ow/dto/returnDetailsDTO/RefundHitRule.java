@@ -11,7 +11,7 @@ public class RefundHitRule {
     private String name;
 
     /**
-     *
+     * 
      * @return
      *     The id
      */
@@ -19,13 +19,8 @@ public class RefundHitRule {
         return id;
     }
 
-
-    public RefundHitRule() {
-        super();
-    }
-
     /**
-     *
+     * 
      * @param id
      *     The id
      */
@@ -34,7 +29,7 @@ public class RefundHitRule {
     }
 
     /**
-     *
+     * 
      * @return
      *     The name
      */
@@ -43,7 +38,7 @@ public class RefundHitRule {
     }
 
     /**
-     *
+     * 
      * @param name
      *     The name
      */

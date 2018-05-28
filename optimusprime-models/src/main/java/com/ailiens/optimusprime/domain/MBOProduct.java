@@ -6,6 +6,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Objects;
@@ -17,6 +18,8 @@ import java.util.Objects;
 @Table(name = "mboproduct")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class MBOProduct implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,6 +69,12 @@ public class MBOProduct implements Serializable {
 
     @Column(name = "sap_sku_id")
     private String sapSkuId;
+
+    @Column(name = "returnable")
+    private Boolean returnable;
+
+    @Column(name = "returnable_date")
+    private ZonedDateTime returnableDate;
 
     public Long getId() {
         return id;
@@ -187,6 +196,22 @@ public class MBOProduct implements Serializable {
         this.sapStyleId = sapStyleId;
     }
 
+    public Boolean getReturnable() {
+        return returnable;
+    }
+
+    public void setReturnable(Boolean returnable) {
+        this.returnable = returnable;
+    }
+
+    public ZonedDateTime getReturnableDate() {
+        return returnableDate;
+    }
+
+    public void setReturnableDate(ZonedDateTime returnableDate) {
+        this.returnableDate = returnableDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -222,14 +247,16 @@ public class MBOProduct implements Serializable {
             ", grossSP='" + grossSP + "'" +
             ", description='" + description + "'" +
             ", sapStyleId='" + sapStyleId + "'" +
+            ", returnable='" + returnable + "'" +
+            ", returnableDate='" + returnableDate + "'" +
             '}';
     }
 
-    public String getSapSkuId() {
-        return sapSkuId;
-    }
+	public String getSapSkuId() {
+		return sapSkuId;
+	}
 
-    public void setSapSkuId(String sapSkuId) {
-        this.sapSkuId = sapSkuId;
-    }
+	public void setSapSkuId(String sapSkuId) {
+		this.sapSkuId = sapSkuId;
+	}
 }

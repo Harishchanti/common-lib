@@ -25,15 +25,11 @@ public class ConsignmentDTO {
     public List<ItemDTO> items = new ArrayList<ItemDTO>();
     public List<History> consignmentHistory = new ArrayList<History>();
 
-
-
+    
+    
     public String getConsignmentId() {
 		return consignmentId;
 	}
-
-	public  ConsignmentDTO(){
-        super();
-    }
 
 
 
@@ -161,7 +157,7 @@ public class ConsignmentDTO {
 		this.items = items;
 	}
 
-
+	
 
 
 	public String getSlaEndTime() {
@@ -174,8 +170,8 @@ public class ConsignmentDTO {
 		this.slaEndTime = slaEndTime;
 	}
 
-
-
+	
+	
 
 
 	public List<History> getConsignmentHistory() {

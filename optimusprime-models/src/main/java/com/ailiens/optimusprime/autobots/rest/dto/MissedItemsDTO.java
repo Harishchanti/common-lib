@@ -24,7 +24,7 @@ public class MissedItemsDTO {
     private String fulfillmentCenter;
     private String reason;
     private String orderStatus;
-    private String currentStatus;
+    private String consignmentStatus;
     private ZonedDateTime consignmentStamp;
 
 
@@ -47,7 +47,7 @@ public class MissedItemsDTO {
         this.fulfillmentCenter = fulfillmentCenter;
     }
 
-    public MissedItemsDTO(String itemId, String consignmentId, String orderId, ZonedDateTime orderDate, String paymentType, BigDecimal consignmentValue, String customerName, String orderingStore, String fulfillmentCenter, String reason, String orderStatus, String currentStatus, ZonedDateTime consignmentStamp) {
+    public MissedItemsDTO(String itemId, String consignmentId, String orderId, ZonedDateTime orderDate, String paymentType, BigDecimal consignmentValue, String customerName, String orderingStore, String fulfillmentCenter, String reason, String orderStatus, String consignmentStatus, ZonedDateTime consignmentStamp) {
         this.itemId = itemId;
         this.consignmentId = consignmentId;
         this.orderId = orderId;
@@ -59,7 +59,7 @@ public class MissedItemsDTO {
         this.fulfillmentCenter = fulfillmentCenter;
         this.reason = reason;
         this.orderStatus = orderStatus;
-        this.currentStatus = currentStatus;
+        this.consignmentStatus = consignmentStatus;
         this.consignmentStamp = consignmentStamp;
     }
 
@@ -151,12 +151,12 @@ public class MissedItemsDTO {
         this.orderStatus = orderStatus;
     }
 
-    public String getCurrentStatus() {
-        return currentStatus;
+    public String getConsignmentStatus() {
+        return consignmentStatus;
     }
 
-    public void setCurrentStatus(String currentStatus) {
-        this.currentStatus = currentStatus;
+    public void setConsignmentStatus(String consignmentStatus) {
+        this.consignmentStatus = consignmentStatus;
     }
 
     public ZonedDateTime getConsignmentStamp() {

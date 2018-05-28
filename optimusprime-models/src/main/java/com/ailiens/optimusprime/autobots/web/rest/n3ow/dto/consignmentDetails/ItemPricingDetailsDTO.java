@@ -67,12 +67,33 @@ public class ItemPricingDetailsDTO {
             this.setTax(tax.getAmount());
             //@adi added extra condition while reading BT consignment and then calucating the tax percentage by adding all taxe %'s
             if(orderLine.getConsignment().getOrders().getService().equals(service.BT)) {
+
                 this.setTaxPercentage(PricingUtils.getTaxPercentageForBTOrder(tax));
+
+                // checking discount shoudn't be zero
+                if(!discounts.isEmpty() && discounts.get(0).getDiscountAmount().compareTo(BigDecimal.ZERO) > 0 && this.netAmount.compareTo(BigDecimal.ZERO) > 0) {
+
+                    this.setDiscount(discounts.get(0).getDiscountAmount());
+
+                } else {
+                    this.setDiscount(new BigDecimal(0.0));
+                }
             }
-            else if (this.value != null && (this.value.compareTo(BigDecimal.ZERO) > 0) && this.tax != null) {
-                this.setTaxPercentage(PricingUtils.getTaxPercentage(this.tax, this.value));
-            } else {
-                this.setTaxPercentage(new BigDecimal(0.0));
+            else {
+
+                if (this.value != null && (this.value.compareTo(BigDecimal.ZERO) > 0) && this.tax != null) {
+                    this.setTaxPercentage(PricingUtils.getTaxPercentage(this.tax, this.value));
+                } else {
+                    this.setTaxPercentage(new BigDecimal(0.0));
+                }
+
+                Iterator<Discount> discountIterator = discounts.iterator();
+                if(discountIterator.hasNext()){
+                    Discount discount = discountIterator.next();
+                    this.setDiscount(discount.getDiscountAmount());
+                } else {
+                    this.setDiscount(new BigDecimal(0.0));
+                }
             }
             this.setCgstAmount(returnDefault(tax.getCgstAmount()));
             this.setSgstAmount(returnDefault(tax.getSgstAmount()));
@@ -85,13 +106,16 @@ public class ItemPricingDetailsDTO {
         } else {
             this.setTax(new BigDecimal(0.0));
         }
-        Iterator<Discount> discountIterator = discounts.iterator();
-        if(discountIterator.hasNext()){
-            Discount discount = discountIterator.next();
-            this.setDiscount(discount.getDiscountAmount());
-        } else {
-            this.setDiscount(new BigDecimal(0.0));
-        }
+
+
+// logic shifted above
+//        Iterator<Discount> discountIterator = discounts.iterator();
+//        if(discountIterator.hasNext()){
+//            Discount discount = discountIterator.next();
+//            this.setDiscount(discount.getDiscountAmount());
+//        } else {
+//            this.setDiscount(new BigDecimal(0.0));
+//        }
     }
 
 

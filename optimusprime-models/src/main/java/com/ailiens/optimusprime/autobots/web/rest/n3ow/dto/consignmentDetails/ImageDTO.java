@@ -5,6 +5,9 @@ public class ImageDTO {
     private String imageLink;
     private String fcId;
 
+    public ImageDTO() {
+    	
+    }
     public String getImageLink() {
         return imageLink;
     }
@@ -21,9 +24,6 @@ public class ImageDTO {
         this.fcId = fcId;
     }
 
-    public ImageDTO() {
-
-    }
     @Override
     public String toString() {
         return "ImageDTO{" +

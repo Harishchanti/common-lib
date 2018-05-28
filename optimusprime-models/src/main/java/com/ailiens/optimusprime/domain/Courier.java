@@ -30,8 +30,19 @@ public class Courier {
 
   @Column(name = "courier_reference_id")
   private String courierReferenceId;
+  
+  @Column(name = "tenant_id")
+  private String tenantId;
 
-  public Integer getId() {
+  public String getTenantId() {
+	return tenantId;
+   }
+
+  public void setTenantId(String tenantId) {
+	this.tenantId = tenantId;
+  }
+
+public Integer getId() {
     return id;
   }
 

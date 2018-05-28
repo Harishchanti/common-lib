@@ -18,19 +18,16 @@ public class CreatePOSOrderDTO {
     private List<Item> items = new ArrayList<Item>();
 
     /**
-     *
+     * 
      * @return
      *     The date
      */
     public String getDate() {
         return date;
     }
-    public CreatePOSOrderDTO(){
-        super();
-    }
 
     /**
-     *
+     * 
      * @param date
      *     The date
      */
@@ -39,7 +36,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @return
      *     The transactionType
      */
@@ -48,7 +45,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @param transactionType
      *     The transactionType
      */
@@ -57,7 +54,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @return
      *     The billDiscountScheme
      */
@@ -66,7 +63,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @param billDiscountScheme
      *     The billDiscountScheme
      */
@@ -75,7 +72,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @return
      *     The billDiscountAmount
      */
@@ -84,7 +81,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @param billDiscountAmount
      *     The billDiscountAmount
      */
@@ -93,7 +90,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @return
      *     The invoiceNumber
      */
@@ -102,7 +99,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @param invoiceNumber
      *     The invoiceNumber
      */
@@ -111,7 +108,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @return
      *     The storeCode
      */
@@ -120,7 +117,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @param storeCode
      *     The storeCode
      */
@@ -129,7 +126,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @return
      *     The items
      */
@@ -138,7 +135,7 @@ public class CreatePOSOrderDTO {
     }
 
     /**
-     *
+     * 
      * @param items
      *     The items
      */

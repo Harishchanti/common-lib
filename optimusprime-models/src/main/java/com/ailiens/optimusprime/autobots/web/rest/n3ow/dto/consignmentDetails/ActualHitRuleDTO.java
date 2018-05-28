@@ -15,6 +15,9 @@ public class ActualHitRuleDTO {
     public String id;
     public String name;
 
+    public ActualHitRuleDTO() {
+    	
+    }
     public ActualHitRuleDTO(List<Discount> discounts) {
     	Iterator<Discount> discountIterator = discounts.iterator();
     	if(discountIterator.hasNext()){
@@ -23,10 +26,6 @@ public class ActualHitRuleDTO {
     		this.setName(discount.getDiscountName());
     	}
 	}
-
-	public ActualHitRuleDTO() {
-
-    }
 
 	public String getId() {
 		return id;

@@ -8,9 +8,9 @@ import javax.annotation.Generated;
 @Generated("org.jsonschema2pojo")
 public class TotalNNNowCashDetails {
 
-    private BigDecimal productNNNowCash;
-    private BigDecimal cartNNNowCash;
-    private BigDecimal totalNNNowCash;
+    private BigDecimal productNNNowCash = new BigDecimal(0.0);
+    private BigDecimal cartNNNowCash = new BigDecimal(0.0);
+    private BigDecimal totalNNNowCash = new BigDecimal(0.0);
 
     /**
      *
@@ -37,11 +37,6 @@ public class TotalNNNowCashDetails {
      */
     public BigDecimal getCartNNNowCash() {
         return cartNNNowCash;
-    }
-
-
-    public TotalNNNowCashDetails() {
-        super();
     }
 
     /**

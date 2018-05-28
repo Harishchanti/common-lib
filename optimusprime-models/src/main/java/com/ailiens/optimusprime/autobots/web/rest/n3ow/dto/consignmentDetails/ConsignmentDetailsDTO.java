@@ -1,13 +1,9 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.Generated;
-import javax.persistence.Column;
 
 import com.ailiens.optimusprime.autobots.rest.dto.VoucherDetailsDTO;
-import com.ailiens.optimusprime.domain.SourceMetadata;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 
@@ -31,13 +27,16 @@ public class ConsignmentDetailsDTO {
     public ConsignmentDTO consignment = new ConsignmentDTO();
     //public SourceMetadata sourceMetadata;
     public SourceMetadataDTO sourceMetadata;
-    public String getOrderId() {
+
+
+	public String getOrderId() {
 		return orderId;
 	}
 
     public ConsignmentDetailsDTO() {
 
     }
+
 
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;

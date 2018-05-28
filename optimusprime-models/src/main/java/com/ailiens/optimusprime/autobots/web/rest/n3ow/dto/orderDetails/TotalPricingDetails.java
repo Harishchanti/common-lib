@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+
 import javax.annotation.Generated;
 import javax.validation.Valid;
 
 import com.ailiens.optimusprime.domain.OrderDiscount;
 import com.ailiens.optimusprime.domain.OrderPricing;
-import com.ailiens.optimusprime.domain.Orders;
-import com.ailiens.optimusprime.domain.Taxes;
 
 @Generated("org.jsonschema2pojo")
 public class TotalPricingDetails {
@@ -39,11 +39,12 @@ public class TotalPricingDetails {
 //    	Iterator<OrderPricing> orderPricinggIterator = orderPricingDetailsList.iterator();
 //    	if(orderPricinggIterator.hasNext()){
 //    		OrderPricing orderPricing = orderPricinggIterator.next();
-    		this.setNetAmount(orderPricing.getTotalNetAmount());
-    		this.setTotalTax(orderPricing.getTotalTax());
-    		this.setTradeSP(orderPricing.getTotalTradeSP());
-    		this.setTotalSP(orderPricing.getTotalSP());
-    		this.setTotalAmountWithShipping(orderPricing.getTotalNetAmount().add(orderPricing.getTotalShippingCharge()));
+        if(orderPricing!=null){
+    		this.setNetAmount(returnDefault(orderPricing.getTotalNetAmount()));
+    		this.setTotalTax(returnDefault(orderPricing.getTotalTax()));
+    		this.setTradeSP(returnDefault(orderPricing.getTotalTradeSP()));
+    		this.setTotalSP(returnDefault(orderPricing.getTotalSP()));
+    		this.setTotalAmountWithShipping(returnDefault(orderPricing.getTotalNetAmount().add(orderPricing.getTotalShippingCharge()))) ;
     		TotalDiscountDetails totalDiscountDetails = new TotalDiscountDetails();
     		totalDiscountDetails.setCartDiscount(orderPricing.getTotalCartDiscount());
     		totalDiscountDetails.setProductDiscount(orderPricing.getTotalProductDiscount());
@@ -53,19 +54,19 @@ public class TotalPricingDetails {
 
     		TotalNNNowCashDetails totalNNNowCashDetails = new TotalNNNowCashDetails();
 
-    		totalNNNowCashDetails.setCartNNNowCash(orderPricing.getTotalCartNnnowCash());
-    		totalNNNowCashDetails.setProductNNNowCash(orderPricing.getTotalProductNnnowCash());
-    		totalNNNowCashDetails.setTotalNNNowCash(orderPricing.getTotalNnnowCash());
+    		totalNNNowCashDetails.setCartNNNowCash(returnDefault(orderPricing.getTotalCartNnnowCash()));
+    		totalNNNowCashDetails.setProductNNNowCash(returnDefault(orderPricing.getTotalProductNnnowCash()));
+    		totalNNNowCashDetails.setTotalNNNowCash(returnDefault(orderPricing.getTotalNnnowCash()));
 
     		this.setTotalNNNowCashDetails(totalNNNowCashDetails);
 
     		this.setShippingCharge(orderPricing.getTotalShippingCharge());
 
-    		this.setTotalCgstAmount(orderPricing.getTotalCgstAmount());
-    		this.setTotalSgstAmount(orderPricing.getTotalSgstAmount());
-    		this.setTotalIgstAmount(orderPricing.getTotalIgstAmount());
-    		this.setTotalUtgstAmount(orderPricing.getTotalUtgstAmount());
-//    	}
+    		this.setTotalCgstAmount(returnDefault(orderPricing.getTotalCgstAmount()));
+    		this.setTotalSgstAmount(returnDefault(orderPricing.getTotalSgstAmount()));
+    		this.setTotalIgstAmount(returnDefault(orderPricing.getTotalIgstAmount()));
+    		this.setTotalUtgstAmount(returnDefault(orderPricing.getTotalUtgstAmount()));
+    	}
 
     	Iterator<OrderDiscount> orderDiscountIterator = orderDiscountDetailsList.iterator();
 
@@ -79,10 +80,6 @@ public class TotalPricingDetails {
     	}
         this.setTotalActualHitRule(totalActualHitRuleAr);
 	}
-
-    public TotalPricingDetails() {
-        super();
-    }
 
 	/**
      *
@@ -267,4 +264,10 @@ public class TotalPricingDetails {
     public void setTotalUtgstAmount(BigDecimal totalUtgstAmount) {
         this.totalUtgstAmount = totalUtgstAmount;
     }
+
+
+    public BigDecimal returnDefault(BigDecimal value) {
+   	Optional<BigDecimal> optionalValue = Optional.ofNullable(value);
+   	return optionalValue.orElse(new BigDecimal(0.0));
+       }
 }

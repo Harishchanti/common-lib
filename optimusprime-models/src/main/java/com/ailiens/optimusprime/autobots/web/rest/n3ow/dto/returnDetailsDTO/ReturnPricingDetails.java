@@ -26,11 +26,6 @@ public class ReturnPricingDetails {
         return refundNetAmount;
     }
 
-
-    public ReturnPricingDetails() {
-        super();
-    }
-
     /**
      *
      * @param refundNetAmount
