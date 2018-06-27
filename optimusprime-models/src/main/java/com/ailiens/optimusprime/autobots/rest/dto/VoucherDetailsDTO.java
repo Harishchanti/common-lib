@@ -32,4 +32,9 @@ public class VoucherDetailsDTO {
             ", voucherAmount=" + voucherAmount +
             '}';
     }
+
+
+    public VoucherDetailsDTO(){
+
+    }
 }

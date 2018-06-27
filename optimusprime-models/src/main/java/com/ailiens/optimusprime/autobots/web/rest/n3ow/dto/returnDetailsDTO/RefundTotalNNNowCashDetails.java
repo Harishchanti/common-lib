@@ -12,7 +12,7 @@ public class RefundTotalNNNowCashDetails {
     private String refundTotalNNNowCash;
 
     /**
-     * 
+     *
      * @return
      *     The refundProductNNNowCash
      */
@@ -21,7 +21,7 @@ public class RefundTotalNNNowCashDetails {
     }
 
     /**
-     * 
+     *
      * @param refundProductNNNowCash
      *     The refundProductNNNowCash
      */
@@ -30,7 +30,7 @@ public class RefundTotalNNNowCashDetails {
     }
 
     /**
-     * 
+     *
      * @return
      *     The refundCartNNNowCash
      */
@@ -39,7 +39,7 @@ public class RefundTotalNNNowCashDetails {
     }
 
     /**
-     * 
+     *
      * @param refundCartNNNowCash
      *     The refundCartNNNowCash
      */
@@ -48,7 +48,7 @@ public class RefundTotalNNNowCashDetails {
     }
 
     /**
-     * 
+     *
      * @return
      *     The refundTotalNNNowCash
      */
@@ -57,7 +57,7 @@ public class RefundTotalNNNowCashDetails {
     }
 
     /**
-     * 
+     *
      * @param refundTotalNNNowCash
      *     The refundTotalNNNowCash
      */
@@ -70,4 +70,7 @@ public class RefundTotalNNNowCashDetails {
         return ToStringBuilder.reflectionToString(this);
     }
 
+
+    public RefundTotalNNNowCashDetails() {
+    }
 }

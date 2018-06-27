@@ -78,4 +78,8 @@ public class RefundModesDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public RefundModesDTO(){
+
+    }
+
 }

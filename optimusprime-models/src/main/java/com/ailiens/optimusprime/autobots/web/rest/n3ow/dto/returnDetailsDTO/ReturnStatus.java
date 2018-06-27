@@ -127,4 +127,8 @@ public class ReturnStatus {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public ReturnStatus() {
+        super();
+    }
+
 }

@@ -148,4 +148,8 @@ public class ReturnsHistory {
         return ToStringBuilder.reflectionToString(this);
     }
 
+
+    public ReturnsHistory(){
+        super();
+    }
 }

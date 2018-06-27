@@ -126,4 +126,7 @@ public class RefundPaymentDetail {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public RefundPaymentDetail() {
+        super();
+    }
 }

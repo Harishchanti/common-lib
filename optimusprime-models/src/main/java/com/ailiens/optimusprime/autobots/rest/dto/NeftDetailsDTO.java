@@ -201,4 +201,9 @@ public class NeftDetailsDTO {
             ", additionalProperties=" + additionalProperties +
             '}';
     }
+
+
+    public NeftDetailsDTO(){
+
+    }
 }

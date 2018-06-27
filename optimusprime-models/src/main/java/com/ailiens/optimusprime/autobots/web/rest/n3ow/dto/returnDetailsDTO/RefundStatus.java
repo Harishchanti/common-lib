@@ -11,7 +11,7 @@ public class RefundStatus {
     private String status;
 
     /**
-     * 
+     *
      * @return
      *     The transactionId
      */
@@ -20,7 +20,7 @@ public class RefundStatus {
     }
 
     /**
-     * 
+     *
      * @param transactionId
      *     The transactionId
      */
@@ -29,7 +29,7 @@ public class RefundStatus {
     }
 
     /**
-     * 
+     *
      * @return
      *     The status
      */
@@ -38,7 +38,7 @@ public class RefundStatus {
     }
 
     /**
-     * 
+     *
      * @param status
      *     The status
      */
@@ -49,6 +49,10 @@ public class RefundStatus {
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
+    }
+
+    public RefundStatus() {
+        super();
     }
 
 }
