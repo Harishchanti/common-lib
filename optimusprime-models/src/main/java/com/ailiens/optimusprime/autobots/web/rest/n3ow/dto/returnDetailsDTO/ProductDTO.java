@@ -218,4 +218,8 @@ public class ProductDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public ProductDTO() {
+        super();
+    }
+
 }

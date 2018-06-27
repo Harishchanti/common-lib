@@ -11,7 +11,7 @@ public class RefundHitRule {
     private String name;
 
     /**
-     * 
+     *
      * @return
      *     The id
      */
@@ -20,7 +20,7 @@ public class RefundHitRule {
     }
 
     /**
-     * 
+     *
      * @param id
      *     The id
      */
@@ -29,7 +29,7 @@ public class RefundHitRule {
     }
 
     /**
-     * 
+     *
      * @return
      *     The name
      */
@@ -38,7 +38,7 @@ public class RefundHitRule {
     }
 
     /**
-     * 
+     *
      * @param name
      *     The name
      */
@@ -51,4 +51,6 @@ public class RefundHitRule {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public RefundHitRule() {
+    }
 }

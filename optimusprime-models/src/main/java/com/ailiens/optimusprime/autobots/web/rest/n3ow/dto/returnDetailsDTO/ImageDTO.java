@@ -28,4 +28,7 @@ public class ImageDTO {
             ", fcId='" + fcId + '\'' +
             '}';
     }
+
+    public ImageDTO() {
+    }
 }

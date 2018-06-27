@@ -284,4 +284,6 @@ public class ItemPricingDetailsDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public ItemPricingDetailsDTO() {
+    }
 }

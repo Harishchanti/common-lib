@@ -11,12 +11,12 @@ public class FfTypeDTO {
 
     public String ffType;
     public String type;
-    
+
     public FfTypeDTO(OrderLine orderLine) {
 		this.setFfType(orderLine.getFullfilmentType().getName());
 		this.setType(orderLine.getFullfilmentType().getType());
 	}
-    
+
 	public String getFfType() {
 		return ffType;
 	}
@@ -38,4 +38,6 @@ public class FfTypeDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public FfTypeDTO() {
+    }
 }

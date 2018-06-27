@@ -11,7 +11,7 @@ public class PaymentType {
     private String typeCode;
 
     /**
-     * 
+     *
      * @return
      *     The id
      */
@@ -20,7 +20,7 @@ public class PaymentType {
     }
 
     /**
-     * 
+     *
      * @param id
      *     The id
      */
@@ -29,7 +29,7 @@ public class PaymentType {
     }
 
     /**
-     * 
+     *
      * @return
      *     The typeCode
      */
@@ -38,7 +38,7 @@ public class PaymentType {
     }
 
     /**
-     * 
+     *
      * @param typeCode
      *     The typeCode
      */
@@ -51,4 +51,6 @@ public class PaymentType {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public PaymentType() {
+    }
 }

@@ -304,4 +304,6 @@ public class LogisticsDetailsDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public LogisticsDetailsDTO() {
+    }
 }

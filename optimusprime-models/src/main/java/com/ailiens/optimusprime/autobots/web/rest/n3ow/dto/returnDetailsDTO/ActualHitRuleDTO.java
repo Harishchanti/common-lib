@@ -45,4 +45,7 @@ public class ActualHitRuleDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 
+
+    public ActualHitRuleDTO() {
+    }
 }

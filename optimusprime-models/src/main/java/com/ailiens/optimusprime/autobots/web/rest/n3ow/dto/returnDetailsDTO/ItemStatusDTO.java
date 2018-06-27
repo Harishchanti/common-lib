@@ -23,8 +23,8 @@ public class ItemStatusDTO {
     	}
 	}
 
-    
-    
+
+
 	public String getId() {
 		return id;
 	}
@@ -78,4 +78,6 @@ public class ItemStatusDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public ItemStatusDTO() {
+    }
 }

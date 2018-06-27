@@ -17,8 +17,8 @@ public class AddressDetailsDTO {
     	}
 	}
 
-    
-    
+
+
 	public String getAddressId() {
 		return addressId;
 	}
@@ -36,4 +36,6 @@ public class AddressDetailsDTO {
         return ToStringBuilder.reflectionToString(this);
     }
 
+    public AddressDetailsDTO() {
+    }
 }
