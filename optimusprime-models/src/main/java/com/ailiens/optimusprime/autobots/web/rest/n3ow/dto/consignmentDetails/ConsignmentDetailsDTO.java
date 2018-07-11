@@ -28,6 +28,7 @@ public class ConsignmentDetailsDTO {
     //public SourceMetadata sourceMetadata;
     public SourceMetadataDTO sourceMetadata;
 
+    public  String tenantId;
 
 	public String getOrderId() {
 		return orderId;
@@ -239,7 +240,11 @@ public class ConsignmentDetailsDTO {
 		this.sourceMetadata = sourceMetadata;
 	}
 
+    public String getTenantId() {
+        return tenantId;
+    }
 
-
-
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
 }
