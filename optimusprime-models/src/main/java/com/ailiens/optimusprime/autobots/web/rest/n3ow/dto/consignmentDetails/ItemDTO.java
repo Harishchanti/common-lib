@@ -33,162 +33,166 @@ public class ItemDTO {
 
     public String clusterId;
 
+    public ItemPricingDetailsDTO shippingCharges;
+    public ItemPricingDetailsDTO codCharges;
+
 
     public ItemDTO() {
 
     }
+
     public ItemDTO(OrderLine orderLine) {
-		this.setItemId(orderLine.getOrderLineId());
-		this.setWarehouseItemId(orderLine.getWarehoueItemId());
+        this.setItemId(orderLine.getOrderLineId());
+        this.setWarehouseItemId(orderLine.getWarehoueItemId());
         this.setSapOrderNo(orderLine.getSapOrderNo());
-		this.setSlaEndTime(String.valueOf(orderLine.getSlaEndTime()));
-		this.setErpInvoiceId(orderLine.getErpInvoiceId());
-		this.setClusterId(orderLine.getClusterId());
-	}
+        this.setSlaEndTime(String.valueOf(orderLine.getSlaEndTime()));
+        this.setErpInvoiceId(orderLine.getErpInvoiceId());
+        this.setClusterId(orderLine.getClusterId());
+    }
 
 
 
-	public String getItemId() {
-		return itemId;
-	}
+    public String getItemId() {
+        return itemId;
+    }
 
 
 
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
+    public void setItemId(String itemId) {
+        this.itemId = itemId;
+    }
 
 
 
-	public String getWarehouseItemId() {
-		return warehouseItemId;
-	}
+    public String getWarehouseItemId() {
+        return warehouseItemId;
+    }
 
 
 
-	public void setWarehouseItemId(String warehouseItemId) {
-		this.warehouseItemId = warehouseItemId;
-	}
+    public void setWarehouseItemId(String warehouseItemId) {
+        this.warehouseItemId = warehouseItemId;
+    }
 
 
 
-	public ProductDTO getProduct() {
-		return product;
-	}
+    public ProductDTO getProduct() {
+        return product;
+    }
 
 
 
-	public void setProduct(ProductDTO product) {
-		this.product = product;
-	}
+    public void setProduct(ProductDTO product) {
+        this.product = product;
+    }
 
 
 
-	public String getSlaEndTime() {
-		return slaEndTime;
-	}
+    public String getSlaEndTime() {
+        return slaEndTime;
+    }
 
 
 
-	public void setSlaEndTime(String slaEndTime) {
-		this.slaEndTime = slaEndTime;
-	}
+    public void setSlaEndTime(String slaEndTime) {
+        this.slaEndTime = slaEndTime;
+    }
 
 
 
-	public ItemStatusDTO getItemStatus() {
-		return itemStatus;
-	}
+    public ItemStatusDTO getItemStatus() {
+        return itemStatus;
+    }
 
 
 
-	public void setItemStatus(ItemStatusDTO itemStatus) {
-		this.itemStatus = itemStatus;
-	}
+    public void setItemStatus(ItemStatusDTO itemStatus) {
+        this.itemStatus = itemStatus;
+    }
 
 
 
-	public FfTypeDTO getFfType() {
-		return ffType;
-	}
+    public FfTypeDTO getFfType() {
+        return ffType;
+    }
 
 
 
-	public void setFfType(FfTypeDTO ffType) {
-		this.ffType = ffType;
-	}
+    public void setFfType(FfTypeDTO ffType) {
+        this.ffType = ffType;
+    }
 
 
 
-	public AddressDetailsDTO getAddressDetails() {
-		return addressDetails;
-	}
+    public AddressDetailsDTO getAddressDetails() {
+        return addressDetails;
+    }
 
 
 
-	public void setAddressDetails(AddressDetailsDTO addressDetails) {
-		this.addressDetails = addressDetails;
-	}
+    public void setAddressDetails(AddressDetailsDTO addressDetails) {
+        this.addressDetails = addressDetails;
+    }
 
 
 
-	public FfCenterDTO getFfCenter() {
-		return ffCenter;
-	}
+    public FfCenterDTO getFfCenter() {
+        return ffCenter;
+    }
 
 
 
-	public void setFfCenter(FfCenterDTO ffCenter) {
-		this.ffCenter = ffCenter;
-	}
+    public void setFfCenter(FfCenterDTO ffCenter) {
+        this.ffCenter = ffCenter;
+    }
 
 
 
-	public LogisticsDetailsDTO getLogistics() {
-		return logistics;
-	}
+    public LogisticsDetailsDTO getLogistics() {
+        return logistics;
+    }
 
 
 
-	public void setLogistics(LogisticsDetailsDTO logistics) {
-		this.logistics = logistics;
-	}
+    public void setLogistics(LogisticsDetailsDTO logistics) {
+        this.logistics = logistics;
+    }
 
 
 
-	public ItemPricingDetailsDTO getItemPricingDetails() {
-		return itemPricingDetails;
-	}
+    public ItemPricingDetailsDTO getItemPricingDetails() {
+        return itemPricingDetails;
+    }
 
 
 
-	public void setItemPricingDetails(ItemPricingDetailsDTO itemPricingDetails) {
-		this.itemPricingDetails = itemPricingDetails;
-	}
+    public void setItemPricingDetails(ItemPricingDetailsDTO itemPricingDetails) {
+        this.itemPricingDetails = itemPricingDetails;
+    }
 
 
 
-	public List<String> getRelatedItems() {
-		return relatedItems;
-	}
+    public List<String> getRelatedItems() {
+        return relatedItems;
+    }
 
 
 
-	public void setRelatedItems(List<String> relatedItems) {
-		this.relatedItems = relatedItems;
-	}
+    public void setRelatedItems(List<String> relatedItems) {
+        this.relatedItems = relatedItems;
+    }
 
 
 
-	public List<History> getOrderItemHistory() {
-		return orderItemHistory;
-	}
+    public List<History> getOrderItemHistory() {
+        return orderItemHistory;
+    }
 
 
 
-	public void setOrderItemHistory(List<History> orderItemHistory) {
-		this.orderItemHistory = orderItemHistory;
-	}
+    public void setOrderItemHistory(List<History> orderItemHistory) {
+        this.orderItemHistory = orderItemHistory;
+    }
 
     public String getSapOrderNo() {
         return sapOrderNo;
@@ -218,12 +222,12 @@ public class ItemDTO {
     public String toString() {
         return ToStringBuilder.reflectionToString(this);
     }
-	public String getErpInvoiceId() {
-		return erpInvoiceId;
-	}
-	public void setErpInvoiceId(String erpInvoiceId) {
-		this.erpInvoiceId = erpInvoiceId;
-	}
+    public String getErpInvoiceId() {
+        return erpInvoiceId;
+    }
+    public void setErpInvoiceId(String erpInvoiceId) {
+        this.erpInvoiceId = erpInvoiceId;
+    }
 
     public String getClusterId() {
         return clusterId;
@@ -231,5 +235,22 @@ public class ItemDTO {
 
     public void setClusterId(String clusterId) {
         this.clusterId = clusterId;
+    }
+
+
+    public ItemPricingDetailsDTO getShippingCharges() {
+        return shippingCharges;
+    }
+
+    public void setShippingCharges(ItemPricingDetailsDTO shippingCharges) {
+        this.shippingCharges = shippingCharges;
+    }
+
+    public ItemPricingDetailsDTO getCodCharges() {
+        return codCharges;
+    }
+
+    public void setCodCharges(ItemPricingDetailsDTO codCharges) {
+        this.codCharges = codCharges;
     }
 }

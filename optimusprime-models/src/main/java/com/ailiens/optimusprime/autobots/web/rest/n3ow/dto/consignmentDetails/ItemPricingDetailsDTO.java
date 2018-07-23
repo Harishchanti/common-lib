@@ -1,22 +1,17 @@
 
 package com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails;
 
+import com.ailiens.optimusprime.autobots.utils.PricingUtils;
+import com.ailiens.optimusprime.domain.*;
+import com.ailiens.optimusprime.domain.enumeration.service;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.annotation.Generated;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
-
-import javax.annotation.Generated;
-
-import com.ailiens.optimusprime.autobots.utils.PricingUtils;
-import com.ailiens.optimusprime.domain.enumeration.service;
-import org.apache.commons.lang.builder.ToStringBuilder;
-
-import com.ailiens.optimusprime.domain.Discount;
-import com.ailiens.optimusprime.domain.OrderLine;
-import com.ailiens.optimusprime.domain.Price;
-import com.ailiens.optimusprime.domain.Taxes;
 
 @Generated("org.jsonschema2pojo")
 public class ItemPricingDetailsDTO {
@@ -30,7 +25,7 @@ public class ItemPricingDetailsDTO {
     public BigDecimal tax = new BigDecimal(0.0);
     public BigDecimal taxPercentage = new BigDecimal(0.0);
     public BigDecimal discountPercentage = new BigDecimal(0.0);
-    public Boolean taxInclusive=false;
+    public Boolean taxInclusive = false;
     public String taxClass;
     public List<ActualHitRuleDTO> actualHitRule = new ArrayList<ActualHitRuleDTO>();
     private BigDecimal cgstAmount = new BigDecimal(0.0);
@@ -46,9 +41,10 @@ public class ItemPricingDetailsDTO {
     public ItemPricingDetailsDTO() {
 
     }
+
     public ItemPricingDetailsDTO(OrderLine orderLine, List<Taxes> taxes, List<Discount> discounts) {
         Price price = orderLine.getPrice();
-        if(price != null){
+        if (price != null) {
             this.setNnnowCash(price.getNnnowCash());
             this.setNetAmount(price.getFinalPrice());
             this.setValue(price.getOriginalPrice());
@@ -62,24 +58,23 @@ public class ItemPricingDetailsDTO {
         }
 
         Iterator<Taxes> taxIterator = taxes.iterator();
-        if(taxIterator.hasNext()){
+        if (taxIterator.hasNext()) {
             Taxes tax = taxIterator.next();
             this.setTax(tax.getAmount());
             //@adi added extra condition while reading BT consignment and then calucating the tax percentage by adding all taxe %'s
-            if(orderLine.getConsignment().getOrders().getService().equals(service.BT)) {
+            if (orderLine.getConsignment().getOrders().getService().equals(service.BT)) {
 
                 this.setTaxPercentage(PricingUtils.getTaxPercentageForBTOrder(tax));
 
                 // checking discount shoudn't be zero
-                if(!discounts.isEmpty() && discounts.get(0).getDiscountAmount().compareTo(BigDecimal.ZERO) > 0 && this.netAmount.compareTo(BigDecimal.ZERO) > 0) {
+                if (!discounts.isEmpty() && discounts.get(0).getDiscountAmount().compareTo(BigDecimal.ZERO) > 0 && this.netAmount.compareTo(BigDecimal.ZERO) > 0) {
 
                     this.setDiscount(discounts.get(0).getDiscountAmount());
 
                 } else {
                     this.setDiscount(new BigDecimal(0.0));
                 }
-            }
-            else {
+            } else {
 
                 if (this.value != null && (this.value.compareTo(BigDecimal.ZERO) > 0) && this.tax != null) {
                     this.setTaxPercentage(PricingUtils.getTaxPercentage(this.tax, this.value));
@@ -88,7 +83,7 @@ public class ItemPricingDetailsDTO {
                 }
 
                 Iterator<Discount> discountIterator = discounts.iterator();
-                if(discountIterator.hasNext()){
+                if (discountIterator.hasNext()) {
                     Discount discount = discountIterator.next();
                     this.setDiscount(discount.getDiscountAmount());
                 } else {
@@ -108,16 +103,39 @@ public class ItemPricingDetailsDTO {
         }
 
 
-// logic shifted above
-//        Iterator<Discount> discountIterator = discounts.iterator();
-//        if(discountIterator.hasNext()){
-//            Discount discount = discountIterator.next();
-//            this.setDiscount(discount.getDiscountAmount());
-//        } else {
-//            this.setDiscount(new BigDecimal(0.0));
-//        }
     }
 
+    public ItemPricingDetailsDTO(OrderLine orderLine, ShippingTaxes tax) {
+
+        if (orderLine.getConsignment().getOrders().getService().equals(service.BT)) {
+
+            Price price = orderLine.getPrice();
+            if (price != null) {
+
+                this.setNetAmount(price.getNetAmountWithShipping().subtract(price.getFinalPrice()));
+                this.setTaxClass(price.getTaxClass());
+                if (price.getTaxExclusive() != null) {
+                    this.setTaxInclusive(!price.getTaxExclusive());
+                }
+            }
+            if (tax != null) {
+
+
+                this.setTax(tax.getAmount());
+                this.setCgstAmount(returnDefault(tax.getCgstAmount()));
+                this.setSgstAmount(returnDefault(tax.getSgstAmount()));
+                this.setIgstAmount(returnDefault(tax.getIgstAmount()));
+                this.setUtgstAmount(returnDefault(tax.getUtgstAmount()));
+                this.setCgstPercentage(returnDefault(tax.getCgstPercentage()));
+                this.setSgstPercentage(returnDefault(tax.getSgstPercentage()));
+                this.setIgstPercentage(returnDefault(tax.getIgstPercentage()));
+                this.setUtgstPercentage(returnDefault(tax.getUtgstPercentage()));
+                this.setTaxPercentage(PricingUtils.getShippingTaxPercentageForBTOrder(tax));
+            }
+
+        }
+
+    }
 
 
     public BigDecimal getDiscount() {
@@ -125,11 +143,9 @@ public class ItemPricingDetailsDTO {
     }
 
 
-
     public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
-
 
 
     public BigDecimal getNnnowCash() {
@@ -137,11 +153,9 @@ public class ItemPricingDetailsDTO {
     }
 
 
-
     public void setNnnowCash(BigDecimal nnnowCash) {
         this.nnnowCash = nnnowCash;
     }
-
 
 
     public BigDecimal getNetAmount() {
@@ -149,11 +163,9 @@ public class ItemPricingDetailsDTO {
     }
 
 
-
     public void setNetAmount(BigDecimal netAmount) {
         this.netAmount = netAmount;
     }
-
 
 
     public BigDecimal getValue() {
@@ -161,11 +173,9 @@ public class ItemPricingDetailsDTO {
     }
 
 
-
     public void setValue(BigDecimal value) {
         this.value = value;
     }
-
 
 
     public BigDecimal getSp() {
@@ -173,11 +183,9 @@ public class ItemPricingDetailsDTO {
     }
 
 
-
     public void setSp(BigDecimal sp) {
         this.sp = sp;
     }
-
 
 
     public BigDecimal getTax() {
@@ -185,17 +193,14 @@ public class ItemPricingDetailsDTO {
     }
 
 
-
     public void setTax(BigDecimal tax) {
         this.tax = tax;
     }
 
 
-
     public List<ActualHitRuleDTO> getActualHitRule() {
         return actualHitRule;
     }
-
 
 
     public void setActualHitRule(List<ActualHitRuleDTO> actualHitRule) {

@@ -3,6 +3,7 @@ package com.ailiens.optimusprime.autobots.utils;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+import com.ailiens.optimusprime.domain.ShippingTaxes;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,17 +46,23 @@ public class PricingUtils {
         return  taxes.getCgstPercentage().add(taxes.getUtgstPercentage().add(taxes.getSgstPercentage().add(taxes.getIgstPercentage())));
     }
 
+    // @adi  calucating the tax percentage by adding all taxe %'s
+    public static BigDecimal getShippingTaxPercentageForBTOrder(ShippingTaxes taxes) {
+
+        return  taxes.getCgstPercentage().add(taxes.getUtgstPercentage().add(taxes.getSgstPercentage().add(taxes.getIgstPercentage())));
+    }
+
     public static BigDecimal convertStringToBigdecimal(String value, String formatPattern) {
         if(StringUtils.isEmpty(value)) {
             return  new BigDecimal("0");
         }
         try {
-	    Float tempFloat = Float.valueOf(value);
-	    DecimalFormat fd =  new DecimalFormat(formatPattern);
-	    value = fd.format(tempFloat);
-	} catch (Exception e) {
+            Float tempFloat = Float.valueOf(value);
+            DecimalFormat fd =  new DecimalFormat(formatPattern);
+            value = fd.format(tempFloat);
+        } catch (Exception e) {
             return  new BigDecimal("0");
-	}
+        }
         return new BigDecimal(value);
 
 
