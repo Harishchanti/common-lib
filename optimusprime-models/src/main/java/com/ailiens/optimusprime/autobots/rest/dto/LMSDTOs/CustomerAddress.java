@@ -1,6 +1,5 @@
 package com.ailiens.optimusprime.autobots.rest.dto.LMSDTOs;
 
-import com.hazelcast.util.StringUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -80,6 +79,6 @@ public class CustomerAddress {
             }
     }
 
-
-
+    public CustomerAddress() {
+    }
 }

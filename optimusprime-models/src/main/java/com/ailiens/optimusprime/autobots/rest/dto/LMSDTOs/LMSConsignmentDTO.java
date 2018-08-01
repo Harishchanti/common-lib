@@ -1,10 +1,8 @@
 package com.ailiens.optimusprime.autobots.rest.dto.LMSDTOs;
 
-import com.ailiens.optimusprime.autobots.web.rest.n3ow.dto.consignmentDetails.ConsignmentDTO;
 import com.ailiens.optimusprime.domain.Consignment;
 import com.ailiens.optimusprime.domain.OrderLine;
 import com.ailiens.optimusprime.domain.PackagingType;
-import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,7 +13,7 @@ public class LMSConsignmentDTO {
     private Integer breadth;
     private Integer height;
     private String packageType;
-    private DateTime created;
+    private String created;
     private List<LMSProductsInConsignmentDetailsDTO> lmsProductsInConsignmentDetailsDTOS;
     private Customer destinationAddress;
     private String consignmentId;
@@ -39,7 +37,7 @@ public class LMSConsignmentDTO {
         this.breadth =  packagingType.getPackagingBreadth();
         this.height =  packagingType.getPackagingHeight();
         this.packageType =  packagingType.getPackagingTypeName();
-        this.created =  DateTime.now();
+        //this.created =  DateTime.now().toString();
         this.consignmentId =  consignment.getConsignmentId();
         this.orderId = orderId;
         this.storeId =  consignment.getFulfillmentCenterId();
@@ -93,11 +91,12 @@ public class LMSConsignmentDTO {
         this.packageType = packageType;
     }
 
-    public DateTime getCreated() {
+
+    public String getCreated() {
         return created;
     }
 
-    public void setCreated(DateTime created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 
@@ -187,5 +186,8 @@ public class LMSConsignmentDTO {
 
     public void setInvoiceNo(String invoiceNo) {
         this.invoiceNo = invoiceNo;
+    }
+
+    public LMSConsignmentDTO() {
     }
 }

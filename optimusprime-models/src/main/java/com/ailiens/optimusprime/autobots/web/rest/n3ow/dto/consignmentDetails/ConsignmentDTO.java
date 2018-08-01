@@ -35,6 +35,9 @@ public class ConsignmentDTO {
     public List<ConsignmentParamsDTO> consignmentParams = new ArrayList<>();
 
     public String tenantId;
+
+    public BigDecimal codCharges = new BigDecimal(0.0);
+
     public String getTenantId() {
         return tenantId;
     }
@@ -44,164 +47,164 @@ public class ConsignmentDTO {
     }
     //public String source;
     /*public Orders orders;*/
-/*public SourceMetadata sourceMetadata;*/
+    /*public SourceMetadata sourceMetadata;*/
 
     public String getConsignmentId() {
-		return consignmentId;
-	}
+        return consignmentId;
+    }
 
     public ConsignmentDTO() {
 
     }
 
 
-	public void setConsignmentId(String consignmentId) {
-		this.consignmentId = consignmentId;
-	}
+    public void setConsignmentId(String consignmentId) {
+        this.consignmentId = consignmentId;
+    }
 
 
 
-	public String getInvoiceId() {
-		return invoiceId;
-	}
+    public String getInvoiceId() {
+        return invoiceId;
+    }
 
 
 
-	public void setInvoiceId(String invoiceId) {
-		this.invoiceId = invoiceId;
-	}
+    public void setInvoiceId(String invoiceId) {
+        this.invoiceId = invoiceId;
+    }
 
 
 
-	public String getInvoiceDate() {
-		return invoiceDate;
-	}
+    public String getInvoiceDate() {
+        return invoiceDate;
+    }
 
 
 
-	public void setInvoiceDate(String invoiceDate) {
-		this.invoiceDate = invoiceDate;
-	}
+    public void setInvoiceDate(String invoiceDate) {
+        this.invoiceDate = invoiceDate;
+    }
 
 
 
-	public Integer getItemCount() {
-		return itemCount;
-	}
+    public Integer getItemCount() {
+        return itemCount;
+    }
 
 
 
-	public void setItemCount(Integer itemCount) {
-		this.itemCount = itemCount;
-	}
+    public void setItemCount(Integer itemCount) {
+        this.itemCount = itemCount;
+    }
 
 
 
-	public PackagingTypeDTO getPackagingType() {
-		return packagingType;
-	}
+    public PackagingTypeDTO getPackagingType() {
+        return packagingType;
+    }
 
 
 
-	public void setPackagingType(PackagingTypeDTO packagingType) {
-		this.packagingType = packagingType;
-	}
+    public void setPackagingType(PackagingTypeDTO packagingType) {
+        this.packagingType = packagingType;
+    }
 
 
 
-	public FfTypeDTO getFfType() {
-		return ffType;
-	}
+    public FfTypeDTO getFfType() {
+        return ffType;
+    }
 
 
 
-	public void setFfType(FfTypeDTO ffType) {
-		this.ffType = ffType;
-	}
+    public void setFfType(FfTypeDTO ffType) {
+        this.ffType = ffType;
+    }
 
 
 
-	public AddressDetailsDTO getAddressDetails() {
-		return addressDetails;
-	}
+    public AddressDetailsDTO getAddressDetails() {
+        return addressDetails;
+    }
 
 
 
-	public void setAddressDetails(AddressDetailsDTO addressDetails) {
-		this.addressDetails = addressDetails;
-	}
+    public void setAddressDetails(AddressDetailsDTO addressDetails) {
+        this.addressDetails = addressDetails;
+    }
 
 
 
-	public LogisticsDetailsDTO getLogisticsDetails() {
-		return logisticsDetails;
-	}
+    public LogisticsDetailsDTO getLogisticsDetails() {
+        return logisticsDetails;
+    }
 
 
 
-	public void setLogisticsDetails(LogisticsDetailsDTO logisticsDetails) {
-		this.logisticsDetails = logisticsDetails;
-	}
+    public void setLogisticsDetails(LogisticsDetailsDTO logisticsDetails) {
+        this.logisticsDetails = logisticsDetails;
+    }
 
 
 
-	public FfCenterDTO getFfCenter() {
-		return ffCenter;
-	}
+    public FfCenterDTO getFfCenter() {
+        return ffCenter;
+    }
 
 
 
-	public void setFfCenter(FfCenterDTO ffCenter) {
-		this.ffCenter = ffCenter;
-	}
+    public void setFfCenter(FfCenterDTO ffCenter) {
+        this.ffCenter = ffCenter;
+    }
 
 
 
-	public ConsignmentStatusDTO getConsignmentStatus() {
-		return consignmentStatus;
-	}
+    public ConsignmentStatusDTO getConsignmentStatus() {
+        return consignmentStatus;
+    }
 
 
 
-	public void setConsignmentStatus(ConsignmentStatusDTO consignmentStatus) {
-		this.consignmentStatus = consignmentStatus;
-	}
+    public void setConsignmentStatus(ConsignmentStatusDTO consignmentStatus) {
+        this.consignmentStatus = consignmentStatus;
+    }
 
 
 
-	public List<ItemDTO> getItems() {
-		return items;
-	}
+    public List<ItemDTO> getItems() {
+        return items;
+    }
 
 
 
-	public void setItems(List<ItemDTO> items) {
-		this.items = items;
-	}
+    public void setItems(List<ItemDTO> items) {
+        this.items = items;
+    }
 
 
 
-	public String getSlaEndTime() {
-		return slaEndTime;
-	}
+    public String getSlaEndTime() {
+        return slaEndTime;
+    }
 
 
 
-	public void setSlaEndTime(String slaEndTime) {
-		this.slaEndTime = slaEndTime;
-	}
+    public void setSlaEndTime(String slaEndTime) {
+        this.slaEndTime = slaEndTime;
+    }
 
 
 
-	public List<History> getConsignmentHistory() {
-		return consignmentHistory;
-	}
+    public List<History> getConsignmentHistory() {
+        return consignmentHistory;
+    }
 
 
 
-	public void setConsignmentHistory(List<History> consignmentHistory) {
-		this.consignmentHistory = consignmentHistory;
-	}
+    public void setConsignmentHistory(List<History> consignmentHistory) {
+        this.consignmentHistory = consignmentHistory;
+    }
 
 
     public List<ConsignmentParamsDTO> getConsignmentParams() {
@@ -228,13 +231,21 @@ public class ConsignmentDTO {
         this.consignmentNetAmount = consignmentNetAmount;
     }
 
-/*	public String getSource() {
-		return source;
-	}
+    public BigDecimal getCodCharges() {
+        return codCharges;
+    }
 
-	public void setSource(String source) {
-		this.source = source;
-	}*/
+    public void setCodCharges(BigDecimal codCharges) {
+        this.codCharges = codCharges;
+    }
+
+    /*	public String getSource() {
+            return source;
+        }
+
+        public void setSource(String source) {
+            this.source = source;
+        }*/
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this);

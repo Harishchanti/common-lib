@@ -27,4 +27,7 @@ public class DeliveryCost {
     public DeliveryCost(BigDecimal value) {
         this.value = value;
     }
+
+    public DeliveryCost() {
+    }
 }

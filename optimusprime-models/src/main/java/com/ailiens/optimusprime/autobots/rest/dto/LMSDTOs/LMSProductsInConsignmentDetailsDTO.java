@@ -60,4 +60,7 @@ public class LMSProductsInConsignmentDetailsDTO {
         this.totalPrice = deliveryCost;
 
     }
+
+    public LMSProductsInConsignmentDetailsDTO() {
+    }
 }
