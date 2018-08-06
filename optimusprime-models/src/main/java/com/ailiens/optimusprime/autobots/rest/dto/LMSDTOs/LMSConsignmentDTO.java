@@ -9,9 +9,9 @@ import java.util.List;
 
 public class LMSConsignmentDTO {
 
-    private Integer length;
-    private Integer breadth;
-    private Integer height;
+    private Double length;
+    private Double breadth;
+    private Double height;
     private String packageType;
     private String created;
     private List<LMSProductsInConsignmentDetailsDTO> lmsProductsInConsignmentDetailsDTOS;
@@ -33,9 +33,9 @@ public class LMSConsignmentDTO {
         OrderLine orderLine =  consignment.getOrderLines().iterator().next();
 
         PackagingType packagingType = orderLine.getPackagingType();
-        this.length =  packagingType.getPackagingLength();
-        this.breadth =  packagingType.getPackagingBreadth();
-        this.height =  packagingType.getPackagingHeight();
+        this.length =   Double.valueOf(packagingType.getPackagingLength());
+        this.breadth =  Double.valueOf(packagingType.getPackagingBreadth());
+        this.height =  Double.valueOf(packagingType.getPackagingHeight());
         this.packageType =  packagingType.getPackagingTypeName();
         //this.created =  DateTime.now().toString();
         this.consignmentId =  consignment.getConsignmentId();
@@ -59,27 +59,27 @@ public class LMSConsignmentDTO {
     }
 
 
-    public Integer getLength() {
+    public Double getLength() {
         return length;
     }
 
-    public void setLength(Integer length) {
+    public void setLength(Double length) {
         this.length = length;
     }
 
-    public Integer getBreadth() {
+    public Double getBreadth() {
         return breadth;
     }
 
-    public void setBreadth(Integer breadth) {
+    public void setBreadth(Double breadth) {
         this.breadth = breadth;
     }
 
-    public Integer getHeight() {
+    public Double getHeight() {
         return height;
     }
 
-    public void setHeight(Integer height) {
+    public void setHeight(Double height) {
         this.height = height;
     }
 
