@@ -50,6 +50,10 @@ public class Customer {
         this.primaryNumber = primaryNumber;
     }
 
+    public Customer() {
+        
+    }
+
     public Customer(JSONObject addressDetails, String primaryNumber) {
 
         if(addressDetails != null) {
